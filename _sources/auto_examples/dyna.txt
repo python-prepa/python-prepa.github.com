@@ -1,0 +1,11 @@
+
+
+.. _example_dyna.py:
+
+
+
+**Python source code:** :download:`dyna.py <dyna.py>`
+
+.. literalinclude:: dyna.py
+    :lines: 2-
+    

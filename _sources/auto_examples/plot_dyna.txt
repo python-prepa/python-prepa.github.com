@@ -1,0 +1,16 @@
+
+
+.. _example_plot_dyna.py:
+
+
+
+
+.. image:: images/plot_dyna_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_dyna.py <plot_dyna.py>`
+
+.. literalinclude:: plot_dyna.py
+    :lines: 2-
+    

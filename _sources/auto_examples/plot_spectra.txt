@@ -1,0 +1,16 @@
+
+
+.. _example_plot_spectra.py:
+
+
+
+
+.. image:: images/plot_spectra_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_spectra.py <plot_spectra.py>`
+
+.. literalinclude:: plot_spectra.py
+    :lines: 2-
+    

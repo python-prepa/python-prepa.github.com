@@ -24,10 +24,45 @@ Examples
 ========
 
 .. _examples-index:
+.. figure:: ./images/thumb/cascade.png
+   :target: ./cascade.html
+
+   :ref:`example_cascade.py`
+
+.. figure:: ./images/thumb/dyna.png
+   :target: ./dyna.html
+
+   :ref:`example_dyna.py`
+
+.. figure:: ./images/thumb/plot_cascade.png
+   :target: ./plot_cascade.html
+
+   :ref:`example_plot_cascade.py`
+
+.. figure:: ./images/thumb/plot_chaos.png
+   :target: ./plot_chaos.html
+
+   :ref:`example_plot_chaos.py`
+
+.. figure:: ./images/thumb/plot_dyna.png
+   :target: ./plot_dyna.html
+
+   :ref:`example_plot_dyna.py`
+
+.. figure:: ./images/thumb/plot_fft.png
+   :target: ./plot_fft.html
+
+   :ref:`example_plot_fft.py`
+
 .. figure:: ./images/thumb/plot_simple_pendulum.png
    :target: ./plot_simple_pendulum.html
 
    :ref:`example_plot_simple_pendulum.py`
+
+.. figure:: ./images/thumb/plot_spectra.png
+   :target: ./plot_spectra.html
+
+   :ref:`example_plot_spectra.py`
 
 
 .. raw:: html

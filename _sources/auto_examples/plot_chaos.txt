@@ -1,0 +1,16 @@
+
+
+.. _example_plot_chaos.py:
+
+
+
+
+.. image:: images/plot_chaos_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_chaos.py <plot_chaos.py>`
+
+.. literalinclude:: plot_chaos.py
+    :lines: 2-
+    

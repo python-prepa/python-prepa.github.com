@@ -1,0 +1,138 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>&lt;no title&gt; &mdash; Python scientifique - ENS Paris</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2013.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="Python scientifique - ENS Paris" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <p id="example-dyna-py"><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/dyna.py"><tt class="xref download docutils literal"><span class="pre">dyna.py</span></tt></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">simple_pendulum</span><span class="p">(</span><span class="n">theta_thetadot</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">theta</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">theta_thetadot</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">theta_dot</span><span class="p">,</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)]</span>
+
+<span class="k">def</span> <span class="nf">forced_pendulum_equations</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="p">):</span>
+    <span class="n">theta</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">theta_dot</span><span class="p">,</span> <span class="n">acc</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> \
+                       <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> <span class="n">q</span> <span class="o">*</span> <span class="n">theta_dot</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">forced_pendulum</span><span class="p">(</span><span class="n">t_end</span><span class="p">,</span> <span class="n">t_space</span><span class="p">,</span> <span class="n">theta_init</span><span class="p">,</span> <span class="n">theta_dot_init</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                            <span class="n">acc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Integrate a trajectory for the forced pendulum.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    t_end : float</span>
+<span class="sd">        Final time of the trajectory (initial time is always 0).</span>
+
+<span class="sd">    t_space : float</span>
+<span class="sd">        Time_interval between two points of the trajectories</span>
+
+<span class="sd">    theta_init : float</span>
+<span class="sd">        Initial angular position</span>
+
+<span class="sd">    theta_dot_init : float, optional</span>
+<span class="sd">        Initial angular velocity (default 0)</span>
+
+<span class="sd">    q : float, optional</span>
+<span class="sd">        Damping (default 0.1)</span>
+
+<span class="sd">    acc : float, optional</span>
+<span class="sd">        Amplitude of the forcing (default 1)</span>
+
+<span class="sd">    omega : float, optional</span>
+<span class="sd">        Pulsation of forcing (default 1)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    t: ndarray of floats</span>
+<span class="sd">        array of times</span>
+
+<span class="sd">    theta: ndarray of floats</span>
+<span class="sd">        angular positions along the trajectory</span>
+
+<span class="sd">    theta_dot: ndarray of floats</span>
+<span class="sd">        angular velocities along the trajectory</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function integrates the equation</span>
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \ddot{\\theta} + q \dot{\\theta} + \omega^2 \sin\\theta = A \sin</span>
+<span class="sd">            \omega_D t</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; t, theta, theta_dot =  forced_pendulum(100, 0.1, np.pi/3)</span>
+<span class="sd">    &gt;&gt;&gt; sol = forced_pendulum(100, 0.1, np.pi/3, theta_dot_init=1, acc=1.5)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">t_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">t_space</span><span class="p">)</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">forced_pendulum_equations</span><span class="p">,</span> <span class="p">[</span><span class="n">theta_init</span><span class="p">,</span> <span class="n">theta_dot_init</span><span class="p">],</span>
+                            <span class="n">t_range</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">t_range</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><div style="clear: both"></div></p>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
+      </ul>
+    </div>
+        <!-- your html code here -->
+<a href="http://www.ens.fr"><img src="_static/ENS_Logo.png"
+alt="ENS" height="100"></a>
+<a href="http://www.inria.fr"><img src="_static/logo-inria.jpg"
+alt="INRIA" height="60"></a>
+<a href="http://www.saint-gobain-recherche.fr/fr/"><img
+src="_static/logoSGR.png" alt="Saint-Gobain Recherche" height="60"></a>
+
+  </body>
+</html>

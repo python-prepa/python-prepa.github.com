@@ -1,0 +1,16 @@
+
+
+.. _example_plot_fft.py:
+
+
+
+
+.. image:: images/plot_fft_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_fft.py <plot_fft.py>`
+
+.. literalinclude:: plot_fft.py
+    :lines: 2-
+    

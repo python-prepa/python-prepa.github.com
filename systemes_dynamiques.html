@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.1',
+        VERSION:     '2013.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,8 +25,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="top" title="Python scientifique - ENS Paris" href="index.html" />
-    <link rel="next" title="5. Quelques exemples..." href="exemples.html" />
     <link rel="prev" title="3. Phénomènes stochastiques : utilisation des tableaux NumPy" href="stochastique.html" /> 
   </head>
   <body>
@@ -34,11 +34,8 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="exemples.html" title="5. Quelques exemples..."
-             accesskey="N">next</a></li>
-        <li class="right" >
           <a href="stochastique.html" title="3. Phénomènes stochastiques : utilisation des tableaux NumPy"
-             accesskey="P">previous</a> |</li>
+             accesskey="P">précédent</a></li>
         <li><a href="index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
       </ul>
     </div>  
@@ -48,7 +45,7 @@
           <div class="body">
             
   <div class="section" id="systemes-dynamiques-utilisation-de-scipy">
-<h1>4. Systèmes dynamiques : utilisation de SciPy<a class="headerlink" href="#systemes-dynamiques-utilisation-de-scipy" title="Permalink to this headline">¶</a></h1>
+<h1>4. Systèmes dynamiques : utilisation de SciPy<a class="headerlink" href="#systemes-dynamiques-utilisation-de-scipy" title="Lien permanent vers ce titre">¶</a></h1>
 <div class="topic">
 <p class="topic-title first">Contenu du chapitre</p>
 <ul class="simple">
@@ -58,7 +55,7 @@
 <li>Ecrire la documentation d&#8217;une fonction</li>
 </ul>
 </div>
-<p>On trouve dans le module <strong>ScipPy</strong> les opérations de manipulation /
+<p>On trouve dans le module <strong>SciPy</strong> les opérations de manipulation /
 traitement de données numériques classiques, mais spécifiques à un type
 d&#8217;application (algébre linéaire, statistiques, etc.). Il s&#8217;agit d&#8217;un
 module stable, bien testé et relativement bien documenté.</p>
@@ -85,8 +82,9 @@ ces tableaux comme arguments pour les différentes fonctions</p>
 l&#8217;intégration d&#8217;équations différentielles, en considérant de systèmes
 dynamiques à base de pendules mécaniques.</p>
 <div class="section" id="pendule-simple">
-<h2>4.1. Pendule simple<a class="headerlink" href="#pendule-simple" title="Permalink to this headline">¶</a></h2>
-<p>L&#8217;équation du pendule simple (faire figure) est donnée par</p>
+<h2>4.1. Pendule simple<a class="headerlink" href="#pendule-simple" title="Lien permanent vers ce titre">¶</a></h2>
+<a class="reference internal image-reference" href="_images/pendulum.png"><img alt="_images/pendulum.png" class="align-center" src="_images/pendulum.png" style="width: 250.0px; height: 370.5px;" /></a>
+<p>L&#8217;équation du pendule simple est donnée par</p>
 <div class="math">
 <p><img src="_images/math/c24308e0cf4cfbde7ba51595fb918a99aca1dae2.png" alt="\ddot{\theta} + \omega^2 \sin\theta = 0"/></p>
 </div><p>(expliquer)</p>
@@ -130,7 +128,7 @@ initiale</p>
 <p>Nous pouvons par exemple vérifier la conservation de l&#8217;énergie mécanique
 au cours du temps :</p>
 <div class="figure">
-<a class="reference external image-reference" href="auto_examples/plot_lena.html"><img alt="_images/plot_simple_pendulum_1.png" src="_images/plot_simple_pendulum_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+<a class="reference external image-reference" href="auto_examples/plot_simple_pendulum.html"><img alt="_images/plot_simple_pendulum_1.png" src="_images/plot_simple_pendulum_1.png" style="width: 640.0px; height: 480.0px;" /></a>
 </div>
 <p>Pour générer la figure ci-dessous, on a utilisé un certain nombre de
 commandes du module <tt class="docutils literal"><span class="pre">matplotlib</span></tt>.</p>
@@ -143,7 +141,7 @@ légende, etc.), il existe des fonctions dédiées de matplotlib qu&#8217;on peu
 générer différents types de figures.</p>
 </div>
 <div class="section" id="pendule-force">
-<h2>4.2. Pendule forcé<a class="headerlink" href="#pendule-force" title="Permalink to this headline">¶</a></h2>
+<h2>4.2. Pendule forcé<a class="headerlink" href="#pendule-force" title="Lien permanent vers ce titre">¶</a></h2>
 <p>On peut rajouter un degré de liberté au système dynamique du pendule en
 imposant un forçage dépendant du temps, par exemple périodique en temps.
 Nous allons également considérer un amortissement du pendule dû au
@@ -152,9 +150,9 @@ pendule forcé</p>
 <div class="math">
 <p><img src="_images/math/3e1c898e07d4e328739fa049f9412b999ee608fc.png" alt="\ddot{\theta} + q \dot{\theta} + \omega^2 \sin\theta = A \sin
 \omega_D t"/></p>
-</div><p>Comme auparavant, on normalise le temps en fixant <img class="math" src="_images/math/44125168d20759845a58543397be4a6854a5302f.png" alt="omega = 1" style="vertical-align: -6px"/>. Il
-reste alors trois paramètre sur lesquels on peut jouer : A, q et
-<img class="math" src="_images/math/bec264a732dc1437f2255eca0899cc379308fdda.png" alt="omega_D" style="vertical-align: -6px"/>. On définit donc une nouvelle fonction définissant le
+</div><p>Comme auparavant, on normalise le temps en fixant <img class="math" src="_images/math/31d3b9cbf0763001f4f5fc668df31fcec69556e1.png" alt="\omega = 1" style="vertical-align: -1px"/>. Il
+reste alors trois paramètres sur lesquels on peut jouer : A, q et
+<img class="math" src="_images/math/fbc7f74c3555a1a46bc204385e4c57b29094375b.png" alt="\omega_D" style="vertical-align: -4px"/>. On définit donc une nouvelle fonction définissant le
 système dynamique du premier ordre</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">forced_pendulum_equations</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="p">):</span>
     <span class="n">theta</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">y</span>
@@ -162,9 +160,9 @@ système dynamique du premier ordre</p>
                     <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> <span class="n">q</span> <span class="o">*</span> <span class="n">theta_dot</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>Par commodité, on va également définir une fonction permettant d&#8217;intégrer une
-trajectoire à partir d&#8217;une condition initiale, sur un certain intervalle de
-temps:</p>
+<p>Par commodité, on va également définir une fonction permettant d&#8217;intégrer
+une trajectoire à partir d&#8217;une condition initiale, sur un certain
+intervalle de temps:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">forced_pendulum</span><span class="p">(</span><span class="n">t_end</span><span class="p">,</span> <span class="n">t_space</span><span class="p">,</span> <span class="n">theta_init</span><span class="p">,</span> <span class="n">theta_dot_init</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
                             <span class="n">acc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="n">t_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">t_space</span><span class="p">)</span>
@@ -173,13 +171,164 @@ temps:</p>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">t_range</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Il s&#8217;agit d&#8217;une fonction haut niveau, que l&#8217;utilisateur final va souvent
-manipuler. Pour cela, il est recommandé d&#8217;écrire une bonne documentation pour
-la fonction <tt class="docutils literal"><span class="pre">forced_pendulum</span></tt>. Il existe un standard pour l&#8217;écriture de
-docstrings hérité de NumPy, et documenté sur
-<a class="reference external" href="https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt">https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt</a>. Les
-différentes sections sont toujours dans le même ordre, ce qui permet une
-lecture rapide et efficace de la documentation:</p>
+<p>On peut à présent intégrer une trajectoire:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">omega</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">/</span><span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">omega</span> <span class="o">/</span> <span class="mi">25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">,</span> <span class="n">theta_dot_0</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+<span class="go">q=0.5, acc=1, omega=omega)</span>
+</pre></div>
+</div>
+<p>Pour cette trajectoire, l&#8217;évolution de <img class="math" src="_images/math/52e8ed7a3ba22130ad3984eb2cd413406475a689.png" alt="\theta" style="vertical-align: 0px"/> reste périodique,
+avec la même période que la période de forçage</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">)</span> <span class="c"># courbe bleue</span>
+</pre></div>
+</div>
+<p>Quand on augmente l&#8217;amplitude du forçage, le mouvement reste périodique
+après un régime transitoire assez long. On observe par contre un
+doublement de période, l&#8217;amplitude de l&#8217;oscillation varie entre deux
+périodes du forçage</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">,</span> <span class="n">theta_1</span><span class="p">,</span> <span class="n">theta_dot_1</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+<span class="go">q=0.5, acc=1.08, omega=omega)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_1</span><span class="p">)</span> <span class="c"># courbe verte</span>
+</pre></div>
+</div>
+<p>Enfin, quand on augmente encore l&#8217;amplitude du forçage, le mouvement
+n&#8217;est plus périodique et semble &#8220;chaotique&#8221;:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">,</span> <span class="n">theta_2</span><span class="p">,</span> <span class="n">theta_dot_2</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+<span class="go">q=0.5, acc=1.17, omega=omega)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_2</span><span class="p">)</span> <span class="c"># courbe rouge</span>
+</pre></div>
+</div>
+<div class="figure">
+<a class="reference external image-reference" href="auto_examples/plot_spectra.html"><img alt="_images/plot_spectra_1.png" src="_images/plot_spectra_1.png" style="width: 480.0px; height: 320.0px;" /></a>
+</div>
+<p>On va confirmer l&#8217;observation du doublement de période grâce à la
+transformée de Fourier discrète des signaux. Pour la transformée de
+Fourier discrète, il existe également un sous-module de <tt class="docutils literal"><span class="pre">SciPy</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">fftpack</span>
+</pre></div>
+</div>
+<p>Il faut tout d&#8217;abord sélectionner la partie du signal qui semble
+périodique, c&#8217;est-à-dire enlever le régime transitoire. On utilise pour
+cela un masque de booléens</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">time_mask</span> <span class="o">=</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">400</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">theta_0</span> <span class="o">=</span> <span class="n">theta_0</span><span class="p">[</span><span class="n">time_mask</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Comme on n&#8217;est pas intéressé par la fréquence nulle, on soustrait la
+moyenne du signal</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">theta_0</span> <span class="o">-=</span> <span class="n">theta_0</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Notons qu&#8217;on peut soustraire un scalaire à un tableau <cite>ndarray</cite> : la
+soustraction est alors faite élément par élément.</p>
+<p>On calcule la transformée de Fourier discrète de <img class="math" src="_images/math/62df86ba6c84c9e8a5008f0ad6bbefa5d9cf301f.png" alt="\theta_0" style="vertical-align: -4px"/>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">fft_theta_0</span> <span class="o">=</span> <span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">theta_0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Pour représenter la TF, il nous faut également un tableau des fréquences
+correspondant au tableau fft_theta_0. Il y a pour cela une fonction
+dédiée dans le module <tt class="docutils literal"><span class="pre">fftpack</span></tt>, <tt class="docutils literal"><span class="pre">fftfreq</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">freq</span> <span class="o">=</span> <span class="n">fftpack</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_0</span><span class="p">),</span> <span class="n">dt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On peut alors représenter le module de la transformée de Fourier en
+fonction de la fréquence</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fft_theta_0</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On observe que la fréquence fondamentale du signal correspond à la
+fréquence de forçage <img class="math" src="_images/math/9c2982e5610fcbb77a9f8b954f7c6c3049e1fa2e.png" alt="f_D" style="vertical-align: -6px"/>. On observe aussi une harmonique triple
+à <img class="math" src="_images/math/72ab7033206e368a7bfa98066755084569db4eee.png" alt="3 f_D" style="vertical-align: -6px"/>.</p>
+<div class="figure">
+<a class="reference external image-reference" href="auto_examples/plot_fft.html"><img alt="_images/plot_fft_1.png" src="_images/plot_fft_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
+<p>Pour le forçage intermédiaire, on refait la même série d&#8217;opérations</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">theta_1</span> <span class="o">=</span> <span class="n">theta_1</span><span class="p">[</span><span class="n">time_mask</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">theta_1</span> <span class="o">-=</span> <span class="n">theta_1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fft_theta_1</span> <span class="o">=</span> <span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">theta_1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fft_theta_1</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On observe alors un nouveau pic à la fréquence moitiés <img class="math" src="_images/math/4ae6350e3b16d67f90299b301e6abe43cf07cfb6.png" alt="f_D/2" style="vertical-align: -7px"/>,
+correspondant à un doublement de période.</p>
+<p>Pour aller plus loin, on peut visualiser l&#8217;évolution du spectre de
+<img class="math" src="_images/math/52e8ed7a3ba22130ad3984eb2cd413406475a689.png" alt="\theta" style="vertical-align: 0px"/> pour un grand nombre de paramètres en codant par la couleur l&#8217;amplitude du module de la transformée de Fourier:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">omega</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">/</span><span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">omega</span> <span class="o">/</span> <span class="mi">25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acc_factors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fft_sig</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">400</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hann</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">hanning</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">acc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">acc_factors</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span> <span class="n">i</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">t</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                        <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">theta</span> <span class="o">-=</span> <span class="n">theta</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">theta</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">theta</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">theta</span> <span class="o">*=</span> <span class="n">hann</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">fft_sig</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fft_sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fft_sig</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fft_sig</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">500</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">aspect</span><span class="o">=</span><span class="s">&#39;auto&#39;</span><span class="p">,</span>
+<span class="go">            interpolation=&#39;nearest&#39;)</span>
+</pre></div>
+</div>
+<p>On observe alors la cascade de transition vers le chaos, avec des fenêtre
+chaotiques et d&#8217;autres périodiques.</p>
+<div class="figure">
+<a class="reference external image-reference" href="auto_examples/plot_cascade.html"><img alt="_images/plot_cascade_1.png" src="_images/plot_cascade_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
+<p>Dans le régime chaotique, on peut vérifier que deux trajectoires
+initialement très proches s&#8217;éloignent très vite:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">omega</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">/</span><span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">omega</span> <span class="o">/</span> <span class="mi">25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acc</span> <span class="o">=</span> <span class="mf">1.17</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eps</span> <span class="o">=</span> <span class="mf">1.e-8</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">,</span> <span class="n">theta_dot_0</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">,</span> <span class="n">theta_1</span><span class="p">,</span> <span class="n">theta_dot_1</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span> <span class="o">*</span>
+<span class="go">np.pi/3, 0,</span>
+<span class="gp">... </span>                        <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Compute the distance between the two trajectories</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">theta_1</span> <span class="o">-</span> <span class="n">theta_0</span><span class="p">,</span> <span class="n">theta_dot_1</span> <span class="o">-</span> <span class="n">theta_dot_1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure">
+<a class="reference external image-reference" href="auto_examples/plot_chaos.html"><img alt="_images/plot_chaos_1.png" src="_images/plot_chaos_1.png" style="width: 480.0px; height: 320.0px;" /></a>
+</div>
+<p>En coordonnées logarithmiques, on voit que la distance entre les
+trajectoires croît de manière exponentielle au cours du temps. Il s&#8217;agit
+d&#8217;une propriété caractéristique du chaos.</p>
+<div class="topic">
+<p class="topic-title first">Pour aller plus loin</p>
+<p>On peut représenter en 3-D le cycle limite décrivant la dynamique du
+pendule.</p>
+<div class="figure">
+<a class="reference external image-reference" href="auto_examples/plot_dyna.html"><img alt="_images/plot_dyna_1.png" src="_images/plot_dyna_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
+<p>[<a class="reference internal" href="auto_examples/plot_dyna.html#example-plot-dyna-py"><em>Python source code</em></a>]</p>
+</div>
+</div>
+<div class="section" id="ecriture-de-documentation">
+<h2>4.3. Ecriture de documentation<a class="headerlink" href="#ecriture-de-documentation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Dans l&#8217;exemple précédent du pendule forcé, la fonction
+<tt class="docutils literal"><span class="pre">forced_pendulum</span></tt> est une fonction haut niveau, que l&#8217;utilisateur final
+va souvent manipuler. Pour cela, il est recommandé d&#8217;écrire une bonne
+documentation pour la fonction <tt class="docutils literal"><span class="pre">forced_pendulum</span></tt>. Il existe un standard
+pour l&#8217;écriture de docstrings hérité de NumPy, et documenté sur
+<a class="reference external" href="https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt">https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt</a>.
+Les différentes sections sont toujours dans le même ordre, ce qui permet
+une lecture rapide et efficace de la documentation:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">forced_pendulum</span><span class="p">(</span><span class="n">t_end</span><span class="p">,</span> <span class="n">t_space</span><span class="p">,</span> <span class="n">theta_init</span><span class="p">,</span> <span class="n">theta_dot_init</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
                             <span class="n">acc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -238,6 +387,7 @@ lecture rapide et efficace de la documentation:</p>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">t_range</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
 </pre></div>
 </div>
+<p><div style="clear: both"></div></p>
 </div>
 </div>
 
@@ -250,11 +400,8 @@ lecture rapide et efficace de la documentation:</p>
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="exemples.html" title="5. Quelques exemples..."
-             >next</a></li>
-        <li class="right" >
           <a href="stochastique.html" title="3. Phénomènes stochastiques : utilisation des tableaux NumPy"
-             >previous</a> |</li>
+             >précédent</a></li>
         <li><a href="index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
       </ul>
     </div>

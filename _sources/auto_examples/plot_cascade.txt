@@ -1,0 +1,16 @@
+
+
+.. _example_plot_cascade.py:
+
+
+
+
+.. image:: images/plot_cascade_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_cascade.py <plot_cascade.py>`
+
+.. literalinclude:: plot_cascade.py
+    :lines: 2-
+    
