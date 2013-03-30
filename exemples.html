@@ -1,0 +1,215 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5. Quelques exemples... &mdash; Python scientifique - ENS Paris</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Python scientifique - ENS Paris" href="index.html" />
+    <link rel="prev" title="4. Systèmes dynamiques : utilisation de SciPy" href="systemes_dynamiques.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="systemes_dynamiques.html" title="4. Systèmes dynamiques : utilisation de SciPy"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="quelques-exemples">
+<h1>5. Quelques exemples...<a class="headerlink" href="#quelques-exemples" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="why-python">
+<h2>5.1. Why Python?<a class="headerlink" href="#why-python" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-scientist-s-needs">
+<h3>5.1.1. The scientist&#8217;s needs<a class="headerlink" href="#the-scientist-s-needs" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Get data (simulation, experiment control)</li>
+<li>Manipulate and process data.</li>
+<li>Visualize results... to understand what we are doing!</li>
+<li>Communicate results: produce figures for reports or publications,
+write presentations.</li>
+</ul>
+</div>
+<div class="section" id="specifications">
+<h3>5.1.2. Specifications<a class="headerlink" href="#specifications" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id1">
+<h3>5.1.3. Specifications<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Rich collection of already existing <strong>bricks</strong> corresponding to classical
+numerical methods or basic actions: we don&#8217;t want to re-program the
+plotting of a curve, a Fourier transform or a fitting algorithm. Don&#8217;t
+reinvent the wheel!</li>
+<li>Easy to learn: computer science is neither our job nor our education. We
+want to be able to draw a curve, smooth a signal, do a Fourier transform
+in a few minutes.</li>
+<li>Easy communication with collaborators, students, customers, to make the code
+live within a lab or a company: the code should be as readable as a book.
+Thus, the language should contain as few syntax symbols or unneeded routines
+as possible that would divert the reader from the mathematical or scientific
+understanding of the code.</li>
+<li>Efficient code that executes quickly... but needless to say that a very fast
+code becomes useless if we spend too much time writing it. So, we need both a
+quick development time and a quick execution time.</li>
+<li>A single environment/language for everything, if possible, to avoid learning
+a new software for each new problem.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="scientific-python-building-blocks">
+<h2>5.2. Scientific Python building blocks<a class="headerlink" href="#scientific-python-building-blocks" title="Permalink to this headline">¶</a></h2>
+<p>Unlike Matlab, Scilab or R, Python does not come with a pre-bundled set
+of modules for scientific computing. Below are the basic building blocks
+that can be combined to obtain a scientific computing environment:</p>
+<ul>
+<li><p class="first"><strong>Python</strong>, a generic and modern computing language</p>
+<blockquote>
+<div><ul class="simple">
+<li>Python language: data types (<tt class="docutils literal"><span class="pre">string</span></tt>, <tt class="docutils literal"><span class="pre">int</span></tt>), flow control,
+data collections (lists, dictionaries), patterns, etc.</li>
+<li>Modules of the standard library.</li>
+<li>A large number of specialized modules or applications written in
+Python: web protocols, web framework, etc. ... and scientific
+computing.</li>
+<li>Development tools (automatic testing, documentation generation)</li>
+</ul>
+</div></blockquote>
+<a class="reference internal image-reference" href="_images/snapshot_ipython.png"><img alt="_images/snapshot_ipython.png" class="align-center" src="_images/snapshot_ipython.png" style="width: 316.0px; height: 158.0px;" /></a>
+</li>
+<li><p class="first"><strong>IPython</strong>, an advanced <strong>Python shell</strong> <a class="reference external" href="http://ipython.scipy.org/moin/">http://ipython.scipy.org/moin/</a></p>
+</li>
+<li><p class="first"><strong>Numpy</strong> : provides powerful <strong>numerical arrays</strong> objects, and routines to
+manipulate them. <a class="reference external" href="http://www.numpy.org/">http://www.numpy.org/</a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Scipy</strong> : high-level data processing routines.
+Optimization, regression, interpolation, etc <a class="reference external" href="http://www.scipy.org/">http://www.scipy.org/</a></p>
+<a class="reference internal image-reference" href="_images/random_c.jpg"><img alt="_images/random_c.jpg" class="align-center" src="_images/random_c.jpg" style="width: 340.0px; height: 210.0px;" /></a>
+</li>
+<li><p class="first"><strong>Matplotlib</strong> : 2-D visualization, &#8220;publication-ready&#8221; plots
+<a class="reference external" href="http://matplotlib.sourceforge.net/">http://matplotlib.sourceforge.net/</a></p>
+</li>
+<li><p class="first"><strong>Mayavi</strong> : 3-D visualization
+<a class="reference external" href="http://code.enthought.com/projects/mayavi/">http://code.enthought.com/projects/mayavi/</a></p>
+</li>
+</ul>
+</div>
+<div class="section" id="the-interactive-workflow-ipython-and-a-text-editor">
+<h2>5.3. The interactive workflow: IPython and a text editor<a class="headerlink" href="#the-interactive-workflow-ipython-and-a-text-editor" title="Permalink to this headline">¶</a></h2>
+<p><strong>Interactive work to test and understand algorithms:</strong> In this section, we
+describe an interactive workflow with <a class="reference external" href="http://ipython.org">IPython</a> that is
+handy to explore and understand algorithms.</p>
+<p>Python is a general-purpose language. As such, there is not one blessed
+environment to work in, and not only one way of using it. Although
+this makes it harder for beginners to find their way, it makes it
+possible for Python to be used to write programs, in web servers, or
+embedded devices.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Reference document for this section:</p>
+<p class="last"><strong>IPython user manual:</strong> <a class="reference external" href="http://ipython.org/ipython-doc/dev/index.html">http://ipython.org/ipython-doc/dev/index.html</a></p>
+</div>
+<div class="section" id="command-line-interaction">
+<h3>5.3.1. Command line interaction<a class="headerlink" href="#command-line-interaction" title="Permalink to this headline">¶</a></h3>
+<p>Start <cite>ipython</cite>:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;Hello world&#39;</span><span class="p">)</span>
+<span class="go">Hello world</span>
+</pre></div>
+</div>
+<p>Getting help:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [2]: </span><span class="k">print</span><span class="err">?</span>
+<span class="go">Type:               builtin_function_or_method</span>
+<span class="go">Base Class:         &lt;type &#39;builtin_function_or_method&#39;&gt;</span>
+<span class="go">String Form:        &lt;built-in function print&gt;</span>
+<span class="go">Namespace:          Python builtin</span>
+<span class="go">Docstring:</span>
+<span class="go">    print(value, ..., sep=&#39; &#39;, end=&#39;\n&#39;, file=sys.stdout)</span>
+
+<span class="go">    Prints the values to a stream, or to sys.stdout by default.</span>
+<span class="go">    Optional keyword arguments:</span>
+<span class="go">    file: a file-like object (stream); defaults to the current sys.stdout.</span>
+<span class="go">    sep:  string inserted between values, default a space.</span>
+<span class="go">    end:  string appended after the last value, default a newline.</span>
+</pre></div>
+</div>
+<p>Create a file <cite>my_file.py</cite> in a text editor. Under EPD (Enthought Python
+Distribution), you can use <cite>Scite</cite>, available from the start menu. Under
+Python(x,y), you can use Spyder. Under Ubuntu, if you don&#8217;t already have your
+favorite editor, we would advise installing <cite>Stani&#8217;s Python editor</cite>. In the
+file, add the following lines:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">s</span> <span class="o">=</span> <span class="s">&#39;Hello world&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now, you can run it in IPython and explore the resulting variables:</p>
+<div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [3]: </span><span class="o">%</span><span class="n">run</span> <span class="n">my_file</span><span class="o">.</span><span class="n">py</span>
+<span class="go">Hello word</span>
+
+<span class="gp">In [4]: </span><span class="n">s</span>
+<span class="go">Out[4]: </span><span class="s">&#39;Hello word&#39;</span>
+
+<span class="gp">In [5]: </span><span class="o">%</span><span class="n">whos</span>
+<span class="go">Variable   Type    Data/Info</span>
+<span class="go">----------------------------</span>
+<span class="go">s          str     Hello word</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="systemes_dynamiques.html" title="4. Systèmes dynamiques : utilisation de SciPy"
+             >previous</a></li>
+        <li><a href="index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
+      </ul>
+    </div>
+        <!-- your html code here -->
+<a href="http://www.ens.fr"><img src="_static/ENS_Logo.png"
+alt="ENS" height="100"></a>
+<a href="http://www.inria.fr"><img src="_static/logo-inria.jpg"
+alt="INRIA" height="60"></a>
+<a href="http://www.saint-gobain-recherche.fr/fr/"><img
+src="_static/logoSGR.png" alt="Saint-Gobain Recherche" height="60"></a>
+
+  </body>
+</html>

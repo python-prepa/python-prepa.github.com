@@ -1,0 +1,270 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4. Systèmes dynamiques : utilisation de SciPy &mdash; Python scientifique - ENS Paris</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Python scientifique - ENS Paris" href="index.html" />
+    <link rel="next" title="5. Quelques exemples..." href="exemples.html" />
+    <link rel="prev" title="3. Phénomènes stochastiques : utilisation des tableaux NumPy" href="stochastique.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="exemples.html" title="5. Quelques exemples..."
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="stochastique.html" title="3. Phénomènes stochastiques : utilisation des tableaux NumPy"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="systemes-dynamiques-utilisation-de-scipy">
+<h1>4. Systèmes dynamiques : utilisation de SciPy<a class="headerlink" href="#systemes-dynamiques-utilisation-de-scipy" title="Permalink to this headline">¶</a></h1>
+<div class="topic">
+<p class="topic-title first">Contenu du chapitre</p>
+<ul class="simple">
+<li>Présentation du module SciPy</li>
+<li>Réalisation de traitements de données avancés avec SciPy</li>
+<li>Génération de figures avancées avec Matplotlib</li>
+<li>Ecrire la documentation d&#8217;une fonction</li>
+</ul>
+</div>
+<p>On trouve dans le module <strong>ScipPy</strong> les opérations de manipulation /
+traitement de données numériques classiques, mais spécifiques à un type
+d&#8217;application (algébre linéaire, statistiques, etc.). Il s&#8217;agit d&#8217;un
+module stable, bien testé et relativement bien documenté.</p>
+<p><a class="reference external" href="http://docs.scipy.org/doc/">http://docs.scipy.org/doc/</a>
+<a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/">http://docs.scipy.org/doc/scipy/reference/</a></p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">scipy</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Le module SciPy réalise les différentes opérations sur des tableaux
+numériques (<tt class="docutils literal"><span class="pre">ndarray</span></tt>) de <tt class="docutils literal"><span class="pre">numpy</span></tt>. On peut donc directement utiliser
+ces tableaux comme arguments pour les différentes fonctions</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mat</span>
+<span class="go">array([[1, 2],</span>
+<span class="go">    [2, 4]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p>Pour montrer l&#8217;utilisation de SciPy, nous allons nous intéresser à
+l&#8217;intégration d&#8217;équations différentielles, en considérant de systèmes
+dynamiques à base de pendules mécaniques.</p>
+<div class="section" id="pendule-simple">
+<h2>4.1. Pendule simple<a class="headerlink" href="#pendule-simple" title="Permalink to this headline">¶</a></h2>
+<p>L&#8217;équation du pendule simple (faire figure) est donnée par</p>
+<div class="math">
+<p><img src="_images/math/c24308e0cf4cfbde7ba51595fb918a99aca1dae2.png" alt="\ddot{\theta} + \omega^2 \sin\theta = 0"/></p>
+</div><p>(expliquer)</p>
+<p>Pour les petites oscillations on peut faire l&#8217;approximation
+<img class="math" src="_images/math/6514e2ea9419f41ec217149ceac594aff087022e.png" alt="\sin\theta\simeq\theta" style="vertical-align: -1px"/>. Quand l&#8217;approximation n&#8217;est pas valide il
+faut intégrer numériquement cette équation différentielle pour obtenir
+l&#8217;évolution de la position et de la vitesse angulaire du pendule, au
+cours du temps.</p>
+<p>Il nous faut donc disposer d&#8217;un intégrateur d&#8217;équations différentielles,
+que l&#8217;on peut s&#8217;attendre à trouver dans SciPy. Mais quelle est la
+fonction correspondante ? Tentont une recherche Google &#8220;scipy integrate
+differential equation&#8221;, ou la consultation du sommaire de l&#8217;aide
+<a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/index.html">http://docs.scipy.org/doc/scipy/reference/index.html</a>. Il existe un
+sous-module <tt class="docutils literal"><span class="pre">integrate</span></tt>, qui contient lui-même une fonction
+<tt class="docutils literal"><span class="pre">odeint</span></tt></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+</pre></div>
+</div>
+<p>Regarder la doc de la fonction
+<a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html#scipy.integrate.odeint">http://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html#scipy.integrate.odeint</a>
+et l&#8217;exemple
+<a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/tutorial/integrate.html#ordinary-differential-equations-odeint">http://docs.scipy.org/doc/scipy/reference/tutorial/integrate.html#ordinary-differential-equations-odeint</a></p>
+<p>Pour commencer, il faut mettre l&#8217;équation différentielle du 2nd ordre
+sous la forme d&#8217;un système d&#8217;équations du premier ordre</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">simple_pendulum</span><span class="p">(</span><span class="n">theta_thetadot</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">theta</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">theta_thetadot</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">theta_dot</span><span class="p">,</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>correspondant à</p>
+<div class="math">
+<p><img src="_images/math/ce1d4be375090c6e9ee8175e31d4e8aa4bb9cba9.png" alt="\frac{\mathrm{d}\theta}{\mathrm{d}t} = \dot{\theta}
+
+\frac{\mathrm{d}\dot{\theta}}{\mathrm{d}t} = -\sin\theta"/></p>
+</div><p>Nous pouvons maintenant intégrer une trajectoire à partir d&#8217;une condition
+initiale</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sol</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">simple_pendulum</span><span class="p">,</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Nous pouvons par exemple vérifier la conservation de l&#8217;énergie mécanique
+au cours du temps :</p>
+<div class="figure">
+<a class="reference external image-reference" href="auto_examples/plot_lena.html"><img alt="_images/plot_simple_pendulum_1.png" src="_images/plot_simple_pendulum_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
+<p>Pour générer la figure ci-dessous, on a utilisé un certain nombre de
+commandes du module <tt class="docutils literal"><span class="pre">matplotlib</span></tt>.</p>
+<p>[<a class="reference internal" href="auto_examples/plot_simple_pendulum.html#example-plot-simple-pendulum-py"><em>Python source code</em></a>]</p>
+<p>Pour construire les différents éléments de la figure (courbe, labels,
+légende, etc.), il existe des fonctions dédiées de matplotlib qu&#8217;on peut
+&#8220;découvrir&#8221; grâce à la documentation de matplotlib
+<a class="reference external" href="http://matplotlib.org/">http://matplotlib.org/</a>. En particulier, la gallerie d&#8217;exemples
+<a class="reference external" href="http://matplotlib.org/gallery.html">http://matplotlib.org/gallery.html</a> est très utile pour voir comment
+générer différents types de figures.</p>
+</div>
+<div class="section" id="pendule-force">
+<h2>4.2. Pendule forcé<a class="headerlink" href="#pendule-force" title="Permalink to this headline">¶</a></h2>
+<p>On peut rajouter un degré de liberté au système dynamique du pendule en
+imposant un forçage dépendant du temps, par exemple périodique en temps.
+Nous allons également considérer un amortissement du pendule dû au
+frottement de l&#8217;air. On considère alors l&#8217;équation suivante pour le
+pendule forcé</p>
+<div class="math">
+<p><img src="_images/math/3e1c898e07d4e328739fa049f9412b999ee608fc.png" alt="\ddot{\theta} + q \dot{\theta} + \omega^2 \sin\theta = A \sin
+\omega_D t"/></p>
+</div><p>Comme auparavant, on normalise le temps en fixant <img class="math" src="_images/math/44125168d20759845a58543397be4a6854a5302f.png" alt="omega = 1" style="vertical-align: -6px"/>. Il
+reste alors trois paramètre sur lesquels on peut jouer : A, q et
+<img class="math" src="_images/math/bec264a732dc1437f2255eca0899cc379308fdda.png" alt="omega_D" style="vertical-align: -6px"/>. On définit donc une nouvelle fonction définissant le
+système dynamique du premier ordre</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">forced_pendulum_equations</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="p">):</span>
+    <span class="n">theta</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">theta_dot</span><span class="p">,</span> <span class="n">acc</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> \
+                    <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> <span class="n">q</span> <span class="o">*</span> <span class="n">theta_dot</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Par commodité, on va également définir une fonction permettant d&#8217;intégrer une
+trajectoire à partir d&#8217;une condition initiale, sur un certain intervalle de
+temps:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">forced_pendulum</span><span class="p">(</span><span class="n">t_end</span><span class="p">,</span> <span class="n">t_space</span><span class="p">,</span> <span class="n">theta_init</span><span class="p">,</span> <span class="n">theta_dot_init</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                            <span class="n">acc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">t_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">t_space</span><span class="p">)</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">forced_pendulum_equations</span><span class="p">,</span> <span class="p">[</span><span class="n">theta_init</span><span class="p">,</span> <span class="n">theta_dot_init</span><span class="p">],</span>
+                            <span class="n">t_range</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">t_range</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Il s&#8217;agit d&#8217;une fonction haut niveau, que l&#8217;utilisateur final va souvent
+manipuler. Pour cela, il est recommandé d&#8217;écrire une bonne documentation pour
+la fonction <tt class="docutils literal"><span class="pre">forced_pendulum</span></tt>. Il existe un standard pour l&#8217;écriture de
+docstrings hérité de NumPy, et documenté sur
+<a class="reference external" href="https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt">https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt</a>. Les
+différentes sections sont toujours dans le même ordre, ce qui permet une
+lecture rapide et efficace de la documentation:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">forced_pendulum</span><span class="p">(</span><span class="n">t_end</span><span class="p">,</span> <span class="n">t_space</span><span class="p">,</span> <span class="n">theta_init</span><span class="p">,</span> <span class="n">theta_dot_init</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                            <span class="n">acc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Integrate a trajectory for the forced pendulum.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    t_end : float</span>
+<span class="sd">        Final time of the trajectory (initial time is always 0).</span>
+
+<span class="sd">    t_space : float</span>
+<span class="sd">        Time_interval between two points of the trajectories</span>
+
+<span class="sd">    theta_init : float</span>
+<span class="sd">        Initial angular position</span>
+
+<span class="sd">    theta_dot_init : float, optional</span>
+<span class="sd">        Initial angular velocity (default 0)</span>
+
+<span class="sd">    q : float, optional</span>
+<span class="sd">        Damping (default 0.1)</span>
+
+<span class="sd">    acc : float, optional</span>
+<span class="sd">        Amplitude of the forcing (default 1)</span>
+
+<span class="sd">    omega : float, optional</span>
+<span class="sd">        Pulsation of forcing (default 1)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    t: ndarray of floats</span>
+<span class="sd">        array of times</span>
+<span class="sd">    theta: ndarray of floats</span>
+<span class="sd">        angular positions along the trajectory</span>
+
+<span class="sd">    theta_dot: ndarray of floats</span>
+<span class="sd">        angular velocities along the trajectory</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function integrates the equation</span>
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \ddot{\\theta} + q \dot{\\theta} + \omega^2 \sin\\theta = A \sin</span>
+<span class="sd">            \omega_D t</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; t, theta, theta_dot =  forced_pendulum(100, 0.1, np.pi/3)</span>
+<span class="sd">    &gt;&gt;&gt; sol = forced_pendulum(100, 0.1, np.pi/3, theta_dot_init=1, acc=1.5)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">t_space</span><span class="p">)</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">forced_pendulum_equations</span><span class="p">,</span> <span class="p">[</span><span class="n">theta_init</span><span class="p">,</span> <span class="n">theta_dot_init</span><span class="p">],</span>
+                            <span class="n">t_range</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">t_range</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="exemples.html" title="5. Quelques exemples..."
+             >next</a></li>
+        <li class="right" >
+          <a href="stochastique.html" title="3. Phénomènes stochastiques : utilisation des tableaux NumPy"
+             >previous</a> |</li>
+        <li><a href="index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
+      </ul>
+    </div>
+        <!-- your html code here -->
+<a href="http://www.ens.fr"><img src="_static/ENS_Logo.png"
+alt="ENS" height="100"></a>
+<a href="http://www.inria.fr"><img src="_static/logo-inria.jpg"
+alt="INRIA" height="60"></a>
+<a href="http://www.saint-gobain-recherche.fr/fr/"><img
+src="_static/logoSGR.png" alt="Saint-Gobain Recherche" height="60"></a>
+
+  </body>
+</html>
