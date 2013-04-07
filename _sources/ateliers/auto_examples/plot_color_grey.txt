@@ -1,0 +1,16 @@
+
+
+.. _example_plot_color_grey.py:
+
+
+
+
+.. image:: images/plot_color_grey_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_color_grey.py <plot_color_grey.py>`
+
+.. literalinclude:: plot_color_grey.py
+    :lines: 2-
+    

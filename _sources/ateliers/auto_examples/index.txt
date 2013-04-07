@@ -1,0 +1,51 @@
+
+.. raw:: html
+
+    <style type="text/css">
+    .figure {
+        float: left;
+        margin: 10px;
+        width: auto;
+        height: 200px;
+        width: 180px;
+    }
+
+    .figure img {
+        display: inline;
+        }
+
+    .figure .caption {
+        width: 170px;
+        text-align: center !important;
+    }
+    </style>
+
+Examples
+========
+
+.. _examples-index:
+.. figure:: ./images/thumb/plot_color_grey.png
+   :target: ./plot_color_grey.html
+
+   :ref:`example_plot_color_grey.py`
+
+.. figure:: ./images/thumb/plot_example_intro.png
+   :target: ./plot_example_intro.html
+
+   :ref:`example_plot_example_intro.py`
+
+.. figure:: ./images/thumb/plot_intro.png
+   :target: ./plot_intro.html
+
+   :ref:`example_plot_intro.py`
+
+.. figure:: ./images/thumb/plot_numpy_interaction.png
+   :target: ./plot_numpy_interaction.html
+
+   :ref:`example_plot_numpy_interaction.py`
+
+
+.. raw:: html
+
+    <div style="clear: both"></div>
+    

@@ -1,0 +1,16 @@
+
+
+.. _example_plot_intro.py:
+
+
+
+
+.. image:: images/plot_intro_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_intro.py <plot_intro.py>`
+
+.. literalinclude:: plot_intro.py
+    :lines: 2-
+    

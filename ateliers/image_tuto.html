@@ -1,0 +1,137 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5.1.2. Mini-tutoriel de traitement d’images &mdash; Python scientifique - ENS Paris</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2013.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="Python scientifique - ENS Paris" href="../index.html" />
+    <link rel="up" title="5.1. Traitement d’images pour l’analyse de données d’expériences (TIPE)" href="image_processing.html" />
+    <link rel="prev" title="5.1.1. Présentation des outils" href="image_outils.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="image_outils.html" title="5.1.1. Présentation des outils"
+             accesskey="P">précédent</a></li>
+        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li>
+          <li><a href="index.html" >5. Ateliers pratiques</a> &raquo;</li>
+          <li><a href="image_processing.html" accesskey="U">5.1. Traitement d&#8217;images pour l&#8217;analyse de données d&#8217;expériences (TIPE)</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="mini-tutoriel-de-traitement-d-images">
+<h1>5.1.2. Mini-tutoriel de traitement d&#8217;images<a class="headerlink" href="#mini-tutoriel-de-traitement-d-images" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le module <tt class="docutils literal"><span class="pre">skimage</span></tt> est organisé en plusieurs sous-modules
+correspondant à plusieurs branches du traitement d&#8217;images : segmentation,
+filtrage, gestion des formats d&#8217;image, etc. Pour éviter d&#8217;avoir des noms
+trop longs, on importe souvent directement les sous-modules dans le
+namespace principal</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coins_image</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">coins</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">io</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">coins_image</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="nb">filter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edges</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">sobel</span><span class="p">(</span><span class="n">coins_image</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>La grande majorité des fonctions de <tt class="docutils literal"><span class="pre">skimage</span></tt> se trouvent donc à
+l&#8217;intérieur d&#8217;un sous-module : il y a deux niveaux hiérarchiques.</p>
+<div class="section" id="input-output-des-fichiers-aux-tableaux-numpy">
+<h2>5.1.2.1. Input / output: des fichiers aux tableaux numpy<a class="headerlink" href="#input-output-des-fichiers-aux-tableaux-numpy" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">skimage</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">current_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="c"># so that we can go back to current dir.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">skimage</span><span class="o">.</span><span class="n">data_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On peut ouvrir un fichier image (jpg, png, tiff...) comme un tableau
+numpy en passant le chemin du fichier à la fonction <tt class="docutils literal"><span class="pre">skimage.io.imread</span></tt></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coins_image</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&#39;coins.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Une large gamme de formats de fichier est supportée : jpg, png, tiff,
+bmp, etc.</p>
+<p>On peut ouvrir des images en couleur ou en noir et blanc. Les images en
+couleur ont trois dimensions, les images en noir et blanc en ont deux</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">coins_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(303, 384)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lena_image</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&#39;lena.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lena_image</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(512, 512, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">io</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lena_image</span><span class="p">)</span> <span class="c"># color image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">io</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lena_image</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c"># grayscale image</span>
+</pre></div>
+</div>
+<p>On peut aussi ouvrir une image couleur comme une image en noir et blanc</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">lena_gray</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&#39;lena.png&#39;</span><span class="p">,</span> <span class="n">as_grey</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lena_gray</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(512, 512)</span>
+</pre></div>
+</div>
+<div class="figure">
+<a class="reference external image-reference" href="auto_examples/plot_color_grey.html"><img alt="../_images/plot_color_grey_1.png" src="../_images/plot_color_grey_1.png" style="width: 1080.0px; height: 360.0px;" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">Type des tableaux d&#8217;image</p>
+<p>Les tableaux d&#8217;images peuvent être soit des tableaux d&#8217;entier, soit
+des tableaux de flottants.</p>
+</div>
+<p><div style="clear: both"></div></p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="image_outils.html" title="5.1.1. Présentation des outils"
+             >précédent</a></li>
+        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li>
+          <li><a href="index.html" >5. Ateliers pratiques</a> &raquo;</li>
+          <li><a href="image_processing.html" >5.1. Traitement d&#8217;images pour l&#8217;analyse de données d&#8217;expériences (TIPE)</a> &raquo;</li> 
+      </ul>
+    </div>
+        <!-- your html code here -->
+<a href="http://www.ens.fr"><img src="../_static/ENS_Logo.png"
+alt="ENS" height="100"></a>
+<a href="http://www.inria.fr"><img src="../_static/logo-inria.jpg"
+alt="INRIA" height="60"></a>
+<a href="http://www.saint-gobain-recherche.fr/fr/"><img
+src="../_static/logoSGR.png" alt="Saint-Gobain Recherche" height="60"></a>
+
+  </body>
+</html>

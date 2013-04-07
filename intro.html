@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="top" title="Python scientifique - ENS Paris" href="index.html" />
-    <link rel="next" title="2. Théorie de l’information : utilisation du langage Python" href="information_theory.html" />
+    <link rel="next" title="1.1.1.1. Préparer la formation: téléchargement d’Anaconda" href="preparation.html" />
     <link rel="prev" title="Formation à Python scientifique - ENS Paris" href="index.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="information_theory.html" title="2. Théorie de l’information : utilisation du langage Python"
+          <a href="preparation.html" title="1.1.1.1. Préparer la formation: téléchargement d’Anaconda"
              accesskey="N">suivant</a></li>
         <li class="right" >
           <a href="index.html" title="Formation à Python scientifique - ENS Paris"
@@ -50,7 +50,389 @@
             
   <div class="section" id="introduction-a-python-et-son-environnement">
 <h1>1. Introduction à Python et son environnement<a class="headerlink" href="#introduction-a-python-et-son-environnement" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="ecosysteme-et-environnement-de-travail">
+<h2>1.1. Écosystème et environnement de travail<a class="headerlink" href="#ecosysteme-et-environnement-de-travail" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="figure align-right">
+<a class="reference internal image-reference" href="_images/spyder.png"><img alt="_images/spyder.png" src="_images/spyder.png" style="width: 391.2px; height: 270.8px;" /></a>
+<p class="caption">Environnement de travail scientifique <a class="reference external" href="https://code.google.com/p/spyderlib">spyder</a></p>
+</div>
+<p>Python est un langage de programmation très polyvalent et modulaire, qui
+est utilisé aussi bien pour écrire des applications comme YouTube, que
+pour traiter des données scientifiques. Par conséquent, il existe de
+multiples installations possibles de Python. L&#8217;utilisateur débutant peut
+donc se sentir dérouté par l&#8217;absence d&#8217;une référence unique pour Python
+scientifique. Nous conseillons donc un logiciel unique pour la formation,
+<a class="reference external" href="http://continuum.io/downloads.html">la suite scientifique Anaconda</a>
+développée par l&#8217;entreprise Continuum. Anaconda rassemble tout le
+nécessaire pour l&#8217;enseignement de Python scientifique: le langage Python
+et ses modules scientifiques.</p>
+<p>En particulier, Anaconda fournit un environnement de travail adapté à
+l&#8217;enseignement et au calcul scientifique, <a class="reference external" href="https://code.google.com/p/spyderlib">spyder</a>, que nous utiliseront pour la
+formation.</p>
+<div class="section" id="installation-de-l-environnement-python-scientifique">
+<h3>1.1.1. Installation de l&#8217;environnement Python scientifique<a class="headerlink" href="#installation-de-l-environnement-python-scientifique" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html">1.1.1.1. Préparer la formation: téléchargement d&#8217;Anaconda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preparation.html#installation-des-logiciels">1.1.1.2. Installation des logiciels</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="preparation.html#sous-windows">1.1.1.2.1. Sous Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preparation.html#sous-mac">1.1.1.2.2. Sous Mac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preparation.html#sous-linux">1.1.1.2.3. Sous Linux</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="l-ecosysteme-python-scientifique">
+<h3>1.1.2. L&#8217;écosystème Python scientifique<a class="headerlink" href="#l-ecosysteme-python-scientifique" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Pour le calcul scientifique il faut utiliser Python 2.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Python:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/2.7/tutorial/index.html">Langage</a> +
+<a class="reference external" href="http://docs.python.org/2.7/library/index.html">librairie standard très riche</a></p>
+<ul class="simple">
+<li><strong>Enseignement algorithmique</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/crypto.html">hash cryptographiques</a>,
+<a class="reference external" href="http://docs.python.org/2.7/library/heapq.html">piles partiellement ordonnées</a>, <a class="reference external" href="http://docs.python.org/2.7/library/decimal.html">décimaux de taille
+arbitraire</a>)</li>
+<li><strong>TIPE</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/os.html">manipulation de fichiers</a>,
+<a class="reference external" href="http://docs.python.org/2.7/library/multiprocessing.html">calcul parallèle</a>,
+<a class="reference external" href="http://docs.python.org/2.7/library/internet.html">téléchargement de données</a>).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">numpy:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/">Calcul de tableau et calcul matriciel</a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">scipy:</th><td class="field-body"><p class="first">Outils numériques standards: <a class="reference external" href="http://scipy-lectures.github.com/intro/scipy.html#fast-fourier-transforms-scipy-fftpack">FFT</a>,
+<a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/tutorial/integrate.html">intégration</a>,
+<a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html">résolution de système non-linéaires</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">matplotlib:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://matplotlib.org/">Tracé de courbes et affichage scientifique</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Tout est libre, développé par des individus sur leur temps libre.</p>
+</div>
+<div class="section" id="un-environnement-de-travail-spyder">
+<h3>1.1.3. Un environnement de travail: Spyder<a class="headerlink" href="#un-environnement-de-travail-spyder" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Pour lancer spyder:</p>
+<ul class="simple">
+<li><strong>Sous windows</strong> exécuter <cite>Anaconda\Scripts\spyder.bat</cite></li>
+<li><strong>Sous Mac et Linux</strong> exécuter <cite>Anaconda/bin/spyder</cite></li>
+</ul>
+<p><a class="reference internal" href="_images/spyder_launcher.png"><img alt="spyder_win" src="_images/spyder_launcher.png" style="width: 340.5px; height: 258.0px;" /></a> <a class="reference internal" href="_images/mac-spyder-screenshot.png"><img alt="spyder_mac" src="_images/mac-spyder-screenshot.png" style="width: 481.6px; height: 206.85px;" /></a></p>
+<p>Spyder présente 2 panneaux que nous allons beaucoup utiliser: <strong>en bas à
+droite</strong>, un interpréteur interactif Python, <strong>à gauche</strong> un éditeur pour
+écrire ses scripts Python.</p>
+<a class="reference internal image-reference" href="_images/spyder_small.png"><img alt="_images/spyder_small.png" class="align-center" src="_images/spyder_small.png" style="width: 561.4px; height: 427.0px;" /></a>
+<div class="section" id="configurer-l-environnement">
+<h4>1.1.3.1. Configurer l&#8217;environnement<a class="headerlink" href="#configurer-l-environnement" title="Lien permanent vers ce titre">¶</a></h4>
+<a class="reference internal image-reference" href="_images/configure_spyder.png"><img alt="_images/configure_spyder.png" class="align-right" src="_images/configure_spyder.png" style="width: 407.0px; height: 310.0px;" /></a>
+<p>Nous voulons configurer le panneau de droite pour utiliser l&#8217;outil
+&#8220;IPython&#8221;, qui permettra la visualisation interactive de données:</p>
+<p>Aller dans les menus <cite>Outils -&gt; Préférences</cite> et dans la boite de dialogue
+correspondante, dans la section <cite>Console -&gt; Options avancées</cite>, décocher
+&#8220;Ouvrir un interpréteur Python au démarrage&#8221;, et cocher &#8220;Démarrer un
+noyau IPython au démarrage&#8221;.</p>
+<hr class="docutils" />
+<a class="reference internal image-reference" href="_images/configure_spyder2.png"><img alt="_images/configure_spyder2.png" class="align-right" src="_images/configure_spyder2.png" style="width: 406.0px; height: 310.0px;" /></a>
+<p>Dans l&#8217;onglet &#8216;Modules externes&#8217;, remplacer les options de la ligne de
+commande par &#8216;&#8211;pylab&#8217;.</p>
+</div>
+<div class="section" id="premiers-pas">
+<h4>1.1.3.2. Premiers pas<a class="headerlink" href="#premiers-pas" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Dans l&#8217;interpréteur (panneau de droite), taper &#8216;1 + 1&#8217;:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p>Dans l&#8217;éditeur (panneau de gauche), ajouter la ligne:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/configure_execution.png"><img alt="_images/configure_execution.png" class="align-right" src="_images/configure_execution.png" style="width: 262.8px; height: 287.4px;" /></a>
+<p>Puis, dans le menu &#8216;Exécution&#8217;, sélectionner &#8216;Exécution&#8217;, ou appuyer sur
+la touche &#8216;F5&#8217;. Dans le dialogue qui s&#8217;affiche &#8216;Configurations
+d&#8217;exécution&#8217;, sélectionner &#8216;Exécuter dans l&#8217;interpréteur Python ou
+IPython actif&#8217;.</p>
+<div class="sidebar">
+<p class="first sidebar-title">Félicitations</p>
+<p class="last">Vous avez un environnement prêt pour le travail
+scientifique avec Python.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="le-langage-python">
+<h2>1.2. Le langage Python<a class="headerlink" href="#le-langage-python" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="differents-type-d-objets">
+<h3>1.2.1. Différents type d&#8217;objets<a class="headerlink" href="#differents-type-d-objets" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="section" id="objets-simples">
+<h4>1.2.1.1. Objets simples<a class="headerlink" href="#objets-simples" title="Lien permanent vers ce titre">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="s">&#39;Bonjour&#39;</span>
+</pre></div>
+</div>
+<p><cite>a</cite> et <cite>b</cite> sont des objets de différent type : <cite>a</cite> est un entier (<cite>int</cite>), et <cite>b</cite>
+est une chaîne de caractères (<cite>string</cite>).</p>
+<p>En Python, les types ne sont pas déclarés explicitement.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Nombres</strong></td>
+<td><strong>Entier</strong> <cite>1</cite> — <strong>Flottant</strong> <cite>1.</cite> — <strong>Complexe</strong> <cite>1 + 1j</cite> — <strong>Booléen</strong> <cite>False</cite></td>
+</tr>
+<tr class="row-even"><td><strong>Chaînes de caractère</strong></td>
+<td><strong>Chaînes</strong> <cite>&#8216;Bonjour&#8217;</cite> — <strong>Chaînes avec accents</strong> <cite>u&#8217;Gaël&#8217;</cite></td>
+</tr>
+</tbody>
+</table>
+<p>A différents types d&#8217;objets, correspond différentes opérations possibles:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Remarque</p>
+<p>Puissance:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p class="last">8</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Attention</p>
+<p><strong>Division entière</strong></p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">1.</span><span class="o">/</span><span class="mi">2</span>
+<span class="go">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="collections-d-objets">
+<h4>1.2.1.2. Collections d&#8217;objets<a class="headerlink" href="#collections-d-objets" title="Lien permanent vers ce titre">¶</a></h4>
+<ul>
+<li><p class="first"><strong>Listes</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Attention</p>
+<p class="last">Les indices commencent à 0, et non à 1</p>
+</div>
+<p>Modifications d&#8217;une liste:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span>
+<span class="go">[-1, 1, 2, 3]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span>
+<span class="go">[-1, 1, 2, 3, 4]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Remarque</p>
+<p class="last">Les listes sont des objets &#8220;mutables&#8221;.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Remarque</p>
+<p><cite>l.append</cite> est une &#8220;méthode&#8221; de <cite>l</cite>.</p>
+<p>Les méthodes de <cite>l</cite> peuvent être découverte en appuyant sur <cite>Tab</cite>
+dans IPython:</p>
+<div class="highlight-python"><pre>In [2]: l.
+append  count  extend  index  insert  pop  remove  reverse  sort</pre>
+</div>
+<p>Pour savoir ce qu&#8217;une méthode fait:</p>
+<div class="last highlight-python"><pre>In [2]: l.append?
+Type:       builtin_function_or_method
+String Form:&lt;built-in method append of list object at 0x34fa128&gt;
+Docstring:  L.append(object) -- append object to end</pre>
+</div>
+</div>
+</li>
+<li><p class="first"><strong>Et plus encore</strong></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">dictionnaires:</th><td class="field-body"><div class="first highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;Gael&quot;</span><span class="p">:</span> <span class="s">&quot;Informatique&quot;</span><span class="p">,</span> <span class="s">&quot;Werner&quot;</span><span class="p">:</span> <span class="s">&quot;Physique&quot;</span><span class="p">,</span> <span class="s">&quot;Emmanuelle&quot;</span><span class="p">:</span> <span class="s">&quot;Physique&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="p">[</span><span class="s">&quot;Damien&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;Informatique&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="p">[</span><span class="s">&quot;Gael&quot;</span><span class="p">]</span>
+<span class="go">&quot;Informatique</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">tuple:</th><td class="field-body"><p class="first">Comme une liste, mais non mutable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="go">---------------------------------------------------------------------------</span>
+<span class="go">TypeError                                 Traceback (most recent call last)</span>
+<span class="go">&lt;ipython-input-4-2c4c55c1f409&gt; in &lt;module&gt;()</span>
+<span class="go">----&gt; 1 l[0] = -1</span>
+
+<span class="go">TypeError: &#39;tuple&#39; object does not support item assignment</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">set:</th><td class="field-body"><p class="first last">Ensemble d&#8217;éléments uniques muni d&#8217;opérations comme l&#8217;intersection ou
+l&#8217;union.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="logique-du-programme-operations-conditionnelles-et-boucles">
+<h3>1.2.2. Logique du programme: opérations conditionnelles et boucles<a class="headerlink" href="#logique-du-programme-operations-conditionnelles-et-boucles" title="Lien permanent vers ce titre">¶</a></h3>
+<ul>
+<li><p class="first"><strong>Opérations conditionnelles</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;a vaut bien 1&#39;</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;a ne vaut pas 1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Remarque</p>
+<p class="last"><tt class="docutils literal"><span class="pre">==</span></tt> est différent de <tt class="docutils literal"><span class="pre">=</span></tt>. Le premier est un &#8220;test&#8221; et le
+deuxième une &#8220;affectation de variable&#8221;.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Remarque</p>
+<p>L&#8217;indentation délimite les blocs logiques</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;a vaut bien 1&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s">&quot;c&#39;est certain&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Remarque</p>
+<p class="last">Pour taper des instructions sur plusieurs lignes, l&#8217;éditeur
+de texte (panneau gauche de spyder) est plus pratique.</p>
+</div>
+<p>Conditions multiples: <tt class="docutils literal"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">1</span> <span class="pre">and</span> <span class="pre">b</span> <span class="pre">==</span> <span class="pre">1</span></tt>, <tt class="docutils literal"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">1</span> <span class="pre">or</span> <span class="pre">b</span> <span class="pre">==</span> <span class="pre">1</span></tt></p>
+<p>Autres conditions: <tt class="docutils literal"><span class="pre">a</span> <span class="pre">!=</span> <span class="pre">1</span></tt>, <tt class="docutils literal"><span class="pre">a</span> <span class="pre">&lt;</span> <span class="pre">1</span></tt>, <tt class="docutils literal"><span class="pre">a</span> <span class="pre">&gt;</span> <span class="pre">1</span></tt></p>
+</li>
+<li><p class="first"><strong>Boucles</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="go">1</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p>On peut itérer sur les éléments d&#8217;une liste:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="k">print</span> <span class="n">i</span>
+<span class="go">0</span>
+<span class="go">1</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="definir-des-fonctions">
+<h3>1.2.3. Définir des fonctions<a class="headerlink" href="#definir-des-fonctions" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</pre></div>
+</div>
+<p>Arguments optionnels:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="importer-des-fonctionnalites-additionnelles">
+<h3>1.2.4. Importer des fonctionnalités additionnelles<a class="headerlink" href="#importer-des-fonctionnalites-additionnelles" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Les &#8220;modules&#8221; permettent d&#8217;importer de nombreuses fonctionnalités
+additionnelles, allant de modules d&#8217;interface graphique au calcul
+scientifique.</p>
+<p>Voici un exemple qui importe un nouveau type de nombre, les fractions:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">fractions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">fractions</span><span class="o">.</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">a</span>
+<span class="go">2/3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">fractions</span><span class="o">.</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">b</span>
+<span class="go">1/2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="go">Fraction(7, 6)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="go">7/6</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="admonition-voir-aussi admonition seealso">
+<p class="first admonition-title">Voir aussi</p>
+<ul class="last simple">
+<li><a class="reference external" href="http://scipy-lectures.github.com">Scipy Lecture Notes</a>, <a class="reference external" href="http://scipy-lectures.github.com/intro/language/python_language.html">chapitre sur le langage Python</a></li>
+<li>Ouvrage de Gérard Swinnen: <a class="reference external" href="http://inforef.be/swi/python.htm">Apprendre à programmer avec Python</a></li>
+<li><a class="reference external" href="http://docs.python.org/2.7/">Documentation officielle du langage Python</a></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="green topic">
+<p class="topic-title first"><strong>Exercice</strong>: Implémenter <cite>quicksort</cite></p>
+<p>La <a class="reference external" href="http://en.wikipedia.org/wiki/Quicksort">page wikipedia</a>
+décrivant l&#8217;algorithme de tri <cite>quicksort</cite> donne le pseudo-code
+suivant:</p>
+<div class="highlight-python"><pre>function quicksort('array')
+   if length('array') &lt;= 1
+       return 'array'
+   select and remove a pivot value 'pivot' from 'array'
+   create empty lists 'less' and 'greater'
+   for each 'x' in 'array'
+       if 'x' &lt;= 'pivot' then append 'x' to 'less'
+       else append 'x' to 'greater'
+   return concatenate(quicksort('less'), 'pivot', quicksort('greater'))</pre>
+</div>
+<p>Saurez vous transformer ce pseudo-code en code valide Python.</p>
+<p>Des indices:</p>
+<blockquote>
+<div><ul class="simple">
+<li>La longueur d&#8217;une liste est donnée par <tt class="docutils literal"><span class="pre">len(l)</span></tt></li>
+<li>Deux listes peuvent être concaténées avec <tt class="docutils literal"><span class="pre">l1</span> <span class="pre">+</span> <span class="pre">l2</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">l.pop()</span></tt> retire le dernier élément d&#8217;une liste</li>
+<li>Attention: une liste est mutable</li>
+</ul>
+</div></blockquote>
+<p>Il vous suffit de compléter cette ébauche:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">quicksort</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="c"># ...</span>
+    <span class="k">return</span> <span class="n">l</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="k">print</span> <span class="n">quicksort</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <p><div style="clear: both"></div></p>
+</div>
+</div>
 </div>
 
 
@@ -62,7 +444,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="information_theory.html" title="2. Théorie de l’information : utilisation du langage Python"
+          <a href="preparation.html" title="1.1.1.1. Préparer la formation: téléchargement d’Anaconda"
              >suivant</a></li>
         <li class="right" >
           <a href="index.html" title="Formation à Python scientifique - ENS Paris"

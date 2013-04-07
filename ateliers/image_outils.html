@@ -1,0 +1,184 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5.1.1. Présentation des outils &mdash; Python scientifique - ENS Paris</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2013.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="Python scientifique - ENS Paris" href="../index.html" />
+    <link rel="up" title="5.1. Traitement d’images pour l’analyse de données d’expériences (TIPE)" href="image_processing.html" />
+    <link rel="next" title="5.1.2. Mini-tutoriel de traitement d’images" href="image_tuto.html" />
+    <link rel="prev" title="5.1. Traitement d’images pour l’analyse de données d’expériences (TIPE)" href="image_processing.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="image_tuto.html" title="5.1.2. Mini-tutoriel de traitement d’images"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="image_processing.html" title="5.1. Traitement d’images pour l’analyse de données d’expériences (TIPE)"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li>
+          <li><a href="index.html" >5. Ateliers pratiques</a> &raquo;</li>
+          <li><a href="image_processing.html" accesskey="U">5.1. Traitement d&#8217;images pour l&#8217;analyse de données d&#8217;expériences (TIPE)</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="presentation-des-outils">
+<h1>5.1.1. Présentation des outils<a class="headerlink" href="#presentation-des-outils" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="un-exemple-pour-commencer">
+<h2>5.1.1.1. Un exemple pour commencer<a class="headerlink" href="#un-exemple-pour-commencer" title="Lien permanent vers ce titre">¶</a></h2>
+<p>On commence par importer les modules dont on aura
+besoin pour le traitement d&#8217;images:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">skimage</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<p>On charge une image comme un tableau numpy:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">image_array</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">coins</span><span class="p">()</span> <span class="c"># or any NumPy array!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image_array</span><span class="o">.</span><span class="n">dtype</span>
+<span class="go">dtype(&#39;uint8&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">image_array</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(303, 384)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_intro.html"><img alt="../_images/plot_intro_1.png" src="../_images/plot_intro_1.png" style="width: 450.0px; height: 540.0px;" /></a>
+</div>
+<p>On l&#8217;affiche</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">io</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_array</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># or plt.imshow(image_array, cmap=&#39;gray&#39;)</span>
+</pre></div>
+</div>
+<p>On la transforme pour extraire les bords</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage.filter</span> <span class="kn">import</span> <span class="n">sobel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edges</span> <span class="o">=</span> <span class="n">sobel</span><span class="p">(</span><span class="n">image_array</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">io</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On sauve le résultat</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">io</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="s">&#39;edges.png&#39;</span><span class="p">,</span> <span class="n">edges</span><span class="s">&#39;)</span><span class="gp">&gt;&gt;&gt; </span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&#39;edges.png&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="topic">
+<p class="topic-title first">Qu&#8217;est-ce que le traitement d&#8217;images ?</p>
+<p>Au sens large, c&#8217;est la manipulation et la transformation d&#8217;images
+numériques pour</p>
+<blockquote>
+<div><ul class="simple">
+<li>obtenir d&#8217;autres images</li>
+<li>extraire des informations d&#8217;intérêt des images (réduire
+l&#8217;information): position d&#8217;un objet, nombre de personnes, etc.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="les-applications-du-traitement-d-image">
+<h2>5.1.1.2. Les applications du traitement d&#8217;image<a class="headerlink" href="#les-applications-du-traitement-d-image" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Grâce aux capteurs CCD bon marché, il est de nos jours possible de
+produire de gros volumes d&#8217;images à faible coût. De nombreuses
+applications reposent donc sur l&#8217;extraction d&#8217;information à partir
+d&#8217;images, il s&#8217;agit d&#8217;un domain en plein essor. Parmi les diverses
+applications, on peut citer :</p>
+<blockquote>
+<div><ul class="simple">
+<li>Diagnostic médical (présence de tumeurs, forme des cellules, etc.)</li>
+<li>Contrôle industriel (détection de défauts)</li>
+<li>Reconnaissance automatique (visages sur Facebook, etc.)</li>
+<li>Extraction de données scientifiques à partir d&#8217;images dans une
+expérience scientifique (position d&#8217;une bulle, d&#8217;une particule, ...)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="le-scikit-image">
+<h2>5.1.1.3. Le <tt class="docutils literal"><span class="pre">scikit-image</span></tt><a class="headerlink" href="#le-scikit-image" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le module <tt class="docutils literal"><span class="pre">scikit-image</span></tt> (<a class="reference external" href="http://scikit-image.org/">http://scikit-image.org/</a>) est le module
+principal de Python scientifique pour le traitement d&#8217;images. Il est
+prévu pour fonctionner avec des tableaux <tt class="docutils literal"><span class="pre">numpy</span></tt>, ce qui permet
+d&#8217;utiliser facilement le <tt class="docutils literal"><span class="pre">scikit-image</span></tt> en même temps que les autres
+modules de calcul scientifique:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coins</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">coins</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">detail</span> <span class="o">=</span> <span class="n">coins</span><span class="p">[</span><span class="mi">30</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="mi">70</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">values</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_numpy_interaction.html"><img alt="../_images/plot_numpy_interaction_1.png" src="../_images/plot_numpy_interaction_1.png" style="width: 960.0px; height: 240.0px;" /></a>
+</div>
+<p>Il existe d&#8217;autres modules de Python spécialisés pour le traitement
+d&#8217;image, par exemple</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://opencv.willowgarage.com/documentation/python/">OpenCV</a></li>
+<li><a class="reference external" href="http://luispedro.org/software/mahotas">Mahotas</a></li>
+<li><a class="reference external" href="https://www.pinkhq.com">Pink</a></li>
+</ul>
+</div></blockquote>
+<p><div style="clear: both"></div></p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="image_tuto.html" title="5.1.2. Mini-tutoriel de traitement d’images"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="image_processing.html" title="5.1. Traitement d’images pour l’analyse de données d’expériences (TIPE)"
+             >précédent</a> |</li>
+        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li>
+          <li><a href="index.html" >5. Ateliers pratiques</a> &raquo;</li>
+          <li><a href="image_processing.html" >5.1. Traitement d&#8217;images pour l&#8217;analyse de données d&#8217;expériences (TIPE)</a> &raquo;</li> 
+      </ul>
+    </div>
+        <!-- your html code here -->
+<a href="http://www.ens.fr"><img src="../_static/ENS_Logo.png"
+alt="ENS" height="100"></a>
+<a href="http://www.inria.fr"><img src="../_static/logo-inria.jpg"
+alt="INRIA" height="60"></a>
+<a href="http://www.saint-gobain-recherche.fr/fr/"><img
+src="../_static/logoSGR.png" alt="Saint-Gobain Recherche" height="60"></a>
+
+  </body>
+</html>
