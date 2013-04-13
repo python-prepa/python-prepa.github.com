@@ -50,18 +50,11 @@
             
   <div class="section" id="equations-aux-derivees-partielles-utilisation-de-numpy">
 <h1>4. Équations aux dérivées partielles : utilisation de NumPy<a class="headerlink" href="#equations-aux-derivees-partielles-utilisation-de-numpy" title="Lien permanent vers ce titre">¶</a></h1>
-<div class="topic">
-<p class="topic-title first">Contenu du chapitre</p>
-<ul class="simple">
-<li>Présentation du module NumPy</li>
-<li>Équation de la chaleur en 1D</li>
-</ul>
-</div>
 <p>On trouve dans le module <strong>NumPy</strong> les outils de manipulation des tableaux
 pour le calcul numérique</p>
 <blockquote>
 <div><ul class="simple">
-<li>Nombreuses fonctions de manipulation</li>
+<li>Nombreuses fonctions de manipulation de tableaux</li>
 <li>Bibliothèque mathématique importante</li>
 </ul>
 </div></blockquote>
@@ -69,9 +62,11 @@ pour le calcul numérique</p>
 module stable, bien testé et relativement bien documenté.</p>
 <p><a class="reference external" href="http://docs.scipy.org/doc/">http://docs.scipy.org/doc/</a>
 <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/">http://docs.scipy.org/doc/numpy/reference/</a></p>
+<p>Pour l&#8217;importer, on recommande d&#8217;utiliser</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
+<p>Toutes les fonctions NumPy seront alors préfixées par <em>np.</em></p>
 <div class="section" id="introduction-rapide-a-numpy">
 <h2>4.1. Introduction rapide à NumPy<a class="headerlink" href="#introduction-rapide-a-numpy" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Le module NumPy permet la manipulation simple et efficace des tableaux</p>
@@ -173,8 +168,10 @@ utiliser <strong>.copy()</strong></p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="equation-de-la-chaleur-1d">
-<h2>4.2. Équation de la chaleur 1D<a class="headerlink" href="#equation-de-la-chaleur-1d" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="equation-de-la-chaleur">
+<h2>4.2. Équation de la chaleur<a class="headerlink" href="#equation-de-la-chaleur" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="modele-a-une-dimension-d-espace">
+<h3>4.2.1. Modèle à une dimension d&#8217;espace<a class="headerlink" href="#modele-a-une-dimension-d-espace" title="Lien permanent vers ce titre">¶</a></h3>
 <p>On va s&#8217;intéresser dans un premier temps à l&#8217;équation de la chaleur
 (diffusion thermique) en une dimension d&#8217;espace</p>
 <div class="math">
@@ -331,9 +328,9 @@ d&#8217;évolution en temps en utilisant le schéma implicite</p>
 \qquad \text{avec}\quad
 c\equiv \frac{{\Delta t}\,  \kappa}{\Delta x^2} \, ."/></p>
 </div></div>
-<div class="section" id="equation-de-la-chaleur-2d">
-<h2>4.3. Équation de la chaleur 2D<a class="headerlink" href="#equation-de-la-chaleur-2d" title="Lien permanent vers ce titre">¶</a></h2>
-<p>On peut traiter le problème à deux dimensions</p>
+<div class="section" id="modele-a-deux-dimensions-d-espace">
+<h3>4.2.2. Modèle à deux dimensions d&#8217;espace<a class="headerlink" href="#modele-a-deux-dimensions-d-espace" title="Lien permanent vers ce titre">¶</a></h3>
+<p>On peut traiter le problème équivalent en deux dimensions d&#8217;espace</p>
 <div class="math">
 <p><img src="_images/math/e77c2d37ad9bbd6757dfcb7c6b5da1095420d6eb.png" alt="\frac{\partial T}{\partial t} = \kappa \, \Delta T + S\, ,"/></p>
 </div><p>de la même manière, avec un schéma explicite en temps</p>
@@ -381,10 +378,14 @@ matrice de taille (N,N)</p>
 <dt>Le code complet est disponible ci-dessous :</dt>
 <dd>[<a class="reference internal" href="auto_examples/edp6_2D_heat_solve.html#example-edp6-2d-heat-solve-py"><em>Python source code</em></a>]</dd>
 </dl>
-<p>Notons pour finir que ce l&#8217;intégration explicite en temps peut s&#8217;adapter
-très simplement à d&#8217;autres équations, comme par exemple équation d&#8217;onde</p>
+<div class="green topic">
+<p class="topic-title first"><strong>Exercice</strong>: Une équation d&#8217;onde en deux dimensions</p>
+<p>Modifiez l&#8217;exemple d&#8217;intégration en temps explicite de
+l&#8217;équation de la chaleur en deux dimensions (vu ci-dessus)</p>
+<p>[<a class="reference internal" href="auto_examples/edp5_2D_heat_vect.html#example-edp5-2d-heat-vect-py"><em>Python source code</em></a>]</p>
+<p>pour traiter (toujours en deux dimensions) l&#8217;équation d&#8217;ondes suivante</p>
 <div class="math">
-<p><img src="_images/math/6ad50a24e7c12e833a3097b96df41a212d7bc956.png" alt="\frac{\partial ^2 u}{\partial t ^2} = c^2 \, \Delta u \, ,"/></p>
+<p><img src="_images/math/4df1a3a24308ff237af5cdab2831dd28c325cc99.png" alt="\frac{\partial ^2 u}{\partial t ^2} = c^2 \, \Delta u \, ."/></p>
 </div><p>de la même manière, on peut écrire un schéma explicite en temps</p>
 <div class="math">
 <p><img src="_images/math/a78725063d8ee768162ce2f5fbce4e9940d7133f.png" alt="u_{i,j}^{n+1} = 2 \, u_{i,j}^{n} - u_{i,j}^{n-1}
@@ -393,14 +394,16 @@ très simplement à d&#8217;autres équations, comme par exemple équation d&#82
 +
 (u_{i,j-1}^{n} - 2\, u_{i,j}^{n} + u_{i,j+1}^{n})/{\Delta y^2}
 \right] \, ."/></p>
-</div><div class="figure align-center">
-<a class="reference external image-reference" href="auto_examples/edp7_edp7_waves.html"><img alt="_images/plot_edp7_waves_1.png" src="_images/plot_edp7_waves_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div><p>On pourra considérer une condition initiale de la forme (...)</p>
 </div>
-<dl class="docutils">
-<dt>Le code complet est disponible ci-dessous :</dt>
-<dd>[<a class="reference internal" href="auto_examples/edp7_waves.html#example-edp7-waves-py"><em>Python source code</em></a>]</dd>
-</dl>
+<p>Correction...</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/edp7_waves.html"><img alt="_images/plot_edp7_waves_1.png" src="_images/plot_edp7_waves_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
+<p>Le code complet est disponible ci-dessous :
+[<a class="reference internal" href="auto_examples/edp7_waves.html#example-edp7-waves-py"><em>La solution...</em></a>]</p>
 <p><div style="clear: both"></div></p>
+</div>
 </div>
 </div>
 
