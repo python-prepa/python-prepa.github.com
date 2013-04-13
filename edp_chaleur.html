@@ -274,10 +274,10 @@ x^2}{12}\left.\frac{\partial^4T}{\partial x^4}\right|_j^n + \mathcal{O}(\Delta x
 </div><p>Un calcul similaire en temps permet d&#8217;estimer l&#8217;erreur &#8220;de troncature&#8221;
 associée à notre schéma discret</p>
 <div class="math">
-<p><img src="_images/math/421b2c0982f3810b5f3c9028b59c7fe3a841f7a4.png" alt="R(T)=
+<p><img src="_images/math/cfb4205a530b2bd937c25288c8b8ec72a9c3b9d9.png" alt="R(T)=
 \frac{\Delta t}{2}\left.\frac{\partial^2 T}{\partial t^2}\right|_j^n
-- \kappa\frac{\Delta x^2}{12}\left.\frac{\partial^4 T}{\partial x^4}\right|_j^n + \mathcal{O}(\Delta
-t^2)+\mathcal{O}(\Delta x^4) \, ."/></p>
+- \kappa\frac{\Delta x^2}{12}\left.\frac{\partial^4 T}{\partial x^4}\right|_j^n
++ \mathcal{O}(\Delta t^2)+\mathcal{O}(\Delta x^4) \, ."/></p>
 </div><p>On peut essayer de vérifier numériquement que le schéma utilisé est bien
 d&#8217;ordre deux en espace</p>
 <p>Pour cela on va effectuer une boucle extérieure sur la résolution et mesurer
@@ -361,12 +361,17 @@ Python pour les indices, i.e. de 0 à N-1) :</p>
  1
  \end{array}
  \right)"/></p>
-</div><p>Pour résoudre ce problème en Python, on peut définir une matrice creuse (tridiagonale)</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>     <span class="c"># Diagonal terms</span>
-<span class="n">offsets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>                     <span class="c"># Their positions</span>
-<span class="n">LAP</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dia_matrix</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">offsets</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
-</pre></div>
-</div>
+</div><p>Pour résoudre ce problème en Python, on peut définir une matrice creuse (tridiagonale).</p>
+<dl class="docutils">
+<dt>Pour cela on utilise le format de matrices creuses de SciPy ::</dt>
+<dd>import scipy.sparse as sp</dd>
+<dt>Ainsi que le solveur associé::</dt>
+<dd>from scipy.sparse.linalg.dsolve import spsolve</dd>
+<dt>On peut alors définir le problème aux différences finies::</dt>
+<dd>data = [np.ones(N), -2*np.ones(N), np.ones(N)]     # Diagonal terms
+offsets = np.array([-1, 0, 1])                     # Their positions
+LAP = sp.dia_matrix((data, offsets), shape=(N, N))</dd>
+</dl>
 <p>et utiliser le
 solver inclus dans SciPy :</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
@@ -395,8 +400,8 @@ c\equiv \frac{{\Delta t}\,  \kappa}{\Delta x^2} \, ."/></p>
 \right] \, ."/></p>
 </div><p>Ce qui devient en Python:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">NT</span><span class="p">):</span>
-   <span class="n">RHS</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span> <span class="p">(</span><span class="n">T</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  \
-                         <span class="o">+</span> <span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">:])</span> <span class="o">/</span> <span class="p">(</span><span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+   <span class="n">RHS</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span> <span class="p">(</span><span class="n">T</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  \
+                              <span class="o">+</span> <span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">:])</span>  <span class="o">/</span> <span class="p">(</span><span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
    <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">RHS</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">S</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -449,13 +454,13 @@ l&#8217;équation de la chaleur en deux dimensions (vu ci-dessus)</p>
 \right] \, ."/></p>
 </div><p>On pourra considérer une condition initiale sous la forme d&#8217;une gaussienne stationnaire.</p>
 </div>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/edp7_waves.html"><img alt="_images/plot_edp7_waves_1.png" src="_images/plot_edp7_waves_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
 <div class="topic">
 <p class="topic-title first">Correction...</p>
 <p>Le code complet est disponible ci-dessous :
 [<a class="reference internal" href="auto_examples/edp7_waves.html#example-edp7-waves-py"><em>La solution...</em></a>]</p>
-</div>
-<div class="figure align-center">
-<a class="reference external image-reference" href="auto_examples/edp7_waves.html"><img alt="_images/plot_edp7_waves_1.png" src="_images/plot_edp7_waves_1.png" style="width: 640.0px; height: 480.0px;" /></a>
 </div>
 <p><div style="clear: both"></div></p>
 </div>
