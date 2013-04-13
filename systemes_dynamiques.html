@@ -59,17 +59,39 @@
 <li>Ecrire la documentation d&#8217;une fonction</li>
 </ul>
 </div>
-<p>On trouve dans le module <strong>SciPy</strong> les opérations de manipulation /
+<p>Dans les modules scientifiques de Python, il existe une collection
+impressionnante de fonctions réalisant des opérations diverses sur les
+tableaux numériques de NumPy. Il faut surtout les utiliser, plutôt que de
+réinventer la roue en recodant (probablement moins bien) une
+fonctionnalité qui existe déjà par ailleurs !</p>
+<p>Dans <strong>NumPy</strong>, on a déjà vu qu&#8217;il existe beaucoup d&#8217;opérations
+permettant par exemple de</p>
+<blockquote>
+<div><ul class="simple">
+<li>générer des tableaux particuliers : <tt class="docutils literal"><span class="pre">np.arange</span></tt>, <tt class="docutils literal"><span class="pre">np.ones</span></tt>,
+<tt class="docutils literal"><span class="pre">np.linspace</span></tt>, ...</li>
+<li>faire des opérations à partir des valeurs du tableau : <tt class="docutils literal"><span class="pre">np.sum</span></tt>,
+<tt class="docutils literal"><span class="pre">np.sin</span></tt>, <tt class="docutils literal"><span class="pre">np.histogram</span></tt>, etc.</li>
+<li>exprimer des conditions (booléennes) sur les éléments d&#8217;un tableau ou
+extraire des parties d&#8217;un tableau :
+<tt class="docutils literal"><span class="pre">np.logical_not</span></tt>,  <tt class="docutils literal"><span class="pre">np.in1d</span></tt></li>
+<li>changer l&#8217;agencement des valeurs d&#8217;un tableau, sa forme, ou encore
+créer un nouveau tableau à partir de plusieurs autres :
+<tt class="docutils literal"><span class="pre">np.reshape</span></tt>, <tt class="docutils literal"><span class="pre">np.concatenate</span></tt>.</li>
+<li>etc. ...</li>
+</ul>
+</div></blockquote>
+<p>Le module <strong>SciPy</strong> est la <strong>boîte à outils</strong> numérique pour les tableaux
+NumPy. On trouve dans <strong>SciPy</strong> les opérations de manipulation /
 traitement de données numériques classiques, mais spécifiques à un type
-d&#8217;application (algébre linéaire, statistiques, etc.). Il s&#8217;agit d&#8217;un
-module stable, bien testé et relativement bien documenté.</p>
+d&#8217;application (algébre linéaire, statistiques, etc.). Ce sont donc des
+fonctions plus &#8220;haut niveau&#8221; que celles de NumPy.</p>
+<p>SciPy est un module stable, bien testé et relativement bien documenté.</p>
 <p><a class="reference external" href="http://docs.scipy.org/doc/">http://docs.scipy.org/doc/</a>
 <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/">http://docs.scipy.org/doc/scipy/reference/</a></p>
-<blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">scipy</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">scipy</span>
 </pre></div>
 </div>
-</div></blockquote>
 <p>Le module SciPy réalise les différentes opérations sur des tableaux
 numériques (<tt class="docutils literal"><span class="pre">ndarray</span></tt>) de <tt class="docutils literal"><span class="pre">numpy</span></tt>. On peut donc directement utiliser
 ces tableaux comme arguments pour les différentes fonctions</p>
@@ -366,8 +388,67 @@ pendule.</p>
 <p>[<a class="reference internal" href="auto_examples/plot_dyna.html#example-plot-dyna-py"><em>Python source code</em></a>]</p>
 </div>
 </div>
+<div class="section" id="input-output-comment-sauver-des-tableaux-et-charger-des-fichiers">
+<h2>5.3. Input/output : comment sauver des tableaux, et charger des fichiers<a class="headerlink" href="#input-output-comment-sauver-des-tableaux-et-charger-des-fichiers" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pour le moment, nous n&#8217;avons pas encore sauvé aucun de nos résultats ! On
+peut facilement sauver un tableau NumPy sous deux formats :</p>
+<blockquote>
+<div><ul class="simple">
+<li>en texte ascii avec <tt class="docutils literal"><span class="pre">np.savetxt</span></tt> (si on a besoin de voir le
+tableau dans un éditeur de texte) pour les tableaux de dimension
+&lt;= 2.</li>
+<li>en format binaire de NumPy avec <tt class="docutils literal"><span class="pre">np.save</span></tt> (pour des fichiers
+moins gros en mémoire)</li>
+</ul>
+</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[ 0,  1,  2,  3,  4],</span>
+<span class="go">    [ 5,  6,  7,  8,  9],</span>
+<span class="go">    [10, 11, 12, 13, 14],</span>
+<span class="go">    [15, 16, 17, 18, 19],</span>
+<span class="go">    [20, 21, 22, 23, 24]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s">&#39;tableau.txt&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;tableau.npy&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s">&#39;tableau.txt&#39;</span><span class="p">)</span>
+<span class="go">625</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s">&#39;tableau.npy&#39;</span><span class="p">)</span>
+<span class="go">280</span>
+</pre></div>
+</div>
+<p>Pour des tableaux de dimension trois ou plus, il faut utiliser
+<tt class="docutils literal"><span class="pre">np.save</span></tt></p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; b = np.ones((2, 1, 3, 4))
+&gt;&gt;&gt; b.shape
+(2, 1, 3, 4)
+&gt;&gt;&gt; np.savetxt('b.txt', b)
+Traceback (most recent call last):
+File "&lt;ipython-input-13-1d7a297e3d85&gt;", line 1, in &lt;module&gt;
+    np.savetxt('b.txt', b)
+File "/usr/lib/python2.7/dist-packages/numpy/lib/npyio.py", line 979,
+in savetxt
+    fh.write(asbytes(format % tuple(row) + newline))
+TypeError: float argument required, not numpy.ndarray
+
+&gt;&gt;&gt; np.save('b.npy', b)</pre>
+</div>
+<p>De la même manière, il existe deux fonctions pour charger un tableau
+numpy à partir d&#8217;un fichier</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s">&#39;tableau.txt&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;tableau.npy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Remarque</p>
+<p>La librairie standard de Python permet de <a class="reference external" href="http://scipy-lectures.github.io/intro/language/io.html">sauver n&#8217;importe quelle
+string dans un fichier</a> .</p>
+<p class="last">Des modules spécialisés peuvent permettrent de sauver des tableaux
+dans d&#8217;autres format : csv, hdf5, etc.</p>
+</div>
+</div>
 <div class="section" id="ecriture-de-documentation">
-<h2>5.3. Ecriture de documentation<a class="headerlink" href="#ecriture-de-documentation" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>5.4. Ecriture de documentation<a class="headerlink" href="#ecriture-de-documentation" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Dans l&#8217;exemple précédent du pendule forcé, la fonction
 <tt class="docutils literal"><span class="pre">forced_pendulum</span></tt> est une fonction haut niveau, que l&#8217;utilisateur final
 va souvent manipuler. Pour cela, il est recommandé d&#8217;écrire une bonne
