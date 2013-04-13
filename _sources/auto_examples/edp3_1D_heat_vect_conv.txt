@@ -1,0 +1,11 @@
+
+
+.. _example_edp3_1D_heat_vect_conv.py:
+
+1D Heat Vectorized Convergence study
+
+**Python source code:** :download:`edp3_1D_heat_vect_conv.py <edp3_1D_heat_vect_conv.py>`
+
+.. literalinclude:: edp3_1D_heat_vect_conv.py
+    :lines: 2-
+    

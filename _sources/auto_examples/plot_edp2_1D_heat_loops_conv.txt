@@ -1,0 +1,16 @@
+
+
+.. _example_plot_edp2_1D_heat_loops_conv.py:
+
+1D Heat equatlion loops convergence
+
+
+.. image:: images/plot_edp2_1D_heat_loops_conv_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_edp2_1D_heat_loops_conv.py <plot_edp2_1D_heat_loops_conv.py>`
+
+.. literalinclude:: plot_edp2_1D_heat_loops_conv.py
+    :lines: 2-
+    

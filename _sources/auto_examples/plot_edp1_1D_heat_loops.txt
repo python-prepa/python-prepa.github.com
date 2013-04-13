@@ -1,0 +1,16 @@
+
+
+.. _example_plot_edp1_1D_heat_loops.py:
+
+1D heat equation with loops
+
+
+.. image:: images/plot_edp1_1D_heat_loops_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_edp1_1D_heat_loops.py <plot_edp1_1D_heat_loops.py>`
+
+.. literalinclude:: plot_edp1_1D_heat_loops.py
+    :lines: 2-
+    

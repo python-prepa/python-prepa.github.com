@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>5.1.2. Mini-tutoriel de traitement d’images &mdash; Python scientifique - ENS Paris</title>
+    <title>6.1.2. Mini-tutoriel de traitement d’images &mdash; Python scientifique - ENS Paris</title>
     
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -27,19 +27,19 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="top" title="Python scientifique - ENS Paris" href="../index.html" />
-    <link rel="up" title="5.1. Traitement d’images pour l’analyse de données d’expériences (TIPE)" href="image_processing.html" />
-    <link rel="prev" title="5.1.1. Présentation des outils" href="image_outils.html" /> 
+    <link rel="up" title="6.1. Traitement d’images pour l’analyse de données d’expériences (TIPE)" href="image_processing.html" />
+    <link rel="prev" title="6.1.1. Présentation des outils" href="image_outils.html" /> 
   </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="image_outils.html" title="5.1.1. Présentation des outils"
+          <a href="image_outils.html" title="6.1.1. Présentation des outils"
              accesskey="P">précédent</a></li>
         <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li>
-          <li><a href="index.html" >5. Ateliers pratiques</a> &raquo;</li>
-          <li><a href="image_processing.html" accesskey="U">5.1. Traitement d&#8217;images pour l&#8217;analyse de données d&#8217;expériences (TIPE)</a> &raquo;</li> 
+          <li><a href="index.html" >6. Ateliers pratiques</a> &raquo;</li>
+          <li><a href="image_processing.html" accesskey="U">6.1. Traitement d&#8217;images pour l&#8217;analyse de données d&#8217;expériences (TIPE)</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -48,7 +48,7 @@
           <div class="body">
             
   <div class="section" id="mini-tutoriel-de-traitement-d-images">
-<h1>5.1.2. Mini-tutoriel de traitement d&#8217;images<a class="headerlink" href="#mini-tutoriel-de-traitement-d-images" title="Lien permanent vers ce titre">¶</a></h1>
+<h1>6.1.2. Mini-tutoriel de traitement d&#8217;images<a class="headerlink" href="#mini-tutoriel-de-traitement-d-images" title="Lien permanent vers ce titre">¶</a></h1>
 <p>Le module <tt class="docutils literal"><span class="pre">skimage</span></tt> est organisé en plusieurs sous-modules
 correspondant à plusieurs branches du traitement d&#8217;images : segmentation,
 filtrage, gestion des formats d&#8217;image, etc. Pour éviter d&#8217;avoir des noms
@@ -65,7 +65,7 @@ namespace principal</p>
 <p>La grande majorité des fonctions de <tt class="docutils literal"><span class="pre">skimage</span></tt> se trouvent donc à
 l&#8217;intérieur d&#8217;un sous-module : il y a deux niveaux hiérarchiques.</p>
 <div class="section" id="input-output-des-fichiers-aux-tableaux-numpy">
-<h2>5.1.2.1. Input / output: des fichiers aux tableaux numpy<a class="headerlink" href="#input-output-des-fichiers-aux-tableaux-numpy" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>6.1.2.1. Input / output: des fichiers aux tableaux numpy<a class="headerlink" href="#input-output-des-fichiers-aux-tableaux-numpy" title="Lien permanent vers ce titre">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">skimage</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">current_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="c"># so that we can go back to current dir.</span>
@@ -95,6 +95,7 @@ couleur ont trois dimensions, les images en noir et blanc en ont deux</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">lena_gray</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&#39;lena.png&#39;</span><span class="p">,</span> <span class="n">as_grey</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lena_gray</span><span class="o">.</span><span class="n">shape</span>
 <span class="go">(512, 512)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">current_dir</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure">
@@ -103,8 +104,112 @@ couleur ont trois dimensions, les images en noir et blanc en ont deux</p>
 <div class="topic">
 <p class="topic-title first">Type des tableaux d&#8217;image</p>
 <p>Les tableaux d&#8217;images peuvent être soit des tableaux d&#8217;entier, soit
-des tableaux de flottants.</p>
+des tableaux de flottants. La plupart des formats d&#8217;image stockent
+les valeurs des pixels sous forme d&#8217;entiers; le format le plus
+classique correspond à des entiers codés sur 8 bits (entre 0, et 255), ce
+qui correspond au type <tt class="docutils literal"><span class="pre">np.uint8</span></tt> de numpy (entier non signé sur 8
+bits).</p>
+<p>Il est par contre naturel d&#8217;utiliser des flottants dès qu&#8217;on fait des
+opérations sur les pixels dans l&#8217;espace des réels, comme des
+multiplications ou des divisions par des réels. Par conséquent,
+certaines fonctions de <tt class="docutils literal"><span class="pre">skimage</span></tt> renvoient un tableau de type
+différent du tableau d&#8217;entrée</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coins_image</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">coins</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coins_image</span><span class="o">.</span><span class="n">dtype</span>
+<span class="go">dtype(&#39;uint8&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">median_filter_coins</span> <span class="o">=</span> <span class="n">median_filter</span><span class="p">(</span><span class="n">coins_image</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">median_filter_coins</span><span class="o">.</span><span class="n">dtype</span> <span class="c"># median of integers is an integer</span>
+<span class="go">dtype(&#39;uint8&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">exposure</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">equalize_coins</span> <span class="o">=</span> <span class="n">exposure</span><span class="o">.</span><span class="n">equalize</span><span class="p">(</span><span class="n">coins_image</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">equalize_coins</span><span class="o">.</span><span class="n">dtype</span>
+<span class="go">dtype(&#39;float64&#39;)</span>
+</pre></div>
 </div>
+<p>Dans <tt class="docutils literal"><span class="pre">skimage</span></tt>, par convention les images en flottant sont à valeur
+entre -1 et 1, afin d&#8217;assurer que toutes les images aient la même
+plage de valeurs. La plage de valeurs d&#8217;une image retournée par une
+fonction peut donc être très différente de celle de l&#8217;image d&#8217;entrée,
+dans le cas où le type a été modifié</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">coins</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">coins</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="go">1 252</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">equalize_coins</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">equalize_coins</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="go">8.59460946095e-06 1.0</span>
+</pre></div>
+</div>
+<p>Les fonctions <tt class="docutils literal"><span class="pre">skimage.img_as_float</span></tt> et <tt class="docutils literal"><span class="pre">skimage.img_as_ubyte</span></tt>
+permettent de faire la conversion entre les types sans se soucier des
+changements d&#8217;échelle.</p>
+</div>
+<p>De la même manière qu&#8217;on peut ouvrir un fichier image comme tableau
+numpy, on peut faire l&#8217;opération contraire : sauver un tableau numpy
+correspondant à une image en un fichier image. Pour cela, on utilise la
+fonction <tt class="docutils literal"><span class="pre">skimage.io.imsave</span></tt></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">io</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="s">&#39;equalize_coins.png&#39;</span><span class="p">,</span> <span class="n">equalize_coins</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Le type du fichier image est automatiquement déduit de l&#8217;extension de la
+chaîne de caractères (&#8216;.png&#8217;, &#8216;.jpg&#8217;).</p>
+<p>Somewhere we need a paragraph about the os module : here?</p>
+</div>
+<div class="section" id="quelques-operations-de-base-avec-numpy">
+<h2>6.1.2.2. Quelques opérations de base avec <tt class="docutils literal"><span class="pre">numpy</span></tt><a class="headerlink" href="#quelques-operations-de-base-avec-numpy" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Une fois que notre image est un tableau numpy, les opérations de numpy
+sur les éléments du tableau correspondent à des opérations sur les
+pixels.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">skimage</span><span class="o">.</span><span class="n">data_dir</span><span class="p">,</span> <span class="s">&#39;lenagray.png&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lena</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Pixel value</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lena</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">32</span><span class="p">]</span>
+<span class="go">110</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Slicing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lena</span><span class="p">[</span><span class="mi">20</span><span class="p">:</span><span class="mi">22</span><span class="p">,</span> <span class="mi">32</span><span class="p">:</span><span class="mi">34</span><span class="p">]</span>
+<span class="go">Image([[110, 113],</span>
+<span class="go">    [110, 111]], dtype=uint8)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lena</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lx</span><span class="p">,</span> <span class="n">ly</span> <span class="o">=</span> <span class="n">lena</span><span class="o">.</span><span class="n">shape</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ogrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">lx</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">ly</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">lx</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">ly</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">&gt;</span> <span class="n">lx</span><span class="o">*</span><span class="n">ly</span><span class="o">/</span><span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Using masks</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lena</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<div class="figure">
+<a class="reference external image-reference" href="auto_examples/plot_numpy_array.html"><img alt="../_images/plot_numpy_array_1.png" src="../_images/plot_numpy_array_1.png" style="width: 180.0px; height: 180.0px;" /></a>
+</div>
+<p>Attention : pour l&#8217;indexation, la 1e dimension (axe 0) correspond aux
+lignes indicées de haut en bas, et la 2e dimension (axe 1) correspond aux
+colonnes de gauche à droite. C&#8217;est la convention des tableaux numpy.</p>
+<div class="topic">
+<p class="topic-title first">Exercice</p>
+<p>Cet exercice a pour but de s&#8217;entraîner 1) au slicing des tableaux
+numpy et 2) à la représentation d&#8217;images couleurs sous la forme de
+tableaux numpy à trois canaux.</p>
+<div class="figure">
+<a class="reference external image-reference" href="auto_examples/plot_mini_mondrian.html"><img alt="../_images/plot_mini_mondrian_1.png" src="../_images/plot_mini_mondrian_1.png" style="width: 360.0px; height: 360.0px;" /></a>
+</div>
+<p>Exercice : réaliser une image ressemblant à l&#8217;image ci-dessus, sous
+la forme d&#8217;un tableau numpy. On pourra par exemple prendre l&#8217;image de
+forme 32x32, et de type <tt class="docutils literal"><span class="pre">np.uint8</span></tt> (entiers de 0 à 255).</p>
+<p>Indices :</p>
+<blockquote>
+<div><ul class="simple">
+<li>Les trois canaux de couleur sont dans l&#8217;ordre R, V, B (rouge vert
+bleu).</li>
+<li>Le jaune correspond au triplet (R, V, B) = (255, 185, 15)</li>
+</ul>
+</div></blockquote>
+<p>Voir la solution :</p>
+<p>[<a class="reference internal" href="auto_examples/plot_mini_mondrian.html#example-plot-mini-mondrian-py"><em>Python source code</em></a>]</p>
+</div>
+</div>
+<div class="section" id="filtrage-d-image">
+<h2>6.1.2.3. Filtrage d&#8217;image<a class="headerlink" href="#filtrage-d-image" title="Lien permanent vers ce titre">¶</a></h2>
+</div>
+<div class="section" id="extraction-d-objets-d-interet">
+<h2>6.1.2.4. Extraction d&#8217;objets d&#8217;intérêt<a class="headerlink" href="#extraction-d-objets-d-interet" title="Lien permanent vers ce titre">¶</a></h2>
 <p><div style="clear: both"></div></p>
 </div>
 </div>
@@ -118,11 +223,11 @@ des tableaux de flottants.</p>
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="image_outils.html" title="5.1.1. Présentation des outils"
+          <a href="image_outils.html" title="6.1.1. Présentation des outils"
              >précédent</a></li>
         <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li>
-          <li><a href="index.html" >5. Ateliers pratiques</a> &raquo;</li>
-          <li><a href="image_processing.html" >5.1. Traitement d&#8217;images pour l&#8217;analyse de données d&#8217;expériences (TIPE)</a> &raquo;</li> 
+          <li><a href="index.html" >6. Ateliers pratiques</a> &raquo;</li>
+          <li><a href="image_processing.html" >6.1. Traitement d&#8217;images pour l&#8217;analyse de données d&#8217;expériences (TIPE)</a> &raquo;</li> 
       </ul>
     </div>
         <!-- your html code here -->

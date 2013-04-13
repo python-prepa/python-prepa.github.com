@@ -1,0 +1,11 @@
+
+
+.. _example_edp6_2D_heat_solve.py:
+
+Example of matrix formulation of 2D finite difference schemes
+
+**Python source code:** :download:`edp6_2D_heat_solve.py <edp6_2D_heat_solve.py>`
+
+.. literalinclude:: edp6_2D_heat_solve.py
+    :lines: 2-
+    

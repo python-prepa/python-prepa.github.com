@@ -1,0 +1,18 @@
+
+
+.. _example_plot_mini_mondrian.py:
+
+
+Un mini Mondrian
+
+
+
+.. image:: images/plot_mini_mondrian_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_mini_mondrian.py <plot_mini_mondrian.py>`
+
+.. literalinclude:: plot_mini_mondrian.py
+    :lines: 4-
+    

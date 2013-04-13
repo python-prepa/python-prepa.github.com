@@ -1,0 +1,11 @@
+
+
+.. _example_edp4_1D_heat_solve.py:
+
+Example of matrix formulation of 1D finite difference schemes
+
+**Python source code:** :download:`edp4_1D_heat_solve.py <edp4_1D_heat_solve.py>`
+
+.. literalinclude:: edp4_1D_heat_solve.py
+    :lines: 2-
+    

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4. Systèmes dynamiques : utilisation de SciPy &mdash; Python scientifique - ENS Paris</title>
+    <title>5. Systèmes dynamiques : utilisation de SciPy &mdash; Python scientifique - ENS Paris</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -27,18 +27,18 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="top" title="Python scientifique - ENS Paris" href="index.html" />
-    <link rel="next" title="5. Ateliers pratiques" href="ateliers/index.html" />
-    <link rel="prev" title="3. Phénomènes stochastiques : utilisation des tableaux NumPy" href="stochastique.html" /> 
+    <link rel="next" title="6. Ateliers pratiques" href="ateliers/index.html" />
+    <link rel="prev" title="4. Équations aux dérivées partielles : utilisation de NumPy" href="edp_chaleur.html" /> 
   </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="ateliers/index.html" title="5. Ateliers pratiques"
+          <a href="ateliers/index.html" title="6. Ateliers pratiques"
              accesskey="N">suivant</a></li>
         <li class="right" >
-          <a href="stochastique.html" title="3. Phénomènes stochastiques : utilisation des tableaux NumPy"
+          <a href="edp_chaleur.html" title="4. Équations aux dérivées partielles : utilisation de NumPy"
              accesskey="P">précédent</a> |</li>
         <li><a href="index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
       </ul>
@@ -49,7 +49,7 @@
           <div class="body">
             
   <div class="section" id="systemes-dynamiques-utilisation-de-scipy">
-<h1>4. Systèmes dynamiques : utilisation de SciPy<a class="headerlink" href="#systemes-dynamiques-utilisation-de-scipy" title="Lien permanent vers ce titre">¶</a></h1>
+<h1>5. Systèmes dynamiques : utilisation de SciPy<a class="headerlink" href="#systemes-dynamiques-utilisation-de-scipy" title="Lien permanent vers ce titre">¶</a></h1>
 <div class="topic">
 <p class="topic-title first">Contenu du chapitre</p>
 <ul class="simple">
@@ -83,15 +83,17 @@ ces tableaux comme arguments pour les différentes fonctions</p>
 </pre></div>
 </div>
 <p>Pour montrer l&#8217;utilisation de SciPy, nous allons nous intéresser à
-l&#8217;intégration d&#8217;équations différentielles, en considérant de systèmes
+l&#8217;intégration d&#8217;équations différentielles, en considérant des systèmes
 dynamiques à base de pendules mécaniques.</p>
 <div class="section" id="pendule-simple">
-<h2>4.1. Pendule simple<a class="headerlink" href="#pendule-simple" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>5.1. Pendule simple<a class="headerlink" href="#pendule-simple" title="Lien permanent vers ce titre">¶</a></h2>
 <a class="reference internal image-reference" href="_images/pendulum.png"><img alt="_images/pendulum.png" class="align-center" src="_images/pendulum.png" style="width: 250.0px; height: 370.5px;" /></a>
-<p>L&#8217;équation du pendule simple est donnée par</p>
+<p>En écrivant la relation fondamentale de la dynamique (conservation de la
+quantité de mouvement), on obtient l&#8217;équation du pendule simple donnée par</p>
 <div class="math">
 <p><img src="_images/math/c24308e0cf4cfbde7ba51595fb918a99aca1dae2.png" alt="\ddot{\theta} + \omega^2 \sin\theta = 0"/></p>
-</div><p>(expliquer)</p>
+</div><p>où <img class="math" src="_images/math/52e8ed7a3ba22130ad3984eb2cd413406475a689.png" alt="\theta" style="vertical-align: 0px"/> est l&#8217;angle du pendule par rapport à la verticale, et
+on note avec un point la dérivée temporelle.</p>
 <p>Pour les petites oscillations on peut faire l&#8217;approximation
 <img class="math" src="_images/math/6514e2ea9419f41ec217149ceac594aff087022e.png" alt="\sin\theta\simeq\theta" style="vertical-align: -1px"/>. Quand l&#8217;approximation n&#8217;est pas valide il
 faut intégrer numériquement cette équation différentielle pour obtenir
@@ -99,7 +101,7 @@ l&#8217;évolution de la position et de la vitesse angulaire du pendule, au
 cours du temps.</p>
 <p>Il nous faut donc disposer d&#8217;un intégrateur d&#8217;équations différentielles,
 que l&#8217;on peut s&#8217;attendre à trouver dans SciPy. Mais quelle est la
-fonction correspondante ? Tentont une recherche Google &#8220;scipy integrate
+fonction correspondante ? Tentons une recherche Google &#8220;scipy integrate
 differential equation&#8221;, ou la consultation du sommaire de l&#8217;aide
 <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/index.html">http://docs.scipy.org/doc/scipy/reference/index.html</a>. Il existe un
 sous-module <tt class="docutils literal"><span class="pre">integrate</span></tt>, qui contient lui-même une fonction
@@ -129,12 +131,31 @@ initiale</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sol</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">simple_pendulum</span><span class="p">,</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">t</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="admonition warning">
+<p class="first admonition-title">Attention</p>
+<p class="last">Comme la fonction <tt class="docutils literal"><span class="pre">odeint</span></tt>, il existe un grand nombre de fonctions
+permettant de réaliser des opérations haut niveau de calcul
+scientifique.</p>
+</div>
 <p>Nous pouvons par exemple vérifier la conservation de l&#8217;énergie mécanique
-au cours du temps :</p>
+au cours du temps</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">theta</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">T</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E_kin</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">theta_dot</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E_pot</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="c"># z</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E_mech</span> <span class="o">=</span> <span class="n">E_kin</span> <span class="o">+</span> <span class="n">E_pot</span>
+</pre></div>
+</div>
 <div class="figure">
 <a class="reference external image-reference" href="auto_examples/plot_simple_pendulum.html"><img alt="_images/plot_simple_pendulum_1.png" src="_images/plot_simple_pendulum_1.png" style="width: 640.0px; height: 480.0px;" /></a>
 </div>
-<p>Pour générer la figure ci-dessous, on a utilisé un certain nombre de
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">E_kin</span><span class="p">,</span> <span class="s">&#39;o-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">u&#39;$E_\mathrm{kin}$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">E_pot</span><span class="p">,</span> <span class="s">&#39;o-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">u&#39;$E_\mathrm{pot}$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">E_mech</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">u&#39;$E_\mathrm{mech}$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Pour générer la figure ci-dessus, on a utilisé un certain nombre de
 commandes du module <tt class="docutils literal"><span class="pre">matplotlib</span></tt>.</p>
 <p>[<a class="reference internal" href="auto_examples/plot_simple_pendulum.html#example-plot-simple-pendulum-py"><em>Python source code</em></a>]</p>
 <p>Pour construire les différents éléments de la figure (courbe, labels,
@@ -143,9 +164,26 @@ légende, etc.), il existe des fonctions dédiées de matplotlib qu&#8217;on peu
 <a class="reference external" href="http://matplotlib.org/">http://matplotlib.org/</a>. En particulier, la gallerie d&#8217;exemples
 <a class="reference external" href="http://matplotlib.org/gallery.html">http://matplotlib.org/gallery.html</a> est très utile pour voir comment
 générer différents types de figures.</p>
+<div class="topic">
+<p class="topic-title first">Exercice</p>
+<p>Ecrire un script python pour construire le diagramme des phases du
+pendule simple, représenté ci-dessous. Pour celà, il faut</p>
+<blockquote>
+<div><ul class="simple">
+<li>intégrer l&#8217;équation différentielle pour différentes conditions
+initiales entre 0 et <img class="math" src="_images/math/f2ca003a7da0de4994b4733e203b74ff52d42553.png" alt="\pi" style="vertical-align: 0px"/>.</li>
+<li>représenter <img class="math" src="_images/math/b968505d78f325a99a639297b7a081e041f4b007.png" alt="\dot{\theta}" style="vertical-align: 0px"/> en fonction de <img class="math" src="_images/math/52e8ed7a3ba22130ad3984eb2cd413406475a689.png" alt="\theta" style="vertical-align: 0px"/>
+pour les différentes solutions.</li>
+</ul>
+</div></blockquote>
+<div class="figure">
+<a class="reference external image-reference" href="auto_examples/plot_phase_diagram.html"><img alt="_images/plot_phase_diagram_1.png" src="_images/plot_phase_diagram_1.png" style="width: 480.0px; height: 480.0px;" /></a>
+</div>
+<p>[<a class="reference internal" href="auto_examples/plot_phase_diagram.html#example-plot-phase-diagram-py"><em>Solution de l&#8217;exercice</em></a>]</p>
+</div>
 </div>
 <div class="section" id="pendule-force">
-<h2>4.2. Pendule forcé<a class="headerlink" href="#pendule-force" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>5.2. Pendule forcé<a class="headerlink" href="#pendule-force" title="Lien permanent vers ce titre">¶</a></h2>
 <p>On peut rajouter un degré de liberté au système dynamique du pendule en
 imposant un forçage dépendant du temps, par exemple périodique en temps.
 Nous allons également considérer un amortissement du pendule dû au
@@ -176,33 +214,33 @@ intervalle de temps:</p>
 </pre></div>
 </div>
 <p>On peut à présent intégrer une trajectoire:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">omega</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">/</span><span class="mi">3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">omega</span> <span class="o">/</span> <span class="mi">25</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tf</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">,</span> <span class="n">theta_dot_0</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-<span class="go">q=0.5, acc=1, omega=omega)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">omega</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">/</span><span class="mi">3</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">omega</span> <span class="o">/</span> <span class="mi">25</span>
+<span class="n">tf</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">,</span> <span class="n">theta_dot_0</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Pour cette trajectoire, l&#8217;évolution de <img class="math" src="_images/math/52e8ed7a3ba22130ad3984eb2cd413406475a689.png" alt="\theta" style="vertical-align: 0px"/> reste périodique,
 avec la même période que la période de forçage</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">)</span> <span class="c"># courbe bleue</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">)</span> <span class="c"># courbe bleue</span>
 </pre></div>
 </div>
 <p>Quand on augmente l&#8217;amplitude du forçage, le mouvement reste périodique
 après un régime transitoire assez long. On observe par contre un
 doublement de période, l&#8217;amplitude de l&#8217;oscillation varie entre deux
 périodes du forçage</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">,</span> <span class="n">theta_1</span><span class="p">,</span> <span class="n">theta_dot_1</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-<span class="go">q=0.5, acc=1.08, omega=omega)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_1</span><span class="p">)</span> <span class="c"># courbe verte</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">t</span><span class="p">,</span> <span class="n">theta_1</span><span class="p">,</span> <span class="n">theta_dot_1</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="mf">1.08</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_1</span><span class="p">)</span> <span class="c"># courbe verte</span>
 </pre></div>
 </div>
 <p>Enfin, quand on augmente encore l&#8217;amplitude du forçage, le mouvement
 n&#8217;est plus périodique et semble &#8220;chaotique&#8221;:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">,</span> <span class="n">theta_2</span><span class="p">,</span> <span class="n">theta_dot_2</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-<span class="go">q=0.5, acc=1.17, omega=omega)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_2</span><span class="p">)</span> <span class="c"># courbe rouge</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">t</span><span class="p">,</span> <span class="n">theta_2</span><span class="p">,</span> <span class="n">theta_dot_2</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="mf">1.17</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_2</span><span class="p">)</span> <span class="c"># courbe rouge</span>
 </pre></div>
 </div>
 <div class="figure">
@@ -226,7 +264,7 @@ moyenne du signal</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">theta_0</span> <span class="o">-=</span> <span class="n">theta_0</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Notons qu&#8217;on peut soustraire un scalaire à un tableau <cite>ndarray</cite> : la
+<p>Notons qu&#8217;on peut soustraire un scalaire à un tableau <tt class="docutils literal"><span class="pre">ndarray</span></tt> : la
 soustraction est alors faite élément par élément.</p>
 <p>On calcule la transformée de Fourier discrète de <img class="math" src="_images/math/62df86ba6c84c9e8a5008f0ad6bbefa5d9cf301f.png" alt="\theta_0" style="vertical-align: -4px"/>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">fft_theta_0</span> <span class="o">=</span> <span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">theta_0</span><span class="p">)</span>
@@ -250,10 +288,10 @@ fréquence de forçage <img class="math" src="_images/math/9c2982e5610fcbb77a9f8
 <a class="reference external image-reference" href="auto_examples/plot_fft.html"><img alt="_images/plot_fft_1.png" src="_images/plot_fft_1.png" style="width: 640.0px; height: 480.0px;" /></a>
 </div>
 <p>Pour le forçage intermédiaire, on refait la même série d&#8217;opérations</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">theta_1</span> <span class="o">=</span> <span class="n">theta_1</span><span class="p">[</span><span class="n">time_mask</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">theta_1</span> <span class="o">-=</span> <span class="n">theta_1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fft_theta_1</span> <span class="o">=</span> <span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">theta_1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fft_theta_1</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">theta_1</span> <span class="o">=</span> <span class="n">theta_1</span><span class="p">[</span><span class="n">time_mask</span><span class="p">]</span>
+<span class="n">theta_1</span> <span class="o">-=</span> <span class="n">theta_1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">fft_theta_1</span> <span class="o">=</span> <span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">theta_1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fft_theta_1</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>On observe alors un nouveau pic à la fréquence moitiés <img class="math" src="_images/math/4ae6350e3b16d67f90299b301e6abe43cf07cfb6.png" alt="f_D/2" style="vertical-align: -7px"/>,
@@ -290,29 +328,34 @@ chaotiques et d&#8217;autres périodiques.</p>
 <div class="figure">
 <a class="reference external image-reference" href="auto_examples/plot_cascade.html"><img alt="_images/plot_cascade_1.png" src="_images/plot_cascade_1.png" style="width: 640.0px; height: 480.0px;" /></a>
 </div>
-<p>Dans le régime chaotique, on peut vérifier que deux trajectoires
-initialement très proches s&#8217;éloignent très vite:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">omega</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">/</span><span class="mi">3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">omega</span> <span class="o">/</span> <span class="mi">25</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tf</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">acc</span> <span class="o">=</span> <span class="mf">1.17</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">eps</span> <span class="o">=</span> <span class="mf">1.e-8</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">,</span> <span class="n">theta_dot_0</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-<span class="gp">... </span>                        <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">,</span> <span class="n">theta_1</span><span class="p">,</span> <span class="n">theta_dot_1</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span> <span class="o">*</span>
-<span class="go">np.pi/3, 0,</span>
-<span class="gp">... </span>                        <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c"># Compute the distance between the two trajectories</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">theta_1</span> <span class="o">-</span> <span class="n">theta_0</span><span class="p">,</span> <span class="n">theta_dot_1</span> <span class="o">-</span> <span class="n">theta_dot_1</span><span class="p">)</span>
+<div class="topic">
+<p class="topic-title first">Exercice</p>
+<p>Une propriété des systèmes dynamiques chaotiques est leur grande
+sensibilité aux conditions initiales : deux trajectoires initialement
+très proches vont d&#8217;éloigner exponentiellement vite au cours du temps.</p>
+<p>Dans le régime chaotique, on va vérifier que deux trajectoires
+initialement très proches s&#8217;éloignent très vite. Pour les paramètres</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">omega</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">/</span><span class="mi">3</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="mf">1.17</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">1.e-8</span>
 </pre></div>
 </div>
+<p>initialiser deux trajectoires séparées par une distance <tt class="docutils literal"><span class="pre">eps</span></tt>
+(conditions initiales <img class="math" src="_images/math/4887dfc3898067620f740a9028623724147ebc5a.png" alt="(\theta, 0)" style="vertical-align: -7px"/> et
+<img class="math" src="_images/math/385fc4ada746ee07b2cba34fbad5cba60cf359ca.png" alt="(\theta + \epsilon, 0)" style="vertical-align: -7px"/>,  par exemple), et représenter leur
+distance dans l&#8217;espace des phases au cours du temps</p>
+<div class="math">
+<p><img src="_images/math/0dfe1a20f4bb8e54b06940a9fcb4316bc45b1b03.png" alt="d_{12}(t) = \sqrt{(\theta_2(t) - \theta_1(t))^2 +
+                    (\dot{\theta}_2(t) - \dot{\theta}_1(t))^2}"/></p>
+</div><p>Pour vérifier que la distance grandit de manière exponentielle au
+cours du temps, faire une représentation graphique en coordonnées
+semi-logarithmiques (<tt class="docutils literal"><span class="pre">plt.semilogy</span></tt>).</p>
 <div class="figure">
 <a class="reference external image-reference" href="auto_examples/plot_chaos.html"><img alt="_images/plot_chaos_1.png" src="_images/plot_chaos_1.png" style="width: 480.0px; height: 320.0px;" /></a>
 </div>
-<p>En coordonnées logarithmiques, on voit que la distance entre les
-trajectoires croît de manière exponentielle au cours du temps. Il s&#8217;agit
-d&#8217;une propriété caractéristique du chaos.</p>
+<p>[<a class="reference internal" href="auto_examples/plot_chaos.html#example-plot-chaos-py"><em>Solution de l&#8217;exercice</em></a>]</p>
+</div>
 <div class="topic">
 <p class="topic-title first">Pour aller plus loin</p>
 <p>On peut représenter en 3-D le cycle limite décrivant la dynamique du
@@ -324,7 +367,7 @@ pendule.</p>
 </div>
 </div>
 <div class="section" id="ecriture-de-documentation">
-<h2>4.3. Ecriture de documentation<a class="headerlink" href="#ecriture-de-documentation" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>5.3. Ecriture de documentation<a class="headerlink" href="#ecriture-de-documentation" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Dans l&#8217;exemple précédent du pendule forcé, la fonction
 <tt class="docutils literal"><span class="pre">forced_pendulum</span></tt> est une fonction haut niveau, que l&#8217;utilisateur final
 va souvent manipuler. Pour cela, il est recommandé d&#8217;écrire une bonne
@@ -404,10 +447,10 @@ une lecture rapide et efficace de la documentation:</p>
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="ateliers/index.html" title="5. Ateliers pratiques"
+          <a href="ateliers/index.html" title="6. Ateliers pratiques"
              >suivant</a></li>
         <li class="right" >
-          <a href="stochastique.html" title="3. Phénomènes stochastiques : utilisation des tableaux NumPy"
+          <a href="edp_chaleur.html" title="4. Équations aux dérivées partielles : utilisation de NumPy"
              >précédent</a> |</li>
         <li><a href="index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
       </ul>

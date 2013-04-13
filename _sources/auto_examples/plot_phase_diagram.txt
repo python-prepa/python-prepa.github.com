@@ -1,0 +1,16 @@
+
+
+.. _example_plot_phase_diagram.py:
+
+
+
+
+.. image:: images/plot_phase_diagram_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_phase_diagram.py <plot_phase_diagram.py>`
+
+.. literalinclude:: plot_phase_diagram.py
+    :lines: 2-
+    

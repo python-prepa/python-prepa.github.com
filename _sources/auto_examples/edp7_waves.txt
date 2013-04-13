@@ -1,0 +1,11 @@
+
+
+.. _example_edp7_waves.py:
+
+2D WAVE PROPAGATION USING FINITE DIFFERENCES
+
+**Python source code:** :download:`edp7_waves.py <edp7_waves.py>`
+
+.. literalinclude:: edp7_waves.py
+    :lines: 2-
+    

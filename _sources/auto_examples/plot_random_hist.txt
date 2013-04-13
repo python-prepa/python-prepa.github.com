@@ -1,0 +1,16 @@
+
+
+.. _example_plot_random_hist.py:
+
+
+
+
+.. image:: images/plot_random_hist_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_random_hist.py <plot_random_hist.py>`
+
+.. literalinclude:: plot_random_hist.py
+    :lines: 2-
+    

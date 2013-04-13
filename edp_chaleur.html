@@ -1,0 +1,433 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4. Équations aux dérivées partielles : utilisation de NumPy &mdash; Python scientifique - ENS Paris</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2013.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="Python scientifique - ENS Paris" href="index.html" />
+    <link rel="next" title="5. Systèmes dynamiques : utilisation de SciPy" href="systemes_dynamiques.html" />
+    <link rel="prev" title="3. Systèmes statistiques : Nombres aléatoires - Monte Carlo" href="stochastique.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="systemes_dynamiques.html" title="5. Systèmes dynamiques : utilisation de SciPy"
+             accesskey="N">suivant</a></li>
+        <li class="right" >
+          <a href="stochastique.html" title="3. Systèmes statistiques : Nombres aléatoires - Monte Carlo"
+             accesskey="P">précédent</a> |</li>
+        <li><a href="index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="equations-aux-derivees-partielles-utilisation-de-numpy">
+<h1>4. Équations aux dérivées partielles : utilisation de NumPy<a class="headerlink" href="#equations-aux-derivees-partielles-utilisation-de-numpy" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="topic">
+<p class="topic-title first">Contenu du chapitre</p>
+<ul class="simple">
+<li>Présentation du module NumPy</li>
+<li>Équation de la chaleur en 1D</li>
+</ul>
+</div>
+<p>On trouve dans le module <strong>NumPy</strong> les outils de manipulation des tableaux
+pour le calcul numérique</p>
+<blockquote>
+<div><ul class="simple">
+<li>Nombreuses fonctions de manipulation</li>
+<li>Bibliothèque mathématique importante</li>
+</ul>
+</div></blockquote>
+<p>Il s&#8217;agit d&#8217;un
+module stable, bien testé et relativement bien documenté.</p>
+<p><a class="reference external" href="http://docs.scipy.org/doc/">http://docs.scipy.org/doc/</a>
+<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/">http://docs.scipy.org/doc/numpy/reference/</a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+<div class="section" id="introduction-rapide-a-numpy">
+<h2>4.1. Introduction rapide à NumPy<a class="headerlink" href="#introduction-rapide-a-numpy" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le module NumPy permet la manipulation simple et efficace des tableaux</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>   <span class="c"># De 0 (inclus) à 2 (exclus) par pas de 0.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([ 0. ,  0.1,  0.2,  0.3,  0.4,  0.5,  0.6,  0.7,  0.8,  0.9,  1. ,</span>
+<span class="go">        1.1,  1.2,  1.3,  1.4,  1.5,  1.6,  1.7,  1.8,  1.9])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c"># Sa taille</span>
+<span class="go">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c"># Le premier élément</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c"># Le deuxième élément</span>
+<span class="go">0.10000000000000001</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">19</span><span class="p">]</span> <span class="c"># Le dernier élément</span>
+<span class="go">1.9000000000000001</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="c"># Pas un élément !</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">IndexError</span>: <span class="n">index 20 is out of bounds for axis 0 with size 20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[1, 2, 3],</span>
+<span class="go">       [4, 5, 6],</span>
+<span class="go">       [7, 8, 9]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">a</span>  <span class="c"># Multiplication de chaque terme</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span>  <span class="c"># Sommation terme à terme</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="c"># Produit de matrices</span>
+<span class="go">array([[ 60,  72,  84],</span>
+<span class="go">       [132, 162, 192],</span>
+<span class="go">       [204, 252, 300]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">*</span><span class="n">b</span>      <span class="c"># Produit terme à terme</span>
+<span class="go">array([[  2,   8,  18],</span>
+<span class="go">       [ 32,  50,  72],</span>
+<span class="go">       [ 98, 128, 162]])</span>
+</pre></div>
+</div>
+<p>On peut facilement effectuer des coupes dans un tableau numpy. Cette
+fonctionnalité est particulièrement importante en calcul scientifique
+(comme nous allons le voir) pour éviter l&#8217;utilisation de boucles.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>   <span class="c"># de l&#39;indice 1 à l&#39;indice 4 exclu !!!ATTENTION!!!</span>
+<span class="go">array([2, 3, 4])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>    <span class="c"># du debut à l&#39;indice 4 exclu</span>
+<span class="go">array([1, 2, 3, 4])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>    <span class="c"># de l&#39;indice 4 inclus à la fin</span>
+<span class="go">array([5, 6])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>   <span class="c"># excluant le dernier element</span>
+<span class="go">array([1, 2, 3, 4, 5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c"># excluant le premier et le dernier</span>
+<span class="go">array([2, 3, 4, 5])</span>
+</pre></div>
+</div>
+<p><strong>Attention</strong> à la copie de tableau !</p>
+<p>Pour un scalaire on a le comportement &#8220;intuitif&#8221; :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">=</span><span class="n">a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>Pour un tableau NumPy, par defaut on ne copie que l&#8217;adresse du
+tableau (pointeur) pas son contenu (les deux noms correspondent alors aux
+mêmes adresses en mémoire).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">=</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">=</span><span class="n">a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">array([[ 0.,  0.],</span>
+<span class="go">       [ 0.,  0.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">array([[  0.,   0.],</span>
+<span class="go">       [  0.,  10.]])</span>
+</pre></div>
+</div>
+<p>Pour effectuer une copie des valeurs, il faut
+utiliser <strong>.copy()</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">=</span><span class="n">b</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">array([[  0.,   0.],</span>
+<span class="go">       [  0.,  10.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">array([[ 0.,  0.],</span>
+<span class="go">       [ 0.,  0.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">array([[  0.,   0.],</span>
+<span class="go">       [  0.,  10.]])</span>
+</pre></div>
+</div>
+<p><em>Remarque :</em> la même chose s&#8217;applique aux coupes :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">array([10,  1,  2,  3,  4])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="equation-de-la-chaleur-1d">
+<h2>4.2. Équation de la chaleur 1D<a class="headerlink" href="#equation-de-la-chaleur-1d" title="Lien permanent vers ce titre">¶</a></h2>
+<p>On va s&#8217;intéresser dans un premier temps à l&#8217;équation de la chaleur
+(diffusion thermique) en une dimension d&#8217;espace</p>
+<div class="math">
+<p><img src="_images/math/636a9aa84deeb492aaaade73721b56b7748e3519.png" alt="\frac{\partial T}{\partial t} = \kappa \, \frac{\partial^2 T}{\partial
+x^2} \, ,"/></p>
+</div><p>on considèrera les conditions aux limites suivantes</p>
+<div class="math">
+<p><img src="_images/math/0a3a3e58890b2e782079b14e646b79c0d4824fbc.png" alt="\forall t \qquad  T=0 \, ,\qquad \text{en} \,\, x=0 \,\,  \text{et} \,\,  x=1 \, ,\\[3mm]
+T=\sin(2\pi\,x)\, ,  \qquad \text{en $t=0$}\, ."/></p>
+</div><p>On va chercher à discrétiser ce problème pour en chercher une solution
+approchée.</p>
+<p>La discrétisation la plus simple que l&#8217;on puisse envisager (aux différences
+finies s&#8217;écrit)</p>
+<div class="math">
+<p><img src="_images/math/6cd5717e08d1c54fdd92ea7a9580d07a2af7ada0.png" alt="\frac{T_{j}^{n+1}-T_{j}^{n}}{\Delta t} =
+\kappa \,
+\frac{\frac{T_{j+1}^n-T_{j}^{n}}{\Delta
+x}-\frac{T_{j}^n-T_{j-1}^{n}}{\Delta x}}{\Delta x} \, ,"/></p>
+</div><p>que l&#8217;on peut re-écrire</p>
+<div class="math">
+<p><img src="_images/math/006d58851eb4425c8f2ee83871f67bcbd5e24075.png" alt="T_{j}^{n+1} = T_{j}^{n} + c \, (T_{j-1}^{n}-2\, T_{j}^{n}+T_{j+1}^{n}) \, ,
+\qquad \text{avec}\quad
+c\equiv \frac{{\Delta t}\,  \kappa}{\Delta x^2} \, ."/></p>
+</div><div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/edp1_1D_heat_loops.html"><img alt="_images/plot_edp1_1D_heat_loops_1.png" src="_images/plot_edp1_1D_heat_loops_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
+<p>[<a class="reference internal" href="auto_examples/edp1_1D_heat_loops.html#example-edp1-1d-heat-loops-py"><em>Python source code</em></a>]</p>
+<p>En introduisant un développement de Taylor, on peut estimer la qualité de
+l&#8217;approximation numérique (évolution de l&#8217;erreur en fonction de
+<img class="math" src="_images/math/1eb29f9de3753a59530941141fcb5c7aa3fa2e38.png" alt="\Delta x" style="vertical-align: 0px"/> et <img class="math" src="_images/math/a1ffc0a012620941fe660cedabff822ce7162eca.png" alt="\Delta t" style="vertical-align: 0px"/>).</p>
+<p>En écrivant</p>
+<div class="math">
+<p><img src="_images/math/a2c4eccdf7047450106142df985c5c7d5d58064c.png" alt="T_{j+\alpha}^n = T_{j}^n
++ \alpha \, \Delta x \left(\frac{\partial T}{\partial x}\right)_{j}^n
++ \alpha^2 \, \frac{\Delta x^2}{2} \left(\frac{\partial^2 T}{\partial x^2}\right)_{j}^n
++ \alpha^3 \, \frac{\Delta x^3}{3!} \left(\frac{\partial^3 T}{\partial
+x^3}\right)_{j}^n"/></p>
+</div><div class="math">
+<p><img src="_images/math/c9982c97aeb6ddaf45d8a556748b6745b280930a.png" alt="+ \alpha^4 \, \frac{\Delta x^4}{4!} \left(\frac{\partial^4 T}{\partial x^4}\right)_{j}^n
++ \alpha^5 \, \frac{\Delta x^5}{5!} \left(\frac{\partial^5 T}{\partial x^5}\right)_{j}^n
++ {\cal O}(\Delta x^6) \, ,"/></p>
+</div><p>et en sommant les expressions pour <img class="math" src="_images/math/997a209dcb90543b0b7472e90e7cf855091b8b00.png" alt="\alpha=-1" style="vertical-align: -1px"/> et <img class="math" src="_images/math/5d739b3faa1ca596d500cae6ad311fd86a8b6937.png" alt="\alpha=1" style="vertical-align: -1px"/>,
+on a</p>
+<div class="math">
+<p><img src="_images/math/6092d70c08bb1b555f02616d4dfb359a24aa33d5.png" alt="T_{j-1} + T_{j+1} = 2 T_{j} + \Delta x^2 \left.\frac{\partial^2
+T}{\partial x^2}\right|_{j}^n + \frac{\Delta
+x^4}{12}\left.\frac{\partial^4 T}{\partial x^4}\right|_{j}^n + \mathcal{O}(\Delta
+x^6) \, ,"/></p>
+</div><p>donc</p>
+<div class="math">
+<p><img src="_images/math/c2e2f196a1283e51d0136d2d44c3416655d7c84e.png" alt="\left.\frac{\partial ^2 T}{\partial x ^2} \right|_j^n =
+\frac{T_{j-1}^n-2T_j^n+T_{j+1^n}}{\Delta x ^2} - \frac{\Delta
+x^2}{12}\left.\frac{\partial^4T}{\partial x^4}\right|_j^n + \mathcal{O}(\Delta x^4)
+\, ."/></p>
+</div><p>Un calcul similaire en temps permet d&#8217;estimer l&#8217;erreur &#8220;de troncature&#8221;
+associée à notre schéma discret</p>
+<div class="math">
+<p><img src="_images/math/421b2c0982f3810b5f3c9028b59c7fe3a841f7a4.png" alt="R(T)=
+\frac{\Delta t}{2}\left.\frac{\partial^2 T}{\partial t^2}\right|_j^n
+- \kappa\frac{\Delta x^2}{12}\left.\frac{\partial^4 T}{\partial x^4}\right|_j^n + \mathcal{O}(\Delta
+t^2)+\mathcal{O}(\Delta x^4) \, ."/></p>
+</div><p>On peut essayer de vérifier numériquement que le schéma utilisé est bien
+d&#8217;ordre deux en espace</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/edp2_1D_heat_loops_conv.html"><img alt="_images/plot_edp2_1D_heat_loops_conv_1.png" src="_images/plot_edp2_1D_heat_loops_conv_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
+<p>[<a class="reference internal" href="auto_examples/edp2_1D_heat_loops_conv.html#example-edp2-1d-heat-loops-conv-py"><em>Python source code</em></a>]</p>
+<p>On constate que le schéma semble bien être d&#8217;ordre 2 en espace, mais que le
+calcul devient insupportablement long.</p>
+<p>C&#8217;est qu&#8217;en fait ce code est mal écrit car il ne tire pas profit des
+possibilités de calcul vectoriel offertes par NumPy.</p>
+<p>Pour cela il faut remplacer les lignes</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">NX</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+   <span class="n">RHS</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">dt</span><span class="o">*</span><span class="n">K</span><span class="o">*</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">NX</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+   <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+=</span><span class="n">RHS</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>par des instructions vectorielles (les &#8220;boucles&#8221; sont alors gérées par du
+code compilé et non par du code interpreté)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">RHS</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">dt</span><span class="o">*</span><span class="n">K</span><span class="o">*</span><span class="p">(</span><span class="n">T</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span><span class="o">/</span><span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">T</span><span class="o">+=</span><span class="n">RHS</span>
+</pre></div>
+</div>
+<p>On constate que l&#8217;execution est alors quasi-instantanée.</p>
+<p>[<a class="reference internal" href="auto_examples/edp3_1D_heat_vect_conv.html#example-edp3-1d-heat-vect-conv-py"><em>Python source code</em></a>]</p>
+<p>Que se passe t&#8217;il si on pousse l&#8217;analyse vers de plus petits pas d&#8217;espace ???</p>
+<p>On est de fait limité par un critère de stabilité.</p>
+<p>Pour une résolution spatiale fixée, celui-ci nous impose donc un nombre
+minimum d&#8217;iterations pour atteindre un temps donné.</p>
+<p>On peut cependant chercher à obtenir directement la solution du problème
+stationnaire</p>
+<p>Considérons le système modifié avec terme source (pour éviter une solution
+stationnaire triviale)</p>
+<div class="math">
+<p><img src="_images/math/cb6b4d4805983815927a9d6d5f42eca0273aceba.png" alt="\frac{\partial T}{\partial t} = \kappa \, \frac{\partial^2 T}{\partial x^2} + S \, ,"/></p>
+</div><p>On a alors la solution stationnaire en résolvant</p>
+<div class="math">
+<p><img src="_images/math/45bd0ca900377f586c8d8bc0097ad04bc80ebf38.png" alt="\kappa \, \frac{\partial^2 T}{\partial x^2} = - S \, ,"/></p>
+</div><p>Pour cela il faut donc résoudre un système linéaire</p>
+<div class="math">
+<p><img src="_images/math/36de7c74deb83c2f57c34827dab88f2a1e4c3cd5.png" alt="\kappa (T_{j-1}^{n}-2\, T_{j}^{n}+T_{j+1}^{n}) = -S \, \Delta x^2 \, ."/></p>
+</div><p>qui peut s&#8217;écrire, avec nos conditions aux limites (<img class="math" src="_images/math/caa786a1615e0e7e6b6770c530359a8b4863822a.png" alt="T=0" style="vertical-align: -1px"/> en
+<img class="math" src="_images/math/34ea5b6f6de584d56d19a89cc4923a9d9a5cfa41.png" alt="x=0" style="vertical-align: -1px"/> et <img class="math" src="_images/math/4c52e02a35db152495396584bfeae1d0599cd753.png" alt="x=1" style="vertical-align: -1px"/>) sous forme matricielle (avec la convention de
+Python pour les indices, i.e. de 0 à N-1) :</p>
+<div class="math">
+<p><img src="_images/math/36da382a438997de0e504d9e26c34c5d3b43127c.png" alt="\left(
+\begin{array}{ccccc}
+-2 &amp;  1 &amp; 0 &amp; \cdots &amp; 0 \\
+ 1 &amp; -2 &amp; 1 &amp;        &amp;\vdots\\
+ 0 &amp;\ddots&amp;\ddots&amp;\ddots&amp; 0\\
+ \vdots &amp; &amp; 1 &amp; -2 &amp; 1\\
+ 0 &amp; \cdots &amp; 0 &amp; 1 &amp; -2
+ \end{array}
+ \right)
+ \left(
+ \begin{array}{c}
+ T_1\\
+ T_2\\
+ \vdots\\
+ T_{N-3}\\
+ T_{N-2}
+ \end{array}
+ \right)
+ =
+ -S \, \Delta x^2 \,
+ \left(
+ \begin{array}{c}
+ 1\\
+ 1\\
+ \vdots\\
+ 1\\
+ 1
+ \end{array}
+ \right)"/></p>
+</div><p>Pour résoudre ce problème en Python, on peut définir une matrice creuse (tridiagonale)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">),</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>     <span class="c"># Diagonal terms</span>
+<span class="n">offsets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>                     <span class="c"># Their positions</span>
+<span class="n">LAP</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dia_matrix</span><span class="p">(</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">offsets</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>et utiliser le
+solver inclus dans SciPy :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">*</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">spsolve</span><span class="p">(</span><span class="n">LAP</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>[<a class="reference internal" href="auto_examples/edp4_1D_heat_solve.html#example-edp4-1d-heat-solve-py"><em>Python source code</em></a>]</p>
+<p><em>Remarque :</em> la même approche pourrait être utilisée pour l&#8217;équation
+d&#8217;évolution en temps en utilisant le schéma implicite</p>
+<div class="math">
+<p><img src="_images/math/7aa1d9a3922969087537c1eb21cd3e42d26de0b4.png" alt="T_{j}^{n+1} = T_{j}^{n} + c \, (T_{j-1}^{n+1}-2\, T_{j}^{n+1}+T_{j+1}^{n+1}) \, ,
+\qquad \text{avec}\quad
+c\equiv \frac{{\Delta t}\,  \kappa}{\Delta x^2} \, ."/></p>
+</div></div>
+<div class="section" id="equation-de-la-chaleur-2d">
+<h2>4.3. Équation de la chaleur 2D<a class="headerlink" href="#equation-de-la-chaleur-2d" title="Lien permanent vers ce titre">¶</a></h2>
+<p>On peut traiter le problème à deux dimensions</p>
+<div class="math">
+<p><img src="_images/math/e77c2d37ad9bbd6757dfcb7c6b5da1095420d6eb.png" alt="\frac{\partial T}{\partial t} = \kappa \, \Delta T + S\, ,"/></p>
+</div><p>de la même manière, avec un schéma explicite en temps</p>
+<div class="math">
+<p><img src="_images/math/1de06a48c3bd0c90d4aca3672291340814b4090c.png" alt="T_{i,j}^{n+1} = T_{i,j}^{n} + {\Delta t}\,  \kappa \, \left[
+(T_{i-1,j}^{n} - 2\, T_{i,j}^{n} + T_{i+1,j}^{n})/{\Delta x^2}
++
+(T_{i,j-1}^{n} - 2\, T_{i,j}^{n} + T_{i,j+1}^{n})/{\Delta y^2}
+\right] \, ."/></p>
+</div><p>Ce qui devient en Python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">NT</span><span class="p">):</span>
+   <span class="n">RHS</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt</span><span class="o">*</span><span class="n">K</span><span class="o">*</span><span class="p">(</span> <span class="p">(</span><span class="n">T</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  \
+                         <span class="o">+</span> <span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">:])</span><span class="o">/</span><span class="p">(</span><span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span>
+   <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">RHS</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">dt</span><span class="o">*</span><span class="n">S</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/edp5_2D_heat_vect.html"><img alt="_images/plot_edp5_2D_heat_vect_1.png" src="_images/plot_edp5_2D_heat_vect_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
+<p>[<a class="reference internal" href="auto_examples/edp5_2D_heat_vect.html#example-edp5-2d-heat-vect-py"><em>Python source code</em></a>]</p>
+<p>Pour résoudre directement la solution stationnaire en 2D, en revanche le
+système linéaire est plus difficile à formuler.</p>
+<p>La température dépend à présent de deux indices <img class="math" src="_images/math/34857b3ba74ce5cd8607f3ebd23e9015908ada71.png" alt="i" style="vertical-align: 0px"/> et <img class="math" src="_images/math/8122aa89ea6e80784c6513d22787ad86e36ad0cc.png" alt="j" style="vertical-align: -6px"/>.</p>
+<p>Pour formuler le problème sous la forme</p>
+<div class="math">
+<p><img src="_images/math/fca7af9be1bf892d9c408b9fff28a64e457c9ace.png" alt="\left[ A\right]
+ \left(T\right)
+ =
+ -\left(S\right)"/></p>
+</div><p>il faut numéroter les <img class="math" src="_images/math/c3668f65cba99ec9907b51acefb909a2ff285b1c.png" alt="T_{i,j}" style="vertical-align: -8px"/> sous la forme d&#8217;une grand vecteur et
+utiliser le produit de Kronecker</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">LAP2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">LAP</span><span class="p">,</span><span class="n">I1D</span><span class="p">)</span><span class="o">+</span><span class="n">sp</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">I1D</span><span class="p">,</span><span class="n">LAP</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>il ne reste alors qu&#8217;à résoudre le système linéaire</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">T</span> <span class="o">=</span> <span class="n">spsolve</span><span class="p">(</span><span class="n">LAP2</span><span class="p">,</span><span class="n">f2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>et à transformer le résultat (qui est un vecteur de taille NxN) sous la forme d&#8217;une
+matrice de taille (N,N)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Le code complet est disponible ci-dessous :</dt>
+<dd>[<a class="reference internal" href="auto_examples/edp6_2D_heat_solve.html#example-edp6-2d-heat-solve-py"><em>Python source code</em></a>]</dd>
+</dl>
+<p>Notons pour finir que ce l&#8217;intégration explicite en temps peut s&#8217;adapter
+très simplement à d&#8217;autres équations, comme par exemple équation d&#8217;onde</p>
+<div class="math">
+<p><img src="_images/math/6ad50a24e7c12e833a3097b96df41a212d7bc956.png" alt="\frac{\partial ^2 u}{\partial t ^2} = c^2 \, \Delta u \, ,"/></p>
+</div><p>de la même manière, on peut écrire un schéma explicite en temps</p>
+<div class="math">
+<p><img src="_images/math/a78725063d8ee768162ce2f5fbce4e9940d7133f.png" alt="u_{i,j}^{n+1} = 2 \, u_{i,j}^{n} - u_{i,j}^{n-1}
++ {\Delta t ^2}\,  c^2 \, \left[
+(u_{i-1,j}^{n} - 2\, u_{i,j}^{n} + u_{i+1,j}^{n})/{\Delta x^2}
++
+(u_{i,j-1}^{n} - 2\, u_{i,j}^{n} + u_{i,j+1}^{n})/{\Delta y^2}
+\right] \, ."/></p>
+</div><div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/edp7_edp7_waves.html"><img alt="_images/plot_edp7_waves_1.png" src="_images/plot_edp7_waves_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
+<dl class="docutils">
+<dt>Le code complet est disponible ci-dessous :</dt>
+<dd>[<a class="reference internal" href="auto_examples/edp7_waves.html#example-edp7-waves-py"><em>Python source code</em></a>]</dd>
+</dl>
+<p><div style="clear: both"></div></p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="systemes_dynamiques.html" title="5. Systèmes dynamiques : utilisation de SciPy"
+             >suivant</a></li>
+        <li class="right" >
+          <a href="stochastique.html" title="3. Systèmes statistiques : Nombres aléatoires - Monte Carlo"
+             >précédent</a> |</li>
+        <li><a href="index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
+      </ul>
+    </div>
+        <!-- your html code here -->
+<a href="http://www.ens.fr"><img src="_static/ENS_Logo.png"
+alt="ENS" height="100"></a>
+<a href="http://www.inria.fr"><img src="_static/logo-inria.jpg"
+alt="INRIA" height="60"></a>
+<a href="http://www.saint-gobain-recherche.fr/fr/"><img
+src="_static/logoSGR.png" alt="Saint-Gobain Recherche" height="60"></a>
+
+  </body>
+</html>

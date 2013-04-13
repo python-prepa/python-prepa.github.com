@@ -1,0 +1,11 @@
+
+
+.. _example_edp2_1D_heat_loops_conv.py:
+
+1D Heat equatlion loops convergence
+
+**Python source code:** :download:`edp2_1D_heat_loops_conv.py <edp2_1D_heat_loops_conv.py>`
+
+.. literalinclude:: edp2_1D_heat_loops_conv.py
+    :lines: 2-
+    

@@ -1,0 +1,16 @@
+
+
+.. _example_plot_edp7_waves.py:
+
+2D WAVE PROPAGATION USING FINITE DIFFERENCES
+
+
+.. image:: images/plot_edp7_waves_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_edp7_waves.py <plot_edp7_waves.py>`
+
+.. literalinclude:: plot_edp7_waves.py
+    :lines: 2-
+    

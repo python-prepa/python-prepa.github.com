@@ -1,0 +1,16 @@
+
+
+.. _example_plot_edp5_2D_heat_vect.py:
+
+2D Heat equation using finite differences
+
+
+.. image:: images/plot_edp5_2D_heat_vect_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_edp5_2D_heat_vect.py <plot_edp5_2D_heat_vect.py>`
+
+.. literalinclude:: plot_edp5_2D_heat_vect.py
+    :lines: 2-
+    

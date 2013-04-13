@@ -24,6 +24,11 @@ Examples
 ========
 
 .. _examples-index:
+.. figure:: ./images/thumb/W_random_hist.png
+   :target: ./W_random_hist.html
+
+   :ref:`example_W_random_hist.py`
+
 .. figure:: ./images/thumb/cascade.png
    :target: ./cascade.html
 
@@ -33,6 +38,41 @@ Examples
    :target: ./dyna.html
 
    :ref:`example_dyna.py`
+
+.. figure:: ./images/thumb/edp1_1D_heat_loops.png
+   :target: ./edp1_1D_heat_loops.html
+
+   :ref:`example_edp1_1D_heat_loops.py`
+
+.. figure:: ./images/thumb/edp2_1D_heat_loops_conv.png
+   :target: ./edp2_1D_heat_loops_conv.html
+
+   :ref:`example_edp2_1D_heat_loops_conv.py`
+
+.. figure:: ./images/thumb/edp3_1D_heat_vect_conv.png
+   :target: ./edp3_1D_heat_vect_conv.html
+
+   :ref:`example_edp3_1D_heat_vect_conv.py`
+
+.. figure:: ./images/thumb/edp4_1D_heat_solve.png
+   :target: ./edp4_1D_heat_solve.html
+
+   :ref:`example_edp4_1D_heat_solve.py`
+
+.. figure:: ./images/thumb/edp5_2D_heat_vect.png
+   :target: ./edp5_2D_heat_vect.html
+
+   :ref:`example_edp5_2D_heat_vect.py`
+
+.. figure:: ./images/thumb/edp6_2D_heat_solve.png
+   :target: ./edp6_2D_heat_solve.html
+
+   :ref:`example_edp6_2D_heat_solve.py`
+
+.. figure:: ./images/thumb/edp7_waves.png
+   :target: ./edp7_waves.html
+
+   :ref:`example_edp7_waves.py`
 
 .. figure:: ./images/thumb/plot_cascade.png
    :target: ./plot_cascade.html
@@ -49,10 +89,40 @@ Examples
 
    :ref:`example_plot_dyna.py`
 
+.. figure:: ./images/thumb/plot_edp1_1D_heat_loops.png
+   :target: ./plot_edp1_1D_heat_loops.html
+
+   :ref:`example_plot_edp1_1D_heat_loops.py`
+
+.. figure:: ./images/thumb/plot_edp2_1D_heat_loops_conv.png
+   :target: ./plot_edp2_1D_heat_loops_conv.html
+
+   :ref:`example_plot_edp2_1D_heat_loops_conv.py`
+
+.. figure:: ./images/thumb/plot_edp5_2D_heat_vect.png
+   :target: ./plot_edp5_2D_heat_vect.html
+
+   :ref:`example_plot_edp5_2D_heat_vect.py`
+
+.. figure:: ./images/thumb/plot_edp7_waves.png
+   :target: ./plot_edp7_waves.html
+
+   :ref:`example_plot_edp7_waves.py`
+
 .. figure:: ./images/thumb/plot_fft.png
    :target: ./plot_fft.html
 
    :ref:`example_plot_fft.py`
+
+.. figure:: ./images/thumb/plot_phase_diagram.png
+   :target: ./plot_phase_diagram.html
+
+   :ref:`example_plot_phase_diagram.py`
+
+.. figure:: ./images/thumb/plot_random_hist.png
+   :target: ./plot_random_hist.html
+
+   :ref:`example_plot_random_hist.py`
 
 .. figure:: ./images/thumb/plot_simple_pendulum.png
    :target: ./plot_simple_pendulum.html
@@ -63,6 +133,11 @@ Examples
    :target: ./plot_spectra.html
 
    :ref:`example_plot_spectra.py`
+
+.. figure:: ./images/thumb/quicksort.png
+   :target: ./quicksort.html
+
+   :ref:`example_quicksort.py`
 
 
 .. raw:: html

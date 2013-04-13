@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2. Théorie de l’information : utilisation du langage Python &mdash; Python scientifique - ENS Paris</title>
+    <title>2. Utilisation avancée du langage Python : un exemple de la théorie de l’information &mdash; Python scientifique - ENS Paris</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="top" title="Python scientifique - ENS Paris" href="index.html" />
-    <link rel="next" title="3. Phénomènes stochastiques : utilisation des tableaux NumPy" href="stochastique.html" />
+    <link rel="next" title="3. Systèmes statistiques : Nombres aléatoires - Monte Carlo" href="stochastique.html" />
     <link rel="prev" title="1.1.1.1. Préparer la formation: téléchargement d’Anaconda" href="preparation.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="stochastique.html" title="3. Phénomènes stochastiques : utilisation des tableaux NumPy"
+          <a href="stochastique.html" title="3. Systèmes statistiques : Nombres aléatoires - Monte Carlo"
              accesskey="N">suivant</a></li>
         <li class="right" >
           <a href="preparation.html" title="1.1.1.1. Préparer la formation: téléchargement d’Anaconda"
@@ -48,9 +48,518 @@
       <div class="documentwrapper">
           <div class="body">
             
-  <div class="section" id="theorie-de-l-information-utilisation-du-langage-python">
-<h1>2. Théorie de l&#8217;information : utilisation du langage Python<a class="headerlink" href="#theorie-de-l-information-utilisation-du-langage-python" title="Lien permanent vers ce titre">¶</a></h1>
+  <div class="section" id="utilisation-avancee-du-langage-python-un-exemple-de-la-theorie-de-l-information">
+<h1>2. Utilisation avancée du langage Python : un exemple de la théorie de l&#8217;information<a class="headerlink" href="#utilisation-avancee-du-langage-python-un-exemple-de-la-theorie-de-l-information" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="modules-et-fichiers">
+<h2>2.1. Modules et fichiers<a class="headerlink" href="#modules-et-fichiers" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="modules">
+<h3>2.1.1. Modules<a class="headerlink" href="#modules" title="Lien permanent vers ce titre">¶</a></h3>
+<p>On peut ranger les définitions de fonctions se rapportant à une même
+application au sein d&#8217;un script commun baptisé <strong>module</strong></p>
+<p>Un module est sauvegardé sous forme d&#8217;un fichier dont le nom a la
+forme <tt class="docutils literal"><span class="pre">&lt;nom</span> <span class="pre">du</span> <span class="pre">module&gt;.py</span></tt></p>
+<p>Pour utiliser un module, il faut se servir de l&#8217;instruction</p>
+<div class="highlight-python"><pre>import &lt;nom du module&gt;</pre>
+</div>
+<p>L&#8217;exécution de cette instruction consiste à exécuter le script
+définissant le module (ce script peut contenir des instructions autres
+que des définitions de fonctions).</p>
+<p>Pour importer un module, Python a besoin de connaître le chemin qui
+permet d&#8217;accéder au fichier correspondant. Ce chemin doit apparaître
+dans la liste des chemins possibles stockés dans la variable <tt class="docutils literal"><span class="pre">path</span></tt> du
+module <tt class="docutils literal"><span class="pre">sys</span></tt></p>
+<p><strong>Première méthode d&#8217;importation</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">9</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>L&#8217;instruction import permet d&#8217;importer toutes les fonctions du
+module random</li>
+<li>Ensuite, nous utilisons la fonction (ou méthode) randint(a,b) du
+module random; attention cette fonction renvoie un nombre entier
+aléatoirement entre a inclus et b inclus</li>
+</ul>
+<p><strong>Deuxième méthode d&#8217;importation</strong></p>
+<p>Pour disposer d&#8217;une fonction du module</p>
+<div class="highlight-python"><pre>from [module] import [fonction]</pre>
+</div>
+<p>Pour disposer de toutes les fonctions d&#8217;un module</p>
+<div class="highlight-python"><pre>from [module] import *</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Remarque</p>
+<p class="last">Cette option est cependant à éviter notament lorsqu&#8217;un module propose un nombre important de fonctions et parce que certains modules ont des fonctions qui ont le même nom (par exemple, <tt class="docutils literal"><span class="pre">math</span></tt> et <tt class="docutils literal"><span class="pre">numpy</span></tt>)</p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">sept</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span>
+<span class="n">angle</span> <span class="o">=</span> <span class="n">pi</span><span class="o">/</span><span class="mi">6</span>
+<span class="k">print</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Modules courants</strong></p>
+<ul class="simple">
+<li>sys : passage d&#8217;arguments, gestion de l&#8217;entrée/sortie standard
+etc...</li>
+<li>os : dialogue avec le système d&#8217;exploitation.</li>
+<li>math : fonctions et constantes mathématiques de base (sin, cos, exp,
+pi...).</li>
+<li>random : génération de nombres aléatoires.</li>
+<li>time : permet d&#8217;accéder aux fonctions gérant le temps.</li>
+<li>urllib : permet de récupérer des données sur internet depuis python.</li>
+<li>re : gestion des expressions régulières.</li>
+<li>numpy, scipy: modules incontournables du calcul scientifique</li>
+<li>Tkinter : interface graphique</li>
+<li>...</li>
+</ul>
+</div>
+<div class="section" id="fichiers">
+<h3>2.1.2. Fichiers<a class="headerlink" href="#fichiers" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Pour permettre une interaction avec l&#8217;utilisateur, la méthode la plus simple consiste à employer la fonction <tt class="docutils literal"><span class="pre">raw_input()</span></tt>
+:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="s">&#39;Entrez votre prénom : &#39;</span><span class="p">)</span>
+<span class="n">prenom</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;Bonjour,&#39;</span><span class="p">,</span> <span class="n">prenom</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">prenom</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&#39;Entrez votre prénom : &#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;Bonjour,&#39;</span><span class="p">,</span> <span class="n">prenom</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Remarque</p>
+<p class="last">La fonction <tt class="docutils literal"><span class="pre">raw_input()</span></tt> renvoie toujours une chaîne de caractères alors que la fonction <tt class="docutils literal"><span class="pre">input()</span></tt> renvoie une valeur dont le type correspond à ce que l&#8217;utilisateur a entré`(i.e. une chaîne de caractères doit être entrée avec des guillemets).</p>
+</div>
+<p>Il est généralement important de dissocier les données des programmes qui les
+utilisent en rangeant ces données dans des fichiers séparés.</p>
+<p>Le module <tt class="docutils literal"><span class="pre">os</span></tt> contient des fonctions qui permettent de localiser
+les fichiers :</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">getcwd()</span></tt> : Retourne le chemin du répertoire courant</li>
+<li><tt class="docutils literal"><span class="pre">chdir(&lt;ch&gt;)</span></tt> : Change le répertoire courant qui prend la valeur
+donnée par la chaîne &lt;ch&gt;</li>
+<li><tt class="docutils literal"><span class="pre">path.isfile(&lt;ch&gt;)</span></tt> : Retourne un booléen qui indique s&#8217;il existe
+un fichier de chemin &lt;ch&gt;</li>
+<li><tt class="docutils literal"><span class="pre">path.isdir(&lt;ch&gt;)</span></tt> : Retourne un booléen qui indique s&#8217;il existe
+un répertoire de chemin &lt;ch&gt;</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
+<span class="n">chdir</span><span class="p">(</span><span class="s">&quot;/home/exercices&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Remarque</p>
+<p class="last">En mode interactif, iPython reconnaît les commandes consoles traditionnelles (ls, cd, pwd, ...)</p>
+</div>
+<p>Pour utiliser un fichier identifié par le chemin &lt;ch&gt; dans un
+programme Python, il faut commencer par l&#8217;ouvrir par l&#8217;appel de
+fonction</p>
+<div class="highlight-python"><pre>open(&lt;ch&gt;, [&lt;mode&gt;])</pre>
+</div>
+<p>qui retourne un objet de type file.</p>
+<p>Le paramètre facultatif <tt class="docutils literal"><span class="pre">&lt;mode&gt;</span></tt> indique le mode d&#8217;ouverture du
+fichier :</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">r</span></tt> : mode lecture (le fichier doit exister préalablement)</li>
+<li><tt class="docutils literal"><span class="pre">w</span></tt> : mode écriture (si le fichier existe, les données sont
+écrasées, sinon le fichier est créé)</li>
+<li><tt class="docutils literal"><span class="pre">a</span></tt> : mode ajout (si le fichier existe, les données écrites vont
+l&#8217;être après celles existantes, sinon le fichier est créé)</li>
+</ul>
+<p>Si le mode est omis, le mode par défaut est <tt class="docutils literal"><span class="pre">r</span></tt>.</p>
+<p>Un objet de type <tt class="docutils literal"><span class="pre">file</span></tt> est associé à des attributs et des
+méthodes. En voici quelques-unes :</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">read([&lt;n&gt;])</span></tt> : retourne la chaîne des &lt;n&gt; caractères restants</li>
+<li><tt class="docutils literal"><span class="pre">readline()</span></tt> : lit une seule ligne à partir du fichier</li>
+<li><tt class="docutils literal"><span class="pre">readlines()</span></tt> : utilise f.readline() de façon répétitive, et
+retourne une liste contenant toutes les lignes du fichier.</li>
+<li><tt class="docutils literal"><span class="pre">write(&lt;ch&gt;)</span></tt> : écrit la chaîne de caractères &lt;ch&gt;</li>
+<li><tt class="docutils literal"><span class="pre">close()</span></tt> : ferme le fichier</li>
+<li><tt class="docutils literal"><span class="pre">seek(&lt;n&gt;)</span></tt> : choisit le caractère &lt;n&gt; comme position courante du
+fichier</li>
+<li><tt class="docutils literal"><span class="pre">tell()</span></tt> : retourne le caractère en position courante</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Exemple de copie intégrale d&#39;un fichier</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;source.txt&quot;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">fd</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;destination.txt&quot;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">txt</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="c"># copie de 50 caractères à la fois</span>
+    <span class="k">if</span> <span class="n">txt</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+<span class="n">fs</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Remarque</p>
+<p class="last">Python fournit le module standard <em>pickle</em> qui peut prendre (presque) n&#8217;importe quel objet Python et le convertir en une représentation sous forme de chaîne de caractères (et le reconstruire). Il s&#8217;agit du moyen standard pour enregistrer des objets Python et les réutiliser dans d&#8217;autres programmes.</p>
+</div>
+</div>
+</div>
+<div class="section" id="structures-de-donnees-en-python">
+<h2>2.2. Structures de données en Python<a class="headerlink" href="#structures-de-donnees-en-python" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="utilisation-avancee-des-listes">
+<h3>2.2.1. Utilisation avancée des listes<a class="headerlink" href="#utilisation-avancee-des-listes" title="Lien permanent vers ce titre">¶</a></h3>
+<p><strong>Les fonctions héritées du fonctionnel.</strong>
+La fonction <tt class="docutils literal"><span class="pre">map</span></tt> permet de transformer une liste via l&#8217;utilisation
+d&#8217;une fonction.  Elle prend en entrée une fonction et une liste et
+retourne une nouvelle liste en appelant la fonction sur chaque élément
+de la liste dans l&#8217;ordre. Voici quelques exemples d&#8217;utilisation :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">carre</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="k">def</span> <span class="nf">pair</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="nb">map</span><span class="p">(</span><span class="n">carre</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="c"># Affiche [1, 4, 9, 16, 25]</span>
+
+<span class="k">print</span> <span class="nb">map</span><span class="p">(</span><span class="n">pair</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="c"># Affiche [False, True, False, True, False]</span>
+</pre></div>
+</div>
+<p>Comme dans les langages fonctionnels, avec le mot-clé <tt class="docutils literal"><span class="pre">lambda</span></tt>, il
+est possible de créer des fonctions anonymes. Le premier exemple est
+équivalent à</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="c"># Affiche [1, 4, 9, 16, 25]</span>
+</pre></div>
+</div>
+<p>La fonction <strong>filter</strong> permet de retirer les valeurs d&#8217;une liste que
+l&#8217;on ne veut pas.  Elle prend en entrée une fonction et une liste et
+retourne la liste des éléments (dans l&#8217;ordre) sur lesquels la fonction
+retourne le booléen <tt class="docutils literal"><span class="pre">True</span></tt>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">petit_carre</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="mi">16</span>
+<span class="k">def</span> <span class="nf">pair</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="nb">filter</span><span class="p">(</span><span class="n">petit_carre</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="c"># Affiche [1, 2, 3]</span>
+
+<span class="k">print</span> <span class="nb">filter</span><span class="p">(</span><span class="n">pair</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="c"># Affiche [2, 4], c&#39;est à dire les nombres pairs de la liste.</span>
+</pre></div>
+</div>
+<p><strong>Les compréhensions de liste.</strong>
+Les compréhensions de liste sont des outils puissants permettant
+d&#8217;utiliser map et filter avec une syntaxe plus proche de celle
+habituelle en Python. De plus, elles permettent de combiner un <tt class="docutils literal"><span class="pre">map</span></tt> et
+un <tt class="docutils literal"><span class="pre">filter</span></tt> en même temps.</p>
+<p>Voici la syntaxe avec les exemples vus précédemment</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Affiche les carrés des éléments</span>
+<span class="n">liste</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="k">print</span> <span class="p">[</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">liste</span><span class="p">]</span>
+<span class="c"># Équivaut au map, en plus lisible et plus simple :) .</span>
+
+<span class="c"># Affiche les nombres pairs</span>
+<span class="k">print</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">liste</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="c"># Plus simple que filter, également :)</span>
+
+<span class="c"># Affiche les carrés pairs (combinaison des deux)</span>
+<span class="k">print</span> <span class="p">[</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">liste</span> <span class="k">if</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="c"># ou print [x for x in [a ** 2 for a in liste] if x % 2 == 0]</span>
+</pre></div>
+</div>
+<p><strong>Méthodes supplémentaires sur les listes</strong></p>
+<p>Voici une liste des méthodes des objets de type liste les plus utiles :</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><tt class="docutils literal"><span class="pre">L.append(x)</span></tt>:</th><td class="field-body"><p class="first">Ajoute l&#8217;élément x à la fin de la liste L</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><tt class="docutils literal"><span class="pre">L1.extend(L2)</span></tt>:</th><td class="field-body"><p class="first">Étend la liste L1 en y ajoutant tous les éléments de la liste L2</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><tt class="docutils literal"><span class="pre">L.insert(i,</span> <span class="pre">x)</span></tt>:</th><td class="field-body"><p class="first">Insère l&#8217;élément x dans la liste L à la position i</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><tt class="docutils literal"><span class="pre">L.remove(x)</span></tt>:</th><td class="field-body"><p class="first">Supprime de la liste L le premier élément dont la valeur est x.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><tt class="docutils literal"><span class="pre">L.pop([i])</span></tt>:</th><td class="field-body"><p class="first">Enlève de la liste L l’élément situé à la position i</p>
+<p>Si aucune position n’est indiqué, L.pop() enlève et retourne le dernier élément de la liste</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><tt class="docutils literal"><span class="pre">L.index(x)</span></tt>:</th><td class="field-body"><p class="first">Retourne la position du premier élément de la liste L ayant la valeur x.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><tt class="docutils literal"><span class="pre">L.sort()</span></tt>:</th><td class="field-body"><p class="first">Trie les éléments de la liste, en place.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><tt class="docutils literal"><span class="pre">L.reverse()</span></tt>:</th><td class="field-body"><p class="first last">Inverse l’ordre des éléments de la liste, en place.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Remarque</p>
+<p class="last">Ces méthodes permettent d&#8217;utiliser les listes comme des piles (i.e. une structure de donnée “dernier entré, premier sorti” ou LIFO) L&#8217;ajout d&#8217;un élément sur la pile se fait avec la méthode <tt class="docutils literal"><span class="pre">append()</span></tt> et la méthode <tt class="docutils literal"><span class="pre">pop()</span></tt> permet de récupérer l’objet au sommet de la pile. Cependant, les listes ne sont pas adaptées pour implanter des files (i.e. une structure de donnée &#8220;dernier entré, dernier sorti&#8221; ou FIFO) pour lesquelles il vaut mieux utiliser la classe <tt class="docutils literal"><span class="pre">collections.deque</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="un-exemple-de-structures-de-donnee-complexe-le-tas">
+<h3>2.2.2. Un exemple de structures de donnée complexe : Le tas<a class="headerlink" href="#un-exemple-de-structures-de-donnee-complexe-le-tas" title="Lien permanent vers ce titre">¶</a></h3>
+<p><strong>Tas binaire.</strong> Un tas binaire (en anglais, heap) est une structure de données qui :</p>
+<ul class="simple">
+<li>est un arbre binaire</li>
+<li>est ordonné de sorte que la clé d&#8217;un nœud est toujours inférieure à la clé de ses fils (de sorte que son plus petit élément est toujours la racine de l&#8217;arbre).</li>
+</ul>
+<p>Les tas binaires supportent les opérations suivantes :</p>
+<ul class="simple">
+<li>Construire-Tas</li>
+<li>Ajouter-Élément</li>
+<li>Consulter-Sommet</li>
+<li>Retirer-Élément</li>
+<li>Tamiser (refabriquer le tas pour qu&#8217;il retrouve ses propriétés; par exemple suite à l&#8217;ajout ou la suppression d&#8217;un élément)</li>
+</ul>
+<p>Les tas permettent notamment d&#8217;implanter les <strong>files de priorité</strong> qui permettent d&#8217;effectuer les trois opérations suivantes :</p>
+<ul class="simple">
+<li>insérer un élément</li>
+<li>lire puis supprimer l&#8217;élément ayant la plus grande clé</li>
+<li>tester si la file de priorité est vide ou pas</li>
+</ul>
+<p><strong>Module heapq</strong>. Ce module propose une implantation efficace des tas binaires (et des files de priorité) qui utilise naturellement des tableaux.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">heapq</span>
+</pre></div>
+</div>
+<p>Les fonctions suivantes sont notamment définies :</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2"><tt class="docutils literal"><span class="pre">heapq.heappush(T,</span> <span class="pre">x)</span></tt>:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Ajoute la valeur x au tas T (en conservant la propriété de tas)</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2"><tt class="docutils literal"><span class="pre">heapq.heappop(T)</span></tt>:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">Enlève et retourne le premier élément du tas T</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2"><tt class="docutils literal"><span class="pre">heapq.heapify(L)</span></tt>:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body">Transforme la liste L en un tas (en place et en temps linéaire)</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Remarque</p>
+<p class="last">En pratique, puisque un tas est un arbre binaire, l&#8217;implantation utilise des tableaux unidimensionel de sorte que <tt class="docutils literal"><span class="pre">tas[k]</span> <span class="pre">&lt;=</span> <span class="pre">tas[2*k+1]</span></tt> et <tt class="docutils literal"><span class="pre">tas[k]</span> <span class="pre">&lt;=</span> <span class="pre">tas[2*k]</span></tt> pour tout <tt class="docutils literal"><span class="pre">k</span></tt>. En particulier le père d&#8217;un noeud en position <tt class="docutils literal"><span class="pre">k</span></tt> a pour position <tt class="docutils literal"><span class="pre">(k-1)/2</span></tt> et les fils d&#8217;un noeud en position <tt class="docutils literal"><span class="pre">k</span></tt> sont situés aux positions <tt class="docutils literal"><span class="pre">2*k</span></tt> et <tt class="docutils literal"><span class="pre">2*k+1</span></tt>.</p>
+</div>
+<div class="highlight-python"><pre>In [1]: from heapq import *
+
+In [2]: L = [7,4,8,1,9,3,2,6,5]
+
+In [3]: heapify(L)
+
+In [4]: L
+Out[4]: [1, 4, 2, 5, 9, 3, 8, 6, 7]</pre>
+</div>
+<div class="figure">
+<img alt="_images/Heap.png" src="_images/Heap.png" />
+</div>
+</div>
+</div>
+<div class="section" id="arbres-de-huffman">
+<h2>2.3. Arbres de Huffman<a class="headerlink" href="#arbres-de-huffman" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="principe">
+<h3>2.3.1. Principe<a class="headerlink" href="#principe" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Le <strong>codage de Huffman</strong> est une méthode de compression de données
+sans perte proposé par David Huffman en 1952. Elle consiste à
+attribuer un mot binaire de longueur variable aux différents symboles
+du document à compresser (pixels ou caractères par exemple).  Les
+symboles les plus fréquents sont codés avec des mots courts, tandis
+que les symboles les plus rares sont encodés avec des mots plus longs
+(rappelant ainsi le principe de l&#8217;alphabet Morse). Le code construit a
+la particularité de ne posséder aucun mot ayant pour préfixe un autre
+mot (i.e.  il s&#8217;agit d&#8217;un code préfixe).</p>
+<p>Le codage de Huffman crée un arbre binaire à partir de tous les
+symboles et de leur nombre d&#8217;occurrences dans le document :</p>
+<ul class="simple">
+<li>chaque caractère constitue une des feuilles de l&#8217;arbre à laquelle on
+associe un poids valant son nombre d&#8217;occurrences</li>
+<li>l&#8217;arbre est créé récursivement en associant à chaque étape les deux nœuds de plus faibles poids pour donner un nœud dont le poids est égal à la somme des poids de ses fils jusqu&#8217;à n&#8217;en avoir plus qu&#8217;un, la racine.</li>
+</ul>
+<p>L&#8217;utilisation d&#8217;un tas pour construire cet arbre est donc particulièrement appropriée.</p>
+<p>On associe ensuite le code 0 à la branche de gauche et le code 1 à la
+branche de droite et le code binaire de chaque symbole est alors
+obtenu en parcourant la racine jusqu&#8217;à la feuille et en notant le
+parcours (0 ou 1) à chaque noeud.</p>
+<p>Un arbre d&#8217;Huffman associé au texte &#8220;PROGRAMMATION EN LANGAGE PYTHON&#8221;
+est donné sur la figure suivante :</p>
+<div class="figure">
+<img alt="_images/HuffmanTree.png" src="_images/HuffmanTree.png" />
+</div>
+<p>La lettre &#8220;A&#8221; avec 4 occurrences est codée par le triplet 011 alors
+que la lettre Y plus rare est codée par le mot de 5 bits 01001.</p>
+</div>
+<div class="section" id="implantation-du-codage-de-huffman-en-python">
+<h3>2.3.2. Implantation du codage de Huffman en Python<a class="headerlink" href="#implantation-du-codage-de-huffman-en-python" title="Lien permanent vers ce titre">¶</a></h3>
+<p><strong>Table des occurrences.</strong> La première étape de la méthode de compression de Huffman consiste à compter le nombre d&#8217;occurrences de chaque symbole.</p>
+<div class="green topic">
+<p class="topic-title first"><strong>Exercice</strong>: Construire une table des occurrences</p>
+<p>Écrire une fonction <tt class="docutils literal"><span class="pre">table_frequences</span></tt> qui étant donné une chaîne de caractère <tt class="docutils literal"><span class="pre">texte</span></tt> retourne un dictionnaire qui associe à chaque caractère son nombre d&#8217;occurrences dans <tt class="docutils literal"><span class="pre">texte</span></tt>.</p>
+<p>Le prototype de la fonction sera le suivant</p>
+<div class="highlight-python"><pre>def table_frequences(texte):</pre>
+</div>
+<p>et</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">table_frequences</span><span class="p">(</span><span class="s">&quot;ABRACADABRA&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>devra retourner un dictionnaire de la forme</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;A&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s">&#39;R&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;D&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="topic">
+<p class="topic-title first"><strong>Solution</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">table_frequences</span><span class="p">(</span><span class="n">texte</span><span class="p">):</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">caractere</span> <span class="ow">in</span> <span class="n">texte</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">caractere</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
+            <span class="n">table</span><span class="p">[</span><span class="n">caractere</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">caractere</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">table</span><span class="p">[</span><span class="n">caractere</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">table</span>
+</pre></div>
+</div>
+</div>
+<p><strong>Arbre de Huffman.</strong> Une approche naturelle pour construire l&#8217;arbre de Huffman à partir de la table des occurrences consiste à utiliser un tas binaire.</p>
+<p>Dans un premier temps, on peut construire un tas correspondant à la table des occurrences (qui aura donc le caractère le moins fréquent à la racine). Ensuite, il faut utiliser cette structure pour construire récursivement l&#8217;arbre binaire :</p>
+<ul class="simple">
+<li>en recherchant les deux noeuds de plus petit poids (en utilisant la structure de tas)</li>
+<li>en fusionnant ces deux noeuds en un seul :<ul>
+<li>dont le poids est égal à la somme des poids des deux noeuds</li>
+<li>qui a ces deux noeuds comme fils</li>
+</ul>
+</li>
+</ul>
+<p>Une représentation possible pour le noeud ainsi construit est d&#8217;utiliser un dictionnaire à deux clés (par exemple 0 pour gauche et 1 pour droite) dont les valeurs sont les représentations des noeuds initiaux.</p>
+<div class="green topic">
+<p class="topic-title first"><strong>Exercice</strong>: Construire un arbre de Huffman</p>
+<p>Écrire une fonction <tt class="docutils literal"><span class="pre">arbre_huffman</span></tt> qui étant donné un dictionnaire construit par la fonction précédente retourne une représentation de l&#8217;arbre de Huffman correspondant.</p>
+<p>Le prototype de la fonction sera le suivant</p>
+<div class="highlight-python"><pre>def arbre_huffman (occurrences):</pre>
+</div>
+<p>et l&#8217;appel de</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">arbre_huffman</span><span class="p">(</span><span class="n">table_frequences</span><span class="p">(</span><span class="s">&quot;ABRACADABRA&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>devra retourner un dictionnaire de la forme</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s">&#39;R&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s">&#39;D&#39;</span><span class="p">},</span> <span class="mi">1</span><span class="p">:</span> <span class="s">&#39;B&#39;</span><span class="p">}}}</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">arbre_huffman</span><span class="p">(</span><span class="n">occurrences</span><span class="p">):</span>
+    <span class="c"># Construction d&#39;un tas avec les lettres sous forme de feuilles</span>
+    <span class="n">tas</span> <span class="o">=</span> <span class="p">[(</span><span class="n">occ</span><span class="p">,</span> <span class="n">lettre</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">lettre</span><span class="p">,</span> <span class="n">occ</span><span class="p">)</span> <span class="ow">in</span> <span class="n">occurrences</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+    <span class="n">heapify</span><span class="p">(</span><span class="n">tas</span><span class="p">)</span>
+
+    <span class="c"># Création de l&#39;arbre</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">tas</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">occ1</span><span class="p">,</span> <span class="n">noeud1</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">tas</span><span class="p">)</span> <span class="c"># noeud de plus petit poids occ1</span>
+        <span class="n">occ2</span><span class="p">,</span> <span class="n">noeud2</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">tas</span><span class="p">)</span> <span class="c"># noeud de deuxième plus petit poids occ2</span>
+        <span class="n">heappush</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span> <span class="p">(</span><span class="n">occ1</span> <span class="o">+</span> <span class="n">occ2</span><span class="p">,</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="n">noeud1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="n">noeud2</span><span class="p">}))</span>
+        <span class="c"># ajoute au tas le noeud de poids occ1+occ2 et avec les fils noeud1 et noeud2</span>
+
+    <span class="k">return</span> <span class="n">heappop</span><span class="p">(</span><span class="n">tas</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Code de Huffman</strong></p>
+<div class="green topic">
+<p class="topic-title first"><strong>Exercice</strong>: Code de Huffman</p>
+<p>Écrire une fonction <tt class="docutils literal"><span class="pre">code_huffman</span></tt> qui étant donné un arbre de Huffman construit par la fonction précédente retourne un dictionnaire où les clés sont les chaînes binaires et les valeurs les caractères correspondants.</p>
+<p>Le prototype de la fonction sera le suivant</p>
+<div class="highlight-python"><pre>def code_huffman(arbre):</pre>
+</div>
+<p>et l&#8217;appel de</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">C</span> <span class="o">=</span> <span class="n">code_huffman</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">T</span>
+</pre></div>
+</div>
+<p>avec T l&#8217;arbre précédent, devra retourner un dictionnaire de la forme suivante</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;10&#39;</span><span class="p">:</span> <span class="s">&#39;R&#39;</span><span class="p">,</span> <span class="s">&#39;111&#39;</span><span class="p">:</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">:</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="s">&#39;1100&#39;</span><span class="p">:</span> <span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="s">&#39;1101&#39;</span><span class="p">:</span> <span class="s">&#39;D&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">code_huffman_parcours</span><span class="p">(</span><span class="n">arbre</span><span class="p">,</span><span class="n">prefixe</span><span class="p">,</span><span class="n">code</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">noeud</span> <span class="ow">in</span> <span class="n">arbre</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arbre</span><span class="p">[</span><span class="n">noeud</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">code</span><span class="p">[</span><span class="n">prefixe</span><span class="o">+</span><span class="n">noeud</span><span class="p">]</span> <span class="o">=</span> <span class="n">arbre</span><span class="p">[</span><span class="n">noeud</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">code_huffman_parcours</span><span class="p">(</span><span class="n">arbre</span><span class="p">[</span><span class="n">noeud</span><span class="p">],</span><span class="n">prefixe</span><span class="o">+</span><span class="n">noeud</span><span class="p">,</span><span class="n">code</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">code_huffman</span><span class="p">(</span><span class="n">arbre</span><span class="p">):</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">code_huffman_parcours</span><span class="p">(</span><span class="n">arbre</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="n">code</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">code</span>
+</pre></div>
+</div>
+<p><strong>Encodage et décodage</strong></p>
+<div class="green topic">
+<p class="topic-title first"><strong>Exercice</strong>: Encodage</p>
+<p>Écrire une fonction <tt class="docutils literal"><span class="pre">encodage</span></tt> qui étant donné un code de Huffman construit par la fonction précédente et le texte initial retourne la chaîne de bits produite par le codage de Huffman.</p>
+<p>Le prototype de la fonction sera le suivant</p>
+<div class="highlight-python"><pre>def encodage(code,texte):</pre>
+</div>
+<p>et l&#8217;appel de</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">encodage</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="s">&quot;ABRACADABRA&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>avec C le code précédent, devra retourner la chaîne binaire suivante</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;01111001100011010111100&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="topic">
+<p class="topic-title first"><strong>Solution</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">encodage</span><span class="p">(</span><span class="n">texte</span><span class="p">,</span><span class="n">code</span><span class="p">):</span>
+    <span class="n">code_inv</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">code</span><span class="p">[</span><span class="n">bits</span><span class="p">],</span> <span class="n">bits</span><span class="p">)</span> <span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="n">code</span><span class="p">)</span>
+    <span class="c"># construit le dictionnaire inverse</span>
+    <span class="n">texte_binaire</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">texte</span><span class="p">:</span>
+        <span class="n">texte_binaire</span> <span class="o">=</span> <span class="n">texte_binaire</span> <span class="o">+</span> <span class="n">code_inv</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">texte_binaire</span>
+</pre></div>
+</div>
+</div>
+<div class="green topic">
+<p class="topic-title first"><strong>Exercice</strong>: Décodage</p>
+<p>Écrire une fonction <tt class="docutils literal"><span class="pre">decodage</span></tt> qui étant donnés un code de Huffman et un texte binaire compressé retourne le texte initial.</p>
+<p>Le prototype de la fonction sera le suivant</p>
+<div class="highlight-python"><pre>def decodage(code,texte_binaire):</pre>
+</div>
+<p>et l&#8217;appel de</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">encodage</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="s">&quot;01111001100011010111100&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>avec C le code précédent, devra retourner la chaîne binaire suivante</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;ABRACADABRA&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="topic">
+<p class="topic-title first"><strong>Solution</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">decodage</span><span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="n">texte_binaire</span><span class="p">):</span>
+    <span class="n">texte</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+    <span class="n">tampon</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">texte_binaire</span><span class="p">:</span>
+        <span class="n">tampon</span> <span class="o">=</span> <span class="n">tampon</span><span class="o">+</span><span class="n">b</span>
+        <span class="k">if</span> <span class="n">tampon</span> <span class="ow">in</span> <span class="n">code</span><span class="p">:</span>
+            <span class="n">texte</span> <span class="o">=</span> <span class="n">texte</span><span class="o">+</span><span class="n">code</span><span class="p">[</span><span class="n">tampon</span><span class="p">]</span>
+            <span class="n">tampon</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">texte</span>
+</pre></div>
+</div>
+</div>
 <p><div style="clear: both"></div></p>
+</div>
+</div>
 </div>
 
 
@@ -62,7 +571,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="stochastique.html" title="3. Phénomènes stochastiques : utilisation des tableaux NumPy"
+          <a href="stochastique.html" title="3. Systèmes statistiques : Nombres aléatoires - Monte Carlo"
              >suivant</a></li>
         <li class="right" >
           <a href="preparation.html" title="1.1.1.1. Préparer la formation: téléchargement d’Anaconda"

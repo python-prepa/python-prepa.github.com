@@ -1,0 +1,13 @@
+
+
+.. _example_quicksort.py:
+
+
+Quick sort
+
+
+**Python source code:** :download:`quicksort.py <quicksort.py>`
+
+.. literalinclude:: quicksort.py
+    :lines: 4-
+    

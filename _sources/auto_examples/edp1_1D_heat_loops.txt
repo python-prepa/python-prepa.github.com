@@ -1,0 +1,11 @@
+
+
+.. _example_edp1_1D_heat_loops.py:
+
+1D heat equation with loops
+
+**Python source code:** :download:`edp1_1D_heat_loops.py <edp1_1D_heat_loops.py>`
+
+.. literalinclude:: edp1_1D_heat_loops.py
+    :lines: 2-
+    

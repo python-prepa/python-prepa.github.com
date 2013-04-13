@@ -1,0 +1,11 @@
+
+
+.. _example_W_random_hist.py:
+
+
+
+**Python source code:** :download:`W_random_hist.py <W_random_hist.py>`
+
+.. literalinclude:: W_random_hist.py
+    :lines: 2-
+    

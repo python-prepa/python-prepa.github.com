@@ -39,6 +39,16 @@ Examples
 
    :ref:`example_plot_intro.py`
 
+.. figure:: ./images/thumb/plot_mini_mondrian.png
+   :target: ./plot_mini_mondrian.html
+
+   :ref:`example_plot_mini_mondrian.py`
+
+.. figure:: ./images/thumb/plot_numpy_array.png
+   :target: ./plot_numpy_array.html
+
+   :ref:`example_plot_numpy_array.py`
+
 .. figure:: ./images/thumb/plot_numpy_interaction.png
    :target: ./plot_numpy_interaction.html
 

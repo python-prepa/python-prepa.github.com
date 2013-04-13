@@ -1,0 +1,11 @@
+
+
+.. _example_edp5_2D_heat_vect.py:
+
+2D Heat equation using finite differences
+
+**Python source code:** :download:`edp5_2D_heat_vect.py <edp5_2D_heat_vect.py>`
+
+.. literalinclude:: edp5_2D_heat_vect.py
+    :lines: 2-
+    
