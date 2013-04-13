@@ -509,16 +509,16 @@ Le code complet est disponible ci-dessous :
 
    On pourra considérer une condition initiale sous la forme d'une gaussienne stationnaire.
 
+.. topic:: Correction...
 
-Correction...
+    .. only:: html
+
+       Le code complet est disponible ci-dessous :
+       [:ref:`La solution... <example_edp7_waves.py>`]
 
 .. figure:: auto_examples/images/plot_edp7_waves_1.png 
    :align: center
    :scale: 80
    :target: auto_examples/edp7_waves.html
 
-.. only:: html
-
-   Le code complet est disponible ci-dessous :
-   [:ref:`La solution... <example_edp7_waves.py>`]
 
