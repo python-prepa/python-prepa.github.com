@@ -34,6 +34,16 @@ Examples
 
    :ref:`example_plot_example_intro.py`
 
+.. figure:: ./images/thumb/plot_filter_coins.png
+   :target: ./plot_filter_coins.html
+
+   :ref:`example_plot_filter_coins.py`
+
+.. figure:: ./images/thumb/plot_granular.png
+   :target: ./plot_granular.html
+
+   :ref:`example_plot_granular.py`
+
 .. figure:: ./images/thumb/plot_intro.png
    :target: ./plot_intro.html
 

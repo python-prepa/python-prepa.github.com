@@ -1,0 +1,11 @@
+
+
+.. _example_ipython_log.py:
+
+
+
+**Python source code:** :download:`ipython_log.py <ipython_log.py>`
+
+.. literalinclude:: ipython_log.py
+    :lines: 4-
+    

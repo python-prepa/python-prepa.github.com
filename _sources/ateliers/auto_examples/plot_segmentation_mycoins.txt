@@ -1,0 +1,16 @@
+
+
+.. _example_plot_segmentation_mycoins.py:
+
+
+
+
+.. image:: images/plot_segmentation_mycoins_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_segmentation_mycoins.py <plot_segmentation_mycoins.py>`
+
+.. literalinclude:: plot_segmentation_mycoins.py
+    :lines: 2-
+    

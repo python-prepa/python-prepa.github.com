@@ -1,0 +1,1 @@
+[:ref:`La solution <example_granular.py>`]

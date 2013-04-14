@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.1.3. Géométrie d’un matériaux granulaire 2-D &mdash; Python scientifique - ENS Paris</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2013.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="Python scientifique - ENS Paris" href="../index.html" />
+    <link rel="up" title="6.1. Traitement d’images pour l’analyse de données d’expériences (TIPE)" href="image_processing.html" />
+    <link rel="prev" title="6.1.2. Mini-tutoriel de traitement d’images" href="image_tuto.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="image_tuto.html" title="6.1.2. Mini-tutoriel de traitement d’images"
+             accesskey="P">précédent</a></li>
+        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li>
+          <li><a href="index.html" >6. Ateliers pratiques</a> &raquo;</li>
+          <li><a href="image_processing.html" accesskey="U">6.1. Traitement d&#8217;images pour l&#8217;analyse de données d&#8217;expériences (TIPE)</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="geometrie-d-un-materiaux-granulaire-2-d">
+<h1>6.1.3. Géométrie d&#8217;un matériaux granulaire 2-D<a class="headerlink" href="#geometrie-d-un-materiaux-granulaire-2-d" title="Lien permanent vers ce titre">¶</a></h1>
+<img alt="../_images/coins_normal.jpg" class="align-left" src="../_images/coins_normal.jpg" style="width: 450px;" />
+<img alt="../_images/coins_black_small.jpg" class="align-right" src="../_images/coins_black_small.jpg" style="width: 450px;" />
+<hr class="docutils" />
+<p>Les matériaux granulaires sont omni-présents dans l&#8217;industrie et
+l&#8217;environnement. La science des matériaux granulaires est relativement
+récente car elle a nécessité des techniques d&#8217;instrumentation et de
+simulation qui n&#8217;ont fait leur apparition que tard.</p>
+<p>Dans cet atelier, on va s&#8217;intéresser à la géométrie d&#8217;un matériau
+granulaire en deux dimensions, c&#8217;est-à-dire :</p>
+<blockquote>
+<div><ul class="simple">
+<li>à la fraction de l&#8217;espace occupée par les grains, appelée la
+<strong>compacité</strong> du milieu granulaire</li>
+<li>au nombre de voisins de chaque grain</li>
+</ul>
+</div></blockquote>
+<p>Le matériau granulaire 2-D est un ensemble de pièces de monnaie,
+ci-dessus on voit le matériau granulaire photographié avec deux
+éclairages différents. Pour l&#8217;atelier on se servira de l&#8217;image la plus
+contrastée. On pourra plus tard se convaincre de l&#8217;importance de
+l&#8217;éclairage en essayant de reproduire les opérations sur l&#8217;autre image !</p>
+<p>[<a class="reference internal" href="auto_examples/plot_granular.html#example-plot-granular-py"><em>Solution de tout l&#8217;atelier</em></a>]</p>
+<div class="section" id="ouverture-de-l-image-comme-un-tableau-numpy">
+<h2>6.1.3.1. Ouverture de l&#8217;image comme un tableau NumPy<a class="headerlink" href="#ouverture-de-l-image-comme-un-tableau-numpy" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Sauver l&#8217;image contrastée ci-dessus (clic droit, sauver sous) dans le
+répertoire de travail. Ouvrir l&#8217;image comme un tableau Numpy appelé
+<tt class="docutils literal"><span class="pre">img</span></tt> avec la fonction <tt class="docutils literal"><span class="pre">skimage.io.imread</span></tt>.</p>
+<p>Afficher l&#8217;image avec <tt class="docutils literal"><span class="pre">skimage.io.imshow</span></tt>.</p>
+<p>Quelle est la forme de l&#8217;image ? Le maximum des valeurs des pixels ? Le
+minimum ?</p>
+</div>
+<div class="section" id="binarisation-de-l-image">
+<h2>6.1.3.2. Binarisation de l&#8217;image<a class="headerlink" href="#binarisation-de-l-image" title="Lien permanent vers ce titre">¶</a></h2>
+<p>On veut à présent séparer l&#8217;image en deux parties, 1) le fond et 2) les objets.Comme nous partons d&#8217;une image très contrastée, un simple seuillage va suffire pour donner un bon résultat.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Utiliser la fonction <tt class="docutils literal"><span class="pre">skimage.filter.threshold_otsu</span></tt> pour choisir la
+valeur à laquelle seuiller l&#8217;image. Optionnel : tracer l&#8217;histogramme de
+l&#8217;image pour vérifier que cette valeur est cohérente avec celle qu&#8217;on
+aurait choisi &#8220;à la main&#8221;.</li>
+<li>Créer une image booléenne <tt class="docutils literal"><span class="pre">mask</span></tt> qui vaut 1 pour les pixels inférieurs
+au seuil dans l&#8217;image originale, et 0 pour les autres. On a ainsi créé
+une binarisation de l&#8217;image en fond (à 0) et objets (à 1)</li>
+<li>On peut maintenant calculer la compacité du matériau granulaire en
+calculant la fraction de l&#8217;espace occupée par des pixels des objets. Pour
+s&#8217;affranchir des effets de bord, calculer cette fraction dans un
+rectangle intérieur loin des bords (comme le rectangle rouge ci-dessous)</li>
+</ul>
+</div></blockquote>
+<div class="figure">
+<a class="reference external image-reference" href="auto_examples/plot_granular.html"><img alt="../_images/plot_granular_1.png" src="../_images/plot_granular_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+</div>
+</div>
+<div class="section" id="separation-des-differents-grains">
+<h2>6.1.3.3. Séparation des différents grains<a class="headerlink" href="#separation-des-differents-grains" title="Lien permanent vers ce titre">¶</a></h2>
+<p>On souhaite maintenant attribuer les différents pixels de valeur 1 dans
+<tt class="docutils literal"><span class="pre">mask</span></tt> aux différents grains. Cette opération s&#8217;appelle la segmentation
+de l&#8217;image. Comme la phase de valeur 1 est continue (les grains se
+touchent), il n&#8217;y a pas d&#8217;opération simple permettant de faire cette
+séparation en une étape.</p>
+<p>En consultant la <a class="reference external" href="http://scikit-image.org/docs/dev/auto_examples/">gallerie du scikit-image</a>, on peut voir qu&#8217;il y
+a justement un exemple où <a class="reference external" href="http://scikit-image.org/docs/dev/auto_examples/plot_watershed.html">on sépare deux objets collés</a>.</p>
+<p>Cet exemple utilise un algorithme de segmentation appelé watershed
+(montée des eaux en français), implémenté dans la fonction
+<tt class="docutils literal"><span class="pre">skimage.morphology.watershed</span></tt>. Pour comprendre comment l&#8217;algorithme
+fonctionne, lire l&#8217;exemple et la docstring de la fonction <tt class="docutils literal"><span class="pre">watershed</span></tt>.</p>
+<p>L&#8217;<a class="reference external" href="http://en.wikipedia.org/wiki/Watershed_(image_processing)">algorithme de watershed</a>:</p>
+<blockquote>
+<div><ul class="simple">
+<li>part de pixels marqués comme appartenant à différents objets</li>
+<li>agit sur une image dont on considère les différents niveaux de gris
+comme des altitudes, et où les pixels marqués vont typiquement être
+dans les creux de cette carte d&#8217;altitude.</li>
+<li>fait grandir des régions à partir de ces pixels marqués, en remontant
+les niveaux de l&#8217;image d&#8217;entrée de l&#8217;algorithme. La propagation
+s&#8217;arrête quand deux régions se rencontrent.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="marqueurs">
+<h3>6.1.3.3.1. Marqueurs<a class="headerlink" href="#marqueurs" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Il faut donc fournir à l&#8217;algorithme une image de marqueurs, où on aura
+identifé quelques pixels appartenant de manière certaine à chaque grain.
+Pour celà, on va éroder le masque jusqu&#8217;à séparer tous les grains. Il
+s&#8217;agit d&#8217;une opération typique de <a class="reference external" href="http://en.wikipedia.org/wiki/Mathematical_morphology">morphologie mathématique</a>, qui se trouve
+donc dans le sous-module <tt class="docutils literal"><span class="pre">skimage.morphology</span></tt>. Une combinaison
+d&#8217;opérations d&#8217;érosion qui fonctionne bien est:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">morphology</span>
+<span class="n">erosion</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span>
+<span class="n">erosion</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">erosion</span><span class="p">,</span> <span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Afficher le tableau <tt class="docutils literal"><span class="pre">erosion</span></tt> après la 1e opération d&#8217;érosion, puis
+après la 2e. Essayer d&#8217;autres paramétres pour la taille de l&#8217;érosion : si
+on érode trop, on fait disparaître des grains, mais si on n&#8217;érode pas
+assez, certains grains vont rester attachés...</p>
+<div class="figure">
+<a class="reference external image-reference" href="auto_examples/plot_granular.html"><img alt="../_images/plot_granular_2.png" src="../_images/plot_granular_2.png" style="width: 800px;" /></a>
+</div>
+<p>Une fois qu&#8217;on a séparé les grains, utiliser la fonction
+<tt class="docutils literal"><span class="pre">skimage.morphology.label</span></tt> pour donner un indice différent à chaque
+région de marqueurs. On appelera <tt class="docutils literal"><span class="pre">labs</span></tt> le tableau de marqueurs.</p>
+</div>
+<div class="section" id="carte-d-elevation">
+<h3>6.1.3.3.2. Carte d&#8217;élévation<a class="headerlink" href="#carte-d-elevation" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Il faut maintenant créer une image où les minima correspondent à peu près
+à la position des marqueurs, et les régions les plus élévées aux
+séparations entre les grains. Pour celà, on va faire comme dans l&#8217;exemple
+du scikit-image : créér une image où la valeur de chaque pixel correspond
+à la distance du pixel au fonc dans le tableau <tt class="docutils literal"><span class="pre">mask</span></tt>. Ce tableau aura
+donc ses plus grandes valeurs au centre des disques, et ses plus petites
+valeurs au bord des grains : il faudra prendre l&#8217;opposé de ce tableau
+comme tableau d&#8217;entrée du watershed.</p>
+<p>La fonction qui calcule la distance ne se trouve pas dans <tt class="docutils literal"><span class="pre">skimage</span></tt>,
+mais dans <tt class="docutils literal"><span class="pre">scipy.ndimage</span></tt></p>
+<div class="highlight-python"><pre>&gt;&gt;&gt; from scipy import ndimage
+&gt;&gt;&gt; ndimage.distance_transform_edt?</pre>
+</div>
+<p>Appliquer cette fonction au tableau <tt class="docutils literal"><span class="pre">mask</span></tt> pour créer un tableau
+<tt class="docutils literal"><span class="pre">elevation_map</span></tt>.</p>
+</div>
+<div class="section" id="segmentation">
+<h3>6.1.3.3.3. Segmentation<a class="headerlink" href="#segmentation" title="Lien permanent vers ce titre">¶</a></h3>
+<p>On peut maintenant utiliser la fonction watershed sur le tableau
+<tt class="docutils literal"><span class="pre">elevation_map</span></tt>, avec comme tableau de marqueurs le tableau <tt class="docutils literal"><span class="pre">labs</span></tt>.
+Afin d&#8217;attribuer uniquement les pixels correspondant aux objets (et pas
+au fond), il faut également donner le tableau <tt class="docutils literal"><span class="pre">mask</span></tt> pour le keyword
+argument (argument optionnel) <tt class="docutils literal"><span class="pre">mask</span></tt>.</p>
+<p>Calculer le résultat du watershed : appeler le résultat <tt class="docutils literal"><span class="pre">regions</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="proprietes-des-grains">
+<h2>6.1.3.4. Propriétés des grains<a class="headerlink" href="#proprietes-des-grains" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Maintenant que nous avons séparé l&#8217;image en plusieurs régions, on peut
+calculer les propriétés des différentes régions. La fonction
+<tt class="docutils literal"><span class="pre">skimage.measure.regionprops</span></tt> sert justement à mesurer les propriétés
+d&#8217;une image de labels.</p>
+<p>Calculer l&#8217;aire et le centroïde de chaque région avec cette fonction. La
+fonction <tt class="docutils literal"><span class="pre">regionprops</span></tt> renvoie une liste de dictionnaire, on peut
+boucler sur les éléments de la liste pour extraire à chaque dictionnaire
+la clé correspondant à l&#8217;aire et au centroïde.</p>
+<p>Quel est la taille du plus petit grain ?</p>
+<p>(Remarque - optionnel : pour bien faire les choses proprement, on peut
+mettre à 0 les régions correspondant aux bords du cadre de l&#8217;image.
+Utiliser des masques (tableaux booléens) pour celà. Si on supprime
+certaines régions, on peut réindicer les labels de manière à ce qu&#8217;ils
+restent consécutifs grâce à la fonction
+<tt class="docutils literal"><span class="pre">skimage.segmentation.relabel_from_one</span></tt>).</p>
+</div>
+<div class="section" id="nombre-de-voisins-des-grains">
+<h2>6.1.3.5. Nombre de voisins des grains<a class="headerlink" href="#nombre-de-voisins-des-grains" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Nous voulons maintenant connaître les indices des voisins de chaque
+grain, c&#8217;est-à-dire des grains qui touchent ce grain. Pour cela, une
+solution est de dilater chaque grain (au sens de la morphologie
+mathématique) et de repérer les indices recouverts par la dilatation du
+grain.</p>
+<p>Quelques indices :</p>
+<blockquote>
+<div><ul class="simple">
+<li>boucler sur les objets en créant des masques <tt class="docutils literal"><span class="pre">regions</span> <span class="pre">==</span> <span class="pre">lab</span></tt> pour
+les différents labels <tt class="docutils literal"><span class="pre">lab</span></tt></li>
+<li>utiliser <tt class="docutils literal"><span class="pre">skimage.morphology.binary_dilation</span></tt> pour dilater ce
+masque.</li>
+<li>utiliser le masque dilaté pour extraire du tableau <tt class="docutils literal"><span class="pre">regions</span></tt> les
+valeurs des pixels recouverts par le masque.</li>
+<li>utiliser la fonction <tt class="docutils literal"><span class="pre">np.unique</span></tt> pour ne garder qu&#8217;une occurrence de
+chaque valeur.</li>
+<li>ajouter ces valeurs à un conteneur, par exemple une liste.</li>
+</ul>
+</div></blockquote>
+<p>Quelle est la moyenne du nombre de voisins ? En deux dimensions, dans un
+milieu granulaire sans frottement à l&#8217;équilibre mécanique la moyenne du
+nombre de contacts est 4, pour assurer la condition d&#8217;iso-staticité. Dans
+cet exemple on devrait trouver moins, car les grains frottent entre eux.</p>
+<p>Une fois qu&#8217;on a extrait les voisins, on peut tracer des liens entre
+voisins grâce à la fonction <tt class="docutils literal"><span class="pre">skimage.draw.line</span></tt>.</p>
+<div class="figure">
+<a class="reference external image-reference" href="auto_examples/plot_granular.html"><img alt="../_images/plot_granular_3.png" src="../_images/plot_granular_3.png" style="width: 560.0px; height: 420.0px;" /></a>
+</div>
+<p>[<a class="reference internal" href="auto_examples/plot_granular.html#example-plot-granular-py"><em>La solution</em></a>]</p>
+<p><div style="clear: both"></div></p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="image_tuto.html" title="6.1.2. Mini-tutoriel de traitement d’images"
+             >précédent</a></li>
+        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li>
+          <li><a href="index.html" >6. Ateliers pratiques</a> &raquo;</li>
+          <li><a href="image_processing.html" >6.1. Traitement d&#8217;images pour l&#8217;analyse de données d&#8217;expériences (TIPE)</a> &raquo;</li> 
+      </ul>
+    </div>
+        <!-- your html code here -->
+<a href="http://www.ens.fr"><img src="../_static/ENS_Logo.png"
+alt="ENS" height="100"></a>
+<a href="http://www.inria.fr"><img src="../_static/logo-inria.jpg"
+alt="INRIA" height="60"></a>
+<a href="http://www.saint-gobain-recherche.fr/fr/"><img
+src="../_static/logoSGR.png" alt="Saint-Gobain Recherche" height="60"></a>
+
+  </body>
+</html>

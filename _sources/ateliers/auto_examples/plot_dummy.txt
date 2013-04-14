@@ -1,0 +1,16 @@
+
+
+.. _example_plot_dummy.py:
+
+
+
+
+.. rst-class:: horizontal
+
+
+
+**Python source code:** :download:`plot_dummy.py <plot_dummy.py>`
+
+.. literalinclude:: plot_dummy.py
+    :lines: 2-
+    

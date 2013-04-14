@@ -1,0 +1,11 @@
+
+
+.. _example_dummy.py:
+
+
+
+**Python source code:** :download:`dummy.py <dummy.py>`
+
+.. literalinclude:: dummy.py
+    :lines: 4-
+    
