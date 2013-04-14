@@ -208,10 +208,10 @@ uniquement des tableaux et des fonctions de NumPy</p>
 </div>
 </div>
 </div>
-<div class="section" id="equation-de-la-chaleur">
-<h2>4.2. Équation de la chaleur<a class="headerlink" href="#equation-de-la-chaleur" title="Lien permanent vers ce titre">¶</a></h2>
-<div class="section" id="modele-a-une-dimension-d-espace">
-<h3>4.2.1. Modèle à une dimension d&#8217;espace<a class="headerlink" href="#modele-a-une-dimension-d-espace" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="section" id="equation-de-la-chaleur-1d">
+<h2>4.2. Équation de la chaleur 1D<a class="headerlink" href="#equation-de-la-chaleur-1d" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="discretisation-en-differences-finies">
+<h3>4.2.1. Discrétisation en différences finies<a class="headerlink" href="#discretisation-en-differences-finies" title="Lien permanent vers ce titre">¶</a></h3>
 <p>On va s&#8217;intéresser dans un premier temps à l&#8217;équation de la chaleur
 (diffusion thermique) en une dimension d&#8217;espace</p>
 <div class="math">
@@ -247,6 +247,9 @@ c\equiv \frac{{\Delta t}\,  \kappa}{\Delta x^2} \, ."/></p>
 <a class="reference external image-reference" href="auto_examples/edp1_1D_heat_loops.html"><img alt="_images/plot_edp1_1D_heat_loops_1.png" src="_images/plot_edp1_1D_heat_loops_1.png" style="width: 640.0px; height: 480.0px;" /></a>
 </div>
 <p>[<a class="reference internal" href="auto_examples/edp1_1D_heat_loops.html#example-edp1-1d-heat-loops-py"><em>Python source code</em></a>]</p>
+</div>
+<div class="section" id="convergence">
+<h3>4.2.2. Convergence<a class="headerlink" href="#convergence" title="Lien permanent vers ce titre">¶</a></h3>
 <p>En introduisant un développement de Taylor, on peut estimer la qualité de
 l&#8217;approximation numérique (évolution de l&#8217;erreur en fonction de
 <img class="math" src="_images/math/1eb29f9de3753a59530941141fcb5c7aa3fa2e38.png" alt="\Delta x" style="vertical-align: 0px"/> et <img class="math" src="_images/math/a1ffc0a012620941fe660cedabff822ce7162eca.png" alt="\Delta t" style="vertical-align: 0px"/>).</p>
@@ -315,6 +318,9 @@ code compilé et non par du code interpreté)</p>
 </div>
 <p>On constate que l&#8217;execution est alors quasi-instantanée.</p>
 <p>[<a class="reference internal" href="auto_examples/edp3_1D_heat_vect_conv.html#example-edp3-1d-heat-vect-conv-py"><em>Python source code</em></a>]</p>
+</div>
+<div class="section" id="formulation-matricielle">
+<h3>4.2.3. Formulation matricielle<a class="headerlink" href="#formulation-matricielle" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Que se passe t&#8217;il si on pousse l&#8217;analyse vers de plus petits pas d&#8217;espace ???</p>
 <p>On est de fait limité par un critère de stabilité.</p>
 <p>Pour une résolution spatiale fixée, celui-ci nous impose donc un nombre
@@ -389,8 +395,9 @@ d&#8217;évolution en temps en utilisant le schéma implicite</p>
 \qquad \text{avec}\quad
 c\equiv \frac{{\Delta t}\,  \kappa}{\Delta x^2} \, ."/></p>
 </div></div>
-<div class="section" id="modele-a-deux-dimensions-d-espace">
-<h3>4.2.2. Modèle à deux dimensions d&#8217;espace<a class="headerlink" href="#modele-a-deux-dimensions-d-espace" title="Lien permanent vers ce titre">¶</a></h3>
+</div>
+<div class="section" id="equation-de-la-chaleur-2d">
+<h2>4.3. Équation de la chaleur 2D<a class="headerlink" href="#equation-de-la-chaleur-2d" title="Lien permanent vers ce titre">¶</a></h2>
 <p>On peut traiter le problème équivalent en deux dimensions d&#8217;espace</p>
 <div class="math">
 <p><img src="_images/math/e77c2d37ad9bbd6757dfcb7c6b5da1095420d6eb.png" alt="\frac{\partial T}{\partial t} = \kappa \, \Delta T + S\, ,"/></p>
@@ -466,7 +473,6 @@ l&#8217;équation de la chaleur en deux dimensions (vu ci-dessus)</p>
 [<a class="reference internal" href="auto_examples/edp7_waves.html#example-edp7-waves-py"><em>La solution...</em></a>]</p>
 </div>
 <p><div style="clear: both"></div></p>
-</div>
 </div>
 </div>
 
