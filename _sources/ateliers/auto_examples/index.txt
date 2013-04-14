@@ -24,6 +24,11 @@ Examples
 ========
 
 .. _examples-index:
+.. figure:: ./images/thumb/mixing.png
+   :target: ./mixing.html
+
+   :ref:`example_mixing.py`
+
 .. figure:: ./images/thumb/plot_color_grey.png
    :target: ./plot_color_grey.html
 

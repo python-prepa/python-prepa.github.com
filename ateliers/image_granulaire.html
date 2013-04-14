@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>6.1.3. Géométrie d’un matériaux granulaire 2-D &mdash; Python scientifique - ENS Paris</title>
+    <title>6.1.4. Géométrie d’un matériaux granulaire 2-D &mdash; Python scientifique - ENS Paris</title>
     
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -28,14 +28,14 @@
     <script type="text/javascript" src="../_static/translations.js"></script>
     <link rel="top" title="Python scientifique - ENS Paris" href="../index.html" />
     <link rel="up" title="6.1. Traitement d’images pour l’analyse de données d’expériences (TIPE)" href="image_processing.html" />
-    <link rel="prev" title="6.1.2. Mini-tutoriel de traitement d’images" href="image_tuto.html" /> 
+    <link rel="prev" title="6.1.3. Application : caractérisation du mélange d’un colorant" href="melange.html" /> 
   </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="image_tuto.html" title="6.1.2. Mini-tutoriel de traitement d’images"
+          <a href="melange.html" title="6.1.3. Application : caractérisation du mélange d’un colorant"
              accesskey="P">précédent</a></li>
         <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li>
           <li><a href="index.html" >6. Ateliers pratiques</a> &raquo;</li>
@@ -48,7 +48,7 @@
           <div class="body">
             
   <div class="section" id="geometrie-d-un-materiaux-granulaire-2-d">
-<h1>6.1.3. Géométrie d&#8217;un matériaux granulaire 2-D<a class="headerlink" href="#geometrie-d-un-materiaux-granulaire-2-d" title="Lien permanent vers ce titre">¶</a></h1>
+<h1>6.1.4. Géométrie d&#8217;un matériaux granulaire 2-D<a class="headerlink" href="#geometrie-d-un-materiaux-granulaire-2-d" title="Lien permanent vers ce titre">¶</a></h1>
 <img alt="../_images/coins_normal.jpg" class="align-left" src="../_images/coins_normal.jpg" style="width: 450px;" />
 <img alt="../_images/coins_black_small.jpg" class="align-right" src="../_images/coins_black_small.jpg" style="width: 450px;" />
 <hr class="docutils" />
@@ -72,7 +72,7 @@ contrastée. On pourra plus tard se convaincre de l&#8217;importance de
 l&#8217;éclairage en essayant de reproduire les opérations sur l&#8217;autre image !</p>
 <p>[<a class="reference internal" href="auto_examples/plot_granular.html#example-plot-granular-py"><em>Solution de tout l&#8217;atelier</em></a>]</p>
 <div class="section" id="ouverture-de-l-image-comme-un-tableau-numpy">
-<h2>6.1.3.1. Ouverture de l&#8217;image comme un tableau NumPy<a class="headerlink" href="#ouverture-de-l-image-comme-un-tableau-numpy" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>6.1.4.1. Ouverture de l&#8217;image comme un tableau NumPy<a class="headerlink" href="#ouverture-de-l-image-comme-un-tableau-numpy" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Sauver l&#8217;image contrastée ci-dessus (clic droit, sauver sous) dans le
 répertoire de travail. Ouvrir l&#8217;image comme un tableau Numpy appelé
 <tt class="docutils literal"><span class="pre">img</span></tt> avec la fonction <tt class="docutils literal"><span class="pre">skimage.io.imread</span></tt>.</p>
@@ -81,7 +81,7 @@ répertoire de travail. Ouvrir l&#8217;image comme un tableau Numpy appelé
 minimum ?</p>
 </div>
 <div class="section" id="binarisation-de-l-image">
-<h2>6.1.3.2. Binarisation de l&#8217;image<a class="headerlink" href="#binarisation-de-l-image" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>6.1.4.2. Binarisation de l&#8217;image<a class="headerlink" href="#binarisation-de-l-image" title="Lien permanent vers ce titre">¶</a></h2>
 <p>On veut à présent séparer l&#8217;image en deux parties, 1) le fond et 2) les objets.Comme nous partons d&#8217;une image très contrastée, un simple seuillage va suffire pour donner un bon résultat.</p>
 <blockquote>
 <div><ul class="simple">
@@ -103,7 +103,7 @@ rectangle intérieur loin des bords (comme le rectangle rouge ci-dessous)</li>
 </div>
 </div>
 <div class="section" id="separation-des-differents-grains">
-<h2>6.1.3.3. Séparation des différents grains<a class="headerlink" href="#separation-des-differents-grains" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>6.1.4.3. Séparation des différents grains<a class="headerlink" href="#separation-des-differents-grains" title="Lien permanent vers ce titre">¶</a></h2>
 <p>On souhaite maintenant attribuer les différents pixels de valeur 1 dans
 <tt class="docutils literal"><span class="pre">mask</span></tt> aux différents grains. Cette opération s&#8217;appelle la segmentation
 de l&#8217;image. Comme la phase de valeur 1 est continue (les grains se
@@ -128,7 +128,7 @@ s&#8217;arrête quand deux régions se rencontrent.</li>
 </ul>
 </div></blockquote>
 <div class="section" id="marqueurs">
-<h3>6.1.3.3.1. Marqueurs<a class="headerlink" href="#marqueurs" title="Lien permanent vers ce titre">¶</a></h3>
+<h3>6.1.4.3.1. Marqueurs<a class="headerlink" href="#marqueurs" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Il faut donc fournir à l&#8217;algorithme une image de marqueurs, où on aura
 identifé quelques pixels appartenant de manière certaine à chaque grain.
 Pour celà, on va éroder le masque jusqu&#8217;à séparer tous les grains. Il
@@ -152,7 +152,7 @@ assez, certains grains vont rester attachés...</p>
 région de marqueurs. On appelera <tt class="docutils literal"><span class="pre">labs</span></tt> le tableau de marqueurs.</p>
 </div>
 <div class="section" id="carte-d-elevation">
-<h3>6.1.3.3.2. Carte d&#8217;élévation<a class="headerlink" href="#carte-d-elevation" title="Lien permanent vers ce titre">¶</a></h3>
+<h3>6.1.4.3.2. Carte d&#8217;élévation<a class="headerlink" href="#carte-d-elevation" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Il faut maintenant créer une image où les minima correspondent à peu près
 à la position des marqueurs, et les régions les plus élévées aux
 séparations entre les grains. Pour celà, on va faire comme dans l&#8217;exemple
@@ -170,7 +170,7 @@ mais dans <tt class="docutils literal"><span class="pre">scipy.ndimage</span></t
 <tt class="docutils literal"><span class="pre">elevation_map</span></tt>.</p>
 </div>
 <div class="section" id="segmentation">
-<h3>6.1.3.3.3. Segmentation<a class="headerlink" href="#segmentation" title="Lien permanent vers ce titre">¶</a></h3>
+<h3>6.1.4.3.3. Segmentation<a class="headerlink" href="#segmentation" title="Lien permanent vers ce titre">¶</a></h3>
 <p>On peut maintenant utiliser la fonction watershed sur le tableau
 <tt class="docutils literal"><span class="pre">elevation_map</span></tt>, avec comme tableau de marqueurs le tableau <tt class="docutils literal"><span class="pre">labs</span></tt>.
 Afin d&#8217;attribuer uniquement les pixels correspondant aux objets (et pas
@@ -180,7 +180,7 @@ argument (argument optionnel) <tt class="docutils literal"><span class="pre">mas
 </div>
 </div>
 <div class="section" id="proprietes-des-grains">
-<h2>6.1.3.4. Propriétés des grains<a class="headerlink" href="#proprietes-des-grains" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>6.1.4.4. Propriétés des grains<a class="headerlink" href="#proprietes-des-grains" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Maintenant que nous avons séparé l&#8217;image en plusieurs régions, on peut
 calculer les propriétés des différentes régions. La fonction
 <tt class="docutils literal"><span class="pre">skimage.measure.regionprops</span></tt> sert justement à mesurer les propriétés
@@ -198,7 +198,7 @@ restent consécutifs grâce à la fonction
 <tt class="docutils literal"><span class="pre">skimage.segmentation.relabel_from_one</span></tt>).</p>
 </div>
 <div class="section" id="nombre-de-voisins-des-grains">
-<h2>6.1.3.5. Nombre de voisins des grains<a class="headerlink" href="#nombre-de-voisins-des-grains" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>6.1.4.5. Nombre de voisins des grains<a class="headerlink" href="#nombre-de-voisins-des-grains" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Nous voulons maintenant connaître les indices des voisins de chaque
 grain, c&#8217;est-à-dire des grains qui touchent ce grain. Pour cela, une
 solution est de dilater chaque grain (au sens de la morphologie
@@ -241,7 +241,7 @@ voisins grâce à la fonction <tt class="docutils literal"><span class="pre">ski
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="image_tuto.html" title="6.1.2. Mini-tutoriel de traitement d’images"
+          <a href="melange.html" title="6.1.3. Application : caractérisation du mélange d’un colorant"
              >précédent</a></li>
         <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li>
           <li><a href="index.html" >6. Ateliers pratiques</a> &raquo;</li>

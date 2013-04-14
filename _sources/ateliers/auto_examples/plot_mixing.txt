@@ -1,0 +1,16 @@
+
+
+.. _example_plot_mixing.py:
+
+
+
+
+.. rst-class:: horizontal
+
+
+
+**Python source code:** :download:`plot_mixing.py <plot_mixing.py>`
+
+.. literalinclude:: plot_mixing.py
+    :lines: 2-
+    

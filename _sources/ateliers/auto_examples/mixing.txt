@@ -1,0 +1,11 @@
+
+
+.. _example_mixing.py:
+
+
+
+**Python source code:** :download:`mixing.py <mixing.py>`
+
+.. literalinclude:: mixing.py
+    :lines: 2-
+    
