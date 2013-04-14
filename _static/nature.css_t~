@@ -144,7 +144,6 @@ div.sidebar .first {
 .figure {
     float: left;
     margin: 1em;
-    max-height: 25%;
 }
 
 .figure img {
