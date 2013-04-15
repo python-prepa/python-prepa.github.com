@@ -403,9 +403,10 @@ c\equiv \frac{{\Delta t}\,  \kappa}{\Delta x^2} \, ."/></p>
 <p><img src="_images/math/e77c2d37ad9bbd6757dfcb7c6b5da1095420d6eb.png" alt="\frac{\partial T}{\partial t} = \kappa \, \Delta T + S\, ,"/></p>
 </div><p>de la même manière, avec un schéma explicite en temps</p>
 <div class="math">
-<p><img src="_images/math/1de06a48c3bd0c90d4aca3672291340814b4090c.png" alt="T_{i,j}^{n+1} = T_{i,j}^{n} + {\Delta t}\,  \kappa \, \left[
-(T_{i-1,j}^{n} - 2\, T_{i,j}^{n} + T_{i+1,j}^{n})/{\Delta x^2}
-+
+<p><img src="_images/math/14c10a9bca7da27d3311194cfbbe19e11bb6b40b.png" alt="T_{i,j}^{n+1} = T_{i,j}^{n} + {\Delta t}\,  \kappa \, \left[
+(T_{i-1,j}^{n} - 2\, T_{i,j}^{n} + T_{i+1,j}^{n})/{\Delta x^2}\right."/></p>
+</div><div class="math">
+<p><img src="_images/math/fba90f7de856e16f4848cc33b18e0812f21a89d6.png" alt="\left. +
 (T_{i,j-1}^{n} - 2\, T_{i,j}^{n} + T_{i,j+1}^{n})/{\Delta y^2}
 \right] \, ."/></p>
 </div><p>Ce qui devient en Python:</p>
@@ -456,10 +457,11 @@ l&#8217;équation de la chaleur en deux dimensions (vu ci-dessus)</p>
 <p><img src="_images/math/4df1a3a24308ff237af5cdab2831dd28c325cc99.png" alt="\frac{\partial ^2 u}{\partial t ^2} = c^2 \, \Delta u \, ."/></p>
 </div><p>de la même manière, on peut écrire un schéma explicite en temps</p>
 <div class="math">
-<p><img src="_images/math/a78725063d8ee768162ce2f5fbce4e9940d7133f.png" alt="u_{i,j}^{n+1} = 2 \, u_{i,j}^{n} - u_{i,j}^{n-1}
+<p><img src="_images/math/fd90916f9459eca1d7af2b3d650dc1c958aa9405.png" alt="u_{i,j}^{n+1} = 2 \, u_{i,j}^{n} - u_{i,j}^{n-1}
 + {\Delta t ^2}\,  c^2 \, \left[
-(u_{i-1,j}^{n} - 2\, u_{i,j}^{n} + u_{i+1,j}^{n})/{\Delta x^2}
-+
+(u_{i-1,j}^{n} - 2\, u_{i,j}^{n} + u_{i+1,j}^{n})/{\Delta x^2}\right."/></p>
+</div><div class="math">
+<p><img src="_images/math/9e71a80394bdc5d6356cc5529d3733292d315826.png" alt="+\left.
 (u_{i,j-1}^{n} - 2\, u_{i,j}^{n} + u_{i,j+1}^{n})/{\Delta y^2}
 \right] \, ."/></p>
 </div><p>On pourra considérer une condition initiale sous la forme d&#8217;une gaussienne stationnaire.</p>

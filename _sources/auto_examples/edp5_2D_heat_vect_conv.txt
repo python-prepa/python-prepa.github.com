@@ -2,7 +2,7 @@
 
 .. _example_edp5_2D_heat_vect_conv.py:
 
-
+2D Heat equation using finite differences
 
 **Python source code:** :download:`edp5_2D_heat_vect_conv.py <edp5_2D_heat_vect_conv.py>`
 

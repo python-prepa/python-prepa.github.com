@@ -10,17 +10,17 @@
 
     *
 
+      .. image:: images/plot_granular_1.png
+            :scale: 50
+
+    *
+
       .. image:: images/plot_granular_2.png
             :scale: 50
 
     *
 
       .. image:: images/plot_granular_3.png
-            :scale: 50
-
-    *
-
-      .. image:: images/plot_granular_1.png
             :scale: 50
 
 
