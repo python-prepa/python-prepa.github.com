@@ -279,8 +279,14 @@ Docstring:  L.append(object) -- append object to end</pre>
 </div>
 <p>C&#8217;est donc un objet très polyvalent.
 Pour contenir un ensemble de nombres de même type, nous verrons plus
-tard dans la formation un objet plus efficace (pour la rapidité
-d&#8217;exécution) : les tableaux numériques du module NumPy.</p>
+tard un objet plus efficace (pour la rapidité d&#8217;exécution) : les
+tableaux numériques du module NumPy.</p>
+<p>Finalement, pour créer une liste d&#8217;entiers continus:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">l</span>
+<span class="go">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+</pre></div>
+</div>
 </li>
 <li><p class="first"><strong>Et plus encore</strong></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -374,6 +380,12 @@ de texte (panneau gauche de spyder) est plus pratique.</p>
 </div>
 </li>
 </ul>
+<div class="green topic">
+<p class="topic-title first"><strong>Exercice</strong>: Calculer Pi avec la formule de Wallis</p>
+<div class="math">
+<p><img src="_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png" alt="\pi = 2 \prod_{i=1}^{\infty} \frac{4i^2}{4i^2 - 1}"/></p>
+</div><p>[<a class="reference internal" href="auto_examples/pi_wallis.html#example-pi-wallis-py"><em>La solution</em></a>]</p>
+</div>
 </div>
 <div class="section" id="definir-des-fonctions">
 <h3>1.2.3. Définir des fonctions<a class="headerlink" href="#definir-des-fonctions" title="Lien permanent vers ce titre">¶</a></h3>
@@ -453,8 +465,89 @@ suivant:</p>
 <span class="k">print</span> <span class="n">quicksort</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
 <p>[<a class="reference internal" href="auto_examples/quicksort.html#example-quicksort-py"><em>La solution</em></a>]</p>
+</div>
+</div>
+<div class="section" id="travailler-avec-beaucoup-de-nombres">
+<h3>1.2.5. Travailler avec beaucoup de nombres<a class="headerlink" href="#travailler-avec-beaucoup-de-nombres" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Lorsque l&#8217;on fait du calcul scientifique, on doit souvent travailler avec
+de gros ensemble de nombres. Par example, calculons ici les racines
+carrées des 10 millions premiers entiers:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ll</span> <span class="o">=</span> <span class="p">[]</span>         <span class="c"># La liste vide, pour stoquer le résultat</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">math</span>     <span class="c"># L&#39;opération racine carré est définit dans le module math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">ll</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Notez que vous devez attendre un peu que cette boucle s&#8217;exécute.</p>
+<p>En calcul scientifique, la manière efficace de travailler et d&#8217;utiliser
+les tableaux</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>    <span class="c"># l est alors un tableau (array) et non une liste</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ll</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>     <span class="c"># En utilisant &#39;sqrt&#39; du module numpy, l&#39;opération est réalisée en block</span>
+</pre></div>
+</div>
+<p>Le module numpy est central au calcul scientifique. Nous le verrons plus
+en détail plus tard.</p>
+</div>
+<div class="section" id="comprendre-les-erreurs">
+<h3>1.2.6. Comprendre les erreurs<a class="headerlink" href="#comprendre-les-erreurs" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Lorsque Python rencontre une situation dont il ne sait se sortir, il lève
+une erreur (exception en jargon):</p>
+<div class="highlight-python"><pre>In [1]: 1 + 'a'
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call
+last)
+&lt;ipython-input-1-bb4aa3e60e23&gt; in &lt;module&gt;()
+----&gt; 1 1 + 'a'
+
+TypeError: unsupported operand type(s) for +: 'int' and 'str'</pre>
+</div>
+<p>Ici c&#8217;est une erreur de &#8216;type&#8217;: Python ne sait additionner des entiers et
+des chaînes de caractère.</p>
+<div class="highlight-python"><pre>In [2]: l = [0, 1]
+
+In [3]: l[2]
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+&lt;ipython-input-3-5b08617e4833&gt; in &lt;module&gt;()
+----&gt; 1 l[2]
+
+IndexError: list index out of range</pre>
+</div>
+<p>Une erreur d&#8217;indexation : j&#8217;ai donné un indice trop grand pour la liste.</p>
+<p>Regardez bien le message d&#8217;erreur, il vous en dit beaucoup: de quelle
+erreur il s&#8217;agit, et où elle s&#8217;est produite</p>
+<div class="highlight-python"><pre>In [4]: def f(x):
+...:     y = 1. / (1 = x)
+...:     return y
+...:
+File "&lt;ipython-input-4-782a072b3f3f&gt;", line 2
+    y = 1. / (1 = x)
+                ^
+SyntaxError: invalid syntax
+
+In [5]: def f(x):
+    y = 1. / (1 + x)
+    return y
+...:
+
+
+In [6]: f(-1)
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+&lt;ipython-input-6-512b55eb878d&gt; in &lt;module&gt;()
+----&gt; 1 f(-1)
+
+&lt;ipython-input-5-9ac7ba330cae&gt; in f(x)
+    1 def f(x):
+----&gt; 2     y = 1. / (1 + x)
+    3     return y
+
+ZeroDivisionError: float division by zero</pre>
+</div>
 <p><div style="clear: both"></div></p>
 </div>
 </div>

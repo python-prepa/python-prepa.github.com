@@ -1,0 +1,13 @@
+
+
+.. _example_pi_wallis.py:
+
+
+Calcul de pi avec la formule de Wallis
+
+
+**Python source code:** :download:`pi_wallis.py <pi_wallis.py>`
+
+.. literalinclude:: pi_wallis.py
+    :lines: 4-
+    

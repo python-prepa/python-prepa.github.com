@@ -28,7 +28,7 @@
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="top" title="Python scientifique - ENS Paris" href="index.html" />
     <link rel="next" title="4. Équations aux dérivées partielles : utilisation de NumPy" href="edp_chaleur.html" />
-    <link rel="prev" title="2. Utilisation avancée du langage Python : un exemple de la théorie de l’information" href="information_theory.html" /> 
+    <link rel="prev" title="2. Structures de données en Python. Un exemple de la théorie de l’information" href="information_theory.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,7 +38,7 @@
           <a href="edp_chaleur.html" title="4. Équations aux dérivées partielles : utilisation de NumPy"
              accesskey="N">suivant</a></li>
         <li class="right" >
-          <a href="information_theory.html" title="2. Utilisation avancée du langage Python : un exemple de la théorie de l’information"
+          <a href="information_theory.html" title="2. Structures de données en Python. Un exemple de la théorie de l’information"
              accesskey="P">précédent</a> |</li>
         <li><a href="index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
       </ul>
@@ -53,105 +53,204 @@
 <div class="topic">
 <p class="topic-title first">Contenu du chapitre</p>
 <ul class="simple">
-<li>Nombres aléatoires</li>
+<li>Le modèle <tt class="docutils literal"><span class="pre">random</span></tt> de Python</li>
 <li>Gaussiennes : du théorème central limite à la distribution de Maxwell</li>
-<li>Chaînes de Markov</li>
-<li>Transition de phases liquide - gaz (disques durs)</li>
+<li>Des marches aléatoires à l&#8217;algorithme de Metropolis</li>
+<li>Une première simulation des sphères dures à deux dimensions.</li>
 </ul>
 </div>
 <div class="section" id="le-module-random-de-python">
 <h2>3.1. Le module <tt class="docutils literal"><span class="pre">random</span></tt> de Python<a class="headerlink" href="#le-module-random-de-python" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Le module <tt class="docutils literal"><span class="pre">random</span></tt> de Python permet des applications simples du
-calcul stochastique, et une introduction <strong>sans peine</strong> aux calculs de Monte Carlo.
-Il donne accès aux nombres aléatoires réels et entiers, distribués selon des lois
-différents (uniforme, gauss, etc).</p>
-<a class="reference internal image-reference" href="_images/W_random_hist1.png"><img alt="_images/W_random_hist1.png" class="align-center" src="_images/W_random_hist1.png" style="width: 400.0px; height: 300.0px;" /></a>
-<p>Ici, la fonction random du module random génère des nombres aléatoires uniformement
-distribués dans l&#8217;intervalle [0,1], comme le montre l&#8217;histogramme.</p>
-<p>NB: le module <tt class="docutils literal"><span class="pre">random</span></tt> permet aussi d&#8217;échantilonner des</p>
+<p>Le module <tt class="docutils literal"><span class="pre">random</span></tt> de Python donne accès aux nombres aléatoires
+et permet des opérations &#8220;stochastiques&#8221;.  Pour nous informer sur
+ce module, nous consultons la documentation online (voir
+<a class="reference external" href="http://docs.python.org/2/library/random.html">http://docs.python.org/2/library/random.html</a>) et faisons appel à l&#8217;aide:</p>
+<div class="highlight-python"><pre>In [1]: import random
+In [2]: help(random)</pre>
+</div>
+<p>Quelques exemples (random.random)</p>
+<div class="highlight-python"><pre>In [3]: random.random()
+Out[3]: 0.18430830705349943
+
+In [4]: random.seed(12345)
+
+In [5]: random.random()
+Out[5]: 0.41661987254534116</pre>
+</div>
+<p>Plus généralement (random.uniform)</p>
+<div class="highlight-python"><pre>In [6]: random.uniform(-1,1)
+Out[6]: -0.6200572425563593
+
+In [7]: random.uniform(-1,1)
+Out[7]: -0.31687914845289566
+
+In [8]: a = random.uniform(-1,1)
+In [9]: a
+Out[9]: -0.9529575637155989
+
+In [10]: a
+Out[10]: ???
+
+In [11]: a = random.uniform(-1,1)
+In [11]: a
+Out[11]: ???</pre>
+</div>
+<p>et encore (shuffle, choice, randint)</p>
+<div class="highlight-python"><pre>In [12]: L = range(10)
+
+In [13]: L
+Out[13]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+In [14]: random.shuffle(L)
+In [15]: L
+Out[15]: [1, 6, 2, 9, 4, 0, 5, 7, 8, 3]
+
+In [16]: random.choice(L)
+Out[16]: 8
+
+In [17]: random.randint(0,1)
+Out[17]: ???</pre>
+</div>
+<p>Pour conclure (mixed type)</p>
+<div class="highlight-python"><pre>In [18]: L = [1, 2, 'ENS-CPGE', [1.1, 2.1]]
+In [19]: random.choice(L)
+Out[19]: [1.1, 2.1 ]
+In [20]: random.shuffle(L)
+Out[20]: ???</pre>
+</div>
+<p>C&#8217;est à l&#8217;aide du module <tt class="docutils literal"><span class="pre">random</span></tt> que nous introduisons <strong>sans peine</strong>
+au calcul de Monte Carlo, des origines jusqu&#8217;à la recherche (presque)
+de nos jours.  D&#8217;abord, faisons un histogramme des nombres aléatoires
+générés par la <tt class="docutils literal"><span class="pre">méthode</span></tt> <strong>random.random</strong> :</p>
+<a class="reference internal image-reference" href="_images/W_random_hist.png"><img alt="_images/W_random_hist.png" class="align-center" src="_images/W_random_hist.png" style="width: 600.0px; height: 450.0px;" /></a>
+<p>Voici comment nous générons la figure (utilisant le module
+<tt class="docutils literal"><span class="pre">matplotlib</span></tt>), tout en construisant, petit à petit, une liste L,
+en ajoutant des nombres aléatoires</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="n">L</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="s">&#39;noyau&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12345</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
     <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="s">&#39;True&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="figure">
-<a class="reference external image-reference" href="auto_examples/plot_random_hist.html"><img alt="_images/plot_random_hist_1.png" src="_images/plot_random_hist_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+<p>Pour arriver à l&#8217;histogramme, nous pouvons aussi emprunter une voie
+ultra-rapide (et sauvegarder la figure dans un fichier) :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span><span class="o">,</span> <span class="nn">random</span>
+<span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="s">&#39;True&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;Random_histogram.png&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
 </div>
-<p>Comme première application, nous allons vérifier le théorème central limite.</p>
+<p>NB: La facilité avec laquelle se construisent (et se modifient) les
+figures est un des nombreux atouts du langage <tt class="docutils literal"><span class="pre">Python</span></tt>. Il y a plusieurs
+approches possibles. Nous nous restreignons ici au module <tt class="docutils literal"><span class="pre">pyplot</span></tt>
+(similaire à <tt class="docutils literal"><span class="pre">Matlab</span></tt>), et adoptons une approche <tt class="docutils literal"><span class="pre">learning</span> <span class="pre">by</span> <span class="pre">doing</span></tt>.</p>
+<p>Vérifions alors le théorème central limite, qui dit que la somme de
+variables aléatoires converge vers une distribution gaussienne.</p>
+<a class="reference internal image-reference" href="_images/W_sum_of_random.png"><img alt="_images/W_sum_of_random.png" class="align-center" src="_images/W_sum_of_random.png" style="width: 600.0px; height: 450.0px;" /></a>
+<p>Voici le programme:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">random</span>
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">52</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span> 
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">52</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
     <span class="n">L</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
         <span class="n">a</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
         <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="s">&#39;True&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Theoreme central limite&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;$x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;distribution $\pi(x)$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;W_sum_of_random.png&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>NB: voir ici pour une version ultra-compacte du programme calculant et traçant
-la somme des random:</p>
+<p>Ici, la version ultra-rapide du programme calculant et
+traçant la somme des random:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span><span class="o">,</span> <span class="nn">random</span>
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">52</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span> 
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">52</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
     <span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)]</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="s">&#39;True&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Dans des applications, on remplacera naturellement la somme des nombres aléatoires
-par la fonction <tt class="docutils literal"><span class="pre">gauss</span></tt></p>
+<p>Dans des applications, on remplacera naturellement la somme des nombres
+aléatoires par la fonction <tt class="docutils literal"><span class="pre">gauss</span></tt> (version ultra-rapide, avec
+cohabitation de <strong>hist</strong> et de <strong>plot</strong>):</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span> <span class="nn">math</span>
 <span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="s">&#39;True&#39;</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">/</span><span class="mf">100.</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">)]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+<p><strong>Exercice</strong>: Illustrez, sur une même figure, que la somme des variables aléatoires <tt class="docutils literal"><span class="pre">random</span></tt>
+donne bien une distribution gaussienne. Procédez aux changements d&#8217;échelle sur
+la partie générant les échantillons.</p>
 </div>
 <div class="section" id="distribution-de-maxwell">
 <h2>3.2. Distribution de Maxwell<a class="headerlink" href="#distribution-de-maxwell" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Ici, une petite application qui est la base de la distribution de Maxwell (exemple
-en deux dimensions)</p>
+<p>Regardons des vecteurs de variables gaussiennes, d&#8217;abord en deux dimensions:
+Le programme suivant illustre que la distribution de vecteurs de gaussiennes
+est isotrope dans l&#8217;espace, ici en deux dimensions...</p>
+<a class="reference internal image-reference" href="_images/W_two_gaussians.png"><img alt="_images/W_two_gaussians.png" class="align-center" src="_images/W_two_gaussians.png" style="width: 600.0px; height: 450.0px;" /></a>
+<p>Voici le programme:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">math</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-
+<span class="kn">import</span> <span class="nn">random</span><span class="o">,</span> <span class="nn">math</span>
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
-    <span class="n">length</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">b</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">length</span><span class="p">)</span>
-    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span> <span class="o">/</span> <span class="n">length</span><span class="p">)</span>
-
+    <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">&#39;.&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;equal&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Le point est qu&#8217;un vecteur de gaussiennes, de longueur $N$,
-est uniformément distribué, en angle, sur la sphere de $N$ dimensions.
-Regardons ceci dans un espace à trois dimensions, avec une illustration adaptée.</p>
+<p>... et ici en trois dimensions (notons l&#8217;utilisation d&#8217;un affichage en trois
+dimensions, et celle d&#8217;une deuxième figure pour l&#8217;histogramme des rayons...</p>
+<a class="reference internal image-reference" href="_images/W_three_gaussians_1.png"><img alt="_images/W_three_gaussians_1.png" class="align-center" src="_images/W_three_gaussians_1.png" style="width: 600.0px; height: 450.0px;" /></a>
+<a class="reference internal image-reference" href="_images/W_three_gaussians_2.png"><img alt="_images/W_three_gaussians_2.png" class="align-center" src="_images/W_three_gaussians_2.png" style="width: 600.0px; height: 450.0px;" /></a>
+<p><strong>*Exercice</strong> : Déterminez la distribution en r.</p>
+<p>Voici le programme:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">math</span>
-
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="p">[],[],[]</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">radius</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="s">&#39;.&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="s">&#39;True&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Maintenant, nous modifions le programme, en mettant tous les vecteur à la même longuer (sans
+toucher à leur direction). Voici le résultat (en trois dimensions)</p>
+<a class="reference internal image-reference" href="_images/W_three_gaussians_projected.png"><img alt="_images/W_three_gaussians_projected.png" class="align-center" src="_images/W_three_gaussians_projected.png" style="width: 600.0px; height: 450.0px;" /></a>
+<p>et voici le programme</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">math</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s">&#39;3d&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s">&#39;equal&#39;</span><span class="p">)</span>
-
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="p">[],[],[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
     <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
@@ -159,18 +258,43 @@ Regardons ceci dans un espace à trois dimensions, avec une illustration adapté
     <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">length</span><span class="p">)</span>
     <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span> <span class="o">/</span> <span class="n">length</span><span class="p">)</span>
     <span class="n">z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span> <span class="o">/</span> <span class="n">length</span><span class="p">)</span>
-
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="s">&#39;.&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>On voit que les vecteurs gaussiens rescalés sont uniformément distribués sur
-l&#8217;hypersphère. Pour déduire la distribution de Maxwell, il faut inverser cet
-argument: Pour générer des vecteurs uniformes sur une hypersphère, il faut partir
-d&#8217;éléments gaussiens.</p>
+<p>NB: La distribution gaussienne uni-dimensionnelle est unique à donner
+une distribution isotrope en N dimensions, de cette sorte.  C&#8217;est ceci le
+coeur de l&#8217;argument de Maxwell (1861) établissant que la distribution des
+composantes v_x, v_y, v_z de la vitesse des atomes dans un gaz ést une
+gaussienne. C&#8217;est aussi le raisonnement fondateur de la physique statistique...
+en seize lignes de code <tt class="docutils literal"><span class="pre">Python</span></tt>.</p>
 </div>
 <div class="section" id="monte-carlo-echantillonnage-direct">
 <h2>3.3. Monte Carlo - échantillonnage direct<a class="headerlink" href="#monte-carlo-echantillonnage-direct" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Si nous construisons un vector, non pas avec des Gaussiennes, mais avec des
+variables uniformément distribuées dans l&#8217;intervalle (-1,1), nous allons remplir,
+en deux dimensions, uniformément le carré entre (-1,-1) et (1,1).</p>
+<a class="reference internal image-reference" href="_images/W_direct_pi_color1.png"><img alt="_images/W_direct_pi_color1.png" class="align-center" src="_images/W_direct_pi_color1.png" style="width: 600.0px; height: 450.0px;" /></a>
+<p>Voici le programme (notez l&#8217;utilisation d&#8217;un code de couleurs progressif):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">)</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="n">xyc</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span> <span class="n">x</span> <span class="p">)</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="n">xyc</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ceci est la base de la méthode de Monte Carlo. Ici, nous l&#8217;utilisons pour calculer
+la valeur de pi, en comptant combien des échantillons du carré se retrouvent à
+l&#8217;intérieur du cercle d&#8217;unité:</p>
+<a class="reference internal image-reference" href="_images/W_direct_pi_color2.png"><img alt="_images/W_direct_pi_color2.png" class="align-center" src="_images/W_direct_pi_color2.png" style="width: 600.0px; height: 450.0px;" /></a>
+<p>Voici le programme (utilisant deux listes, plutôt qu&#8217;un code de coulers compliqué):</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">math</span>
@@ -185,78 +309,123 @@ d&#8217;éléments gaussiens.</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">x_outer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
         <span class="n">y_outer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_inner</span><span class="p">,</span><span class="n">y_inner</span><span class="p">,</span><span class="s">&#39;rs&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_outer</span><span class="p">,</span><span class="n">y_outer</span><span class="p">,</span><span class="s">&#39;bs&#39;</span><span class="p">)</span>
-<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_inner</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_inner</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_outer</span><span class="p">)),</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_inner</span><span class="p">,</span> <span class="n">y_inner</span><span class="p">,</span><span class="n">c</span><span class="o">=</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_outer</span><span class="p">,</span> <span class="n">y_outer</span><span class="p">,</span><span class="n">c</span><span class="o">=</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="k">print</span> <span class="mi">4</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">x_inner</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_inner</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_outer</span><span class="p">)),</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;W_direct_pi_color2.png&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Il est évident que le rapport de l&#8217;aire bleue par rapport à l&#8217;aire rouge est pi/4,
-mais modifions le programme un tout petit peu...</p>
-<p>Nous pouvons programmer la même chose, à quelques détails près, en NumPy</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">uniform</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">),</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">)]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s">&#39;rs&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
+<p>Le rapport de l&#8217;aire bleue à l&#8217;aire totale est pi/4. Nous savons calculer pi!</p>
+<p>Si vous n&#8217;êtes pas surpris de pouvoir calculer pi, modifiez les deux lignes:</p>
+<div class="highlight-python"><pre>length = math.sqrt(a**2 + b**2)
+if length &lt; 1:</pre>
 </div>
-<p>... et essayons un calcul un peu plus intéressant:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="n">x_inner</span><span class="p">,</span> <span class="n">y_inner</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-<span class="n">x_outer</span><span class="p">,</span> <span class="n">y_outer</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">):</span>
-    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">)</span>
-    <span class="n">length</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="mf">0.6</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="mf">0.35</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
-        <span class="n">x_inner</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-        <span class="n">y_inner</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">x_outer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-        <span class="n">y_outer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_inner</span><span class="p">,</span><span class="n">y_inner</span><span class="p">,</span><span class="s">&#39;rs&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_outer</span><span class="p">,</span><span class="n">y_outer</span><span class="p">,</span><span class="s">&#39;bs&#39;</span><span class="p">)</span>
-<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_inner</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_inner</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_outer</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;equal&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
+<p>... par:</p>
+<div class="highlight-python"><pre>if (a-0.6)**2 + (b-0.35)**2 &lt; 0.5:</pre>
 </div>
+<p>... et obtenez le résultat analytique dans ce cas aussi (bonne chance !)</p>
 </div>
 <div class="section" id="chaines-de-markov-algorithme-de-metropolis">
 <h2>3.4. Chaînes de Markov, Algorithme de Metropolis<a class="headerlink" href="#chaines-de-markov-algorithme-de-metropolis" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Programmons une version incrémentale du programme de calcul, en ajoutant
-quelques modifications, comme l&#8217;utilisation d&#8217;une fonction markov_pi.</p>
+<p>Nous passons aux marches aléatoires. Chaque point est obtenu à partir de son
+prédecesseur, grâce à un petit changement (notez l&#8217;utilisation d&#8217;une grille
+(<tt class="docutils literal"><span class="pre">grid</span></tt>), de <tt class="docutils literal"><span class="pre">scatter</span></tt> plutôt que de <tt class="docutils literal"><span class="pre">plot</span></tt>, et d&#8217;un code couleur
+permettant de suivre l&#8217;évolution temporelle)</p>
+<a class="reference internal image-reference" href="_images/W_random_walk.png"><img alt="_images/W_random_walk.png" class="align-center" src="_images/W_random_walk.png" style="width: 600.0px; height: 450.0px;" /></a>
+<p>Voici le programme de simulation de la marche aléatoire en deux dimensions:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span>
+<span class="n">x_plot</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+<span class="n">y_plot</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span><span class="p">]</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">del_x</span><span class="p">,</span><span class="n">del_y</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">delta</span><span class="p">,</span><span class="n">delta</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">delta</span><span class="p">,</span><span class="n">delta</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">del_x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">del_y</span>
+    <span class="n">x_plot</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y_plot</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">y_plot</span><span class="p">,</span><span class="n">c</span><span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_plot</span><span class="p">)),</span> <span class="n">marker</span> <span class="o">=</span> <span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Cette marche aléatoire partira à l&#8217;infini (pour toujours revenir, en deux dimensions).
+Mais comment construire une marche aléatoire restant à l&#8217;intérieur du carré
+((-1,1), (1,1)), tout en y possédant une distribution uniforme ? Ce
+problème a été résolu dans le célébrissime travail de Metropolis et
+al (1953): en cas de refus, restons sur la configuration, et comptons-la
+de nouveau. Voici le résultat:</p>
+<a class="reference internal image-reference" href="_images/W_markov_pi_color1_1.png"><img alt="_images/W_markov_pi_color1_1.png" class="align-center" src="_images/W_markov_pi_color1_1.png" style="width: 600.0px; height: 450.0px;" /></a>
+<p>Voici le programme:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">uniform</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="n">x_plot</span><span class="p">,</span> <span class="n">y_plot</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span>
+<span class="n">delta</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">):</span>
+    <span class="n">del_x</span><span class="p">,</span><span class="n">del_y</span><span class="o">=</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">delta</span><span class="p">,</span><span class="n">delta</span><span class="p">),</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">delta</span><span class="p">,</span><span class="n">delta</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">del_x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">del_y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span> <span class="c"># on sort du carre ?</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">del_x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">del_y</span>
+    <span class="n">x_plot</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y_plot</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">xyc</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span> <span class="n">x_plot</span> <span class="p">)</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span><span class="n">y_plot</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="n">xyc</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="s">&#39;True&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>...et ici la deuxième figure, l&#8217;histogramme en x des échantillons obtenus:</p>
+<a class="reference internal image-reference" href="_images/W_markov_pi_color1_2.png"><img alt="_images/W_markov_pi_color1_2.png" class="align-center" src="_images/W_markov_pi_color1_2.png" style="width: 600.0px; height: 450.0px;" /></a>
+<p>NB: nous aurions pu prendre des gaussiennes pour générer del_x et del_y...</p>
+<p>Voici une version du même programme uniquement dédié au calcul de pi (notez l&#8217;utilisation
+d&#8217;une fonction)</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">uniform</span>
 <span class="k">def</span> <span class="nf">markov_pi</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span>
     <span class="n">N_hits</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
         <span class="n">del_x</span><span class="p">,</span><span class="n">del_y</span><span class="o">=</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">delta</span><span class="p">,</span><span class="n">delta</span><span class="p">),</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">delta</span><span class="p">,</span><span class="n">delta</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">del_x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">del_y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">del_x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">del_y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span> <span class="c"># on sort du carre ?</span>
             <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">del_x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">del_y</span>
-        <span class="k">if</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span> <span class="c"># a l&#39;interieur du cercle ?</span>
             <span class="n">N_hits</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">N_hits</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
    <span class="k">print</span> <span class="n">k</span><span class="p">,</span> <span class="n">markov_pi</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span><span class="mi">100000</span><span class="p">)</span>
-   <span class="k">print</span> <span class="n">k</span><span class="p">,</span> <span class="n">markov_pi</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">100000</span><span class="p">)</span>
-   <span class="k">print</span>
 </pre></div>
 </div>
+<p>Attention : La 7ème ligne de ce programme est non-triviale : si le
+mouvement x,y -&gt; x+del_x, y+ del_y est interdit, on utilise x,y une
+deuxième fois.</p>
+<p><strong>Exercice</strong> : Dans ce programme, chacune des 10 &#8220;chaînes de Markov&#8221;
+débute au point (1,1).  Modifiez-le pour que la chaîne k débute
+en fait sur la dernière des configurations de la chaine k-1. Trouvez
+une astuce pour bien initiez cette simulation.</p>
+<p>NB: Pour ce problème, nous pourrions introduire des limites aux
+bords périodiques. Mais en général, ceci n&#8217;est pas possible.</p>
 </div>
 <div class="section" id="algorithme-de-metropolis-pour-spheres-dures">
 <h2>3.5. Algorithme de Metropolis pour sphères dures<a class="headerlink" href="#algorithme-de-metropolis-pour-spheres-dures" title="Lien permanent vers ce titre">¶</a></h2>
+<a class="reference internal image-reference" href="_images/W_markov_disks_sample.png"><img alt="_images/W_markov_disks_sample.png" class="align-center" src="_images/W_markov_disks_sample.png" style="width: 600.0px; height: 450.0px;" /></a>
+<p>Dans le célebre problème des sphères dures, il s&#8217;agit de générer des configurations
+aléatoires de N disques dans une boîte. En 1953, Metropolis et al ont proposé cet
+algorithme pour le résoudre. Il s&#8217;agit de l&#8217;exacte analogue de l&#8217;algorithme chaîne de Markov
+que nous avons utilisé pour calculer pi.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">uniform</span> <span class="k">as</span> <span class="n">ran</span><span class="p">,</span> <span class="n">choice</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="n">L</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.25</span><span class="p">),(</span><span class="mf">0.75</span><span class="p">,</span><span class="mf">0.25</span><span class="p">),(</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.75</span><span class="p">),(</span><span class="mf">0.75</span><span class="p">,</span><span class="mf">0.75</span><span class="p">)]</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.20</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.15</span>
 <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.15</span>
-<span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000000</span><span class="p">):</span>
+<span class="n">square_x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">];</span> <span class="n">square_y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
    <span class="n">a</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
    <span class="n">L</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
    <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">ran</span><span class="p">(</span> <span class="o">-</span><span class="n">delta</span><span class="p">,</span> <span class="n">delta</span><span class="p">),</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">ran</span><span class="p">(</span><span class="o">-</span><span class="n">delta</span> <span class="p">,</span> <span class="n">delta</span><span class="p">))</span>
@@ -266,15 +435,31 @@ quelques modifications, comme l&#8217;utilisation d&#8217;une fonction markov_pi
       <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
    <span class="k">else</span><span class="p">:</span>
       <span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">L</span>
+   <span class="k">if</span> <span class="nb">iter</span><span class="o">%</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+       <span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
+       <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">()</span>
+       <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+           <span class="n">cir</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span>  <span class="n">fc</span><span class="o">=</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+           <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">cir</span><span class="p">)</span>
+       <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;equal&#39;</span><span class="p">)</span>
+       <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">square_x</span><span class="p">,</span><span class="n">square_y</span><span class="p">)</span>
+       <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;W_markov_disks&#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">)</span><span class="o">+</span> <span class="s">&#39;.png&#39;</span><span class="p">)</span>
+       <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+       <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="transition-de-phases-liquide-solide">
-<h2>3.6. Transition de phases liquide - solide<a class="headerlink" href="#transition-de-phases-liquide-solide" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Voici une animation, avec des configurations prises tous les 100 pas...</p>
+<a class="reference internal image-reference" href="_images/W_markov_disks.gif"><img alt="_images/W_markov_disks.gif" class="align-center" src="_images/W_markov_disks.gif" style="width: 600.0px; height: 450.0px;" /></a>
 </div>
 <div class="section" id="conclusion">
-<h2>3.7. Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>3.6. Conclusion<a class="headerlink" href="#conclusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Nous voilà au coeur de la physique statistique, avec des processus
+statistique décrivant des phénomènes physiques, comme la transition
+liquide-solide, le comportement des matériaux, et la structure de la
+matière. Dans tout ceci, la simulation numérique, notamment celle
+utilisant la méthode de Monte Carlo, est très utilisée, et le langage
+<tt class="docutils literal"><span class="pre">Python</span></tt> s&#8217;y porte très bien. Derrière l&#8217;image simple du langage se cache
+toute la complexité de la programmation moderne.</p>
 <p><div style="clear: both"></div></p>
 </div>
 </div>
@@ -291,7 +476,7 @@ quelques modifications, comme l&#8217;utilisation d&#8217;une fonction markov_pi
           <a href="edp_chaleur.html" title="4. Équations aux dérivées partielles : utilisation de NumPy"
              >suivant</a></li>
         <li class="right" >
-          <a href="information_theory.html" title="2. Utilisation avancée du langage Python : un exemple de la théorie de l’information"
+          <a href="information_theory.html" title="2. Structures de données en Python. Un exemple de la théorie de l’information"
              >précédent</a> |</li>
         <li><a href="index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
       </ul>

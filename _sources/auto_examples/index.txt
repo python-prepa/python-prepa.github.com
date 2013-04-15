@@ -24,11 +24,6 @@ Examples
 ========
 
 .. _examples-index:
-.. figure:: ./images/thumb/W_random_hist.png
-   :target: ./W_random_hist.html
-
-   :ref:`example_W_random_hist.py`
-
 .. figure:: ./images/thumb/cascade.png
    :target: ./cascade.html
 
@@ -83,6 +78,11 @@ Examples
    :target: ./ipython_log.html
 
    :ref:`example_ipython_log.py`
+
+.. figure:: ./images/thumb/pi_wallis.png
+   :target: ./pi_wallis.html
+
+   :ref:`example_pi_wallis.py`
 
 .. figure:: ./images/thumb/plot_cascade.png
    :target: ./plot_cascade.html
