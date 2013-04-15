@@ -5,8 +5,8 @@
 
 
 
-.. image:: images/plot_morpho_erosion_1.png
-    :align: center
+.. rst-class:: horizontal
+
 
 
 **Python source code:** :download:`plot_morpho_erosion.py <plot_morpho_erosion.py>`

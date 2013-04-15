@@ -1,0 +1,138 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>7.2. Data mining: fouille de données et intelligence artificielle &mdash; Python scientifique - ENS Paris</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2013.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="Python scientifique - ENS Paris" href="../index.html" />
+    <link rel="up" title="7. Ateliers pratiques" href="index.html" />
+    <link rel="prev" title="7.1.4. Application : caractérisation du mélange chaotique d’un colorant" href="melange.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="melange.html" title="7.1.4. Application : caractérisation du mélange chaotique d’un colorant"
+             accesskey="P">précédent</a></li>
+        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">7. Ateliers pratiques</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="data-mining-fouille-de-donnees-et-intelligence-artificielle">
+<h1>7.2. Data mining: fouille de données et intelligence artificielle<a class="headerlink" href="#data-mining-fouille-de-donnees-et-intelligence-artificielle" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="sidebar">
+<p class="first sidebar-title"><strong>L&#8217;intelligence artificielle</strong></p>
+<p class="last">L&#8217;intelligence artificielle des années 80 cherchait des règles
+universelles pour prendre des décisions. Avec l&#8217;explosion des données
+(corpus de textes, sons et mages) accessibles sur internet, les
+progrès récents apprennent les règles de décisions empiriquement.</p>
+</div>
+<p>A partir de données observées et de quelques règles simples notre but est
+d&#8217;apprendre à faire prendre des décisions sur de nouvelles observations.
+Par exemple, <strong>apprendre à reconnaître des visages</strong>, ou la langue dans
+laquelle est écrite un document.</p>
+<p>Cette discipline s&#8217;appelle le <em>data mining</em> ou <em>machine learning</em>. Elle
+est en très forte expansion, menée par des compagnies comme Google.</p>
+<div class="section" id="un-peu-de-botanique-nommer-des-iris">
+<h2>7.2.1. Un peu de botanique: nommer des iris<a class="headerlink" href="#un-peu-de-botanique-nommer-des-iris" title="Lien permanent vers ce titre">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">L&#8217;iris <cite>Setosa</cite></th>
+<th class="head">L&#8217;iris <cite>Versicolor</cite></th>
+<th class="head">L&#8217;iris <cite>Virginia</cite></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><img alt="setosa" src="../_images/Setosa_Iris.jpg" style="width: 100%;" /></td>
+<td><img alt="versicolor" src="../_images/Versicolor_Iris.jpg" style="width: 100%;" /></td>
+<td><img alt="virginia" src="../_images/Virginia_Iris.png" style="width: 100%;" /></td>
+</tr>
+</tbody>
+</table>
+<p>Dans les années 30, Edgar Anderson a mesuré 4 <strong>attributs</strong> de fleurs
+<cite>Iris</cite>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li>La longueur du pétale</li>
+<li>La largeur du pétale</li>
+</ul>
+</td><td><ul class="simple">
+<li>La longueur du sépale</li>
+<li>La largeur du sépale</li>
+</ul>
+</td></tr></table>
+<div class="sidebar">
+<p class="first sidebar-title">Machine Learning en Python</p>
+<p class="last">Nous utiliserons le module <a class="reference external" href="http://scikit-learn.org">scikit-learn</a></p>
+</div>
+<p>Pouvons-nous reconnaître les 3 espèces d&#8217;Iris, Setosa, Versicolor et
+Virginia,  à partir de ces attributs?</p>
+<div class="section" id="explorer-les-donnees">
+<h3>7.2.1.1. Explorer les données<a class="headerlink" href="#explorer-les-donnees" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Les données iris viennent avec scikit-learn:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><div style="clear: both"></div></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="melange.html" title="7.1.4. Application : caractérisation du mélange chaotique d’un colorant"
+             >précédent</a></li>
+        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li>
+          <li><a href="index.html" >7. Ateliers pratiques</a> &raquo;</li> 
+      </ul>
+    </div>
+        <!-- your html code here -->
+<a href="http://www.ens.fr"><img src="../_static/ENS_Logo.png"
+alt="ENS" height="100"></a>
+<a href="http://www.inria.fr"><img src="../_static/logo-inria.jpg"
+alt="INRIA" height="60"></a>
+<a href="http://www.saint-gobain-recherche.fr/fr/"><img
+src="../_static/logoSGR.png" alt="Saint-Gobain Recherche" height="60"></a>
+
+  </body>
+</html>
