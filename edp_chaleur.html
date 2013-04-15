@@ -326,7 +326,7 @@ code compilé et non par du code interpreté)</p>
 <p>Pour une résolution spatiale fixée, celui-ci nous impose donc un nombre
 minimum d&#8217;iterations pour atteindre un temps donné.</p>
 <p>On peut cependant chercher à obtenir directement la solution du problème
-stationnaire</p>
+stationnaire.</p>
 <p>Considérons le système modifié avec terme source (pour éviter une solution
 stationnaire triviale)</p>
 <div class="math">
@@ -374,13 +374,17 @@ Python pour les indices, i.e. de 0 à N-1) :</p>
 <dl class="docutils">
 <dt>Pour cela on utilise le format de matrices creuses de SciPy ::</dt>
 <dd>import scipy.sparse as sp</dd>
-<dt>Ainsi que le solveur associé::</dt>
-<dd>from scipy.sparse.linalg.dsolve import spsolve</dd>
-<dt>On peut alors définir le problème aux différences finies::</dt>
-<dd>data = [np.ones(N), -2*np.ones(N), np.ones(N)]     # Diagonal terms
-offsets = np.array([-1, 0, 1])                     # Their positions
-LAP = sp.dia_matrix((data, offsets), shape=(N, N))</dd>
 </dl>
+<p>Ainsi que le solveur associé:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">scipy.sparse.linalg.dsolve</span> <span class="kn">import</span> <span class="n">spsolve</span>
+</pre></div>
+</div>
+<p>On peut alors définir le problème aux différences finies:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>     <span class="c"># Diagonal terms</span>
+<span class="n">offsets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>                     <span class="c"># Their positions</span>
+<span class="n">LAP</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dia_matrix</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">offsets</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+</pre></div>
+</div>
 <p>et utiliser le
 solver inclus dans SciPy :</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
@@ -464,7 +468,9 @@ l&#8217;équation de la chaleur en deux dimensions (vu ci-dessus)</p>
 <p><img src="_images/math/9e71a80394bdc5d6356cc5529d3733292d315826.png" alt="+\left.
 (u_{i,j-1}^{n} - 2\, u_{i,j}^{n} + u_{i,j+1}^{n})/{\Delta y^2}
 \right] \, ."/></p>
-</div><p>On pourra considérer une condition initiale sous la forme d&#8217;une gaussienne stationnaire.</p>
+</div><p>On pourra considérer une condition initiale
+<img class="math" src="_images/math/10d6a4b8107292c46cfc32be4dd12f42cf6bea11.png" alt="u|_0" style="vertical-align: -7px"/> sous la forme d&#8217;une gaussienne
+et <img class="math" src="_images/math/53e04ab1b42dd4034b00b804304c5c83e887ab75.png" alt="\partial_t u|_0 = 0" style="vertical-align: -7px"/>.</p>
 </div>
 <div class="figure align-center">
 <a class="reference external image-reference" href="auto_examples/edp7_waves.html"><img alt="_images/plot_edp7_waves_1.png" src="_images/plot_edp7_waves_1.png" style="width: 640.0px; height: 480.0px;" /></a>
