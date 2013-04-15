@@ -1,0 +1,108 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>7.3. Hydrodynamique 2D, Allée de Von Karman &mdash; Python scientifique - ENS Paris</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2013.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="Python scientifique - ENS Paris" href="../index.html" />
+    <link rel="up" title="7. Ateliers pratiques" href="index.html" />
+    <link rel="prev" title="7.2. Data mining: fouille de données et intelligence artificielle" href="data_mining.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="data_mining.html" title="7.2. Data mining: fouille de données et intelligence artificielle"
+             accesskey="P">précédent</a></li>
+        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">7. Ateliers pratiques</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="hydrodynamique-2d-allee-de-von-karman">
+<h1>7.3. Hydrodynamique 2D, Allée de Von Karman<a class="headerlink" href="#hydrodynamique-2d-allee-de-von-karman" title="Lien permanent vers ce titre">¶</a></h1>
+<img alt="../_images/VonKarmanStreet.jpg" class="align-center" src="../_images/VonKarmanStreet.jpg" style="width: 450px;" />
+<div class="section" id="advection">
+<h2>7.3.1. Advection<a class="headerlink" href="#advection" title="Lien permanent vers ce titre">¶</a></h2>
+<p>On veut d&#8217;abord résoudre le problème d&#8217;advection scalaire
+par un schéma de transport semi-Lagrangien.</p>
+<p>Ecrire ce schéma dans un domaine périodique en completant le programme :</p>
+<p>[<a class="reference internal" href="auto_examples/Advection.html#example-advection-py"><em>Advection source code</em></a>]</p>
+<p>Quelle observation peut-on faire sur le transport de colorant ?</p>
+<p>Quel critère doit satisfaire dt pour que le schéma soit stable ?</p>
+</div>
+<div class="section" id="advection-diffusion">
+<h2>7.3.2. Advection-Diffusion<a class="headerlink" href="#advection-diffusion" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Comprendre puis completer le programme :</p>
+<p>[<a class="reference internal" href="auto_examples/Diffusion.html#example-diffusion-py"><em>Diffusion source code</em></a>]</p>
+</div>
+<div class="section" id="projection">
+<h2>7.3.3. Projection<a class="headerlink" href="#projection" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Comprendre puis completer le programme</p>
+<p>[<a class="reference internal" href="auto_examples/Projection.html#example-projection-py"><em>Projection source code</em></a>]</p>
+</div>
+<div class="section" id="lignes-d-emissions-et-lignes-de-courant">
+<h2>7.3.4. Lignes d&#8217;émissions et lignes de courant<a class="headerlink" href="#lignes-d-emissions-et-lignes-de-courant" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Modifier le programme</p>
+<p>[<a class="reference internal" href="../auto_examples/VonKarman.html#example-vonkarman-py"><em>Von Karman source code</em></a>]</p>
+<p>Ajouter une visualisation de l&#8217;obstacle en utilisant la commande
+<a href="#id1"><span class="problematic" id="id2">``</span></a>contour&#8217;&#8217; de Matplotlib.</p>
+<p>En utilisant la commande <a href="#id3"><span class="problematic" id="id4">``</span></a>streamplot&#8217;&#8217; de Matplotlib, ajouter une
+visualisation des lignes de courant de l&#8217;écoulement à la fin de la
+simulation.</p>
+<p><div style="clear: both"></div></p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="data_mining.html" title="7.2. Data mining: fouille de données et intelligence artificielle"
+             >précédent</a></li>
+        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li>
+          <li><a href="index.html" >7. Ateliers pratiques</a> &raquo;</li> 
+      </ul>
+    </div>
+        <!-- your html code here -->
+<a href="http://www.ens.fr"><img src="../_static/ENS_Logo.png"
+alt="ENS" height="100"></a>
+<a href="http://www.inria.fr"><img src="../_static/logo-inria.jpg"
+alt="INRIA" height="60"></a>
+<a href="http://www.saint-gobain-recherche.fr/fr/"><img
+src="../_static/logoSGR.png" alt="Saint-Gobain Recherche" height="60"></a>
+
+  </body>
+</html>

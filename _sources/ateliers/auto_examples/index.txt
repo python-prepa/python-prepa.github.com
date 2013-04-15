@@ -24,6 +24,41 @@ Examples
 ========
 
 .. _examples-index:
+.. figure:: ./images/thumb/Advection.png
+   :target: ./Advection.html
+
+   :ref:`example_Advection.py`
+
+.. figure:: ./images/thumb/Advection_corr.png
+   :target: ./Advection_corr.html
+
+   :ref:`example_Advection_corr.py`
+
+.. figure:: ./images/thumb/Diffusion.png
+   :target: ./Diffusion.html
+
+   :ref:`example_Diffusion.py`
+
+.. figure:: ./images/thumb/Diffusion_corr.png
+   :target: ./Diffusion_corr.html
+
+   :ref:`example_Diffusion_corr.py`
+
+.. figure:: ./images/thumb/Projection.png
+   :target: ./Projection.html
+
+   :ref:`example_Projection.py`
+
+.. figure:: ./images/thumb/VonKarman.png
+   :target: ./VonKarman.html
+
+   :ref:`example_VonKarman.py`
+
+.. figure:: ./images/thumb/VonKarman_corr.png
+   :target: ./VonKarman_corr.html
+
+   :ref:`example_VonKarman_corr.py`
+
 .. figure:: ./images/thumb/plot_color_grey.png
    :target: ./plot_color_grey.html
 

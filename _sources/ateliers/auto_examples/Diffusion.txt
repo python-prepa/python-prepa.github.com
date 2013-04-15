@@ -1,0 +1,11 @@
+
+
+.. _example_Diffusion.py:
+
+Von Karman street using finite differences
+
+**Python source code:** :download:`Diffusion.py <Diffusion.py>`
+
+.. literalinclude:: Diffusion.py
+    :lines: 2-
+    
