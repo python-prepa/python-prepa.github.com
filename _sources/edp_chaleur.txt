@@ -361,7 +361,7 @@ Python pour les indices, i.e. de 0 à N-1) :
 
 .. math::
 
-   \left(
+   \kappa \, \left(
    \begin{array}{ccccc}
    -2 &  1 & 0 & \cdots & 0 \\
     1 & -2 & 1 &        &\vdots\\
