@@ -31,6 +31,11 @@ light_mask = white > val
 regions = morphology.label(light_mask)
 index_large_region = np.argmax(np.bincount(regions.ravel()))
 fluid_mask = regions == index_large_region
-fluid_mask = morphology.binary_erosion(fluid_mask, selem=np.ones((3, 3)))
+fluid_mask = morphology.binary_erosion(fluid_mask, selem=np.ones((5, 5)))
 
+# Compute concentration field
+# -----------------------------------
 
+#for filename in mixing_list:
+#    img = io.iomread(filename)
+#    conc = np.log(1)

@@ -24,15 +24,15 @@ Examples
 ========
 
 .. _examples-index:
-.. figure:: ./images/thumb/VonKarman.png
-   :target: ./VonKarman.html
-
-   :ref:`example_VonKarman.py`
-
 .. figure:: ./images/thumb/cascade.png
    :target: ./cascade.html
 
    :ref:`example_cascade.py`
+
+.. figure:: ./images/thumb/dummy.png
+   :target: ./dummy.html
+
+   :ref:`example_dummy.py`
 
 .. figure:: ./images/thumb/dyna.png
    :target: ./dyna.html
@@ -73,6 +73,11 @@ Examples
    :target: ./edp7_waves.html
 
    :ref:`example_edp7_waves.py`
+
+.. figure:: ./images/thumb/ipython_log.png
+   :target: ./ipython_log.html
+
+   :ref:`example_ipython_log.py`
 
 .. figure:: ./images/thumb/pi_wallis.png
    :target: ./pi_wallis.html

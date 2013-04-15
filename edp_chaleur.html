@@ -285,7 +285,7 @@ associée à notre schéma discret</p>
 - \kappa\frac{\Delta x^2}{12}\left.\frac{\partial^4 T}{\partial x^4}\right|_j^n
 + \mathcal{O}(\Delta t^2)+\mathcal{O}(\Delta x^4) \, ."/></p>
 </div><p>On peut essayer de vérifier numériquement que le schéma utilisé est bien
-d&#8217;ordre deux en espace</p>
+d&#8217;ordre deux en espace.</p>
 <p>Pour cela on va effectuer une boucle extérieure sur la résolution et mesurer
 une norme de l&#8217;erreur entre la solution calculée et la solution analytique</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">K</span><span class="o">*</span><span class="n">Time</span><span class="p">)</span>

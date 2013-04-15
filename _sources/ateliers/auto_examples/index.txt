@@ -24,6 +24,11 @@ Examples
 ========
 
 .. _examples-index:
+.. figure:: ./images/thumb/mixing.png
+   :target: ./mixing.html
+
+   :ref:`example_mixing.py`
+
 .. figure:: ./images/thumb/plot_color_grey.png
    :target: ./plot_color_grey.html
 
@@ -54,6 +59,11 @@ Examples
 
    :ref:`example_plot_mini_mondrian.py`
 
+.. figure:: ./images/thumb/plot_morpho_erosion.png
+   :target: ./plot_morpho_erosion.html
+
+   :ref:`example_plot_morpho_erosion.py`
+
 .. figure:: ./images/thumb/plot_numpy_array.png
    :target: ./plot_numpy_array.html
 
@@ -63,6 +73,16 @@ Examples
    :target: ./plot_numpy_interaction.html
 
    :ref:`example_plot_numpy_interaction.py`
+
+.. figure:: ./images/thumb/plot_segmentation_coins.png
+   :target: ./plot_segmentation_coins.html
+
+   :ref:`example_plot_segmentation_coins.py`
+
+.. figure:: ./images/thumb/plot_threshold.png
+   :target: ./plot_threshold.html
+
+   :ref:`example_plot_threshold.py`
 
 
 .. raw:: html

@@ -1,0 +1,26 @@
+
+
+.. _example_plot_segmentation_coins.py:
+
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/plot_segmentation_coins_2.png
+            :scale: 50
+
+    *
+
+      .. image:: images/plot_segmentation_coins_1.png
+            :scale: 50
+
+
+**Python source code:** :download:`plot_segmentation_coins.py <plot_segmentation_coins.py>`
+
+.. literalinclude:: plot_segmentation_coins.py
+    :lines: 2-
+    

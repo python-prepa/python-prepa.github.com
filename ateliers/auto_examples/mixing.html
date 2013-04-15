@@ -73,7 +73,14 @@
 <span class="n">regions</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">light_mask</span><span class="p">)</span>
 <span class="n">index_large_region</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">regions</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
 <span class="n">fluid_mask</span> <span class="o">=</span> <span class="n">regions</span> <span class="o">==</span> <span class="n">index_large_region</span>
-<span class="n">fluid_mask</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">fluid_mask</span><span class="p">,</span> <span class="n">selem</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="n">fluid_mask</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">fluid_mask</span><span class="p">,</span> <span class="n">selem</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)))</span>
+
+<span class="c"># Compute concentration field</span>
+<span class="c"># -----------------------------------</span>
+
+<span class="c">#for filename in mixing_list:</span>
+<span class="c">#    img = io.iomread(filename)</span>
+<span class="c">#    conc = np.log(1)</span>
 </pre></div>
 </div>
 <p><div style="clear: both"></div></p>
