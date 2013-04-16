@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="top" title="Python scientifique - ENS Paris" href="index.html" />
-    <link rel="next" title="6. Ateliers pratiques" href="ateliers/index.html" />
+    <link rel="next" title="6. Et pour aller plus loin" href="aller_plus_loin.html" />
     <link rel="prev" title="4. Équations aux dérivées partielles : utilisation de NumPy" href="edp_chaleur.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="ateliers/index.html" title="6. Ateliers pratiques"
+          <a href="aller_plus_loin.html" title="6. Et pour aller plus loin"
              accesskey="N">suivant</a></li>
         <li class="right" >
           <a href="edp_chaleur.html" title="4. Équations aux dérivées partielles : utilisation de NumPy"
@@ -90,19 +90,19 @@ fonctions plus &#8220;haut niveau&#8221; que celles de NumPy.</p>
 <p><a class="reference external" href="http://docs.scipy.org/doc/">http://docs.scipy.org/doc/</a>
 <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/">http://docs.scipy.org/doc/scipy/reference/</a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">scipy</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>Le module SciPy réalise les différentes opérations sur des tableaux
 numériques (<tt class="docutils literal"><span class="pre">ndarray</span></tt>) de <tt class="docutils literal"><span class="pre">numpy</span></tt>. On peut donc directement utiliser
 ces tableaux comme arguments pour les différentes fonctions</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mat</span>
-<span class="go">array([[1, 2],</span>
-<span class="go">    [2, 4]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
-<span class="go">0.0</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">mat</span>
+<div class="newline"></div><span class="go">array([[1, 2],</span>
+<div class="newline"></div><span class="go">    [2, 4]])</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
+<div class="newline"></div><span class="go">0.0</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Pour montrer l&#8217;utilisation de SciPy, nous allons nous intéresser à
 l&#8217;intégration d&#8217;équations différentielles, en considérant des systèmes
@@ -129,7 +129,7 @@ differential equation&#8221;, ou la consultation du sommaire de l&#8217;aide
 sous-module <tt class="docutils literal"><span class="pre">integrate</span></tt>, qui contient lui-même une fonction
 <tt class="docutils literal"><span class="pre">odeint</span></tt></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>Regarder la doc de la fonction
 <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html#scipy.integrate.odeint">http://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html#scipy.integrate.odeint</a>
@@ -138,9 +138,9 @@ et l&#8217;exemple
 <p>Pour commencer, il faut mettre l&#8217;équation différentielle du 2nd ordre
 sous la forme d&#8217;un système d&#8217;équations du premier ordre</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">simple_pendulum</span><span class="p">(</span><span class="n">theta_thetadot</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-    <span class="n">theta</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">theta_thetadot</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">theta_dot</span><span class="p">,</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)]</span>
-</pre></div>
+<div class="newline"></div>    <span class="n">theta</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">theta_thetadot</span>
+<div class="newline"></div>    <span class="k">return</span> <span class="p">[</span><span class="n">theta_dot</span><span class="p">,</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)]</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>correspondant à</p>
 <div class="math">
@@ -150,8 +150,8 @@ sous la forme d&#8217;un système d&#8217;équations du premier ordre</p>
 </div><p>Nous pouvons maintenant intégrer une trajectoire à partir d&#8217;une condition
 initiale</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sol</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">simple_pendulum</span><span class="p">,</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">t</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">sol</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">simple_pendulum</span><span class="p">,</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">t</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Attention</p>
@@ -162,20 +162,20 @@ scientifique.</p>
 <p>Nous pouvons par exemple vérifier la conservation de l&#8217;énergie mécanique
 au cours du temps</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">theta</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">T</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">E_kin</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">theta_dot</span> <span class="o">**</span> <span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">E_pot</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="c"># z</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">E_mech</span> <span class="o">=</span> <span class="n">E_kin</span> <span class="o">+</span> <span class="n">E_pot</span>
-</pre></div>
+<div class="newline"></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">E_kin</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">theta_dot</span> <span class="o">**</span> <span class="mi">2</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">E_pot</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="c"># z</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">E_mech</span> <span class="o">=</span> <span class="n">E_kin</span> <span class="o">+</span> <span class="n">E_pot</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="figure">
 <a class="reference external image-reference" href="auto_examples/plot_simple_pendulum.html"><img alt="_images/plot_simple_pendulum_1.png" src="_images/plot_simple_pendulum_1.png" style="width: 640.0px; height: 480.0px;" /></a>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">E_kin</span><span class="p">,</span> <span class="s">&#39;o-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">u&#39;$E_\mathrm{kin}$&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">E_pot</span><span class="p">,</span> <span class="s">&#39;o-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">u&#39;$E_\mathrm{pot}$&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">E_mech</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">u&#39;$E_\mathrm{mech}$&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">E_pot</span><span class="p">,</span> <span class="s">&#39;o-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">u&#39;$E_\mathrm{pot}$&#39;</span><span class="p">)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">E_mech</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">u&#39;$E_\mathrm{mech}$&#39;</span><span class="p">)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Pour générer la figure ci-dessus, on a utilisé un certain nombre de
 commandes du module <tt class="docutils literal"><span class="pre">matplotlib</span></tt>.</p>
@@ -219,51 +219,51 @@ reste alors trois paramètres sur lesquels on peut jouer : A, q et
 <img class="math" src="_images/math/fbc7f74c3555a1a46bc204385e4c57b29094375b.png" alt="\omega_D" style="vertical-align: -4px"/>. On définit donc une nouvelle fonction définissant le
 système dynamique du premier ordre</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">forced_pendulum_equations</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="p">):</span>
-    <span class="n">theta</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">y</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">theta_dot</span><span class="p">,</span> <span class="n">acc</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> \
-                    <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> <span class="n">q</span> <span class="o">*</span> <span class="n">theta_dot</span><span class="p">]</span>
-</pre></div>
+<div class="newline"></div>    <span class="n">theta</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">y</span>
+<div class="newline"></div>    <span class="k">return</span> <span class="p">[</span><span class="n">theta_dot</span><span class="p">,</span> <span class="n">acc</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> \
+<div class="newline"></div>                    <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> <span class="n">q</span> <span class="o">*</span> <span class="n">theta_dot</span><span class="p">]</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Par commodité, on va également définir une fonction permettant d&#8217;intégrer
 une trajectoire à partir d&#8217;une condition initiale, sur un certain
 intervalle de temps:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">forced_pendulum</span><span class="p">(</span><span class="n">t_end</span><span class="p">,</span> <span class="n">t_space</span><span class="p">,</span> <span class="n">theta_init</span><span class="p">,</span> <span class="n">theta_dot_init</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-                            <span class="n">acc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="n">t_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">t_space</span><span class="p">)</span>
-    <span class="n">sol</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">forced_pendulum_equations</span><span class="p">,</span> <span class="p">[</span><span class="n">theta_init</span><span class="p">,</span> <span class="n">theta_dot_init</span><span class="p">],</span>
-                            <span class="n">t_range</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">t_range</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
-</pre></div>
+<div class="newline"></div>                            <span class="n">acc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="newline"></div>    <span class="n">t_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">t_space</span><span class="p">)</span>
+<div class="newline"></div>    <span class="n">sol</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">forced_pendulum_equations</span><span class="p">,</span> <span class="p">[</span><span class="n">theta_init</span><span class="p">,</span> <span class="n">theta_dot_init</span><span class="p">],</span>
+<div class="newline"></div>                            <span class="n">t_range</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="p">))</span>
+<div class="newline"></div>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">t_range</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>On peut à présent intégrer une trajectoire:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">omega</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">/</span><span class="mi">3</span>
-<span class="n">dt</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">omega</span> <span class="o">/</span> <span class="mi">25</span>
-<span class="n">tf</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">t</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">,</span> <span class="n">theta_dot_0</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div><span class="n">dt</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">omega</span> <span class="o">/</span> <span class="mi">25</span>
+<div class="newline"></div><span class="n">tf</span> <span class="o">=</span> <span class="mi">1000</span>
+<div class="newline"></div><span class="n">t</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">,</span> <span class="n">theta_dot_0</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+<div class="newline"></div>    <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Pour cette trajectoire, l&#8217;évolution de <img class="math" src="_images/math/52e8ed7a3ba22130ad3984eb2cd413406475a689.png" alt="\theta" style="vertical-align: 0px"/> reste périodique,
 avec la même période que la période de forçage</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">)</span> <span class="c"># courbe bleue</span>
-</pre></div>
+<div class="newline"></div><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">)</span> <span class="c"># courbe bleue</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Quand on augmente l&#8217;amplitude du forçage, le mouvement reste périodique
 après un régime transitoire assez long. On observe par contre un
 doublement de période, l&#8217;amplitude de l&#8217;oscillation varie entre deux
 périodes du forçage</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">t</span><span class="p">,</span> <span class="n">theta_1</span><span class="p">,</span> <span class="n">theta_dot_1</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="mf">1.08</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_1</span><span class="p">)</span> <span class="c"># courbe verte</span>
-</pre></div>
+<div class="newline"></div>    <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="mf">1.08</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
+<div class="newline"></div><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_1</span><span class="p">)</span> <span class="c"># courbe verte</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Enfin, quand on augmente encore l&#8217;amplitude du forçage, le mouvement
 n&#8217;est plus périodique et semble &#8220;chaotique&#8221;:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">t</span><span class="p">,</span> <span class="n">theta_2</span><span class="p">,</span> <span class="n">theta_dot_2</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="mf">1.17</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_2</span><span class="p">)</span> <span class="c"># courbe rouge</span>
-</pre></div>
+<div class="newline"></div>    <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="mf">1.17</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
+<div class="newline"></div><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_2</span><span class="p">)</span> <span class="c"># courbe rouge</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="figure">
 <a class="reference external image-reference" href="auto_examples/plot_spectra.html"><img alt="_images/plot_spectra_1.png" src="_images/plot_spectra_1.png" style="width: 480.0px; height: 320.0px;" /></a>
@@ -272,36 +272,36 @@ n&#8217;est plus périodique et semble &#8220;chaotique&#8221;:</p>
 transformée de Fourier discrète des signaux. Pour la transformée de
 Fourier discrète, il existe également un sous-module de <tt class="docutils literal"><span class="pre">SciPy</span></tt>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">fftpack</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>Il faut tout d&#8217;abord sélectionner la partie du signal qui semble
 périodique, c&#8217;est-à-dire enlever le régime transitoire. On utilise pour
 cela un masque de booléens</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">time_mask</span> <span class="o">=</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">400</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">theta_0</span> <span class="o">=</span> <span class="n">theta_0</span><span class="p">[</span><span class="n">time_mask</span><span class="p">]</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">theta_0</span> <span class="o">=</span> <span class="n">theta_0</span><span class="p">[</span><span class="n">time_mask</span><span class="p">]</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Comme on n&#8217;est pas intéressé par la fréquence nulle, on soustrait la
 moyenne du signal</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">theta_0</span> <span class="o">-=</span> <span class="n">theta_0</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>Notons qu&#8217;on peut soustraire un scalaire à un tableau <tt class="docutils literal"><span class="pre">ndarray</span></tt> : la
 soustraction est alors faite élément par élément.</p>
 <p>On calcule la transformée de Fourier discrète de <img class="math" src="_images/math/62df86ba6c84c9e8a5008f0ad6bbefa5d9cf301f.png" alt="\theta_0" style="vertical-align: -4px"/>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">fft_theta_0</span> <span class="o">=</span> <span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">theta_0</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>Pour représenter la TF, il nous faut également un tableau des fréquences
 correspondant au tableau fft_theta_0. Il y a pour cela une fonction
 dédiée dans le module <tt class="docutils literal"><span class="pre">fftpack</span></tt>, <tt class="docutils literal"><span class="pre">fftfreq</span></tt>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">freq</span> <span class="o">=</span> <span class="n">fftpack</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_0</span><span class="p">),</span> <span class="n">dt</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>On peut alors représenter le module de la transformée de Fourier en
 fonction de la fréquence</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fft_theta_0</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>On observe que la fréquence fondamentale du signal correspond à la
 fréquence de forçage <img class="math" src="_images/math/9c2982e5610fcbb77a9f8b954f7c6c3049e1fa2e.png" alt="f_D" style="vertical-align: -6px"/>. On observe aussi une harmonique triple
@@ -311,39 +311,39 @@ fréquence de forçage <img class="math" src="_images/math/9c2982e5610fcbb77a9f8
 </div>
 <p>Pour le forçage intermédiaire, on refait la même série d&#8217;opérations</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">theta_1</span> <span class="o">=</span> <span class="n">theta_1</span><span class="p">[</span><span class="n">time_mask</span><span class="p">]</span>
-<span class="n">theta_1</span> <span class="o">-=</span> <span class="n">theta_1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">fft_theta_1</span> <span class="o">=</span> <span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">theta_1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fft_theta_1</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div><span class="n">theta_1</span> <span class="o">-=</span> <span class="n">theta_1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="newline"></div><span class="n">fft_theta_1</span> <span class="o">=</span> <span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">theta_1</span><span class="p">)</span>
+<div class="newline"></div><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fft_theta_1</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>On observe alors un nouveau pic à la fréquence moitiés <img class="math" src="_images/math/4ae6350e3b16d67f90299b301e6abe43cf07cfb6.png" alt="f_D/2" style="vertical-align: -7px"/>,
 correspondant à un doublement de période.</p>
 <p>Pour aller plus loin, on peut visualiser l&#8217;évolution du spectre de
 <img class="math" src="_images/math/52e8ed7a3ba22130ad3984eb2cd413406475a689.png" alt="\theta" style="vertical-align: 0px"/> pour un grand nombre de paramètres en codant par la couleur l&#8217;amplitude du module de la transformée de Fourier:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">omega</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">/</span><span class="mi">3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">omega</span> <span class="o">/</span> <span class="mi">25</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tf</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">acc_factors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fft_sig</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">400</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hann</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">hanning</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">acc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">acc_factors</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span> <span class="n">i</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">t</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                        <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">theta</span> <span class="o">-=</span> <span class="n">theta</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">theta</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">theta</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">theta</span> <span class="o">*=</span> <span class="n">hann</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">fft_sig</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fft_sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fft_sig</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fft_sig</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">500</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">aspect</span><span class="o">=</span><span class="s">&#39;auto&#39;</span><span class="p">,</span>
-<span class="go">            interpolation=&#39;nearest&#39;)</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">omega</span> <span class="o">/</span> <span class="mi">25</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">tf</span> <span class="o">=</span> <span class="mi">1000</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">acc_factors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">fft_sig</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="newline"></div><span class="go">&gt;&gt;&gt;</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">400</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">hann</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">hanning</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<div class="newline"></div><span class="go">&gt;&gt;&gt;</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">acc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">acc_factors</span><span class="p">):</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span> <span class="n">i</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span>    <span class="n">t</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">theta_dot</span> <span class="o">=</span> <span class="n">forced_pendulum</span><span class="p">(</span><span class="n">tf</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span>                        <span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">acc</span><span class="o">=</span><span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="n">omega</span><span class="p">)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span>    <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span>    <span class="n">theta</span> <span class="o">-=</span> <span class="n">theta</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span>    <span class="n">theta</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">theta</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span>    <span class="n">theta</span> <span class="o">*=</span> <span class="n">hann</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span>    <span class="n">fft_sig</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+<div class="newline"></div><span class="go">&gt;&gt;&gt;</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">fft_sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fft_sig</span><span class="p">)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fft_sig</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">500</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">aspect</span><span class="o">=</span><span class="s">&#39;auto&#39;</span><span class="p">,</span>
+<div class="newline"></div><span class="go">            interpolation=&#39;nearest&#39;)</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>On observe alors la cascade de transition vers le chaos, avec des fenêtre
 chaotiques et d&#8217;autres périodiques.</p>
@@ -358,10 +358,10 @@ très proches vont d&#8217;éloigner exponentiellement vite au cours du temps.</
 <p>Dans le régime chaotique, on va vérifier que deux trajectoires
 initialement très proches s&#8217;éloignent très vite. Pour les paramètres</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">omega</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">/</span><span class="mi">3</span>
-<span class="n">acc</span> <span class="o">=</span> <span class="mf">1.17</span>
-<span class="n">q</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">eps</span> <span class="o">=</span> <span class="mf">1.e-8</span>
-</pre></div>
+<div class="newline"></div><span class="n">acc</span> <span class="o">=</span> <span class="mf">1.17</span>
+<div class="newline"></div><span class="n">q</span> <span class="o">=</span> <span class="mf">0.5</span>
+<div class="newline"></div><span class="n">eps</span> <span class="o">=</span> <span class="mf">1.e-8</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>initialiser deux trajectoires séparées par une distance <tt class="docutils literal"><span class="pre">eps</span></tt>
 (conditions initiales <img class="math" src="_images/math/4887dfc3898067620f740a9028623724147ebc5a.png" alt="(\theta, 0)" style="vertical-align: -7px"/> et
@@ -402,20 +402,20 @@ moins gros en mémoire)</li>
 </ul>
 </div></blockquote>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
-<span class="go">array([[ 0,  1,  2,  3,  4],</span>
-<span class="go">    [ 5,  6,  7,  8,  9],</span>
-<span class="go">    [10, 11, 12, 13, 14],</span>
-<span class="go">    [15, 16, 17, 18, 19],</span>
-<span class="go">    [20, 21, 22, 23, 24]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s">&#39;tableau.txt&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;tableau.npy&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s">&#39;tableau.txt&#39;</span><span class="p">)</span>
-<span class="go">625</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s">&#39;tableau.npy&#39;</span><span class="p">)</span>
-<span class="go">280</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<div class="newline"></div><span class="go">array([[ 0,  1,  2,  3,  4],</span>
+<div class="newline"></div><span class="go">    [ 5,  6,  7,  8,  9],</span>
+<div class="newline"></div><span class="go">    [10, 11, 12, 13, 14],</span>
+<div class="newline"></div><span class="go">    [15, 16, 17, 18, 19],</span>
+<div class="newline"></div><span class="go">    [20, 21, 22, 23, 24]])</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s">&#39;tableau.txt&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;tableau.npy&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s">&#39;tableau.txt&#39;</span><span class="p">)</span>
+<div class="newline"></div><span class="go">625</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s">&#39;tableau.npy&#39;</span><span class="p">)</span>
+<div class="newline"></div><span class="go">280</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Pour des tableaux de dimension trois ou plus, il faut utiliser
 <tt class="docutils literal"><span class="pre">np.save</span></tt></p>
@@ -436,8 +436,8 @@ TypeError: float argument required, not numpy.ndarray
 <p>De la même manière, il existe deux fonctions pour charger un tableau
 numpy à partir d&#8217;un fichier</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s">&#39;tableau.txt&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;tableau.npy&#39;</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;tableau.npy&#39;</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Remarque</p>
@@ -458,62 +458,62 @@ pour l&#8217;écriture de docstrings hérité de NumPy, et documenté sur
 Les différentes sections sont toujours dans le même ordre, ce qui permet
 une lecture rapide et efficace de la documentation:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">forced_pendulum</span><span class="p">(</span><span class="n">t_end</span><span class="p">,</span> <span class="n">t_space</span><span class="p">,</span> <span class="n">theta_init</span><span class="p">,</span> <span class="n">theta_dot_init</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-                            <span class="n">acc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Integrate a trajectory for the forced pendulum.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-
-<span class="sd">    t_end : float</span>
-<span class="sd">        Final time of the trajectory (initial time is always 0).</span>
-
-<span class="sd">    t_space : float</span>
-<span class="sd">        Time_interval between two points of the trajectories</span>
-
-<span class="sd">    theta_init : float</span>
-<span class="sd">        Initial angular position</span>
-
-<span class="sd">    theta_dot_init : float, optional</span>
-<span class="sd">        Initial angular velocity (default 0)</span>
-
-<span class="sd">    q : float, optional</span>
-<span class="sd">        Damping (default 0.1)</span>
-
-<span class="sd">    acc : float, optional</span>
-<span class="sd">        Amplitude of the forcing (default 1)</span>
-
-<span class="sd">    omega : float, optional</span>
-<span class="sd">        Pulsation of forcing (default 1)</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    t: ndarray of floats</span>
-<span class="sd">        array of times</span>
-<span class="sd">    theta: ndarray of floats</span>
-<span class="sd">        angular positions along the trajectory</span>
-
-<span class="sd">    theta_dot: ndarray of floats</span>
-<span class="sd">        angular velocities along the trajectory</span>
-
-<span class="sd">    Notes</span>
-<span class="sd">    -----</span>
-<span class="sd">    This function integrates the equation</span>
-<span class="sd">    .. math::</span>
-
-<span class="sd">        \ddot{\\theta} + q \dot{\\theta} + \omega^2 \sin\\theta = A \sin</span>
-<span class="sd">            \omega_D t</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; t, theta, theta_dot =  forced_pendulum(100, 0.1, np.pi/3)</span>
-<span class="sd">    &gt;&gt;&gt; sol = forced_pendulum(100, 0.1, np.pi/3, theta_dot_init=1, acc=1.5)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">t_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">t_space</span><span class="p">)</span>
-    <span class="n">sol</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">forced_pendulum_equations</span><span class="p">,</span> <span class="p">[</span><span class="n">theta_init</span><span class="p">,</span> <span class="n">theta_dot_init</span><span class="p">],</span>
-                            <span class="n">t_range</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">t_range</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
-</pre></div>
+<div class="newline"></div>                            <span class="n">acc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="newline"></div>    <span class="sd">&quot;&quot;&quot;</span>
+<div class="newline"></div><span class="sd">    Integrate a trajectory for the forced pendulum.</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="sd">    Parameters</span>
+<div class="newline"></div><span class="sd">    ----------</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="sd">    t_end : float</span>
+<div class="newline"></div><span class="sd">        Final time of the trajectory (initial time is always 0).</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="sd">    t_space : float</span>
+<div class="newline"></div><span class="sd">        Time_interval between two points of the trajectories</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="sd">    theta_init : float</span>
+<div class="newline"></div><span class="sd">        Initial angular position</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="sd">    theta_dot_init : float, optional</span>
+<div class="newline"></div><span class="sd">        Initial angular velocity (default 0)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="sd">    q : float, optional</span>
+<div class="newline"></div><span class="sd">        Damping (default 0.1)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="sd">    acc : float, optional</span>
+<div class="newline"></div><span class="sd">        Amplitude of the forcing (default 1)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="sd">    omega : float, optional</span>
+<div class="newline"></div><span class="sd">        Pulsation of forcing (default 1)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="sd">    Returns</span>
+<div class="newline"></div><span class="sd">    -------</span>
+<div class="newline"></div><span class="sd">    t: ndarray of floats</span>
+<div class="newline"></div><span class="sd">        array of times</span>
+<div class="newline"></div><span class="sd">    theta: ndarray of floats</span>
+<div class="newline"></div><span class="sd">        angular positions along the trajectory</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="sd">    theta_dot: ndarray of floats</span>
+<div class="newline"></div><span class="sd">        angular velocities along the trajectory</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="sd">    Notes</span>
+<div class="newline"></div><span class="sd">    -----</span>
+<div class="newline"></div><span class="sd">    This function integrates the equation</span>
+<div class="newline"></div><span class="sd">    .. math::</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="sd">        \ddot{\\theta} + q \dot{\\theta} + \omega^2 \sin\\theta = A \sin</span>
+<div class="newline"></div><span class="sd">            \omega_D t</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="sd">    Examples</span>
+<div class="newline"></div><span class="sd">    --------</span>
+<div class="newline"></div><span class="sd">    &gt;&gt;&gt; t, theta, theta_dot =  forced_pendulum(100, 0.1, np.pi/3)</span>
+<div class="newline"></div><span class="sd">    &gt;&gt;&gt; sol = forced_pendulum(100, 0.1, np.pi/3, theta_dot_init=1, acc=1.5)</span>
+<div class="newline"></div><span class="sd">    &quot;&quot;&quot;</span>
+<div class="newline"></div>    <span class="n">t_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_end</span><span class="p">,</span> <span class="n">t_space</span><span class="p">)</span>
+<div class="newline"></div>    <span class="n">sol</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">forced_pendulum_equations</span><span class="p">,</span> <span class="p">[</span><span class="n">theta_init</span><span class="p">,</span> <span class="n">theta_dot_init</span><span class="p">],</span>
+<div class="newline"></div>                            <span class="n">t_range</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">omega</span><span class="p">))</span>
+<div class="newline"></div>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">t_range</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+<div class="newline"></div></pre></div>
 </div>
 <p><div style="clear: both"></div></p>
 </div>
@@ -528,7 +528,7 @@ une lecture rapide et efficace de la documentation:</p>
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="ateliers/index.html" title="6. Ateliers pratiques"
+          <a href="aller_plus_loin.html" title="6. Et pour aller plus loin"
              >suivant</a></li>
         <li class="right" >
           <a href="edp_chaleur.html" title="4. Équations aux dérivées partielles : utilisation de NumPy"

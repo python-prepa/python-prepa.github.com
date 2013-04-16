@@ -59,10 +59,20 @@ Examples
 
    :ref:`example_VonKarman_corr.py`
 
+.. figure:: ./images/thumb/document_high_dim.png
+   :target: ./document_high_dim.html
+
+   :ref:`example_document_high_dim.py`
+
 .. figure:: ./images/thumb/plot_color_grey.png
    :target: ./plot_color_grey.html
 
    :ref:`example_plot_color_grey.py`
+
+.. figure:: ./images/thumb/plot_document_classification.png
+   :target: ./plot_document_classification.html
+
+   :ref:`example_plot_document_classification.py`
 
 .. figure:: ./images/thumb/plot_example_intro.png
    :target: ./plot_example_intro.html
@@ -83,6 +93,21 @@ Examples
    :target: ./plot_intro.html
 
    :ref:`example_plot_intro.py`
+
+.. figure:: ./images/thumb/plot_iris.png
+   :target: ./plot_iris.html
+
+   :ref:`example_plot_iris.py`
+
+.. figure:: ./images/thumb/plot_iris_simple.png
+   :target: ./plot_iris_simple.html
+
+   :ref:`example_plot_iris_simple.py`
+
+.. figure:: ./images/thumb/plot_knn.png
+   :target: ./plot_knn.html
+
+   :ref:`example_plot_knn.py`
 
 .. figure:: ./images/thumb/plot_mini_mondrian.png
    :target: ./plot_mini_mondrian.html

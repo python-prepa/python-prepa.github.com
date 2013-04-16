@@ -64,60 +64,60 @@ module stable, bien testé et relativement bien documenté.</p>
 <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/">http://docs.scipy.org/doc/numpy/reference/</a></p>
 <p>Pour l&#8217;importer, on recommande d&#8217;utiliser</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>Toutes les fonctions NumPy seront alors préfixées par <em>np.</em></p>
 <div class="section" id="introduction-rapide-a-numpy">
 <h2>4.1. Introduction rapide à NumPy<a class="headerlink" href="#introduction-rapide-a-numpy" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Le module NumPy permet la manipulation simple et efficace des tableaux</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>   <span class="c"># De 0 (inclus) à 2 (exclus) par pas de 0.1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
-<span class="go">array([ 0. ,  0.1,  0.2,  0.3,  0.4,  0.5,  0.6,  0.7,  0.8,  0.9,  1. ,</span>
-<span class="go">        1.1,  1.2,  1.3,  1.4,  1.5,  1.6,  1.7,  1.8,  1.9])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c"># Sa taille</span>
-<span class="go">20</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c"># Le premier élément</span>
-<span class="go">0.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c"># Le deuxième élément</span>
-<span class="go">0.10000000000000001</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">19</span><span class="p">]</span> <span class="c"># Le dernier élément</span>
-<span class="go">1.9000000000000001</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="c"># Pas un élément !</span>
-<span class="gt">Traceback (most recent call last):</span>
-  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
-<span class="gr">IndexError</span>: <span class="n">index 20 is out of bounds for axis 0 with size 20</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
-<span class="go">array([[1, 2, 3],</span>
-<span class="go">       [4, 5, 6],</span>
-<span class="go">       [7, 8, 9]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">a</span>  <span class="c"># Multiplication de chaque terme</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>  <span class="c"># Sommation terme à terme</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c"># Produit de matrices</span>
-<span class="go">array([[ 60,  72,  84],</span>
-<span class="go">       [132, 162, 192],</span>
-<span class="go">       [204, 252, 300]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span>      <span class="c"># Produit terme à terme</span>
-<span class="go">array([[  2,   8,  18],</span>
-<span class="go">       [ 32,  50,  72],</span>
-<span class="go">       [ 98, 128, 162]])</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<div class="newline"></div><span class="go">array([ 0. ,  0.1,  0.2,  0.3,  0.4,  0.5,  0.6,  0.7,  0.8,  0.9,  1. ,</span>
+<div class="newline"></div><span class="go">        1.1,  1.2,  1.3,  1.4,  1.5,  1.6,  1.7,  1.8,  1.9])</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c"># Sa taille</span>
+<div class="newline"></div><span class="go">20</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c"># Le premier élément</span>
+<div class="newline"></div><span class="go">0.0</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c"># Le deuxième élément</span>
+<div class="newline"></div><span class="go">0.10000000000000001</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">19</span><span class="p">]</span> <span class="c"># Le dernier élément</span>
+<div class="newline"></div><span class="go">1.9000000000000001</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span> <span class="c"># Pas un élément !</span>
+<div class="newline"></div><span class="gt">Traceback (most recent call last):</span>
+<div class="newline"></div>  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<div class="newline"></div><span class="gr">IndexError</span>: <span class="n">index 20 is out of bounds for axis 0 with size 20</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span> <span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<div class="newline"></div><span class="go">array([[1, 2, 3],</span>
+<div class="newline"></div><span class="go">       [4, 5, 6],</span>
+<div class="newline"></div><span class="go">       [7, 8, 9]])</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">a</span>  <span class="c"># Multiplication de chaque terme</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>  <span class="c"># Sommation terme à terme</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="c"># Produit de matrices</span>
+<div class="newline"></div><span class="go">array([[ 60,  72,  84],</span>
+<div class="newline"></div><span class="go">       [132, 162, 192],</span>
+<div class="newline"></div><span class="go">       [204, 252, 300]])</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span>      <span class="c"># Produit terme à terme</span>
+<div class="newline"></div><span class="go">array([[  2,   8,  18],</span>
+<div class="newline"></div><span class="go">       [ 32,  50,  72],</span>
+<div class="newline"></div><span class="go">       [ 98, 128, 162]])</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>On peut facilement effectuer des coupes dans un tableau numpy. Cette
 fonctionnalité est particulièrement importante en calcul scientifique
 (comme nous allons le voir) pour éviter l&#8217;utilisation de boucles.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>   <span class="c"># de l&#39;indice 1 à l&#39;indice 4 exclu !!!ATTENTION!!!</span>
-<span class="go">array([2, 3, 4])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>    <span class="c"># du debut à l&#39;indice 4 exclu</span>
-<span class="go">array([1, 2, 3, 4])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>    <span class="c"># de l&#39;indice 4 inclus à la fin</span>
-<span class="go">array([5, 6])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>   <span class="c"># excluant le dernier element</span>
-<span class="go">array([1, 2, 3, 4, 5])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c"># excluant le premier et le dernier</span>
-<span class="go">array([2, 3, 4, 5])</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>   <span class="c"># de l&#39;indice 1 à l&#39;indice 4 exclu !!!ATTENTION!!!</span>
+<div class="newline"></div><span class="go">array([2, 3, 4])</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>    <span class="c"># du debut à l&#39;indice 4 exclu</span>
+<div class="newline"></div><span class="go">array([1, 2, 3, 4])</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>    <span class="c"># de l&#39;indice 4 inclus à la fin</span>
+<div class="newline"></div><span class="go">array([5, 6])</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>   <span class="c"># excluant le dernier element</span>
+<div class="newline"></div><span class="go">array([1, 2, 3, 4, 5])</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c"># excluant le premier et le dernier</span>
+<div class="newline"></div><span class="go">array([2, 3, 4, 5])</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Pour extraire des sous-parties d&#8217;un tableau numpy, on a vu qu&#8217;on peut
 faire de l&#8217;indexation simple <tt class="docutils literal"><span class="pre">t[0]</span></tt> et des coupes <tt class="docutils literal"><span class="pre">t[1:3]</span></tt>. Une autre
@@ -126,85 +126,85 @@ tableau grâce à un autre tableau de booléens (un &#8220;masque&#8221;), de ta
 compatible avec le tableau d&#8217;intérêt. Cette opération s&#8217;appelle de
 l&#8217;indexation par <strong>masque</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
-<span class="go">array([ 0,  1,  4,  9, 16, 25])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="c"># le masque, tableau de booleens</span>
-<span class="go">array([False, False, False, False,  True,  True], dtype=bool)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">]</span> <span class="c"># une maniere compacte d&#39;extraire les valeurs &gt; 10</span>
-<span class="go">array([16, 25])</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<div class="newline"></div><span class="go">array([ 0,  1,  4,  9, 16, 25])</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="c"># le masque, tableau de booleens</span>
+<div class="newline"></div><span class="go">array([False, False, False, False,  True,  True], dtype=bool)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">]</span> <span class="c"># une maniere compacte d&#39;extraire les valeurs &gt; 10</span>
+<div class="newline"></div><span class="go">array([16, 25])</span>
+<div class="newline"></div></pre></div>
 </div>
 <p><strong>Attention</strong> à la copie de tableau !</p>
 <p>Pour un scalaire on a le comportement &#8220;intuitif&#8221; :</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
-<span class="go">1.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
-<span class="go">1.0</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<div class="newline"></div><span class="go">1.0</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.0</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<div class="newline"></div><span class="go">1.0</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Pour un tableau NumPy, par defaut on ne copie que l&#8217;adresse du
 tableau (pointeur) pas son contenu (les deux noms correspondent alors aux
 mêmes adresses en mémoire).</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
-<span class="go">array([[ 0.,  0.],</span>
-<span class="go">       [ 0.,  0.]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
-<span class="go">array([[  0.,   0.],</span>
-<span class="go">       [  0.,  10.]])</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<div class="newline"></div><span class="go">array([[ 0.,  0.],</span>
+<div class="newline"></div><span class="go">       [ 0.,  0.]])</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<div class="newline"></div><span class="go">array([[  0.,   0.],</span>
+<div class="newline"></div><span class="go">       [  0.,  10.]])</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Pour effectuer une copie des valeurs, il faut
 utiliser <strong>.copy()</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
-<span class="go">array([[  0.,   0.],</span>
-<span class="go">       [  0.,  10.]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
-<span class="go">array([[ 0.,  0.],</span>
-<span class="go">       [ 0.,  0.]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
-<span class="go">array([[  0.,   0.],</span>
-<span class="go">       [  0.,  10.]])</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<div class="newline"></div><span class="go">array([[  0.,   0.],</span>
+<div class="newline"></div><span class="go">       [  0.,  10.]])</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<div class="newline"></div><span class="go">array([[ 0.,  0.],</span>
+<div class="newline"></div><span class="go">       [ 0.,  0.]])</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<div class="newline"></div><span class="go">array([[  0.,   0.],</span>
+<div class="newline"></div><span class="go">       [  0.,  10.]])</span>
+<div class="newline"></div></pre></div>
 </div>
 <p><em>Remarque :</em> la même chose s&#8217;applique aux coupes :</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
-<span class="go">array([10,  1,  2,  3,  4])</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<div class="newline"></div><span class="go">array([10,  1,  2,  3,  4])</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Le module NumPy comporte beaucoup de fonctions qui permettent de créer
 des tableaux spéciaux, manipuler des tableaux, de faire des opérations
 sur ces tableaux, etc.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="go">45</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="go">4.5</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<div class="newline"></div><span class="go">45</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<div class="newline"></div><span class="go">4.5</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="topic">
 <p class="topic-title first">Application : calcul de pi</p>
 <p>Nous reprenons ici un exemple de la section précédente, en utilisant
 uniquement des tableaux et des fonctions de NumPy</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100000</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span>
-<span class="go">((100000,), (100000,))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="c"># quart de disque</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span> <span class="c"># fraction des points dans le disque</span>
-<span class="go">0.78474999999999995</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span>
-<span class="go">0.7853981633974483</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span>
+<div class="newline"></div><span class="go">((100000,), (100000,))</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="c"># quart de disque</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span> <span class="c"># fraction des points dans le disque</span>
+<div class="newline"></div><span class="go">0.78474999999999995</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span>
+<div class="newline"></div><span class="go">0.7853981633974483</span>
+<div class="newline"></div></pre></div>
 </div>
 </div>
 </div>
@@ -237,11 +237,11 @@ x}-\frac{T_{j}^n-T_{j-1}^{n}}{\Delta x}}{\Delta x} \, ,"/></p>
 c\equiv \frac{{\Delta t}\,  \kappa}{\Delta x^2} \, ."/></p>
 </div><p>Cela s&#8217;implémente très simplement en Python, par exemple sous la forme</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">NX</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-   <span class="n">RHS</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">NX</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-   <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">RHS</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-</pre></div>
+<div class="newline"></div>   <span class="n">RHS</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">NX</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+<div class="newline"></div>   <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">RHS</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="figure align-center">
 <a class="reference external image-reference" href="auto_examples/edp1_1D_heat_loops.html"><img alt="_images/plot_edp1_1D_heat_loops_1.png" src="_images/plot_edp1_1D_heat_loops_1.png" style="width: 640.0px; height: 480.0px;" /></a>
@@ -289,10 +289,10 @@ d&#8217;ordre deux en espace.</p>
 <p>Pour cela on va effectuer une boucle extérieure sur la résolution et mesurer
 une norme de l&#8217;erreur entre la solution calculée et la solution analytique</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">K</span><span class="o">*</span><span class="n">Time</span><span class="p">)</span>
-<span class="n">TO</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
-<span class="n">DDX</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">dx</span>
-<span class="n">ERR</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">T</span><span class="o">-</span><span class="n">TO</span><span class="o">*</span><span class="n">scale</span><span class="p">))</span>
-</pre></div>
+<div class="newline"></div><span class="n">TO</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<div class="newline"></div><span class="n">DDX</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">dx</span>
+<div class="newline"></div><span class="n">ERR</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">T</span><span class="o">-</span><span class="n">TO</span><span class="o">*</span><span class="n">scale</span><span class="p">))</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="figure align-center">
 <a class="reference external image-reference" href="auto_examples/edp2_1D_heat_loops_conv.html"><img alt="_images/plot_edp2_1D_heat_loops_conv_1.png" src="_images/plot_edp2_1D_heat_loops_conv_1.png" style="width: 640.0px; height: 480.0px;" /></a>
@@ -304,17 +304,17 @@ calcul devient insupportablement long.</p>
 possibilités de calcul vectoriel offertes par NumPy.</p>
 <p>Pour cela il faut remplacer les lignes</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">NX</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-   <span class="n">RHS</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">NX</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-   <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">RHS</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-</pre></div>
+<div class="newline"></div>   <span class="n">RHS</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">NX</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+<div class="newline"></div>   <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">RHS</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>par des instructions vectorielles (les &#8220;boucles&#8221; sont alors gérées par du
 code compilé et non par du code interpreté)</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">RHS</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span> <span class="o">/</span> <span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">T</span> <span class="o">+=</span> <span class="n">RHS</span>
-</pre></div>
+<div class="newline"></div><span class="n">T</span> <span class="o">+=</span> <span class="n">RHS</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>On constate que l&#8217;execution est alors quasi-instantanée.</p>
 <p>[<a class="reference internal" href="auto_examples/edp3_1D_heat_vect_conv.html#example-edp3-1d-heat-vect-conv-py"><em>Python source code</em></a>]</p>
@@ -377,19 +377,19 @@ Python pour les indices, i.e. de 0 à N-1) :</p>
 </dl>
 <p>Ainsi que le solveur associé:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">scipy.sparse.linalg.dsolve</span> <span class="kn">import</span> <span class="n">spsolve</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>On peut alors définir le problème aux différences finies:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>     <span class="c"># Diagonal terms</span>
-<span class="n">offsets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>                     <span class="c"># Their positions</span>
-<span class="n">LAP</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dia_matrix</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">offsets</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
-</pre></div>
+<div class="newline"></div><span class="n">offsets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>                     <span class="c"># Their positions</span>
+<div class="newline"></div><span class="n">LAP</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dia_matrix</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">offsets</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>et utiliser le
 solver inclus dans SciPy :</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
-<span class="n">T</span> <span class="o">=</span> <span class="n">spsolve</span><span class="p">(</span><span class="n">LAP</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div><span class="n">T</span> <span class="o">=</span> <span class="n">spsolve</span><span class="p">(</span><span class="n">LAP</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>[<a class="reference internal" href="auto_examples/edp4_1D_heat_solve.html#example-edp4-1d-heat-solve-py"><em>Python source code</em></a>]</p>
 <p><em>Remarque :</em> la même approche pourrait être utilisée pour l&#8217;équation
@@ -415,10 +415,10 @@ c\equiv \frac{{\Delta t}\,  \kappa}{\Delta x^2} \, ."/></p>
 \right] \, ."/></p>
 </div><p>Ce qui devient en Python:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">NT</span><span class="p">):</span>
-   <span class="n">RHS</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span> <span class="p">(</span><span class="n">T</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  \
-                              <span class="o">+</span> <span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">:])</span>  <span class="o">/</span> <span class="p">(</span><span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-   <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">RHS</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">S</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div>   <span class="n">RHS</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span> <span class="p">(</span><span class="n">T</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  \
+<div class="newline"></div>                              <span class="o">+</span> <span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">:])</span>  <span class="o">/</span> <span class="p">(</span><span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<div class="newline"></div>   <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">RHS</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">S</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="figure align-center">
 <a class="reference external image-reference" href="auto_examples/edp5_2D_heat_vect.html"><img alt="_images/plot_edp5_2D_heat_vect_1.png" src="_images/plot_edp5_2D_heat_vect_1.png" style="width: 640.0px; height: 480.0px;" /></a>
@@ -436,16 +436,16 @@ système linéaire est plus difficile à formuler.</p>
 </div><p>il faut numéroter les <img class="math" src="_images/math/c3668f65cba99ec9907b51acefb909a2ff285b1c.png" alt="T_{i,j}" style="vertical-align: -8px"/> sous la forme d&#8217;une grand vecteur et
 utiliser le produit de Kronecker</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">LAP2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">LAP</span><span class="p">,</span> <span class="n">I1D</span><span class="p">)</span> <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">I1D</span><span class="p">,</span><span class="n">LAP</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>il ne reste alors qu&#8217;à résoudre le système linéaire</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">T</span> <span class="o">=</span> <span class="n">spsolve</span><span class="p">(</span><span class="n">LAP2</span><span class="p">,</span><span class="n">f2</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>et à transformer le résultat (qui est un vecteur de taille NxN) sous la forme d&#8217;une
 matrice de taille (N,N)</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <dl class="docutils">
 <dt>Le code complet est disponible ci-dessous :</dt>

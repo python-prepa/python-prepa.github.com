@@ -59,50 +59,50 @@ filtrage, gestion des formats d&#8217;image, etc. Pour éviter d&#8217;avoir des
 trop longs, on importe souvent directement les sous-modules dans le
 namespace principal</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">coins_image</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">coins</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">io</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">coins_image</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="nb">filter</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">edges</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">sobel</span><span class="p">(</span><span class="n">coins_image</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">coins_image</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">coins</span><span class="p">()</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">io</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">coins_image</span><span class="p">)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="nb">filter</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">edges</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">sobel</span><span class="p">(</span><span class="n">coins_image</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>La grande majorité des fonctions de <tt class="docutils literal"><span class="pre">skimage</span></tt> se trouvent donc à
 l&#8217;intérieur d&#8217;un sous-module : il y a deux niveaux hiérarchiques.</p>
 <div class="section" id="input-output-des-fichiers-aux-tableaux-numpy">
 <h2>7.1.2.1. Input / output: des fichiers aux tableaux numpy<a class="headerlink" href="#input-output-des-fichiers-aux-tableaux-numpy" title="Lien permanent vers ce titre">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">skimage</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">current_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="c"># so that we can go back to current dir.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">skimage</span><span class="o">.</span><span class="n">data_dir</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">skimage</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">current_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="c"># so that we can go back to current dir.</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">skimage</span><span class="o">.</span><span class="n">data_dir</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>On peut ouvrir un fichier image (jpg, png, tiff...) comme un tableau
 numpy en passant le chemin du fichier à la fonction <tt class="docutils literal"><span class="pre">skimage.io.imread</span></tt></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">coins_image</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&#39;coins.png&#39;</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">coins_image</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&#39;coins.png&#39;</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Une large gamme de formats de fichier est supportée : jpg, png, tiff,
 bmp, etc.</p>
 <p>On peut ouvrir des images en couleur ou en noir et blanc. Les images en
 couleur ont trois dimensions, les images en noir et blanc en ont deux</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">coins_image</span><span class="o">.</span><span class="n">shape</span>
-<span class="go">(303, 384)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lena_image</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&#39;lena.png&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lena_image</span><span class="o">.</span><span class="n">shape</span>
-<span class="go">(512, 512, 3)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">io</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lena_image</span><span class="p">)</span> <span class="c"># color image</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">io</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lena_image</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c"># grayscale image</span>
-</pre></div>
+<div class="newline"></div><span class="go">(303, 384)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">lena_image</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&#39;lena.png&#39;</span><span class="p">)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">lena_image</span><span class="o">.</span><span class="n">shape</span>
+<div class="newline"></div><span class="go">(512, 512, 3)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">io</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lena_image</span><span class="p">)</span> <span class="c"># color image</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">io</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lena_image</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c"># grayscale image</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>L&#8217;affichage d&#8217;une image se fait grâce à la fonction
 <tt class="docutils literal"><span class="pre">skimage.io.imshow</span></tt>.</p>
 <p>On peut aussi ouvrir une image couleur comme une image en noir et blanc</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">lena_gray</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&#39;lena.png&#39;</span><span class="p">,</span> <span class="n">as_grey</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lena_gray</span><span class="o">.</span><span class="n">shape</span>
-<span class="go">(512, 512)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">current_dir</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">lena_gray</span><span class="o">.</span><span class="n">shape</span>
+<div class="newline"></div><span class="go">(512, 512)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">current_dir</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="figure">
 <a class="reference external image-reference" href="auto_examples/plot_color_grey.html"><img alt="../_images/plot_color_grey_1.png" src="../_images/plot_color_grey_1.png" style="width: 65%;" /></a>
@@ -121,17 +121,17 @@ multiplications ou des divisions par des réels. Par conséquent,
 certaines fonctions de <tt class="docutils literal"><span class="pre">skimage</span></tt> renvoient un tableau de type
 différent du tableau d&#8217;entrée</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">coins_image</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">coins</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">coins_image</span><span class="o">.</span><span class="n">dtype</span>
-<span class="go">dtype(&#39;uint8&#39;)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">median_filter_coins</span> <span class="o">=</span> <span class="n">median_filter</span><span class="p">(</span><span class="n">coins_image</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">median_filter_coins</span><span class="o">.</span><span class="n">dtype</span> <span class="c"># median of integers is an integer</span>
-<span class="go">dtype(&#39;uint8&#39;)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">exposure</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">equalize_coins</span> <span class="o">=</span> <span class="n">exposure</span><span class="o">.</span><span class="n">equalize</span><span class="p">(</span><span class="n">coins_image</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">equalize_coins</span><span class="o">.</span><span class="n">dtype</span>
-<span class="go">dtype(&#39;float64&#39;)</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">coins_image</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">coins</span><span class="p">()</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">coins_image</span><span class="o">.</span><span class="n">dtype</span>
+<div class="newline"></div><span class="go">dtype(&#39;uint8&#39;)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">median_filter_coins</span> <span class="o">=</span> <span class="n">median_filter</span><span class="p">(</span><span class="n">coins_image</span><span class="p">)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">median_filter_coins</span><span class="o">.</span><span class="n">dtype</span> <span class="c"># median of integers is an integer</span>
+<div class="newline"></div><span class="go">dtype(&#39;uint8&#39;)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">exposure</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">equalize_coins</span> <span class="o">=</span> <span class="n">exposure</span><span class="o">.</span><span class="n">equalize</span><span class="p">(</span><span class="n">coins_image</span><span class="p">)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">equalize_coins</span><span class="o">.</span><span class="n">dtype</span>
+<div class="newline"></div><span class="go">dtype(&#39;float64&#39;)</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Dans <tt class="docutils literal"><span class="pre">skimage</span></tt>, par convention les images en flottant sont à valeur
 entre -1 et 1, afin d&#8217;assurer que toutes les images aient la même
@@ -139,10 +139,10 @@ plage de valeurs. La plage de valeurs d&#8217;une image retournée par une
 fonction peut donc être très différente de celle de l&#8217;image d&#8217;entrée,
 dans le cas où le type a été modifié</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">coins</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">coins</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-<span class="go">1 252</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">equalize_coins</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">equalize_coins</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-<span class="go">8.59460946095e-06 1.0</span>
-</pre></div>
+<div class="newline"></div><span class="go">1 252</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">equalize_coins</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">equalize_coins</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<div class="newline"></div><span class="go">8.59460946095e-06 1.0</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Les fonctions <tt class="docutils literal"><span class="pre">skimage.img_as_float</span></tt> et <tt class="docutils literal"><span class="pre">skimage.img_as_ubyte</span></tt>
 permettent de faire la conversion entre les types sans se soucier des
@@ -153,7 +153,7 @@ numpy, on peut faire l&#8217;opération contraire : sauver un tableau numpy
 correspondant à une image en un fichier image. Pour cela, on utilise la
 fonction <tt class="docutils literal"><span class="pre">skimage.io.imsave</span></tt></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">io</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="s">&#39;equalize_coins.png&#39;</span><span class="p">,</span> <span class="n">equalize_coins</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>Le type du fichier image est automatiquement déduit de l&#8217;extension de la
 chaîne de caractères (&#8216;.png&#8217;, &#8216;.jpg&#8217;).</p>
@@ -164,22 +164,22 @@ chaîne de caractères (&#8216;.png&#8217;, &#8216;.jpg&#8217;).</p>
 sur les éléments du tableau correspondent à des opérations sur les
 pixels.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">skimage</span><span class="o">.</span><span class="n">data_dir</span><span class="p">,</span> <span class="s">&#39;lenagray.png&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lena</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c"># Pixel value</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lena</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">32</span><span class="p">]</span>
-<span class="go">110</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c"># Slicing</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lena</span><span class="p">[</span><span class="mi">20</span><span class="p">:</span><span class="mi">22</span><span class="p">,</span> <span class="mi">32</span><span class="p">:</span><span class="mi">34</span><span class="p">]</span>
-<span class="go">Image([[110, 113],</span>
-<span class="go">    [110, 111]], dtype=uint8)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lena</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lx</span><span class="p">,</span> <span class="n">ly</span> <span class="o">=</span> <span class="n">lena</span><span class="o">.</span><span class="n">shape</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ogrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">lx</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">ly</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">lx</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">ly</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">&gt;</span> <span class="n">lx</span><span class="o">*</span><span class="n">ly</span><span class="o">/</span><span class="mi">4</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c"># Using masks</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lena</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">lena</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="c"># Pixel value</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">lena</span><span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">32</span><span class="p">]</span>
+<div class="newline"></div><span class="go">110</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="c"># Slicing</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">lena</span><span class="p">[</span><span class="mi">20</span><span class="p">:</span><span class="mi">22</span><span class="p">,</span> <span class="mi">32</span><span class="p">:</span><span class="mi">34</span><span class="p">]</span>
+<div class="newline"></div><span class="go">Image([[110, 113],</span>
+<div class="newline"></div><span class="go">    [110, 111]], dtype=uint8)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">lena</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+<div class="newline"></div><span class="go">&gt;&gt;&gt;</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">lx</span><span class="p">,</span> <span class="n">ly</span> <span class="o">=</span> <span class="n">lena</span><span class="o">.</span><span class="n">shape</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ogrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">lx</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">ly</span><span class="p">]</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">lx</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">Y</span> <span class="o">-</span> <span class="n">ly</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">&gt;</span> <span class="n">lx</span><span class="o">*</span><span class="n">ly</span><span class="o">/</span><span class="mi">4</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="c"># Using masks</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">lena</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="figure">
 <a class="reference external image-reference" href="auto_examples/plot_numpy_array.html"><img alt="../_images/plot_numpy_array_1.png" src="../_images/plot_numpy_array_1.png" style="width: 33%;" /></a>
@@ -218,21 +218,21 @@ valeur mais aussi des valeurs des autres pixels de l&#8217;image. On dit que le
 filtre est local si ce sont les valeurs des pixels voisins qui sont
 utilisées, non-local sinon:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="nb">filter</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>Il existe en particulier un certain nombre de fonctions qui vont moyenner
 ensemble des pixels proches. Cela peut être utile dans des applications
 de débruitage, où on veut réduire le bruit sur les pixels:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">coins_zoom</span> <span class="o">=</span> <span class="n">coins</span><span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span> <span class="mi">300</span><span class="p">:</span><span class="mi">370</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">median_coins</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">median_filter</span><span class="p">(</span><span class="n">coins_zoom</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tv_coins</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">tv_denoise</span><span class="p">(</span><span class="n">coins_zoom</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">median_coins</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">median_filter</span><span class="p">(</span><span class="n">coins_zoom</span><span class="p">)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">tv_coins</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">tv_denoise</span><span class="p">(</span><span class="n">coins_zoom</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <p><strong>Attention</strong> : le filtre gaussien ne se trouve pas dans
 <tt class="docutils literal"><span class="pre">scikit-image</span></tt>, mais dans <tt class="docutils literal"><span class="pre">scipy.ndimage</span></tt></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gaussian_coins</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">gaussian_filter</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">gaussian_coins</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">gaussian_filter</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="figure">
 <a class="reference external image-reference" href="auto_examples/plot_filter_coins.html"><img alt="../_images/plot_filter_coins_1.png" src="../_images/plot_filter_coins_1.png" style="width: 90%;" /></a>
@@ -245,55 +245,55 @@ opérations qui fonctionnent sur des images binaires de 0 et de 1 (False et True
 <p>La plupart des opérations reposent sur un <strong>élément
 structurant</strong>, qui va servir à sonder l&#8217;image binaire.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">array([[0, 1, 0],</span>
-<span class="go">    [1, 1, 1],</span>
-<span class="go">    [0, 1, 0]], dtype=uint8)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">array([[0, 0, 0, 1, 0, 0, 0],</span>
-<span class="go">    [0, 1, 1, 1, 1, 1, 0],</span>
-<span class="go">    [0, 1, 1, 1, 1, 1, 0],</span>
-<span class="go">    [1, 1, 1, 1, 1, 1, 1],</span>
-<span class="go">    [0, 1, 1, 1, 1, 1, 0],</span>
-<span class="go">    [0, 1, 1, 1, 1, 1, 0],</span>
-<span class="go">    [0, 0, 0, 1, 0, 0, 0]], dtype=uint8)</span>
-</pre></div>
+<div class="newline"></div><span class="go">array([[0, 1, 0],</span>
+<div class="newline"></div><span class="go">    [1, 1, 1],</span>
+<div class="newline"></div><span class="go">    [0, 1, 0]], dtype=uint8)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="newline"></div><span class="go">array([[0, 0, 0, 1, 0, 0, 0],</span>
+<div class="newline"></div><span class="go">    [0, 1, 1, 1, 1, 1, 0],</span>
+<div class="newline"></div><span class="go">    [0, 1, 1, 1, 1, 1, 0],</span>
+<div class="newline"></div><span class="go">    [1, 1, 1, 1, 1, 1, 1],</span>
+<div class="newline"></div><span class="go">    [0, 1, 1, 1, 1, 1, 0],</span>
+<div class="newline"></div><span class="go">    [0, 1, 1, 1, 1, 1, 0],</span>
+<div class="newline"></div><span class="go">    [0, 0, 0, 1, 0, 0, 0]], dtype=uint8)</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>L&#8217;opération d&#8217;érosion va venir éroder les objets (de valeur 1) de l&#8217;image :
 quand on centre l&#8217;élément structurant sur un pixel donné, on met ce pixel à 0
 si tous les pixels recouverts par l&#8217;élément structurant ne sont pas à 1.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
-<span class="go">array([[ 0.,  0.,  0.,  0.,  0.,  0.,  0.],</span>
-<span class="go">    [ 0.,  1.,  1.,  1.,  1.,  1.,  0.],</span>
-<span class="go">    [ 0.,  1.,  1.,  1.,  1.,  1.,  0.],</span>
-<span class="go">    [ 0.,  1.,  1.,  1.,  1.,  1.,  0.],</span>
-<span class="go">    [ 0.,  1.,  1.,  1.,  1.,  1.,  0.],</span>
-<span class="go">    [ 0.,  1.,  1.,  1.,  1.,  1.,  0.],</span>
-<span class="go">    [ 0.,  0.,  0.,  0.,  0.,  0.,  0.]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">erosion_a</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">erosion_a</span>
-<span class="go">array([[False, False, False, False, False, False, False],</span>
-<span class="go">    [False, False, False, False, False, False, False],</span>
-<span class="go">    [False, False,  True,  True,  True, False, False],</span>
-<span class="go">    [False, False,  True,  True,  True, False, False],</span>
-<span class="go">    [False, False,  True,  True,  True, False, False],</span>
-<span class="go">    [False, False, False, False, False, False, False],</span>
-<span class="go">    [False, False, False, False, False, False, False]], dtype=bool)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-<span class="go">array([[False, False, False, False, False, False, False],</span>
-<span class="go">    [False, False, False, False, False, False, False],</span>
-<span class="go">    [False, False, False, False, False, False, False],</span>
-<span class="go">    [False, False, False, False, False, False, False],</span>
-<span class="go">    [False, False, False, False, False, False, False],</span>
-<span class="go">    [False, False, False, False, False, False, False],</span>
-<span class="go">    [False, False, False, False, False, False, False]], dtype=bool)</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<div class="newline"></div><span class="go">array([[ 0.,  0.,  0.,  0.,  0.,  0.,  0.],</span>
+<div class="newline"></div><span class="go">    [ 0.,  1.,  1.,  1.,  1.,  1.,  0.],</span>
+<div class="newline"></div><span class="go">    [ 0.,  1.,  1.,  1.,  1.,  1.,  0.],</span>
+<div class="newline"></div><span class="go">    [ 0.,  1.,  1.,  1.,  1.,  1.,  0.],</span>
+<div class="newline"></div><span class="go">    [ 0.,  1.,  1.,  1.,  1.,  1.,  0.],</span>
+<div class="newline"></div><span class="go">    [ 0.,  1.,  1.,  1.,  1.,  1.,  0.],</span>
+<div class="newline"></div><span class="go">    [ 0.,  0.,  0.,  0.,  0.,  0.,  0.]])</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">erosion_a</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">erosion_a</span>
+<div class="newline"></div><span class="go">array([[False, False, False, False, False, False, False],</span>
+<div class="newline"></div><span class="go">    [False, False, False, False, False, False, False],</span>
+<div class="newline"></div><span class="go">    [False, False,  True,  True,  True, False, False],</span>
+<div class="newline"></div><span class="go">    [False, False,  True,  True,  True, False, False],</span>
+<div class="newline"></div><span class="go">    [False, False,  True,  True,  True, False, False],</span>
+<div class="newline"></div><span class="go">    [False, False, False, False, False, False, False],</span>
+<div class="newline"></div><span class="go">    [False, False, False, False, False, False, False]], dtype=bool)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<div class="newline"></div><span class="go">array([[False, False, False, False, False, False, False],</span>
+<div class="newline"></div><span class="go">    [False, False, False, False, False, False, False],</span>
+<div class="newline"></div><span class="go">    [False, False, False, False, False, False, False],</span>
+<div class="newline"></div><span class="go">    [False, False, False, False, False, False, False],</span>
+<div class="newline"></div><span class="go">    [False, False, False, False, False, False, False],</span>
+<div class="newline"></div><span class="go">    [False, False, False, False, False, False, False],</span>
+<div class="newline"></div><span class="go">    [False, False, False, False, False, False, False]], dtype=bool)</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>L&#8217;opération contraire s&#8217;appelle la dilatation : la dilatation met à 1 tous les pixels pour lesquels l&#8217;éléments structurant centré au pixel recouvre au moins un pixel valant 1</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">dilation_erosion_a</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_dilation</span><span class="p">(</span><span class="n">erosion_a</span><span class="p">,</span>
-                         <span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-</pre></div>
+<div class="newline"></div>                         <span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>On voit que la composition d&#8217;une érosion puis d&#8217;une érosion redonne
 presque l&#8217;image d&#8217;origine, à l&#8217;exception des coins qui ont disparu. Cette
@@ -316,11 +316,11 @@ automatiquement le seuil le plus discriminant entre deux populations de
 pixels : la fonction <tt class="docutils literal"><span class="pre">skimage.filter.threshold_otsu</span></tt> qui implémente
 l&#8217;algorithme de seuillage d&#8217;Otsu</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">data</span>
-<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="nb">filter</span>
-<span class="n">camera</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">camera</span><span class="p">()</span>
-<span class="n">val</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">threshold_otsu</span><span class="p">(</span><span class="n">camera</span><span class="p">)</span>
-<span class="n">mask</span> <span class="o">=</span> <span class="n">camera</span> <span class="o">&lt;</span> <span class="n">val</span>
-</pre></div>
+<div class="newline"></div><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="nb">filter</span>
+<div class="newline"></div><span class="n">camera</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">camera</span><span class="p">()</span>
+<div class="newline"></div><span class="n">val</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">threshold_otsu</span><span class="p">(</span><span class="n">camera</span><span class="p">)</span>
+<div class="newline"></div><span class="n">mask</span> <span class="o">=</span> <span class="n">camera</span> <span class="o">&lt;</span> <span class="n">val</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="figure">
 <a class="reference external image-reference" href="auto_examples/plot_threshold.html"><img alt="../_images/plot_threshold_1.png" src="../_images/plot_threshold_1.png" style="width: 70%;" /></a>
@@ -331,18 +331,18 @@ n&#8217;était pas homogène. Il existe donc une fonction qui va calculer le
 seuil dans un voisinage local, et peut donc binariser une image de façon
 plus satisfaisante</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">simple_threshold</span> <span class="o">=</span> <span class="n">coins</span> <span class="o">&gt;</span> <span class="nb">filter</span><span class="o">.</span><span class="n">threshold_otsu</span><span class="p">(</span><span class="n">coins</span><span class="p">)</span>
-<span class="n">adaptive_threshold</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">threshold_adaptive</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="mi">151</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div><span class="n">adaptive_threshold</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">threshold_adaptive</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="mi">151</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>L&#8217;image <tt class="docutils literal"><span class="pre">adaptive_threshold</span></tt> a bien séparé les pièces du fond, pour
 supprimer les petites taches blanches et la bande en haut de l&#8217;image on
 peut utiliser deux fonctions du scikit-image dont le nom donne la
 fonction : <tt class="docutils literal"><span class="pre">remove_small_objects</span></tt> et <tt class="docutils literal"><span class="pre">clear_border</span></tt>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">segmentation</span>
-<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">morphology</span>
-<span class="n">filter_res</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">remove_small_objects</span><span class="p">(</span><span class="n">adaptive_threshold</span><span class="p">)</span>
-<span class="n">clear_image</span> <span class="o">=</span> <span class="n">segmentation</span><span class="o">.</span><span class="n">clear_border</span><span class="p">(</span><span class="n">filter_res</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">morphology</span>
+<div class="newline"></div><span class="n">filter_res</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">remove_small_objects</span><span class="p">(</span><span class="n">adaptive_threshold</span><span class="p">)</span>
+<div class="newline"></div><span class="n">clear_image</span> <span class="o">=</span> <span class="n">segmentation</span><span class="o">.</span><span class="n">clear_border</span><span class="p">(</span><span class="n">filter_res</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="figure">
 <a class="reference external image-reference" href="auto_examples/plot_segmentation_coins.html"><img alt="../_images/plot_segmentation_coins_1.png" src="../_images/plot_segmentation_coins_1.png" style="width: 60%;" /></a>
@@ -357,7 +357,7 @@ gallerie du scikit-image.</p>
 chaque objet séparé (composante connexe) grâce à la fonction
 <tt class="docutils literal"><span class="pre">morphology.label</span></tt></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">labels</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">clear_image</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <div class="figure">
 <a class="reference external image-reference" href="auto_examples/plot_segmentation_coins.html"><img alt="../_images/plot_segmentation_coins_2.png" src="../_images/plot_segmentation_coins_2.png" style="width: 50%;" /></a>
@@ -369,14 +369,14 @@ chaque objet séparé (composante connexe) grâce à la fonction
 peut aller calculer différentes propriétés de ces régions grâce à la
 fonction <tt class="docutils literal"><span class="pre">skimage.measure.regionprops</span></tt></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">measure</span>
-<span class="n">props</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">regionprops</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;Area&#39;</span><span class="p">])</span>
-</pre></div>
+<div class="newline"></div><span class="n">props</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">regionprops</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;Area&#39;</span><span class="p">])</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">props</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">{&#39;Area&#39;: 1652.0, &#39;Label&#39;: 1}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">labels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="go">1652</span>
-</pre></div>
+<div class="newline"></div><span class="go">{&#39;Area&#39;: 1652.0, &#39;Label&#39;: 1}</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">labels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="newline"></div><span class="go">1652</span>
+<div class="newline"></div></pre></div>
 </div>
 </div>
 <div class="section" id="et-autres">

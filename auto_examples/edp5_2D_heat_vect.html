@@ -43,61 +43,61 @@
   <p id="example-edp5-2d-heat-vect-py">2D Heat equation using finite differences</p>
 <p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/edp5_2D_heat_vect.py"><tt class="xref download docutils literal"><span class="pre">edp5_2D_heat_vect.py</span></tt></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-
-<span class="k">if</span> <span class="s">&#39;qt&#39;</span> <span class="ow">in</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_backend</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span>
-    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">PySide</span> <span class="kn">import</span> <span class="n">QtGui</span>
-
-
-<span class="c"># PHYSICAL PARAMETERS</span>
-<span class="n">K</span> <span class="o">=</span> <span class="mf">0.5</span>    <span class="c">#Diffusion coefficient</span>
-<span class="n">Lx</span> <span class="o">=</span> <span class="mf">1.0</span>   <span class="c">#Domain size x</span>
-<span class="n">Ly</span> <span class="o">=</span> <span class="mf">1.0</span>   <span class="c">#Domain size y</span>
-<span class="n">Time</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="c">#Integration time</span>
-<span class="n">S</span> <span class="o">=</span> <span class="mf">1.0</span>    <span class="c">#Source term</span>
-
-<span class="c"># NUMERICAL PARAMETERS</span>
-
-<span class="n">NT</span> <span class="o">=</span> <span class="mi">2000</span>      <span class="c">#Number of time steps</span>
-<span class="n">NX</span> <span class="o">=</span> <span class="mi">50</span>        <span class="c">#Number of grid points in x</span>
-<span class="n">NY</span> <span class="o">=</span> <span class="mi">50</span>        <span class="c">#Number of grid points in y</span>
-<span class="n">dt</span> <span class="o">=</span> <span class="n">Time</span><span class="o">/</span><span class="n">NT</span>   <span class="c">#Grid step (time)</span>
-<span class="n">dx</span> <span class="o">=</span> <span class="n">Lx</span><span class="o">/</span><span class="p">(</span><span class="n">NX</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c">#Grid step in x (space)</span>
-<span class="n">dy</span> <span class="o">=</span> <span class="n">Ly</span><span class="o">/</span><span class="p">(</span><span class="n">NY</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c">#Grid step in y (space)</span>
-
-<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">Lx</span><span class="p">,</span><span class="n">NX</span><span class="p">)</span>
-<span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">Ly</span><span class="p">,</span><span class="n">NY</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-
-<span class="c">### MAIN PROGRAM ###</span>
-
-<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">NX</span><span class="p">,</span><span class="n">NY</span><span class="p">))</span>
-<span class="n">RHS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">NX</span><span class="p">,</span><span class="n">NY</span><span class="p">))</span>
-
-<span class="c"># Main loop</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">NT</span><span class="p">):</span>
-   <span class="n">RHS</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt</span><span class="o">*</span><span class="n">K</span><span class="o">*</span><span class="p">(</span> <span class="p">(</span><span class="n">T</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  \
-                         <span class="o">+</span> <span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">:])</span><span class="o">/</span><span class="p">(</span><span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span>
-   <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">RHS</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">dt</span><span class="o">*</span><span class="n">S</span><span class="p">)</span>
-
-
-<span class="c">#Plot every 100 time steps</span>
-   <span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
-      <span class="n">plotlabel</span> <span class="o">=</span> <span class="s">&quot;t = </span><span class="si">%1.2f</span><span class="s">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
-      <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">T</span><span class="p">,</span> <span class="n">shading</span><span class="o">=</span><span class="s">&#39;flat&#39;</span><span class="p">)</span>
-      <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">plotlabel</span><span class="p">)</span>
-      <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;image&#39;</span><span class="p">)</span>
-      <span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-      <span class="k">if</span> <span class="s">&#39;qt&#39;</span> <span class="ow">in</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_backend</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
-          <span class="n">QtGui</span><span class="o">.</span><span class="n">qApp</span><span class="o">.</span><span class="n">processEvents</span><span class="p">()</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
+<div class="newline"></div><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="k">if</span> <span class="s">&#39;qt&#39;</span> <span class="ow">in</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_backend</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+<div class="newline"></div>    <span class="k">try</span><span class="p">:</span>
+<div class="newline"></div>        <span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span>
+<div class="newline"></div>    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+<div class="newline"></div>        <span class="kn">from</span> <span class="nn">PySide</span> <span class="kn">import</span> <span class="n">QtGui</span>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># PHYSICAL PARAMETERS</span>
+<div class="newline"></div><span class="n">K</span> <span class="o">=</span> <span class="mf">0.5</span>    <span class="c">#Diffusion coefficient</span>
+<div class="newline"></div><span class="n">Lx</span> <span class="o">=</span> <span class="mf">1.0</span>   <span class="c">#Domain size x</span>
+<div class="newline"></div><span class="n">Ly</span> <span class="o">=</span> <span class="mf">1.0</span>   <span class="c">#Domain size y</span>
+<div class="newline"></div><span class="n">Time</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="c">#Integration time</span>
+<div class="newline"></div><span class="n">S</span> <span class="o">=</span> <span class="mf">1.0</span>    <span class="c">#Source term</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># NUMERICAL PARAMETERS</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">NT</span> <span class="o">=</span> <span class="mi">2000</span>      <span class="c">#Number of time steps</span>
+<div class="newline"></div><span class="n">NX</span> <span class="o">=</span> <span class="mi">50</span>        <span class="c">#Number of grid points in x</span>
+<div class="newline"></div><span class="n">NY</span> <span class="o">=</span> <span class="mi">50</span>        <span class="c">#Number of grid points in y</span>
+<div class="newline"></div><span class="n">dt</span> <span class="o">=</span> <span class="n">Time</span><span class="o">/</span><span class="n">NT</span>   <span class="c">#Grid step (time)</span>
+<div class="newline"></div><span class="n">dx</span> <span class="o">=</span> <span class="n">Lx</span><span class="o">/</span><span class="p">(</span><span class="n">NX</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c">#Grid step in x (space)</span>
+<div class="newline"></div><span class="n">dy</span> <span class="o">=</span> <span class="n">Ly</span><span class="o">/</span><span class="p">(</span><span class="n">NY</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c">#Grid step in y (space)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">Lx</span><span class="p">,</span><span class="n">NX</span><span class="p">)</span>
+<div class="newline"></div><span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">Ly</span><span class="p">,</span><span class="n">NY</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
+<div class="newline"></div><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c">### MAIN PROGRAM ###</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">NX</span><span class="p">,</span><span class="n">NY</span><span class="p">))</span>
+<div class="newline"></div><span class="n">RHS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">NX</span><span class="p">,</span><span class="n">NY</span><span class="p">))</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># Main loop</span>
+<div class="newline"></div><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">NT</span><span class="p">):</span>
+<div class="newline"></div>   <span class="n">RHS</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt</span><span class="o">*</span><span class="n">K</span><span class="o">*</span><span class="p">(</span> <span class="p">(</span><span class="n">T</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  \
+<div class="newline"></div>                         <span class="o">+</span> <span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">:])</span><span class="o">/</span><span class="p">(</span><span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span>
+<div class="newline"></div>   <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">RHS</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">dt</span><span class="o">*</span><span class="n">S</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div><span class="c">#Plot every 100 time steps</span>
+<div class="newline"></div>   <span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+<div class="newline"></div>      <span class="n">plotlabel</span> <span class="o">=</span> <span class="s">&quot;t = </span><span class="si">%1.2f</span><span class="s">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
+<div class="newline"></div>      <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">T</span><span class="p">,</span> <span class="n">shading</span><span class="o">=</span><span class="s">&#39;flat&#39;</span><span class="p">)</span>
+<div class="newline"></div>      <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">plotlabel</span><span class="p">)</span>
+<div class="newline"></div>      <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;image&#39;</span><span class="p">)</span>
+<div class="newline"></div>      <span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<div class="newline"></div>      <span class="k">if</span> <span class="s">&#39;qt&#39;</span> <span class="ow">in</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_backend</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+<div class="newline"></div>          <span class="n">QtGui</span><span class="o">.</span><span class="n">qApp</span><span class="o">.</span><span class="n">processEvents</span><span class="p">()</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="newline"></div></pre></div>
 </div>
 <p><div style="clear: both"></div></p>
 

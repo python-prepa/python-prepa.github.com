@@ -74,13 +74,13 @@ fichier zippé avec toutes les images se trouve sur
 <p>On peut réaliser ces deux opération en Python, grâce à des
 modules de la librairie standard de Python, <tt class="docutils literal"><span class="pre">urllib</span></tt> et <tt class="docutils literal"><span class="pre">zipfile</span></tt></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">urllib</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c"># le telechargement ci-dessous prend quelques minutes</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s">&#39;https://github.com/python-prepa/mixing-data/zipball/master&#39;</span><span class="p">,</span> <span class="s">&#39;data.zip&#39;</span><span class="p">)</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">zipfile</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fichier_data</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s">&#39;data.zip&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fichier_data</span><span class="o">.</span><span class="n">extractall</span><span class="p">()</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="c"># le telechargement ci-dessous prend quelques minutes</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s">&#39;https://github.com/python-prepa/mixing-data/zipball/master&#39;</span><span class="p">,</span> <span class="s">&#39;data.zip&#39;</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">zipfile</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">fichier_data</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s">&#39;data.zip&#39;</span><span class="p">)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">fichier_data</span><span class="o">.</span><span class="n">extractall</span><span class="p">()</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Pas besoin de sortir de Ipython pour réaliser ces opérations !</p>
 <div class="section" id="extraire-la-region-correspondant-au-fluide">
@@ -110,7 +110,7 @@ On peut le faire avec la fonction <tt class="docutils literal"><span class="pre"
 <li><p class="first">soit on connaît les coordonnées d&#8217;un pixel de la région <tt class="docutils literal"><span class="pre">(i,</span> <span class="pre">j)</span></tt> qui
 nous intéresse, et dans ce cas-là on peut cherche le bon indice comme</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">regions</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 </li>
 </ul>

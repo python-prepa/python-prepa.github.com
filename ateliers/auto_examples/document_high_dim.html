@@ -1,0 +1,125 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>&lt;no title&gt; &mdash; Python scientifique - ENS Paris</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2013.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="Python scientifique - ENS Paris" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <p id="example-document-high-dim-py"><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/document_high_dim.py"><tt class="xref download docutils literal"><span class="pre">document_high_dim.py</span></tt></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">Vectorizer</span>
+<div class="newline"></div><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div><span class="c">###############################################################################</span>
+<div class="newline"></div><span class="c"># Load some categories from the training set</span>
+<div class="newline"></div><span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;comp.sys.ibm.pc.hardware&#39;</span><span class="p">,</span> <span class="s">&#39;comp.os.ms-windows.misc&#39;</span><span class="p">,</span>
+<div class="newline"></div>              <span class="s">&#39;sci.electronics&#39;</span><span class="p">]</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">data_train</span> <span class="o">=</span> <span class="n">fetch_20newsgroups</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s">&#39;train&#39;</span><span class="p">,</span> <span class="n">categories</span><span class="o">=</span><span class="n">categories</span><span class="p">,</span>
+<div class="newline"></div>                               <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<div class="newline"></div><span class="n">data_test</span> <span class="o">=</span> <span class="n">fetch_20newsgroups</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s">&#39;test&#39;</span><span class="p">,</span> <span class="n">categories</span><span class="o">=</span><span class="n">categories</span><span class="p">,</span>
+<div class="newline"></div>                              <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">categories</span> <span class="o">=</span> <span class="n">data_train</span><span class="o">.</span><span class="n">target_names</span>
+<div class="newline"></div><span class="k">print</span> <span class="s">&quot;</span><span class="si">%d</span><span class="s"> documents (training set)&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_train</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<div class="newline"></div><span class="k">print</span> <span class="s">&quot;</span><span class="si">%d</span><span class="s"> documents (testing set)&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_test</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<div class="newline"></div><span class="k">print</span> <span class="s">&quot;</span><span class="si">%d</span><span class="s"> categories&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># split a training set and a test set</span>
+<div class="newline"></div><span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">data_train</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">data_test</span><span class="o">.</span><span class="n">target</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># Extracting features from the training dataset using a sparse vectorizer</span>
+<div class="newline"></div><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">Vectorizer</span><span class="p">()</span>
+<div class="newline"></div><span class="n">X_train</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data_train</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># Extracting features from the test dataset using the same vectorizer</span>
+<div class="newline"></div><span class="n">X_test</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data_test</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c">###############################################################################</span>
+<div class="newline"></div><span class="c"># Benchmark classifier</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># sklearn.naive_bayes.MultinomialNB(alpha=310) gives 84.3%</span>
+<div class="newline"></div><span class="c"># LogisticRegression(C=1.9) gives 85.9%</span>
+<div class="newline"></div><span class="c">#clf = LogisticRegression(C=1.9, penalty=&#39;l2&#39;)</span>
+<div class="newline"></div><span class="c"># LinearSVC(C=.17) gives 85.9%</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="kn">from</span> <span class="nn">sklearn.svm.sparse</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
+<div class="newline"></div><span class="n">clf</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">(</span><span class="n">C</span><span class="o">=.</span><span class="mi">17</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<div class="newline"></div><span class="k">for</span> <span class="n">category</span><span class="p">,</span> <span class="n">words</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">categories</span><span class="p">,</span>
+<div class="newline"></div>                            <span class="n">vectorizer</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span>
+<div class="newline"></div>                                    <span class="n">clf</span><span class="o">.</span><span class="n">coef_</span> <span class="o">&gt;</span> <span class="o">.</span><span class="mi">7</span><span class="p">)):</span>
+<div class="newline"></div>    <span class="k">print</span> <span class="n">category</span><span class="p">,</span> <span class="n">words</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+<div class="newline"></div><span class="k">print</span> <span class="s">&quot;f1-score:   </span><span class="si">%0.3f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">score</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="k">print</span> <span class="s">&quot;classification report:&quot;</span>
+<div class="newline"></div><span class="k">print</span> <span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span>
+<div class="newline"></div>                                        <span class="n">target_names</span><span class="o">=</span><span class="n">categories</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="k">print</span> <span class="s">&quot;confusion matrix:&quot;</span>
+<div class="newline"></div><span class="k">print</span> <span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
+</div>
+<p><div style="clear: both"></div></p>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
+      </ul>
+    </div>
+        <!-- your html code here -->
+<a href="http://www.ens.fr"><img src="../../_static/ENS_Logo.png"
+alt="ENS" height="100"></a>
+<a href="http://www.inria.fr"><img src="../../_static/logo-inria.jpg"
+alt="INRIA" height="60"></a>
+<a href="http://www.saint-gobain-recherche.fr/fr/"><img
+src="../../_static/logoSGR.png" alt="Saint-Gobain Recherche" height="60"></a>
+
+  </body>
+</html>

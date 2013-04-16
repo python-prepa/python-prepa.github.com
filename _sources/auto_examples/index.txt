@@ -24,11 +24,6 @@ Examples
 ========
 
 .. _examples-index:
-.. figure:: ./images/thumb/VonKarman.png
-   :target: ./VonKarman.html
-
-   :ref:`example_VonKarman.py`
-
 .. figure:: ./images/thumb/cascade.png
    :target: ./cascade.html
 

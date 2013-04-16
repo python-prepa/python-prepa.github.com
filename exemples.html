@@ -105,9 +105,9 @@ computing.</li>
 <li><p class="first"><strong>Numpy</strong> : provides powerful <strong>numerical arrays</strong> objects, and routines to
 manipulate them. <a class="reference external" href="http://www.numpy.org/">http://www.numpy.org/</a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<div class="newline"></div></pre></div>
 </div>
 </li>
 <li><p class="first"><strong>Scipy</strong> : high-level data processing routines.
@@ -141,24 +141,24 @@ embedded devices.</p>
 <h3>Command line interaction<a class="headerlink" href="#command-line-interaction" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Start <cite>ipython</cite>:</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;Hello world&#39;</span><span class="p">)</span>
-<span class="go">Hello world</span>
-</pre></div>
+<div class="newline"></div><span class="go">Hello world</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Getting help:</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [2]: </span><span class="k">print</span><span class="err">?</span>
-<span class="go">Type:               builtin_function_or_method</span>
-<span class="go">Base Class:         &lt;type &#39;builtin_function_or_method&#39;&gt;</span>
-<span class="go">String Form:        &lt;built-in function print&gt;</span>
-<span class="go">Namespace:          Python builtin</span>
-<span class="go">Docstring:</span>
-<span class="go">    print(value, ..., sep=&#39; &#39;, end=&#39;\n&#39;, file=sys.stdout)</span>
-
-<span class="go">    Prints the values to a stream, or to sys.stdout by default.</span>
-<span class="go">    Optional keyword arguments:</span>
-<span class="go">    file: a file-like object (stream); defaults to the current sys.stdout.</span>
-<span class="go">    sep:  string inserted between values, default a space.</span>
-<span class="go">    end:  string appended after the last value, default a newline.</span>
-</pre></div>
+<div class="newline"></div><span class="go">Type:               builtin_function_or_method</span>
+<div class="newline"></div><span class="go">Base Class:         &lt;type &#39;builtin_function_or_method&#39;&gt;</span>
+<div class="newline"></div><span class="go">String Form:        &lt;built-in function print&gt;</span>
+<div class="newline"></div><span class="go">Namespace:          Python builtin</span>
+<div class="newline"></div><span class="go">Docstring:</span>
+<div class="newline"></div><span class="go">    print(value, ..., sep=&#39; &#39;, end=&#39;\n&#39;, file=sys.stdout)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="go">    Prints the values to a stream, or to sys.stdout by default.</span>
+<div class="newline"></div><span class="go">    Optional keyword arguments:</span>
+<div class="newline"></div><span class="go">    file: a file-like object (stream); defaults to the current sys.stdout.</span>
+<div class="newline"></div><span class="go">    sep:  string inserted between values, default a space.</span>
+<div class="newline"></div><span class="go">    end:  string appended after the last value, default a newline.</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Create a file <cite>my_file.py</cite> in a text editor. Under EPD (Enthought Python
 Distribution), you can use <cite>Scite</cite>, available from the start menu. Under
@@ -166,21 +166,21 @@ Python(x,y), you can use Spyder. Under Ubuntu, if you don&#8217;t already have y
 favorite editor, we would advise installing <cite>Stani&#8217;s Python editor</cite>. In the
 file, add the following lines:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">s</span> <span class="o">=</span> <span class="s">&#39;Hello world&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Now, you can run it in IPython and explore the resulting variables:</p>
 <div class="highlight-ipython"><div class="highlight"><pre><span class="gp">In [3]: </span><span class="o">%</span><span class="n">run</span> <span class="n">my_file</span><span class="o">.</span><span class="n">py</span>
-<span class="go">Hello word</span>
-
-<span class="gp">In [4]: </span><span class="n">s</span>
-<span class="go">Out[4]: </span><span class="s">&#39;Hello word&#39;</span>
-
-<span class="gp">In [5]: </span><span class="o">%</span><span class="n">whos</span>
-<span class="go">Variable   Type    Data/Info</span>
-<span class="go">----------------------------</span>
-<span class="go">s          str     Hello word</span>
-</pre></div>
+<div class="newline"></div><span class="go">Hello word</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="gp">In [4]: </span><span class="n">s</span>
+<div class="newline"></div><span class="go">Out[4]: </span><span class="s">&#39;Hello word&#39;</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="gp">In [5]: </span><span class="o">%</span><span class="n">whos</span>
+<div class="newline"></div><span class="go">Variable   Type    Data/Info</span>
+<div class="newline"></div><span class="go">----------------------------</span>
+<div class="newline"></div><span class="go">s          str     Hello word</span>
+<div class="newline"></div></pre></div>
 </div>
 <p><div style="clear: both"></div></p>
 </div>

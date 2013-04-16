@@ -43,19 +43,19 @@
   <p id="example-quicksort-py">Quick sort</p>
 <p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/quicksort.py"><tt class="xref download docutils literal"><span class="pre">quicksort.py</span></tt></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">quicksort</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">array</span>
-    <span class="n">pivot</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="c"># this modifies the initial list!!</span>
-    <span class="c"># to avoid this, do</span>
-    <span class="c"># copy_array = array[:]; pivot = copy_array.pop()</span>
-    <span class="n">less_than</span><span class="p">,</span> <span class="n">greater_than</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">element</span> <span class="o">&lt;</span> <span class="n">pivot</span><span class="p">:</span>
-            <span class="n">less_than</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">greater_than</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">quicksort</span><span class="p">(</span><span class="n">less_than</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">pivot</span><span class="p">]</span> <span class="o">+</span> <span class="n">quicksort</span><span class="p">(</span><span class="n">greater_than</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+<div class="newline"></div>        <span class="k">return</span> <span class="n">array</span>
+<div class="newline"></div>    <span class="n">pivot</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="c"># this modifies the initial list!!</span>
+<div class="newline"></div>    <span class="c"># to avoid this, do</span>
+<div class="newline"></div>    <span class="c"># copy_array = array[:]; pivot = copy_array.pop()</span>
+<div class="newline"></div>    <span class="n">less_than</span><span class="p">,</span> <span class="n">greater_than</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<div class="newline"></div>    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">array</span><span class="p">:</span>
+<div class="newline"></div>        <span class="k">if</span> <span class="n">element</span> <span class="o">&lt;</span> <span class="n">pivot</span><span class="p">:</span>
+<div class="newline"></div>            <span class="n">less_than</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+<div class="newline"></div>        <span class="k">else</span><span class="p">:</span>
+<div class="newline"></div>            <span class="n">greater_than</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+<div class="newline"></div>    <span class="k">return</span> <span class="n">quicksort</span><span class="p">(</span><span class="n">less_than</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">pivot</span><span class="p">]</span> <span class="o">+</span> <span class="n">quicksort</span><span class="p">(</span><span class="n">greater_than</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <p><div style="clear: both"></div></p>
 

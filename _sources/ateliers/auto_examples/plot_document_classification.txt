@@ -1,0 +1,16 @@
+
+
+.. _example_plot_document_classification.py:
+
+
+
+
+.. rst-class:: horizontal
+
+
+
+**Python source code:** :download:`plot_document_classification.py <plot_document_classification.py>`
+
+.. literalinclude:: plot_document_classification.py
+    :lines: 3-
+    

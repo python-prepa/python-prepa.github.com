@@ -1,0 +1,11 @@
+
+
+.. _example_document_classification_20newsgroups.py:
+
+
+
+**Python source code:** :download:`document_classification_20newsgroups.py <document_classification_20newsgroups.py>`
+
+.. literalinclude:: document_classification_20newsgroups.py
+    :lines: 3-
+    

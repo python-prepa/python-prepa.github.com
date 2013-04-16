@@ -43,101 +43,101 @@
   <p id="example-edp7-waves-py">2D WAVE PROPAGATION USING FINITE DIFFERENCES</p>
 <p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/edp7_waves.py"><tt class="xref download docutils literal"><span class="pre">edp7_waves.py</span></tt></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="c">#from mpl_toolkits.mplot3d import Axes3D</span>
-<span class="c">#from matplotlib import cm</span>
-
-<span class="k">if</span> <span class="s">&#39;qt&#39;</span> <span class="ow">in</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_backend</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span>
-    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-        <span class="kn">from</span> <span class="nn">PySide</span> <span class="kn">import</span> <span class="n">QtGui</span>
-
-
-
-<span class="c"># PARAMETRES PHYSIQUES</span>
-<span class="n">C</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c">#VIT ONDE </span>
-<span class="n">Lx</span> <span class="o">=</span> <span class="mf">6.0</span>  <span class="c">#taille du domaine</span>
-<span class="n">Ly</span> <span class="o">=</span> <span class="mf">4.0</span>  <span class="c">#taille du domaine</span>
-<span class="n">T</span> <span class="o">=</span> <span class="mf">5.0</span>   <span class="c">#temps d&#39;integration</span>
-
-<span class="c"># PARAMETRES NUMERIQUES</span>
-<span class="n">NX</span> <span class="o">=</span> <span class="mi">151</span>  <span class="c">#nombre de points de grille</span>
-<span class="n">NY</span> <span class="o">=</span> <span class="mi">101</span>  <span class="c">#nombre de points de grille</span>
-<span class="n">NT</span> <span class="o">=</span> <span class="mi">250</span>  <span class="c">#nombre de pas de temps</span>
-
-<span class="n">dx</span> <span class="o">=</span> <span class="n">Lx</span><span class="o">/</span><span class="p">(</span><span class="n">NX</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="c">#pas de grille (espace)</span>
-<span class="n">dy</span> <span class="o">=</span> <span class="n">Ly</span><span class="o">/</span><span class="p">(</span><span class="n">NY</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="c">#pas de grille (espace)</span>
-<span class="n">dt</span> <span class="o">=</span> <span class="n">T</span><span class="o">/</span><span class="n">NT</span>      <span class="c">#pas de grille (temps)</span>
-
-
-<span class="n">alpha</span><span class="o">=</span><span class="p">(</span><span class="n">C</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">dt</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-
-
-<span class="c"># Pour la figure</span>
-<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">NX</span><span class="p">,</span><span class="n">NY</span><span class="p">))</span>
-<span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">NX</span><span class="p">,</span><span class="n">NY</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">NX</span><span class="p">):</span>
-   <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">NY</span><span class="p">):</span>
-      <span class="n">xx</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="n">dx</span>
-      <span class="n">yy</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">j</span><span class="o">*</span><span class="n">dy</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
-<span class="c">#ax = plt.gca(projection=&#39;3d&#39;)</span>
-
-<span class="n">a</span><span class="o">=</span><span class="mf">40.0</span>
-
-<span class="c">#Initialisation</span>
-<span class="n">ddU</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">NX</span><span class="p">,</span><span class="n">NY</span><span class="p">))</span>
-<span class="n">U_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="p">((</span><span class="n">xx</span><span class="o">-</span><span class="mf">1.5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">yy</span><span class="o">-</span><span class="mf">1.5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-<span class="n">U_old</span><span class="o">=</span> <span class="n">U_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">U_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">NX</span><span class="p">,</span><span class="n">NY</span><span class="p">))</span>
-
-<span class="c"># Boucle en temps</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">NT</span><span class="p">):</span>
-   <span class="n">ddU</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">U_data</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">U_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">U_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> \
-                  <span class="o">+</span> <span class="p">(</span><span class="n">U_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">:]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">U_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">U_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-
-   <span class="n">U_new</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">U_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">U_old</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">alpha</span><span class="o">*</span><span class="n">ddU</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
-   <span class="n">toto</span><span class="o">=</span><span class="n">U_old</span>
-   <span class="n">U_old</span><span class="o">=</span><span class="n">U_data</span>
-   <span class="n">U_data</span><span class="o">=</span><span class="n">U_new</span>
-   <span class="n">U_new</span><span class="o">=</span><span class="n">toto</span>
-
-<span class="c"># FIXED BC</span>
-<span class="c">#   U_data[0,:]=0.0</span>
-
-<span class="c"># REFLECTING BC</span>
-   <span class="n">U_data</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span><span class="o">=</span><span class="n">U_data</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span>
-   <span class="n">U_data</span><span class="p">[</span><span class="n">NX</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]</span><span class="o">=</span><span class="n">U_data</span><span class="p">[</span><span class="n">NX</span><span class="o">-</span><span class="mi">3</span><span class="p">,:]</span>
-   <span class="n">U_data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">U_data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
-   <span class="n">U_data</span><span class="p">[:,</span><span class="n">NY</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">U_data</span><span class="p">[:,</span><span class="n">NY</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
-
-<span class="c"># PERIODIC BC</span>
-<span class="c">#   U_data[0,:]=U_data[NX-2,:]</span>
-<span class="c">#   U_data[NX-1,:]=U_data[1,:]</span>
-<span class="c">#   U_data[:,0]=U_data[:,NY-2]</span>
-<span class="c">#   U_data[:,NY-1]=U_data[:,1]</span>
-
-   <span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">10</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
-     <span class="n">plotlabel</span><span class="o">=</span> <span class="s">&quot;N = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-
-     <span class="c">#ax.cla()</span>
-     <span class="c">#ax.plot_surface(xx,yy,U_data,vmin=-0.1,vmax=0.1,cmap=cm.jet,antialiased=False,linewidth=0,rstride=1,cstride=1)</span>
-     <span class="c">#ax.set_zlim3d(-0.1,0.1)</span>
-
-     <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">U_data</span><span class="p">)</span>
-     <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;image&#39;</span><span class="p">)</span>
-     <span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
-
-     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">plotlabel</span><span class="p">)</span>
-     <span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-     <span class="k">if</span> <span class="s">&#39;qt&#39;</span> <span class="ow">in</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_backend</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
-        <span class="n">QtGui</span><span class="o">.</span><span class="n">qApp</span><span class="o">.</span><span class="n">processEvents</span><span class="p">()</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
+<div class="newline"></div><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="newline"></div><span class="c">#from mpl_toolkits.mplot3d import Axes3D</span>
+<div class="newline"></div><span class="c">#from matplotlib import cm</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="k">if</span> <span class="s">&#39;qt&#39;</span> <span class="ow">in</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_backend</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+<div class="newline"></div>    <span class="k">try</span><span class="p">:</span>
+<div class="newline"></div>        <span class="kn">from</span> <span class="nn">PyQt4</span> <span class="kn">import</span> <span class="n">QtGui</span>
+<div class="newline"></div>    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+<div class="newline"></div>        <span class="kn">from</span> <span class="nn">PySide</span> <span class="kn">import</span> <span class="n">QtGui</span>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># PARAMETRES PHYSIQUES</span>
+<div class="newline"></div><span class="n">C</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c">#VIT ONDE </span>
+<div class="newline"></div><span class="n">Lx</span> <span class="o">=</span> <span class="mf">6.0</span>  <span class="c">#taille du domaine</span>
+<div class="newline"></div><span class="n">Ly</span> <span class="o">=</span> <span class="mf">4.0</span>  <span class="c">#taille du domaine</span>
+<div class="newline"></div><span class="n">T</span> <span class="o">=</span> <span class="mf">5.0</span>   <span class="c">#temps d&#39;integration</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># PARAMETRES NUMERIQUES</span>
+<div class="newline"></div><span class="n">NX</span> <span class="o">=</span> <span class="mi">151</span>  <span class="c">#nombre de points de grille</span>
+<div class="newline"></div><span class="n">NY</span> <span class="o">=</span> <span class="mi">101</span>  <span class="c">#nombre de points de grille</span>
+<div class="newline"></div><span class="n">NT</span> <span class="o">=</span> <span class="mi">250</span>  <span class="c">#nombre de pas de temps</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">dx</span> <span class="o">=</span> <span class="n">Lx</span><span class="o">/</span><span class="p">(</span><span class="n">NX</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="c">#pas de grille (espace)</span>
+<div class="newline"></div><span class="n">dy</span> <span class="o">=</span> <span class="n">Ly</span><span class="o">/</span><span class="p">(</span><span class="n">NY</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="c">#pas de grille (espace)</span>
+<div class="newline"></div><span class="n">dt</span> <span class="o">=</span> <span class="n">T</span><span class="o">/</span><span class="n">NT</span>      <span class="c">#pas de grille (temps)</span>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">alpha</span><span class="o">=</span><span class="p">(</span><span class="n">C</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">dt</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># Pour la figure</span>
+<div class="newline"></div><span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">NX</span><span class="p">,</span><span class="n">NY</span><span class="p">))</span>
+<div class="newline"></div><span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">NX</span><span class="p">,</span><span class="n">NY</span><span class="p">))</span>
+<div class="newline"></div><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">NX</span><span class="p">):</span>
+<div class="newline"></div>   <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">NY</span><span class="p">):</span>
+<div class="newline"></div>      <span class="n">xx</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="n">dx</span>
+<div class="newline"></div>      <span class="n">yy</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">j</span><span class="o">*</span><span class="n">dy</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
+<div class="newline"></div><span class="c">#ax = plt.gca(projection=&#39;3d&#39;)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">a</span><span class="o">=</span><span class="mf">40.0</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c">#Initialisation</span>
+<div class="newline"></div><span class="n">ddU</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">NX</span><span class="p">,</span><span class="n">NY</span><span class="p">))</span>
+<div class="newline"></div><span class="n">U_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="p">((</span><span class="n">xx</span><span class="o">-</span><span class="mf">1.5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">yy</span><span class="o">-</span><span class="mf">1.5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<div class="newline"></div><span class="n">U_old</span><span class="o">=</span> <span class="n">U_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<div class="newline"></div><span class="n">U_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">NX</span><span class="p">,</span><span class="n">NY</span><span class="p">))</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># Boucle en temps</span>
+<div class="newline"></div><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">NT</span><span class="p">):</span>
+<div class="newline"></div>   <span class="n">ddU</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">U_data</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">U_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">U_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> \
+<div class="newline"></div>                  <span class="o">+</span> <span class="p">(</span><span class="n">U_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">:]</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">U_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">U_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div>   <span class="n">U_new</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">U_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">U_old</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">alpha</span><span class="o">*</span><span class="n">ddU</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class="newline"></div>
+<div class="newline"></div>   <span class="n">toto</span><span class="o">=</span><span class="n">U_old</span>
+<div class="newline"></div>   <span class="n">U_old</span><span class="o">=</span><span class="n">U_data</span>
+<div class="newline"></div>   <span class="n">U_data</span><span class="o">=</span><span class="n">U_new</span>
+<div class="newline"></div>   <span class="n">U_new</span><span class="o">=</span><span class="n">toto</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># FIXED BC</span>
+<div class="newline"></div><span class="c">#   U_data[0,:]=0.0</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># REFLECTING BC</span>
+<div class="newline"></div>   <span class="n">U_data</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span><span class="o">=</span><span class="n">U_data</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span>
+<div class="newline"></div>   <span class="n">U_data</span><span class="p">[</span><span class="n">NX</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]</span><span class="o">=</span><span class="n">U_data</span><span class="p">[</span><span class="n">NX</span><span class="o">-</span><span class="mi">3</span><span class="p">,:]</span>
+<div class="newline"></div>   <span class="n">U_data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">U_data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
+<div class="newline"></div>   <span class="n">U_data</span><span class="p">[:,</span><span class="n">NY</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">U_data</span><span class="p">[:,</span><span class="n">NY</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># PERIODIC BC</span>
+<div class="newline"></div><span class="c">#   U_data[0,:]=U_data[NX-2,:]</span>
+<div class="newline"></div><span class="c">#   U_data[NX-1,:]=U_data[1,:]</span>
+<div class="newline"></div><span class="c">#   U_data[:,0]=U_data[:,NY-2]</span>
+<div class="newline"></div><span class="c">#   U_data[:,NY-1]=U_data[:,1]</span>
+<div class="newline"></div>
+<div class="newline"></div>   <span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">10</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
+<div class="newline"></div>     <span class="n">plotlabel</span><span class="o">=</span> <span class="s">&quot;N = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div>     <span class="c">#ax.cla()</span>
+<div class="newline"></div>     <span class="c">#ax.plot_surface(xx,yy,U_data,vmin=-0.1,vmax=0.1,cmap=cm.jet,antialiased=False,linewidth=0,rstride=1,cstride=1)</span>
+<div class="newline"></div>     <span class="c">#ax.set_zlim3d(-0.1,0.1)</span>
+<div class="newline"></div>
+<div class="newline"></div>     <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">U_data</span><span class="p">)</span>
+<div class="newline"></div>     <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;image&#39;</span><span class="p">)</span>
+<div class="newline"></div>     <span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div>     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">plotlabel</span><span class="p">)</span>
+<div class="newline"></div>     <span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<div class="newline"></div>     <span class="k">if</span> <span class="s">&#39;qt&#39;</span> <span class="ow">in</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_backend</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+<div class="newline"></div>        <span class="n">QtGui</span><span class="o">.</span><span class="n">qApp</span><span class="o">.</span><span class="n">processEvents</span><span class="p">()</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="newline"></div></pre></div>
 </div>
 <p><div style="clear: both"></div></p>
 

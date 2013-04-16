@@ -43,59 +43,59 @@
   <p id="example-edp6-2d-heat-solve-py">Example of matrix formulation of 2D finite difference schemes</p>
 <p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/edp6_2D_heat_solve.py"><tt class="xref download docutils literal"><span class="pre">edp6_2D_heat_solve.py</span></tt></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># Import Pylab</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-
-<span class="c"># For sparse matrices</span>
-<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="kn">as</span> <span class="nn">sp</span>
-<span class="kn">from</span> <span class="nn">scipy.sparse.linalg.dsolve</span> <span class="kn">import</span> <span class="n">spsolve</span>
-
-<span class="c"># To estimate execution time</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-
-
-<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>         <span class="c"># Number of points in the domain (in each direction)</span>
-<span class="n">dx</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>  <span class="c"># Space spacing</span>
-
-<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
-<span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
-
-
-
-<span class="c"># Definition of the 1D Lalace operator</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">),</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>   <span class="c"># Diagonal terms</span>
-<span class="n">offsets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>                   <span class="c"># Their positions</span>
-<span class="n">LAP</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dia_matrix</span><span class="p">(</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">offsets</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
-
-<span class="c"># To plot the matrix</span>
-<span class="c">#print LAP.todense()</span>
-
-
-<span class="n">NN</span> <span class="o">=</span> <span class="n">N</span><span class="o">*</span><span class="n">N</span>
-
-<span class="c"># Identity NxN</span>
-<span class="n">I1D</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>  
-
-<span class="c"># 2D Laplace operator</span>
-<span class="n">LAP2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">LAP</span><span class="p">,</span><span class="n">I1D</span><span class="p">)</span><span class="o">+</span><span class="n">sp</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">I1D</span><span class="p">,</span><span class="n">LAP</span><span class="p">)</span>
-
-<span class="c">#plt.figure()</span>
-<span class="c">#spy(LAP2)</span>
-<span class="c">#draw()</span>
-
-<span class="n">f2</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">NN</span><span class="p">)</span><span class="o">*</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span>   <span class="c"># Right hand side</span>
-
-<span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="p">();</span> <span class="n">T</span> <span class="o">=</span> <span class="n">spsolve</span><span class="p">(</span><span class="n">LAP2</span><span class="p">,</span><span class="n">f2</span><span class="p">);</span> <span class="k">print</span> <span class="s">&#39;temps sparse=&#39;</span><span class="p">,</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t</span>  <span class="c"># Solving the linear system</span>
-
-<span class="c"># In order to compare with the full resolution</span>
-<span class="c">#LAP2full=LAP2.todense()</span>
-<span class="c">#t=time(); T2=np.linalg.solve(LAP2full,f2); print &#39;temps full=&#39;,time()-t</span>
-
-<span class="c"># Plotting</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">),</span> <span class="n">shading</span><span class="o">=</span><span class="s">&#39;flat&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;image&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
+<div class="newline"></div><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="newline"></div><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># For sparse matrices</span>
+<div class="newline"></div><span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="kn">as</span> <span class="nn">sp</span>
+<div class="newline"></div><span class="kn">from</span> <span class="nn">scipy.sparse.linalg.dsolve</span> <span class="kn">import</span> <span class="n">spsolve</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># To estimate execution time</span>
+<div class="newline"></div><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>         <span class="c"># Number of points in the domain (in each direction)</span>
+<div class="newline"></div><span class="n">dx</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>  <span class="c"># Space spacing</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+<div class="newline"></div><span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># Definition of the 1D Lalace operator</span>
+<div class="newline"></div><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">),</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>   <span class="c"># Diagonal terms</span>
+<div class="newline"></div><span class="n">offsets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>                   <span class="c"># Their positions</span>
+<div class="newline"></div><span class="n">LAP</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dia_matrix</span><span class="p">(</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">offsets</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># To plot the matrix</span>
+<div class="newline"></div><span class="c">#print LAP.todense()</span>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">NN</span> <span class="o">=</span> <span class="n">N</span><span class="o">*</span><span class="n">N</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># Identity NxN</span>
+<div class="newline"></div><span class="n">I1D</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>  
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># 2D Laplace operator</span>
+<div class="newline"></div><span class="n">LAP2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">LAP</span><span class="p">,</span><span class="n">I1D</span><span class="p">)</span><span class="o">+</span><span class="n">sp</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">I1D</span><span class="p">,</span><span class="n">LAP</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c">#plt.figure()</span>
+<div class="newline"></div><span class="c">#spy(LAP2)</span>
+<div class="newline"></div><span class="c">#draw()</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">f2</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">NN</span><span class="p">)</span><span class="o">*</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span>   <span class="c"># Right hand side</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="p">();</span> <span class="n">T</span> <span class="o">=</span> <span class="n">spsolve</span><span class="p">(</span><span class="n">LAP2</span><span class="p">,</span><span class="n">f2</span><span class="p">);</span> <span class="k">print</span> <span class="s">&#39;temps sparse=&#39;</span><span class="p">,</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t</span>  <span class="c"># Solving the linear system</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># In order to compare with the full resolution</span>
+<div class="newline"></div><span class="c">#LAP2full=LAP2.todense()</span>
+<div class="newline"></div><span class="c">#t=time(); T2=np.linalg.solve(LAP2full,f2); print &#39;temps full=&#39;,time()-t</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># Plotting</span>
+<div class="newline"></div><span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">),</span> <span class="n">shading</span><span class="o">=</span><span class="s">&#39;flat&#39;</span><span class="p">)</span>
+<div class="newline"></div><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">&#39;image&#39;</span><span class="p">)</span>
+<div class="newline"></div><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="newline"></div></pre></div>
 </div>
 <p><div style="clear: both"></div></p>
 

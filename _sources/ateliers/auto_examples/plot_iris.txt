@@ -1,0 +1,47 @@
+
+
+.. _example_plot_iris.py:
+
+ Affichage de la classes d'iris en fonction des different attributs
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/plot_iris_4.png
+            :scale: 50
+
+    *
+
+      .. image:: images/plot_iris_6.png
+            :scale: 50
+
+    *
+
+      .. image:: images/plot_iris_1.png
+            :scale: 50
+
+    *
+
+      .. image:: images/plot_iris_3.png
+            :scale: 50
+
+    *
+
+      .. image:: images/plot_iris_2.png
+            :scale: 50
+
+    *
+
+      .. image:: images/plot_iris_5.png
+            :scale: 50
+
+
+**Python source code:** :download:`plot_iris.py <plot_iris.py>`
+
+.. literalinclude:: plot_iris.py
+    :lines: 3-
+    

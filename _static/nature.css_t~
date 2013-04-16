@@ -29,8 +29,8 @@ div.body h1, div.body h2, div.body h3, div.body h4, hr {
 }
 
 div.body p {
-    margin-bottom : 0.5em;
-    margin-top : 0.5em;
+    margin-bottom : 0.7em;
+    margin-top : 0.7em;
 }
 
 /* alternating colors in table rows */

@@ -70,9 +70,9 @@ dans la liste des chemins possibles stockés dans la variable <tt class="docutil
 module <tt class="docutils literal"><span class="pre">sys</span></tt></p>
 <p><strong>Première méthode d&#8217;importation</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">random</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
-<span class="go">9</span>
-</pre></div>
+<div class="newline"></div><span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<div class="newline"></div><span class="go">9</span>
+<div class="newline"></div></pre></div>
 </div>
 <ul class="simple">
 <li>L&#8217;instruction import permet d&#8217;importer toutes les fonctions du
@@ -93,10 +93,10 @@ aléatoirement entre a inclus et b inclus</li>
 <p class="last">Cette option est cependant à éviter notament lorsqu&#8217;un module propose un nombre important de fonctions et parce que certains modules ont des fonctions qui ont le même nom (par exemple, <tt class="docutils literal"><span class="pre">math</span></tt> et <tt class="docutils literal"><span class="pre">numpy</span></tt>)</p>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">sept</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span>
-<span class="n">angle</span> <span class="o">=</span> <span class="n">pi</span><span class="o">/</span><span class="mi">6</span>
-<span class="k">print</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div><span class="n">sept</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">49</span><span class="p">)</span>
+<div class="newline"></div><span class="n">angle</span> <span class="o">=</span> <span class="n">pi</span><span class="o">/</span><span class="mi">6</span>
+<div class="newline"></div><span class="k">print</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <hr class="docutils" />
 <p><strong>Modules courants</strong></p>
@@ -120,13 +120,13 @@ pi...).</li>
 <p>Pour permettre une interaction avec l&#8217;utilisateur, la méthode la plus simple consiste à employer la fonction <tt class="docutils literal"><span class="pre">raw_input()</span></tt>
 :</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="s">&#39;Entrez votre prénom : &#39;</span><span class="p">)</span>
-<span class="n">prenom</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">()</span>
-<span class="k">print</span> <span class="s">&#39;Bonjour,&#39;</span><span class="p">,</span> <span class="n">prenom</span>
-</pre></div>
+<div class="newline"></div><span class="n">prenom</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">()</span>
+<div class="newline"></div><span class="k">print</span> <span class="s">&#39;Bonjour,&#39;</span><span class="p">,</span> <span class="n">prenom</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">prenom</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&#39;Entrez votre prénom : &#39;</span><span class="p">)</span>
-<span class="k">print</span> <span class="s">&#39;Bonjour,&#39;</span><span class="p">,</span> <span class="n">prenom</span>
-</pre></div>
+<div class="newline"></div><span class="k">print</span> <span class="s">&#39;Bonjour,&#39;</span><span class="p">,</span> <span class="n">prenom</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Remarque</p>
@@ -146,8 +146,8 @@ un fichier de chemin &lt;ch&gt;</li>
 un répertoire de chemin &lt;ch&gt;</li>
 </ul>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
-<span class="n">chdir</span><span class="p">(</span><span class="s">&quot;/home/exercices&quot;</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div><span class="n">chdir</span><span class="p">(</span><span class="s">&quot;/home/exercices&quot;</span><span class="p">)</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Remarque</p>
@@ -183,16 +183,16 @@ fichier</li>
 <li><tt class="docutils literal"><span class="pre">tell()</span></tt> : retourne le caractère en position courante</li>
 </ul>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># Exemple de copie intégrale d&#39;un fichier</span>
-<span class="n">fs</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;source.txt&quot;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">fd</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;destination.txt&quot;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
-<span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
-    <span class="n">txt</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="c"># copie de 50 caractères à la fois</span>
-    <span class="k">if</span> <span class="n">txt</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
-        <span class="k">break</span>
-    <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
-<span class="n">fs</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">fd</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
+<div class="newline"></div><span class="n">fs</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;source.txt&quot;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<div class="newline"></div><span class="n">fd</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;destination.txt&quot;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<div class="newline"></div><span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+<div class="newline"></div>    <span class="n">txt</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="c"># copie de 50 caractères à la fois</span>
+<div class="newline"></div>    <span class="k">if</span> <span class="n">txt</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+<div class="newline"></div>        <span class="k">break</span>
+<div class="newline"></div>    <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+<div class="newline"></div><span class="n">fs</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<div class="newline"></div><span class="n">fd</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<div class="newline"></div></pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Remarque</p>
@@ -210,39 +210,39 @@ d&#8217;une fonction.  Elle prend en entrée une fonction et une liste et
 retourne une nouvelle liste en appelant la fonction sur chaque élément
 de la liste dans l&#8217;ordre. Voici quelques exemples d&#8217;utilisation :</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">carre</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span>
-<span class="k">def</span> <span class="nf">pair</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="nb">map</span><span class="p">(</span><span class="n">carre</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-<span class="c"># Affiche [1, 4, 9, 16, 25]</span>
-
-<span class="k">print</span> <span class="nb">map</span><span class="p">(</span><span class="n">pair</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-<span class="c"># Affiche [False, True, False, True, False]</span>
-</pre></div>
+<div class="newline"></div>    <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span>
+<div class="newline"></div><span class="k">def</span> <span class="nf">pair</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="newline"></div>    <span class="k">return</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="k">print</span> <span class="nb">map</span><span class="p">(</span><span class="n">carre</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<div class="newline"></div><span class="c"># Affiche [1, 4, 9, 16, 25]</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="k">print</span> <span class="nb">map</span><span class="p">(</span><span class="n">pair</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<div class="newline"></div><span class="c"># Affiche [False, True, False, True, False]</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Comme dans les langages fonctionnels, avec le mot-clé <tt class="docutils literal"><span class="pre">lambda</span></tt>, il
 est possible de créer des fonctions anonymes. Le premier exemple est
 équivalent à</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-<span class="c"># Affiche [1, 4, 9, 16, 25]</span>
-</pre></div>
+<div class="newline"></div><span class="c"># Affiche [1, 4, 9, 16, 25]</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>La fonction <strong>filter</strong> permet de retirer les valeurs d&#8217;une liste que
 l&#8217;on ne veut pas.  Elle prend en entrée une fonction et une liste et
 retourne la liste des éléments (dans l&#8217;ordre) sur lesquels la fonction
 retourne le booléen <tt class="docutils literal"><span class="pre">True</span></tt>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">petit_carre</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="mi">16</span>
-<span class="k">def</span> <span class="nf">pair</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="nb">filter</span><span class="p">(</span><span class="n">petit_carre</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-<span class="c"># Affiche [1, 2, 3]</span>
-
-<span class="k">print</span> <span class="nb">filter</span><span class="p">(</span><span class="n">pair</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-<span class="c"># Affiche [2, 4], c&#39;est à dire les nombres pairs de la liste.</span>
-</pre></div>
+<div class="newline"></div>    <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="mi">16</span>
+<div class="newline"></div><span class="k">def</span> <span class="nf">pair</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="newline"></div>    <span class="k">return</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="k">print</span> <span class="nb">filter</span><span class="p">(</span><span class="n">petit_carre</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<div class="newline"></div><span class="c"># Affiche [1, 2, 3]</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="k">print</span> <span class="nb">filter</span><span class="p">(</span><span class="n">pair</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<div class="newline"></div><span class="c"># Affiche [2, 4], c&#39;est à dire les nombres pairs de la liste.</span>
+<div class="newline"></div></pre></div>
 </div>
 <p><strong>Les compréhensions de liste.</strong>
 Les compréhensions de liste sont des outils puissants permettant
@@ -251,18 +251,18 @@ habituelle en Python. De plus, elles permettent de combiner un <tt class="docuti
 un <tt class="docutils literal"><span class="pre">filter</span></tt> en même temps.</p>
 <p>Voici la syntaxe avec les exemples vus précédemment</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># Affiche les carrés des éléments</span>
-<span class="n">liste</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
-<span class="k">print</span> <span class="p">[</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">liste</span><span class="p">]</span>
-<span class="c"># Équivaut au map, en plus lisible et plus simple :) .</span>
-
-<span class="c"># Affiche les nombres pairs</span>
-<span class="k">print</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">liste</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-<span class="c"># Plus simple que filter, également :)</span>
-
-<span class="c"># Affiche les carrés pairs (combinaison des deux)</span>
-<span class="k">print</span> <span class="p">[</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">liste</span> <span class="k">if</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-<span class="c"># ou print [x for x in [a ** 2 for a in liste] if x % 2 == 0]</span>
-</pre></div>
+<div class="newline"></div><span class="n">liste</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<div class="newline"></div><span class="k">print</span> <span class="p">[</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">liste</span><span class="p">]</span>
+<div class="newline"></div><span class="c"># Équivaut au map, en plus lisible et plus simple :) .</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># Affiche les nombres pairs</span>
+<div class="newline"></div><span class="k">print</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">liste</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<div class="newline"></div><span class="c"># Plus simple que filter, également :)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># Affiche les carrés pairs (combinaison des deux)</span>
+<div class="newline"></div><span class="k">print</span> <span class="p">[</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">liste</span> <span class="k">if</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<div class="newline"></div><span class="c"># ou print [x for x in [a ** 2 for a in liste] if x % 2 == 0]</span>
+<div class="newline"></div></pre></div>
 </div>
 <p><strong>Méthodes supplémentaires sur les listes</strong></p>
 <p>Voici une liste des méthodes des objets de type liste les plus utiles :</p>
@@ -327,7 +327,7 @@ un <tt class="docutils literal"><span class="pre">filter</span></tt> en même te
 </ul>
 <p><strong>Module heapq</strong>. Ce module propose une implantation efficace des tas binaires (et des files de priorité) qui utilise naturellement des tableaux.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">heapq</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>Les fonctions suivantes sont notamment définies :</p>
 <blockquote>
@@ -409,24 +409,24 @@ que la lettre Y plus rare est codée par le mot de 5 bits 01001.</p>
 </div>
 <p>et</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">table_frequences</span><span class="p">(</span><span class="s">&quot;ABRACADABRA&quot;</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>devra retourner un dictionnaire de la forme</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;A&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s">&#39;R&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;D&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 </div>
 <div class="topic">
 <p class="topic-title first"><strong>Solution</strong>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">table_frequences</span><span class="p">(</span><span class="n">texte</span><span class="p">):</span>
-    <span class="n">table</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">caractere</span> <span class="ow">in</span> <span class="n">texte</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">caractere</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
-            <span class="n">table</span><span class="p">[</span><span class="n">caractere</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">caractere</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">table</span><span class="p">[</span><span class="n">caractere</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">table</span>
-</pre></div>
+<div class="newline"></div>    <span class="n">table</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="newline"></div>    <span class="k">for</span> <span class="n">caractere</span> <span class="ow">in</span> <span class="n">texte</span><span class="p">:</span>
+<div class="newline"></div>        <span class="k">if</span> <span class="n">caractere</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
+<div class="newline"></div>            <span class="n">table</span><span class="p">[</span><span class="n">caractere</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">caractere</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="newline"></div>        <span class="k">else</span><span class="p">:</span>
+<div class="newline"></div>            <span class="n">table</span><span class="p">[</span><span class="n">caractere</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="newline"></div>    <span class="k">return</span> <span class="n">table</span>
+<div class="newline"></div></pre></div>
 </div>
 </div>
 <p><strong>Arbre de Huffman.</strong> Une approche naturelle pour construire l&#8217;arbre de Huffman à partir de la table des occurrences consiste à utiliser un tas binaire.</p>
@@ -448,27 +448,27 @@ que la lettre Y plus rare est codée par le mot de 5 bits 01001.</p>
 </div>
 <p>et l&#8217;appel de</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">arbre_huffman</span><span class="p">(</span><span class="n">table_frequences</span><span class="p">(</span><span class="s">&quot;ABRACADABRA&quot;</span><span class="p">))</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>devra retourner un dictionnaire de la forme</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s">&#39;R&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s">&#39;D&#39;</span><span class="p">},</span> <span class="mi">1</span><span class="p">:</span> <span class="s">&#39;B&#39;</span><span class="p">}}}</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">arbre_huffman</span><span class="p">(</span><span class="n">occurrences</span><span class="p">):</span>
-    <span class="c"># Construction d&#39;un tas avec les lettres sous forme de feuilles</span>
-    <span class="n">tas</span> <span class="o">=</span> <span class="p">[(</span><span class="n">occ</span><span class="p">,</span> <span class="n">lettre</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">lettre</span><span class="p">,</span> <span class="n">occ</span><span class="p">)</span> <span class="ow">in</span> <span class="n">occurrences</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
-    <span class="n">heapify</span><span class="p">(</span><span class="n">tas</span><span class="p">)</span>
-
-    <span class="c"># Création de l&#39;arbre</span>
-    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">tas</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">occ1</span><span class="p">,</span> <span class="n">noeud1</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">tas</span><span class="p">)</span> <span class="c"># noeud de plus petit poids occ1</span>
-        <span class="n">occ2</span><span class="p">,</span> <span class="n">noeud2</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">tas</span><span class="p">)</span> <span class="c"># noeud de deuxième plus petit poids occ2</span>
-        <span class="n">heappush</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span> <span class="p">(</span><span class="n">occ1</span> <span class="o">+</span> <span class="n">occ2</span><span class="p">,</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="n">noeud1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="n">noeud2</span><span class="p">}))</span>
-        <span class="c"># ajoute au tas le noeud de poids occ1+occ2 et avec les fils noeud1 et noeud2</span>
-
-    <span class="k">return</span> <span class="n">heappop</span><span class="p">(</span><span class="n">tas</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
+<div class="newline"></div>    <span class="c"># Construction d&#39;un tas avec les lettres sous forme de feuilles</span>
+<div class="newline"></div>    <span class="n">tas</span> <span class="o">=</span> <span class="p">[(</span><span class="n">occ</span><span class="p">,</span> <span class="n">lettre</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">lettre</span><span class="p">,</span> <span class="n">occ</span><span class="p">)</span> <span class="ow">in</span> <span class="n">occurrences</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<div class="newline"></div>    <span class="n">heapify</span><span class="p">(</span><span class="n">tas</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div>    <span class="c"># Création de l&#39;arbre</span>
+<div class="newline"></div>    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">tas</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+<div class="newline"></div>        <span class="n">occ1</span><span class="p">,</span> <span class="n">noeud1</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">tas</span><span class="p">)</span> <span class="c"># noeud de plus petit poids occ1</span>
+<div class="newline"></div>        <span class="n">occ2</span><span class="p">,</span> <span class="n">noeud2</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">tas</span><span class="p">)</span> <span class="c"># noeud de deuxième plus petit poids occ2</span>
+<div class="newline"></div>        <span class="n">heappush</span><span class="p">(</span><span class="n">tas</span><span class="p">,</span> <span class="p">(</span><span class="n">occ1</span> <span class="o">+</span> <span class="n">occ2</span><span class="p">,</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="n">noeud1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="n">noeud2</span><span class="p">}))</span>
+<div class="newline"></div>        <span class="c"># ajoute au tas le noeud de poids occ1+occ2 et avec les fils noeud1 et noeud2</span>
+<div class="newline"></div>
+<div class="newline"></div>    <span class="k">return</span> <span class="n">heappop</span><span class="p">(</span><span class="n">tas</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<div class="newline"></div></pre></div>
 </div>
 <p><strong>Code de Huffman</strong></p>
 <div class="green topic">
@@ -479,26 +479,26 @@ que la lettre Y plus rare est codée par le mot de 5 bits 01001.</p>
 </div>
 <p>et l&#8217;appel de</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">C</span> <span class="o">=</span> <span class="n">code_huffman</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">T</span>
-</pre></div>
+<div class="newline"></div><span class="k">print</span> <span class="n">T</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>avec T l&#8217;arbre précédent, devra retourner un dictionnaire de la forme suivante</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&#39;10&#39;</span><span class="p">:</span> <span class="s">&#39;R&#39;</span><span class="p">,</span> <span class="s">&#39;111&#39;</span><span class="p">:</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">:</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="s">&#39;1100&#39;</span><span class="p">:</span> <span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="s">&#39;1101&#39;</span><span class="p">:</span> <span class="s">&#39;D&#39;</span><span class="p">}</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">code_huffman_parcours</span><span class="p">(</span><span class="n">arbre</span><span class="p">,</span><span class="n">prefixe</span><span class="p">,</span><span class="n">code</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">noeud</span> <span class="ow">in</span> <span class="n">arbre</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arbre</span><span class="p">[</span><span class="n">noeud</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">code</span><span class="p">[</span><span class="n">prefixe</span><span class="o">+</span><span class="n">noeud</span><span class="p">]</span> <span class="o">=</span> <span class="n">arbre</span><span class="p">[</span><span class="n">noeud</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">code_huffman_parcours</span><span class="p">(</span><span class="n">arbre</span><span class="p">[</span><span class="n">noeud</span><span class="p">],</span><span class="n">prefixe</span><span class="o">+</span><span class="n">noeud</span><span class="p">,</span><span class="n">code</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">code_huffman</span><span class="p">(</span><span class="n">arbre</span><span class="p">):</span>
-    <span class="n">code</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">code_huffman_parcours</span><span class="p">(</span><span class="n">arbre</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="n">code</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">code</span>
-</pre></div>
+<div class="newline"></div>    <span class="k">for</span> <span class="n">noeud</span> <span class="ow">in</span> <span class="n">arbre</span><span class="p">:</span>
+<div class="newline"></div>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arbre</span><span class="p">[</span><span class="n">noeud</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<div class="newline"></div>            <span class="n">code</span><span class="p">[</span><span class="n">prefixe</span><span class="o">+</span><span class="n">noeud</span><span class="p">]</span> <span class="o">=</span> <span class="n">arbre</span><span class="p">[</span><span class="n">noeud</span><span class="p">]</span>
+<div class="newline"></div>        <span class="k">else</span><span class="p">:</span>
+<div class="newline"></div>            <span class="n">code_huffman_parcours</span><span class="p">(</span><span class="n">arbre</span><span class="p">[</span><span class="n">noeud</span><span class="p">],</span><span class="n">prefixe</span><span class="o">+</span><span class="n">noeud</span><span class="p">,</span><span class="n">code</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="k">def</span> <span class="nf">code_huffman</span><span class="p">(</span><span class="n">arbre</span><span class="p">):</span>
+<div class="newline"></div>    <span class="n">code</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="newline"></div>    <span class="n">code_huffman_parcours</span><span class="p">(</span><span class="n">arbre</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="n">code</span><span class="p">)</span>
+<div class="newline"></div>    <span class="k">return</span> <span class="n">code</span>
+<div class="newline"></div></pre></div>
 </div>
 <p><strong>Encodage et décodage</strong></p>
 <div class="green topic">
@@ -509,23 +509,23 @@ que la lettre Y plus rare est codée par le mot de 5 bits 01001.</p>
 </div>
 <p>et l&#8217;appel de</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">encodage</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="s">&quot;ABRACADABRA&quot;</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>avec C le code précédent, devra retourner la chaîne binaire suivante</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;01111001100011010111100&quot;</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 </div>
 <div class="topic">
 <p class="topic-title first"><strong>Solution</strong>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">encodage</span><span class="p">(</span><span class="n">texte</span><span class="p">,</span><span class="n">code</span><span class="p">):</span>
-    <span class="n">code_inv</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">code</span><span class="p">[</span><span class="n">bits</span><span class="p">],</span> <span class="n">bits</span><span class="p">)</span> <span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="n">code</span><span class="p">)</span>
-    <span class="c"># construit le dictionnaire inverse</span>
-    <span class="n">texte_binaire</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">texte</span><span class="p">:</span>
-        <span class="n">texte_binaire</span> <span class="o">=</span> <span class="n">texte_binaire</span> <span class="o">+</span> <span class="n">code_inv</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">texte_binaire</span>
-</pre></div>
+<div class="newline"></div>    <span class="n">code_inv</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">code</span><span class="p">[</span><span class="n">bits</span><span class="p">],</span> <span class="n">bits</span><span class="p">)</span> <span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="n">code</span><span class="p">)</span>
+<div class="newline"></div>    <span class="c"># construit le dictionnaire inverse</span>
+<div class="newline"></div>    <span class="n">texte_binaire</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+<div class="newline"></div>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">texte</span><span class="p">:</span>
+<div class="newline"></div>        <span class="n">texte_binaire</span> <span class="o">=</span> <span class="n">texte_binaire</span> <span class="o">+</span> <span class="n">code_inv</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+<div class="newline"></div>    <span class="k">return</span> <span class="n">texte_binaire</span>
+<div class="newline"></div></pre></div>
 </div>
 </div>
 <div class="green topic">
@@ -536,25 +536,25 @@ que la lettre Y plus rare est codée par le mot de 5 bits 01001.</p>
 </div>
 <p>et l&#8217;appel de</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">encodage</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="s">&quot;01111001100011010111100&quot;</span><span class="p">)</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 <p>avec C le code précédent, devra retourner la chaîne binaire suivante</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;ABRACADABRA&quot;</span>
-</pre></div>
+<div class="newline"></div></pre></div>
 </div>
 </div>
 <div class="topic">
 <p class="topic-title first"><strong>Solution</strong>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">decodage</span><span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="n">texte_binaire</span><span class="p">):</span>
-    <span class="n">texte</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-    <span class="n">tampon</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">texte_binaire</span><span class="p">:</span>
-        <span class="n">tampon</span> <span class="o">=</span> <span class="n">tampon</span><span class="o">+</span><span class="n">b</span>
-        <span class="k">if</span> <span class="n">tampon</span> <span class="ow">in</span> <span class="n">code</span><span class="p">:</span>
-            <span class="n">texte</span> <span class="o">=</span> <span class="n">texte</span><span class="o">+</span><span class="n">code</span><span class="p">[</span><span class="n">tampon</span><span class="p">]</span>
-            <span class="n">tampon</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-    <span class="k">return</span> <span class="n">texte</span>
-</pre></div>
+<div class="newline"></div>    <span class="n">texte</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+<div class="newline"></div>    <span class="n">tampon</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+<div class="newline"></div>    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">texte_binaire</span><span class="p">:</span>
+<div class="newline"></div>        <span class="n">tampon</span> <span class="o">=</span> <span class="n">tampon</span><span class="o">+</span><span class="n">b</span>
+<div class="newline"></div>        <span class="k">if</span> <span class="n">tampon</span> <span class="ow">in</span> <span class="n">code</span><span class="p">:</span>
+<div class="newline"></div>            <span class="n">texte</span> <span class="o">=</span> <span class="n">texte</span><span class="o">+</span><span class="n">code</span><span class="p">[</span><span class="n">tampon</span><span class="p">]</span>
+<div class="newline"></div>            <span class="n">tampon</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+<div class="newline"></div>    <span class="k">return</span> <span class="n">texte</span>
+<div class="newline"></div></pre></div>
 </div>
 </div>
 <p><div style="clear: both"></div></p>

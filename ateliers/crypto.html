@@ -1,0 +1,153 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Cryptographie &mdash; Python scientifique - ENS Paris</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2013.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="Python scientifique - ENS Paris" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="cryptographie">
+<h1>Cryptographie<a class="headerlink" href="#cryptographie" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="topic">
+<p class="topic-title first"><strong>Exercice 1</strong>: Cryptographie conventionnelle</p>
+<ol class="arabic simple">
+<li>Dans un interpréteur Python créez la chaîne de caractères message contenant la
+valeur &#8216;ceci est mon message a chiffrer&#8217;. A l&#8217;aide d&#8217;une boucle <tt class="docutils literal"><span class="pre">for</span></tt> sur
+cette chaîne, chiffrer la par un décalage de 3 (chiffre de César).
+Par exemple la lettre a sera chiffrée en la lettre d (et la lettre x en la lettre a).</li>
+<li>Écrire un script Python qui chiffre (ou déchiffre selon le choix de l&#8217;utilisateur)
+une chaîne de caractères entrée au clavier avec une clé (i.e.un décalage) choisi aussi par
+l&#8217;utilisateur. On définira les fonctions <tt class="docutils literal"><span class="pre">chiffrer</span></tt> et <tt class="docutils literal"><span class="pre">dechiffrer</span></tt>.</li>
+<li>Modifier le script précédent pour qu&#8217;il utilise la méthode de chiffrement de Vigenère :
+la clé est désormais une chaîne de caractères et le chiffrement se fait en décalant la i-ème
+lettre du message gràce à la i-ème lettre de la clé (on reprend au début de la clef quand on a
+fini de lire celle-ci) suivant la règle naturelle A=1,B=2,...,Z=26.</li>
+<li>Modifier le script précédent pour qu&#8217;il chiffre/déchiffre un fichier dont le chemin est
+entré par l&#8217;utilisateur. On pourra utiliser cette <a class="reference external" href="http://di.ens.fr/~vergnaud/Poe.txt">nouvelle</a>
+de Edgar Poe pour tester le script.</li>
+</ol>
+</div>
+<div class="topic">
+<p class="topic-title first"><strong>Exercice 2</strong>: Cryptanalyse fréquentielle</p>
+<p>Comme expliqué dans la nouvelle de E. Poe, les chiffrements par substitution alphabétique
+peuvent être casser facilement par une analyse fréquentielle. Par exemple, dans un texte
+écrit en langue française, la lettre la plus fréquente est généralement le &#8220;E&#8221; et puisqu&#8217;un
+chiffrement de César ne modifie pas les fréquences, la lettre qui apparaît le plus fréquemment
+dans le texte chiffré correspond vraisemblablement à &#8220;E&#8221; et si c&#8217;est le cas le décalage entre
+les deux lettres donne la clé et permet de retrouver l&#8217;intégralité du message clair.</p>
+<ol class="arabic simple">
+<li>Écrire une fonction Python qui prenant en entrée une chaîne de caractères
+(ou un fichier texte) affiche la fréquence des caractères qui le composent.</li>
+<li>Utiliser cette fonction pour créer une fonction qui prend un entrée un texte
+chiffré avec le chiffrement de César (mais pas la clé) et retourne un texte
+clair associé. On pourra demander à l&#8217;utilisateur de valider que ce texte est
+correct (et si ce n&#8217;est pas le cas proposer un nouveau texte clair probable).</li>
+<li>L&#8217;encyclopédie <a class="reference external" href="http://fr.wikipedia.org/wiki/Cryptanalyse_du_chiffre_de_Vigen%C3%A8re">Wikipedia</a>
+propose un article expliquant une méthode de cryptanalyse du chiffrement de Vigenère reposant
+sur les mêmes principes. Écrire une fonction Python qui prend un entrée un texte chiffré avec
+le chiffrement de Vigenère (mais pas la clé) et retourne un texte clair associé possible.</li>
+</ol>
+</div>
+<div class="topic">
+<p class="topic-title first"><strong>Exercice 3</strong>: Cryptographie à clé publique basée sur les courbes elliptiques</p>
+<p>En mathématiques, une courbe elliptique est une courbe algébrique définie sur un corps <img class="math" src="../_images/math/fe3564f325e203a3aa3d067ae85114a8877129f3.png" alt="\mathbb{K}" style="vertical-align: 0px"/>,
+unie entre autres propriétés, d&#8217;une loi de groupe définie sur l&#8217;ensemble de ses points.</p>
+<p>Si la caractéristique du corps est différente de 2 et 3, une courbe elliptique est donnée par
+l&#8217;équation de Weierstrass <img class="math" src="../_images/math/42496709a05674d6dbba15d5d3e11f795fea4aa7.png" alt="y^2=x^3+ax+b" style="vertical-align: -6px"/>, où <img class="math" src="../_images/math/c7d457e388298246adb06c587bccd419ea67f7e8.png" alt="a" style="vertical-align: 0px"/> et <img class="math" src="../_images/math/8136a7ef6a03334a7246df9097e5bcc31ba33fd2.png" alt="b" style="vertical-align: 0px"/> sont des éléments
+du corps <img class="math" src="../_images/math/fe3564f325e203a3aa3d067ae85114a8877129f3.png" alt="\mathbb{K}" style="vertical-align: 0px"/> vérifiant <img class="math" src="../_images/math/e6537e14517fad6e6bff815b9277c0793ebcd5a7.png" alt="4a^3+27b^2 \neq 0" style="vertical-align: -7px"/>.</p>
+<p>Nous considérons l&#8217;ensemble des points de la courbe</p>
+<div class="math">
+<p><img src="../_images/math/b24e10a2cc2eff56be9260679565850ca5934bc6.png" alt="\{(x,y) \in \mathbb{K}^2 \vert y^2=x^3+ax+b \} \cup \{ \mathcal{O} \}"/></p>
+</div><p>où <img class="math" src="../_images/math/9190c348b3a6950ed654032e319b9d0f7a4f9fe9.png" alt="\mathcal{O}" style="vertical-align: -1px"/> est un point sur la droite à l&#8217;infini (dans le plan projectif correspondant).
+Ce point représente l&#8217;élément neutre pour la loi d&#8217;addition de la courbe.</p>
+<p>L&#8217;usage des courbes elliptiques en cryptographie a été proposé en 1986, indépendamment par Neal Koblitz et Victor Miller, pour l&#8217;instanciation des opérations cryptographiques asymétriques, comme l&#8217;échange de clé entre deux personnes sur un canal non-sécurisé. Par rapport aux systèmes fondés sur RSA, les systèmes de chiffrement sur les courbes elliptiques utilisent des clés plus courtes, pour un niveau de sécurité équivalent.</p>
+<p>Par la suite, on considéra une courbe elliptique définie sur un un corps fini <img class="math" src="../_images/math/0a39f548dfe6423ed95caa1b190c0a3c3cd83544.png" alt="\mathbb{F}_p" style="vertical-align: -8px"/> avec <img class="math" src="../_images/math/36f73fc1312ee0349b3f3a0f3bd9eb5504339011.png" alt="p" style="vertical-align: -6px"/>
+un nombre premier <img class="math" src="../_images/math/8437e1b1294378b7f0a667ffc66215648662ec71.png" alt="p &gt; 3" style="vertical-align: -6px"/>. Pour définir l&#8217;addition de deux points distincts <img class="math" src="../_images/math/513db76342f3122e31a7994378dd0f577cd14387.png" alt="P=(x_P,y_P)" style="vertical-align: -7px"/> et
+<img class="math" src="../_images/math/701e0ae0bf3132df10ff8a27429507c6e9efee19.png" alt="P=(x_Q,y_Q)" style="vertical-align: -8px"/> sur la courbe elliptique <img class="math" src="../_images/math/fa2fa899f0afb05d6837885523503a2d4df434f9.png" alt="E" style="vertical-align: 0px"/>, on remarque d&#8217;abord que par ces deux points passe
+une droite bien définie. Par le théorème de Bézout, cette droite recoupe la courbe <img class="math" src="../_images/math/fa2fa899f0afb05d6837885523503a2d4df434f9.png" alt="E" style="vertical-align: 0px"/> en un troisième point.
+La somme des points <img class="math" src="../_images/math/4b4cade9ca8a2c8311fafcf040bc5b15ca507f52.png" alt="P" style="vertical-align: 0px"/> et <img class="math" src="../_images/math/9866e3a998d628ba0941eb4fea0666ac391d149a.png" alt="Q" style="vertical-align: -6px"/> est alors donnée par le symétrique de ce point par rapport à l&#8217;axe
+des abscisses. On donne maintenant des équations explicites pour calculer les coordonnées affines du point somme.</p>
+<ul class="simple">
+<li>Si <img class="math" src="../_images/math/e512855913289e278b95804e147b39eec8b01107.png" alt="x_P=x_Q" style="vertical-align: -8px"/> et <img class="math" src="../_images/math/c68d95263023e54bdb257da6df129b3a788e9c3d.png" alt="y_P=-y_Q" style="vertical-align: -8px"/>, alors <img class="math" src="../_images/math/894932027e9f78a3cf51e2aef5bb717072bbfe55.png" alt="P+Q=\mathcal{O}" style="vertical-align: -6px"/>.
+Autrement dit, l&#8217;inverse d&#8217;un point pour la loi du groupe est son symétrique
+par rapport à l&#8217;axe des abscisses.</li>
+<li>Sinon, on définit les quantités suivantes:</li>
+</ul>
+<div class="math">
+<p><img src="../_images/math/5659f0b06e95df47e1360194e0c10b21c37f40b2.png" alt="\lambda=\left \{\begin{array}{ll} \frac{y_Q-y_P}{x_Q-x_P} &amp; \mbox{si}\,\, P\neq Q,\\
+  \frac{3x_P^2+a}{2y_P} &amp;\mbox{si}\,\, P=Q~\mbox{et}~y_P\neq 0. \end{array}
+  \right.
+
+et"/></p>
+</div><div class="math">
+<p><img src="../_images/math/aaaa15a640507a1b4b214bd1d3ccd46c63e428d8.png" alt="\mu=\left \{\begin{array}{ll}
+\frac{x_Qy_P-y_Qx_P}{x_Q-x_P} &amp; \mbox{si}\,\, P\neq Q,\\
+\frac{-x_P^3+ax_P+2b}{2y_P} &amp;\mbox{si}\,\, P=Q~\mbox{et}~y_P\neq 0.
+\end{array}
+\right."/></p>
+</div><p>Alors la droite <img class="math" src="../_images/math/7382a9885906abeff9db972d5093940404f03b03.png" alt="y=\lambda x+\mu" style="vertical-align: -6px"/> passe par <img class="math" src="../_images/math/4b4cade9ca8a2c8311fafcf040bc5b15ca507f52.png" alt="P" style="vertical-align: 0px"/> et <img class="math" src="../_images/math/9866e3a998d628ba0941eb4fea0666ac391d149a.png" alt="Q" style="vertical-align: -6px"/> et les
+coordonnées de <img class="math" src="../_images/math/38263eed0b52edb412385695351651edab3b37e3.png" alt="P+Q" style="vertical-align: -6px"/> sont :</p>
+<div class="math">
+<p><img src="../_images/math/cfd2e4bd36cc8ec868fe06e82c9d88c392180ced.png" alt="x_{P+Q}=\lambda^2-x_P-x_Q,"/></p>
+</div><p>et</p>
+<div class="math">
+<p><img src="../_images/math/07a44dee137099a9e56937450f66e710118ea29a.png" alt="y_{P+Q}=-\lambda x_{P+Q}-\mu."/></p>
+</div></div>
+<p><div style="clear: both"></div></p>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
+      </ul>
+    </div>
+        <!-- your html code here -->
+<a href="http://www.ens.fr"><img src="../_static/ENS_Logo.png"
+alt="ENS" height="100"></a>
+<a href="http://www.inria.fr"><img src="../_static/logo-inria.jpg"
+alt="INRIA" height="60"></a>
+<a href="http://www.saint-gobain-recherche.fr/fr/"><img
+src="../_static/logoSGR.png" alt="Saint-Gobain Recherche" height="60"></a>
+
+  </body>
+</html>

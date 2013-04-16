@@ -1,0 +1,18 @@
+
+
+.. _example_plot_iris_simple.py:
+
+ Affichage de la classes d'iris en fonction de la largeur et longueur
+du sepal
+
+
+
+.. image:: images/plot_iris_simple_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_iris_simple.py <plot_iris_simple.py>`
+
+.. literalinclude:: plot_iris_simple.py
+    :lines: 4-
+    

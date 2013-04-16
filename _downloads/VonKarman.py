@@ -21,9 +21,9 @@ def CFL():
     global u
     global v
 
-    umax = max(u.max(),0.01);
-    vmax = max(v.max(),0.01);
-    vcfl = 0.8*min(dx/umax,dy/vmax);
+    umax = max(u.max(),0.01)
+    vmax = max(v.max(),0.01)
+    vcfl = 0.8*min(dx/umax,dy/vmax)
 
     return vcfl
 
@@ -31,7 +31,6 @@ def CFL():
 def Forme():
 # Donne la forme de l obstacle
     global Fe
-    global tactuel
     global M
     global N
     global L
@@ -230,7 +229,6 @@ global u
 global v
 global color
 global Fe
-global tactuel
 global Resu
 global Resv
 global ustar
@@ -254,9 +252,9 @@ Long = 20*L
 Larg = 10*L
 
 # Nombre de points (entoure de points fantomes)
-# Nombre de points sur l axe (Ox) pair
+# Nombre de points sur l axe (Ox)
 M = 201
-# Nombre de points sur l axe (Oy) impair
+# Nombre de points sur l axe (Oy) 
 N = 100
 
 # Valeurs des elements differentiels
@@ -267,11 +265,6 @@ dy = (10.*L)/N
 x = np.linspace(0,Long,M) 
 y = np.linspace(0,Larg,N) 
 [xx,yy] = np.meshgrid(x,y) 
-
-# Parametres temporels
-tini = 0
-tfin = 10
-tactuel = 0
 
 # ATTENTION: calculer la CFL a chaque iteration...
 dt = 0.01
@@ -302,7 +295,7 @@ gradphiy = np.zeros((N,M))
 # Construction de la matrice de Laplace
 BuildLpl(N,M)
 
-# Parametrisation des plots
+# Nombre d'iterations
 niter = 0
 nitermax = 1000
 
@@ -331,14 +324,14 @@ for niter in range(0,nitermax):
 
     # Conditions aux limites
     # entree
-    ustar[:,0]=1.0    #np.ones(N)
-    vstar[:,0]=0.0    #np.zeros(N)
+    ustar[:,0]=1.0 
+    vstar[:,0]=0.0 
     # haut
     ustar[N-1,:]=ustar[N-3,:]
-    vstar[N-1,:]=0.0  #np.zeros(M)
+    vstar[N-1,:]=0.0 
     # bas
     ustar[0,:]=ustar[2,:]
-    vstar[0,:]=0.0    #np.zeros(M)
+    vstar[0,:]=0.0  
     # sortie
     ustar[:,M-1]=ustar[:,M-3] 
     vstar[:,M-1]=vstar[:,M-3] 
@@ -362,7 +355,6 @@ for niter in range(0,nitermax):
         plotlabel = "t = %1.2f" %(niter * dt)
         plt.pcolormesh(xx,yy,color,shading='flat')
         plt.clim(0,0.5)
-        plt.contour(xx,yy,Fe,hold=True,colors='b')
         plt.title(plotlabel)
         plt.axis('image')
 #        plt.savefig('image%d.png' %(niter/10))
@@ -370,10 +362,4 @@ for niter in range(0,nitermax):
         if 'qt' in plt.get_backend().lower():
             QtGui.qApp.processEvents()
 
-plt.figure()
-u*=Fe
-v*=Fe
-plt.streamplot(xx,yy,u,v,color='k')
-plt.contour(xx,yy,Fe,hold=True,colors='b')
-plt.axis('image')
-plt.show()
+

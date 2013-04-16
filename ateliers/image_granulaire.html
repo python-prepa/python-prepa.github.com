@@ -140,9 +140,9 @@ s&#8217;agit d&#8217;une opération typique de <a class="reference external" hre
 donc dans le sous-module <tt class="docutils literal"><span class="pre">skimage.morphology</span></tt>. Une combinaison
 d&#8217;opérations d&#8217;érosion qui fonctionne bien est:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">morphology</span>
-<span class="n">erosion</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span>
-<span class="n">erosion</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">erosion</span><span class="p">,</span> <span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
-</pre></div>
+<div class="newline"></div><span class="n">erosion</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span>
+<div class="newline"></div><span class="n">erosion</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">erosion</span><span class="p">,</span> <span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<div class="newline"></div></pre></div>
 </div>
 <p>Afficher le tableau <tt class="docutils literal"><span class="pre">erosion</span></tt> après la 1e opération d&#8217;érosion, puis
 après la 2e. Essayer d&#8217;autres paramétres pour la taille de l&#8217;érosion : si
