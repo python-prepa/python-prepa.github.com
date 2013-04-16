@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Cryptographie &mdash; Python scientifique - ENS Paris</title>
+    <title>7.4. Cryptographie &mdash; Python scientifique - ENS Paris</title>
     
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,13 +26,19 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/translations.js"></script>
-    <link rel="top" title="Python scientifique - ENS Paris" href="../index.html" /> 
+    <link rel="top" title="Python scientifique - ENS Paris" href="../index.html" />
+    <link rel="up" title="7. Ateliers pratiques" href="index.html" />
+    <link rel="prev" title="7.3. Hydrodynamique 2D, Allée de Von Karman" href="VonKarman.html" /> 
   </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
-        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
+        <li class="right" style="margin-right: 10px">
+          <a href="VonKarman.html" title="7.3. Hydrodynamique 2D, Allée de Von Karman"
+             accesskey="P">précédent</a></li>
+        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">7. Ateliers pratiques</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -41,7 +47,7 @@
           <div class="body">
             
   <div class="section" id="cryptographie">
-<h1>Cryptographie<a class="headerlink" href="#cryptographie" title="Lien permanent vers ce titre">¶</a></h1>
+<h1>7.4. Cryptographie<a class="headerlink" href="#cryptographie" title="Lien permanent vers ce titre">¶</a></h1>
 <div class="topic">
 <p class="topic-title first"><strong>Exercice 1</strong>: Cryptographie conventionnelle</p>
 <ol class="arabic simple">
@@ -181,51 +187,7 @@ obtient la même clé <img class="math" src="../_images/math/dfb064112b6c9447033
 <li><p class="first"><strong>L&#8217;attaque pas de bébé, pas de géant sur le logarithme discret.</strong> La méthode de Shanks pour résoudre le
 problème du logarithme discret est basée sur l&#8217;observation suivante :</p>
 <blockquote>
-<div><p>En notant <div class="system-message">
-<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">m = \ceil \sqrt{r} \rceil</tt>)</p>
-<p>latex exited with error:
-[stderr]
-
-[stdout]
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian)
-entering extended mode
-(./math.tex
-LaTeX2e &lt;2009/09/24&gt;
-Babel &lt;v3.8l&gt; and hyphenation patterns for english, usenglishmax, dumylang, noh
-yphenation, french, basque, ngerman, german, german-x-2009-06-19, ngerman-x-200
-9-06-19, loaded.
-(/usr/share/texmf-texlive/tex/latex/base/article.cls
-Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/share/texmf-texlive/tex/latex/base/size12.clo))
-(/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
-(/usr/share/texmf-texlive/tex/latex/ucs/utf8x.def))
-(/usr/share/texmf-texlive/tex/latex/ucs/ucs.sty
-(/usr/share/texmf-texlive/tex/latex/ucs/data/uni-global.def))
-(/usr/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
-For additional information on amsmath, use the `?&#8217; option.
-(/usr/share/texmf-texlive/tex/latex/amsmath/amstext.sty
-(/usr/share/texmf-texlive/tex/latex/amsmath/amsgen.sty))
-(/usr/share/texmf-texlive/tex/latex/amsmath/amsbsy.sty)
-(/usr/share/texmf-texlive/tex/latex/amsmath/amsopn.sty))
-(/usr/share/texmf-texlive/tex/latex/amscls/amsthm.sty)
-(/usr/share/texmf-texlive/tex/latex/amsfonts/amssymb.sty
-(/usr/share/texmf-texlive/tex/latex/amsfonts/amsfonts.sty))
-(/usr/share/texmf-texlive/tex/latex/tools/bm.sty)
-(/usr/share/texmf/tex/latex/preview/preview.sty) (./math.aux)
-(/usr/share/texmf-texlive/tex/latex/ucs/ucsencs.def)
-Preview: Fontsize 12pt
-(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd)
-(/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd)
-! Undefined control sequence.
-l.14 $m = \ceil
-                \sqrt{r} \rceil$
-[1] (./math.aux) )
-(see the transcript file for additional information)
-Output written on math.dvi (1 page, 316 bytes).
-Transcript written on math.log.
-</p>
-</div>
- la partie entière supérieure de la racine carrée de <img class="math" src="../_images/math/b55ca7a0aa88ab7d58f4fc035317fdac39b17861.png" alt="r" style="vertical-align: 0px"/>,
+<div><p>En notant <img class="math" src="../_images/math/9daab65a1734c49896e648d1d96072b49057ff8b.png" alt="m = \lceil \sqrt{r} \rceil" style="vertical-align: -8px"/> la partie entière supérieure de la racine carrée de <img class="math" src="../_images/math/b55ca7a0aa88ab7d58f4fc035317fdac39b17861.png" alt="r" style="vertical-align: 0px"/>,
 on peut écrire tout élément <img class="math" src="../_images/math/26eeb5258ca5099acf8fe96b2a1049c48c89a5e6.png" alt="x" style="vertical-align: 0px"/> inférieur à <img class="math" src="../_images/math/b55ca7a0aa88ab7d58f4fc035317fdac39b17861.png" alt="r" style="vertical-align: 0px"/> comme <img class="math" src="../_images/math/a3002682d841e621253d84baf060335331a2795b.png" alt="x=x_1+x_2 m" style="vertical-align: -5px"/>, avec
 <img class="math" src="../_images/math/24a4ecf4050ea3f4e3f1232b91bdd9e76cfd7a08.png" alt="x_1,x_2 \leq m" style="vertical-align: -6px"/>. Par conséquent, l&#8217;égalité <img class="math" src="../_images/math/f599bc80a2531a86eb27d399db6aab366a547ac4.png" alt="Q=xP" style="vertical-align: -6px"/> peut s&#8217;écrire <img class="math" src="../_images/math/7087d8267bbaf9720213e2f03d6b7524c9057c9e.png" alt="Q-x_2(mP)=x_1P" style="vertical-align: -7px"/>.</p>
 </div></blockquote>
@@ -258,7 +220,11 @@ a été envoyé, le secret de votre collègue.</li>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
-        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
+        <li class="right" style="margin-right: 10px">
+          <a href="VonKarman.html" title="7.3. Hydrodynamique 2D, Allée de Von Karman"
+             >précédent</a></li>
+        <li><a href="../index.html">Python scientifique - ENS Paris</a> &raquo;</li>
+          <li><a href="index.html" >7. Ateliers pratiques</a> &raquo;</li> 
       </ul>
     </div>
         <!-- your html code here -->
