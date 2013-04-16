@@ -4,13 +4,17 @@
 
 
 
+**Python source code:** :download:`plot_filter_coins.py <plot_filter_coins.py>`
+
+.. literalinclude:: plot_filter_coins.py
+    :lines: 2-
+
 
 .. image:: images/plot_filter_coins_1.png
     :align: center
 
 
-**Python source code:** :download:`plot_filter_coins.py <plot_filter_coins.py>`
 
-.. literalinclude:: plot_filter_coins.py
-    :lines: 2-
+
+**Total running time of the example:**  0.00 seconds
     

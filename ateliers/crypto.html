@@ -57,7 +57,7 @@ la clé est désormais une chaîne de caractères et le chiffrement se fait en d
 lettre du message gràce à la i-ème lettre de la clé (on reprend au début de la clef quand on a
 fini de lire celle-ci) suivant la règle naturelle A=1,B=2,...,Z=26.</li>
 <li>Modifier le script précédent pour qu&#8217;il chiffre/déchiffre un fichier dont le chemin est
-entré par l&#8217;utilisateur. On pourra utiliser cette <a class="reference external" href="http://di.ens.fr/~vergnaud/Poe.txt">nouvelle</a>
+entré par l&#8217;utilisateur. On pourra utiliser cette <a class="reference external" href="http://www.di.ens.fr/~vergnaud/Poe.txt">nouvelle</a>
 de Edgar Poe pour tester le script.</li>
 </ol>
 </div>
@@ -108,12 +108,11 @@ par rapport à l&#8217;axe des abscisses.</li>
 <li>Sinon, on définit les quantités suivantes:</li>
 </ul>
 <div class="math">
-<p><img src="../_images/math/5659f0b06e95df47e1360194e0c10b21c37f40b2.png" alt="\lambda=\left \{\begin{array}{ll} \frac{y_Q-y_P}{x_Q-x_P} &amp; \mbox{si}\,\, P\neq Q,\\
-  \frac{3x_P^2+a}{2y_P} &amp;\mbox{si}\,\, P=Q~\mbox{et}~y_P\neq 0. \end{array}
-  \right.
-
-et"/></p>
-</div><div class="math">
+<p><img src="../_images/math/6502b7cdc406677f323b8c4be76433109eb2f551.png" alt="\lambda=\left \{\begin{array}{ll} \frac{y_Q-y_P}{x_Q-x_P} &amp; \mbox{si}\,\, P\neq Q,\\
+\frac{3x_P^2+a}{2y_P} &amp;\mbox{si}\,\, P=Q~\mbox{et}~y_P\neq 0. \end{array}
+\right."/></p>
+</div><p>et</p>
+<div class="math">
 <p><img src="../_images/math/aaaa15a640507a1b4b214bd1d3ccd46c63e428d8.png" alt="\mu=\left \{\begin{array}{ll}
 \frac{x_Qy_P-y_Qx_P}{x_Q-x_P} &amp; \mbox{si}\,\, P\neq Q,\\
 \frac{-x_P^3+ax_P+2b}{2y_P} &amp;\mbox{si}\,\, P=Q~\mbox{et}~y_P\neq 0.
@@ -126,7 +125,128 @@ coordonnées de <img class="math" src="../_images/math/38263eed0b52edb4123856953
 </div><p>et</p>
 <div class="math">
 <p><img src="../_images/math/07a44dee137099a9e56937450f66e710118ea29a.png" alt="y_{P+Q}=-\lambda x_{P+Q}-\mu."/></p>
-</div></div>
+</div><ul>
+<li><p class="first"><strong>Loi d&#8217;addition sur la courbe elliptique.</strong> Soit <img class="math" src="../_images/math/fa2fa899f0afb05d6837885523503a2d4df434f9.png" alt="E" style="vertical-align: 0px"/> la courbe elliptique donnée par l&#8217;équation
+<img class="math" src="../_images/math/71d3f52a9e0277a62f60790f7cc40d4366fa2de6.png" alt="y^2=x^3+5" style="vertical-align: -6px"/>, définie sur le corps fini <img class="math" src="../_images/math/074acb2af995c2f57f17c5e820996adb2e1bd1ea.png" alt="\mathbb{F}_q" style="vertical-align: -8px"/>, avec <img class="math" src="../_images/math/dada471d53d53ccc1611380fd8299d2b679bccb9.png" alt="q=17252297107" style="vertical-align: -6px"/>.
+Le nombre de points sur cette courbe est <img class="math" src="../_images/math/286e24234a2dd1746d2edfad402979c95288c627.png" alt="N=4r" style="vertical-align: -1px"/>, avec <img class="math" src="../_images/math/a6148e5ae156b5d13d06042d5aceb713b5035ff1.png" alt="r=4313008603" style="vertical-align: -1px"/>.</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Écrire une fonction qui calcule un point au hasard de la courbe. Indication: pour cela,
+on écrit d&#8217;abord une fonction calculant des racines carrées <img class="math" src="../_images/math/c4a7d9f9626182bdf826ec1b808b97b52f2ae872.png" alt="\bmod q" style="vertical-align: -6px"/>. On se rappelle que
+lorsque <img class="math" src="../_images/math/1a493c58e780c3d96d279e7384406f8696f42473.png" alt="q=4m+3" style="vertical-align: -6px"/>, la racine carrée de <img class="math" src="../_images/math/401a744cf9317dd66261f479be1d9bc3857cb622.png" alt="a \bmod q" style="vertical-align: -6px"/> (quand elle existe) est
+<img class="math" src="../_images/math/2ff94da3391ee517a23662db8000a78303541be5.png" alt="a^{m+1} \bmod q" style="vertical-align: -6px"/>.</p>
+</li>
+<li><p class="first">Écrire une fonction qui calcule la somme des deux points de la courbe. On testera cette fonction
+à l&#8217;aide des exemples suivants (avec P=[6587596005,10930896470], Q=[2846256190,0],
+R=[1099048983,3110000776])</p>
+<blockquote>
+<div><ul class="simple">
+<li>P+Q=[10674847433,12569638509], P+R=[6587596005,6321400637]</li>
+<li>P+P=[1099048983,14142296331], Q+Q=O</li>
+<li>3P=[8376961733,938225291], 5P=[1708109053,5741342158]</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Écrire une fonction qui étant donné un point <img class="math" src="../_images/math/4b4cade9ca8a2c8311fafcf040bc5b15ca507f52.png" alt="P" style="vertical-align: 0px"/> de la courbe, et un entier <img class="math" src="../_images/math/8c325612684d41304b9751c175df7bcc0f61f64f.png" alt="k" style="vertical-align: 0px"/>,
+calcule efficacement le point <img class="math" src="../_images/math/d27ef8c70fbccbb7ad23ff67c59850677f744341.png" alt="kP" style="vertical-align: 0px"/>. Pour cela, on utilisera l&#8217;algorithme de
+multiplication rapide (<em>double and add</em> ou <em>square and multiply</em>). On testera cette fonction sur
+un point au hasard <img class="math" src="../_images/math/4b4cade9ca8a2c8311fafcf040bc5b15ca507f52.png" alt="P" style="vertical-align: 0px"/> d&#8217;ordre <img class="math" src="../_images/math/b55ca7a0aa88ab7d58f4fc035317fdac39b17861.png" alt="r" style="vertical-align: 0px"/> de la courbe (i.e. <img class="math" src="../_images/math/394827fa6046b2c4def3966e88d4b75108b1ecd0.png" alt="rP=O" style="vertical-align: -1px"/>).</p>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Échange de clé Diffie-Hellman.</strong> Deux personnes, Alice et Bob, veulent échanger un message chiffré
+nécessitant une clé <img class="math" src="../_images/math/dfb064112b6c94470339f6571f69d07afc1c024c.png" alt="K" style="vertical-align: 0px"/>, qui est un nombre entier. Ils doivent échanger la clé <img class="math" src="../_images/math/dfb064112b6c94470339f6571f69d07afc1c024c.png" alt="K" style="vertical-align: 0px"/> d&#8217;abord,
+mais ils ne disposent pas de canal sécurisé pour cela. En 1976, Diffie et Hellman ont proposé une
+méthode qui répond à ce problème. Le protocole de Diffie Hellman utilise un groupe cyclique <img class="math" src="../_images/math/3b2d670bce394337df52381459775c33de5ca713.png" alt="\mathbb{G}" style="vertical-align: -1px"/>
+(noté additivement) d&#8217;ordre <img class="math" src="../_images/math/b55ca7a0aa88ab7d58f4fc035317fdac39b17861.png" alt="r" style="vertical-align: 0px"/> et repose sur l&#8217;idée suivante:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Étant donné un nombre entier <img class="math" src="../_images/math/8c325612684d41304b9751c175df7bcc0f61f64f.png" alt="k" style="vertical-align: 0px"/> et un élément <img class="math" src="../_images/math/4b4cade9ca8a2c8311fafcf040bc5b15ca507f52.png" alt="P" style="vertical-align: 0px"/> dans le groupe <img class="math" src="../_images/math/3b2d670bce394337df52381459775c33de5ca713.png" alt="\mathbb{G}" style="vertical-align: -1px"/>,
+il est facile de calculer <img class="math" src="../_images/math/d27ef8c70fbccbb7ad23ff67c59850677f744341.png" alt="kP" style="vertical-align: 0px"/>.</li>
+<li>Étant donné <img class="math" src="../_images/math/6cc8d39c5db41f9528ad3d7a43e0fbcbc3db7460.png" alt="Q=kP" style="vertical-align: -6px"/>, <img class="math" src="../_images/math/4b4cade9ca8a2c8311fafcf040bc5b15ca507f52.png" alt="P" style="vertical-align: 0px"/>, il est calculatoirement difficile de retrouver <img class="math" src="../_images/math/8c325612684d41304b9751c175df7bcc0f61f64f.png" alt="k" style="vertical-align: 0px"/></li>
+</ul>
+</div></blockquote>
+<p>Le fonctionnement du protocole est le suivant. Alice choisit un nombre au hasard <img class="math" src="../_images/math/c7d457e388298246adb06c587bccd419ea67f7e8.png" alt="a" style="vertical-align: 0px"/>,
+calcule <img class="math" src="../_images/math/6d589109b8863ba5a10690df89cbdca5294b70db.png" alt="aP" style="vertical-align: 0px"/> et l&#8217;envoie à Bob. Bob choisit à son tour un nombre <img class="math" src="../_images/math/8136a7ef6a03334a7246df9097e5bcc31ba33fd2.png" alt="b" style="vertical-align: 0px"/> et envoie
+à Alice <img class="math" src="../_images/math/9251952cab89be7f544ac46a5f20f53add7becd5.png" alt="bP" style="vertical-align: 0px"/>. Alice peut alors calculer <img class="math" src="../_images/math/c4a747c12474eac9ea979fc63a03928765ab5670.png" alt="K=a(bP)" style="vertical-align: -7px"/>. Bob calcule <img class="math" src="../_images/math/154e93955ad694ac53cb4c8991fc835f9384b3ff.png" alt="b(aP)" style="vertical-align: -7px"/> et
+obtient la même clé <img class="math" src="../_images/math/dfb064112b6c94470339f6571f69d07afc1c024c.png" alt="K" style="vertical-align: 0px"/> qu&#8217;Alice.</p>
+<blockquote>
+<div><ol class="arabic simple" start="4">
+<li>(Travail en binôme) En utilisant le groupe d&#8217;ordre <img class="math" src="../_images/math/b55ca7a0aa88ab7d58f4fc035317fdac39b17861.png" alt="r" style="vertical-align: 0px"/> des points de la courbe <img class="math" src="../_images/math/fa2fa899f0afb05d6837885523503a2d4df434f9.png" alt="E" style="vertical-align: 0px"/>,
+échangez avec un collègue une clé secrete .</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>L&#8217;attaque pas de bébé, pas de géant sur le logarithme discret.</strong> La méthode de Shanks pour résoudre le
+problème du logarithme discret est basée sur l&#8217;observation suivante :</p>
+<blockquote>
+<div><p>En notant <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">m = \ceil \sqrt{r} \rceil</tt>)</p>
+<p>latex exited with error:
+[stderr]
+
+[stdout]
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian)
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2009/09/24&gt;
+Babel &lt;v3.8l&gt; and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, french, basque, ngerman, german, german-x-2009-06-19, ngerman-x-200
+9-06-19, loaded.
+(/usr/share/texmf-texlive/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/size12.clo))
+(/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
+(/usr/share/texmf-texlive/tex/latex/ucs/utf8x.def))
+(/usr/share/texmf-texlive/tex/latex/ucs/ucs.sty
+(/usr/share/texmf-texlive/tex/latex/ucs/data/uni-global.def))
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?&#8217; option.
+(/usr/share/texmf-texlive/tex/latex/amsmath/amstext.sty
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texmf-texlive/tex/latex/amscls/amsthm.sty)
+(/usr/share/texmf-texlive/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texmf-texlive/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texmf-texlive/tex/latex/tools/bm.sty)
+(/usr/share/texmf/tex/latex/preview/preview.sty) (./math.aux)
+(/usr/share/texmf-texlive/tex/latex/ucs/ucsencs.def)
+Preview: Fontsize 12pt
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd)
+! Undefined control sequence.
+l.14 $m = \ceil
+                \sqrt{r} \rceil$
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 316 bytes).
+Transcript written on math.log.
+</p>
+</div>
+ la partie entière supérieure de la racine carrée de <img class="math" src="../_images/math/b55ca7a0aa88ab7d58f4fc035317fdac39b17861.png" alt="r" style="vertical-align: 0px"/>,
+on peut écrire tout élément <img class="math" src="../_images/math/26eeb5258ca5099acf8fe96b2a1049c48c89a5e6.png" alt="x" style="vertical-align: 0px"/> inférieur à <img class="math" src="../_images/math/b55ca7a0aa88ab7d58f4fc035317fdac39b17861.png" alt="r" style="vertical-align: 0px"/> comme <img class="math" src="../_images/math/a3002682d841e621253d84baf060335331a2795b.png" alt="x=x_1+x_2 m" style="vertical-align: -5px"/>, avec
+<img class="math" src="../_images/math/24a4ecf4050ea3f4e3f1232b91bdd9e76cfd7a08.png" alt="x_1,x_2 \leq m" style="vertical-align: -6px"/>. Par conséquent, l&#8217;égalité <img class="math" src="../_images/math/f599bc80a2531a86eb27d399db6aab366a547ac4.png" alt="Q=xP" style="vertical-align: -6px"/> peut s&#8217;écrire <img class="math" src="../_images/math/7087d8267bbaf9720213e2f03d6b7524c9057c9e.png" alt="Q-x_2(mP)=x_1P" style="vertical-align: -7px"/>.</p>
+</div></blockquote>
+<p>Dans un premier temps (le pas de bébé), l&#8217;algorithme construit l&#8217;ensemble <img class="math" src="../_images/math/0d079ee90a66118597d437b79047ebd3b28bbad6.png" alt="L = \{O,P,2P,...,(m-1)P\}" style="vertical-align: -8px"/>.
+Dans un deuxième temps (le pas de géant), il calcule S=(-m)P puis recherche la valeur du membre de
+droite de l&#8217;équation précédente dans la liste L</p>
+<div class="highlight-python"><pre>construire l'ensemble L = {O,P,2P,...,(m-1)P}
+pour i de 1 à m-1 faire
+si Q+iS est dans L alors
+   retourner (j-im mod r) tel que jP=Q+iS.</pre>
+</div>
+<p>Pour chercher de manière efficace dans l&#8217;ensemble L on pourra utiliser une structure de dictionnaire.</p>
+<blockquote>
+<div><ol class="arabic simple" start="5">
+<li>Implanter l&#8217;attaque de Shanks, afin de retrouver, à partir du point de la courbe qui vous
+a été envoyé, le secret de votre collègue.</li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+</div>
 <p><div style="clear: both"></div></p>
 </div>
 

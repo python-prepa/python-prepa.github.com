@@ -4,6 +4,11 @@
 
 
 
+**Python source code:** :download:`plot_granular.py <plot_granular.py>`
+
+.. literalinclude:: plot_granular.py
+    :lines: 2-
+
 
 .. rst-class:: horizontal
 
@@ -24,8 +29,7 @@
             :scale: 50
 
 
-**Python source code:** :download:`plot_granular.py <plot_granular.py>`
 
-.. literalinclude:: plot_granular.py
-    :lines: 2-
+
+**Total running time of the example:**  0.00 seconds
     

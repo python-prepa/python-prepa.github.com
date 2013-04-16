@@ -4,13 +4,17 @@
 
 
 
+**Python source code:** :download:`plot_color_grey.py <plot_color_grey.py>`
+
+.. literalinclude:: plot_color_grey.py
+    :lines: 2-
+
 
 .. image:: images/plot_color_grey_1.png
     :align: center
 
 
-**Python source code:** :download:`plot_color_grey.py <plot_color_grey.py>`
 
-.. literalinclude:: plot_color_grey.py
-    :lines: 2-
+
+**Total running time of the example:**  0.00 seconds
     

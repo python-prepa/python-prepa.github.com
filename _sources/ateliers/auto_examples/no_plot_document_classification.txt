@@ -1,0 +1,11 @@
+
+
+.. _example_no_plot_document_classification.py:
+
+
+
+**Python source code:** :download:`no_plot_document_classification.py <no_plot_document_classification.py>`
+
+.. literalinclude:: no_plot_document_classification.py
+    :lines: 3-
+    

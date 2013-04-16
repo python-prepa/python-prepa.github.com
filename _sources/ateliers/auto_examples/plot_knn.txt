@@ -11,13 +11,17 @@ Ici, nous affichons les frontieres de decision en faisant la prediction
 sur une grille de point.
 
 
+**Python source code:** :download:`plot_knn.py <plot_knn.py>`
+
+.. literalinclude:: plot_knn.py
+    :lines: 9-
+
 
 .. image:: images/plot_knn_1.png
     :align: center
 
 
-**Python source code:** :download:`plot_knn.py <plot_knn.py>`
 
-.. literalinclude:: plot_knn.py
-    :lines: 9-
+
+**Total running time of the example:**  0.00 seconds
     

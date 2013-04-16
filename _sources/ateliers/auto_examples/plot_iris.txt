@@ -5,6 +5,11 @@
  Affichage de la classes d'iris en fonction des different attributs
 
 
+**Python source code:** :download:`plot_iris.py <plot_iris.py>`
+
+.. literalinclude:: plot_iris.py
+    :lines: 3-
+
 
 .. rst-class:: horizontal
 
@@ -40,8 +45,7 @@
             :scale: 50
 
 
-**Python source code:** :download:`plot_iris.py <plot_iris.py>`
 
-.. literalinclude:: plot_iris.py
-    :lines: 3-
+
+**Total running time of the example:**  0.00 seconds
     

@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>&lt;no title&gt; &mdash; Python scientifique - ENS Paris</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2013.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="top" title="Python scientifique - ENS Paris" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <p id="example-no-plot-document-classification-py"><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/no_plot_document_classification.py"><tt class="xref download docutils literal"><span class="pre">no_plot_document_classification.py</span></tt></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="newline"></div><span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_20newsgroups</span>
+<div class="newline"></div><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">Vectorizer</span>
+<div class="newline"></div><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<div class="newline"></div><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<div class="newline"></div><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div><span class="c">###############################################################################</span>
+<div class="newline"></div><span class="c"># Load some categories from the training set</span>
+<div class="newline"></div><span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;comp.sys.ibm.pc.hardware&#39;</span><span class="p">,</span> <span class="s">&#39;comp.os.ms-windows.misc&#39;</span><span class="p">,</span>
+<div class="newline"></div>              <span class="s">&#39;sci.electronics&#39;</span><span class="p">]</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">data_train</span> <span class="o">=</span> <span class="n">fetch_20newsgroups</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s">&#39;train&#39;</span><span class="p">,</span> <span class="n">categories</span><span class="o">=</span><span class="n">categories</span><span class="p">,</span>
+<div class="newline"></div>                               <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<div class="newline"></div><span class="n">data_test</span> <span class="o">=</span> <span class="n">fetch_20newsgroups</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s">&#39;test&#39;</span><span class="p">,</span> <span class="n">categories</span><span class="o">=</span><span class="n">categories</span><span class="p">,</span>
+<div class="newline"></div>                              <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">categories</span> <span class="o">=</span> <span class="n">data_train</span><span class="o">.</span><span class="n">target_names</span>
+<div class="newline"></div><span class="k">print</span> <span class="s">&quot;</span><span class="si">%d</span><span class="s"> documents (training set)&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_train</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<div class="newline"></div><span class="k">print</span> <span class="s">&quot;</span><span class="si">%d</span><span class="s"> documents (testing set)&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_test</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<div class="newline"></div><span class="k">print</span> <span class="s">&quot;</span><span class="si">%d</span><span class="s"> categories&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># split a training set and a test set</span>
+<div class="newline"></div><span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">data_train</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">data_test</span><span class="o">.</span><span class="n">target</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># Extracting features from the training dataset using a sparse vectorizer</span>
+<div class="newline"></div><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">Vectorizer</span><span class="p">(</span><span class="n">use_idf</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="newline"></div><span class="n">X_train</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data_train</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># Extracting features from the test dataset using the same vectorizer</span>
+<div class="newline"></div><span class="n">X_test</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data_test</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">vocabulary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">vocabulary</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(),</span>
+<div class="newline"></div>                                            <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))])</span>
+<div class="newline"></div><span class="k">def</span> <span class="nf">bag</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">features</span><span class="p">):</span>
+<div class="newline"></div>    <span class="n">X_red</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<div class="newline"></div>    <span class="k">for</span> <span class="n">bag_of_words</span> <span class="ow">in</span> <span class="n">features</span><span class="p">:</span>
+<div class="newline"></div>        <span class="n">X_red</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> 
+<div class="newline"></div>                            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">vocabulary</span> <span class="o">==</span> <span class="n">word</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">toarray</span><span class="p">()[:,</span> <span class="mi">0</span><span class="p">]</span>
+<div class="newline"></div>                        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">bag_of_words</span><span class="p">))</span>
+<div class="newline"></div>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_red</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+<div class="newline"></div>            <span class="p">[</span><span class="s">&#39;amp&#39;</span><span class="p">,</span> <span class="s">&#39;bus&#39;</span><span class="p">,</span> <span class="s">&#39;circuit&#39;</span><span class="p">,</span> <span class="s">&#39;circuits&#39;</span><span class="p">,</span> <span class="s">&#39;controller&#39;</span><span class="p">,</span>
+<div class="newline"></div>            <span class="s">&#39;detector&#39;</span><span class="p">,</span> <span class="s">&#39;ground&#39;</span><span class="p">,</span> <span class="s">&#39;power&#39;</span><span class="p">,</span> <span class="s">&#39;voltage&#39;</span><span class="p">,</span> <span class="s">&#39;cooling&#39;</span><span class="p">,</span>
+<div class="newline"></div>            <span class="s">&#39;motorola&#39;</span><span class="p">,</span> <span class="s">&#39;amplifier&#39;</span><span class="p">,</span> <span class="s">&#39;seagate&#39;</span><span class="p">,</span> <span class="s">&#39;toshiba&#39;</span><span class="p">,</span> <span class="s">&#39;s3&#39;</span><span class="p">,</span>
+<div class="newline"></div>            <span class="s">&#39;antenna&#39;</span><span class="p">,</span> <span class="s">&#39;led&#39;</span><span class="p">,</span> <span class="s">&#39;batteries&#39;</span><span class="p">,</span> <span class="s">&#39;battery&#39;</span><span class="p">,</span> <span class="s">&#39;analog&#39;</span><span class="p">,</span>
+<div class="newline"></div>            <span class="s">&#39;jumpers&#39;</span><span class="p">,</span> <span class="s">&#39;traffic&#39;</span><span class="p">,</span>
+<div class="newline"></div>            <span class="p">],</span>
+<div class="newline"></div>            <span class="p">[</span><span class="s">&#39;dma&#39;</span><span class="p">,</span> <span class="s">&#39;drive&#39;</span><span class="p">,</span> <span class="s">&#39;driver&#39;</span><span class="p">,</span> <span class="s">&#39;drives&#39;</span><span class="p">,</span> <span class="s">&#39;file&#39;</span><span class="p">,</span> <span class="s">&#39;files&#39;</span><span class="p">,</span> <span class="s">&#39;tape&#39;</span><span class="p">,</span>
+<div class="newline"></div>            <span class="s">&#39;monitor&#39;</span><span class="p">,</span> <span class="s">&#39;monitors&#39;</span><span class="p">,</span> <span class="s">&#39;directory&#39;</span><span class="p">,</span> <span class="s">&#39;floppy&#39;</span><span class="p">,</span> <span class="s">&#39;font&#39;</span><span class="p">,</span>
+<div class="newline"></div>            <span class="s">&#39;fonts&#39;</span><span class="p">,</span> <span class="s">&#39;truetype&#39;</span><span class="p">,</span> <span class="s">&#39;ide&#39;</span><span class="p">,</span> <span class="s">&#39;ini&#39;</span><span class="p">,</span> <span class="s">&#39;motherboard&#39;</span><span class="p">,</span> <span class="s">&#39;nt&#39;</span><span class="p">,</span>
+<div class="newline"></div>            <span class="s">&#39;win&#39;</span><span class="p">,</span> <span class="s">&#39;windows&#39;</span><span class="p">,</span> <span class="s">&#39;cursor&#39;</span><span class="p">,</span> <span class="s">&#39;desktop&#39;</span><span class="p">,</span> <span class="s">&#39;icon&#39;</span><span class="p">,</span> <span class="s">&#39;icons&#39;</span><span class="p">]</span>
+<div class="newline"></div>        <span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">X_train</span> <span class="o">=</span> <span class="n">bag</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+<div class="newline"></div><span class="n">X_test</span>  <span class="o">=</span> <span class="n">bag</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div><span class="c">###############################################################################</span>
+<div class="newline"></div><span class="c"># Benchmark classifier</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">knn10</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class="newline"></div><span class="n">knn10</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">knn1</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="newline"></div><span class="n">knn1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">svm</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s">&#39;linear&#39;</span><span class="p">)</span>
+<div class="newline"></div><span class="n">svm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">svm_rbf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="newline"></div><span class="n">svm_rbf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">pred</span> <span class="o">=</span> <span class="n">knn10</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+<div class="newline"></div><span class="k">print</span> <span class="s">&quot;f1-score:   </span><span class="si">%0.3f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">score</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="k">print</span> <span class="s">&quot;classification report:&quot;</span>
+<div class="newline"></div><span class="k">print</span> <span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span>
+<div class="newline"></div>                                        <span class="n">target_names</span><span class="o">=</span><span class="n">categories</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="k">print</span> <span class="s">&quot;confusion matrix:&quot;</span>
+<div class="newline"></div><span class="k">print</span> <span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c">###############################################################################</span>
+<div class="newline"></div><span class="c"># Plot the decision boundary. For that, we will asign a color to each</span>
+<div class="newline"></div><span class="c"># point in the mesh [x_min, m_max]x[y_min, y_max].</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="o">.</span><span class="mi">85</span><span class="o">*</span><span class="n">X_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="o">.</span><span class="mo">02</span>
+<div class="newline"></div><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="o">.</span><span class="mi">85</span><span class="o">*</span><span class="n">X_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="o">.</span><span class="mo">02</span>
+<div class="newline"></div><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
+<div class="newline"></div>                     <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+<div class="newline"></div><span class="n">Z10</span> <span class="o">=</span> <span class="n">knn10</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+<div class="newline"></div><span class="c"># Put the result into a color plot</span>
+<div class="newline"></div><span class="n">Z10</span> <span class="o">=</span> <span class="n">Z10</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">Z1</span> <span class="o">=</span> <span class="n">knn1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+<div class="newline"></div><span class="n">Z1</span> <span class="o">=</span> <span class="n">Z1</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">Z_svm</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+<div class="newline"></div><span class="n">Z_svm</span> <span class="o">=</span> <span class="n">Z_svm</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">Z_rbf</span> <span class="o">=</span> <span class="n">svm_rbf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+<div class="newline"></div><span class="n">Z_rbf</span> <span class="o">=</span> <span class="n">Z_rbf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">4.6</span><span class="p">,</span> <span class="mf">5.06</span><span class="p">))</span>
+<div class="newline"></div><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">[(</span><span class="s">&#39;train&#39;</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span>
+<div class="newline"></div>                   <span class="p">(</span><span class="s">&#39;test&#39;</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span>
+<div class="newline"></div>                  <span class="p">]:</span>
+<div class="newline"></div>    <span class="n">pl</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+<div class="newline"></div>    <span class="n">pl</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="o">.</span><span class="mi">08</span><span class="p">,</span> <span class="o">.</span><span class="mo">07</span><span class="p">,</span> <span class="o">.</span><span class="mi">91</span><span class="p">,</span> <span class="o">.</span><span class="mi">827</span><span class="p">])</span>
+<div class="newline"></div>    <span class="n">pl</span><span class="o">.</span><span class="n">set_cmap</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Spectral</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div>    <span class="c"># Plot also the training points</span>
+<div class="newline"></div>    <span class="n">symbols</span> <span class="o">=</span> <span class="s">&#39;o^s&#39;</span>
+<div class="newline"></div>    <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">symbols</span><span class="p">):</span>
+<div class="newline"></div>        <span class="n">this_pts</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">y</span><span class="o">==</span><span class="n">label</span><span class="p">]</span>
+<div class="newline"></div>        <span class="n">pl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">this_pts</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+<div class="newline"></div>                <span class="n">this_pts</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">symbol</span><span class="p">,</span>
+<div class="newline"></div>                <span class="n">color</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Spectral</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="o">*</span><span class="n">label</span><span class="p">),</span>
+<div class="newline"></div>                <span class="n">label</span><span class="o">=</span><span class="n">categories</span><span class="p">[</span><span class="n">label</span><span class="p">],</span>
+<div class="newline"></div>                <span class="n">markeredgewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div>    <span class="n">pl</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-.</span><span class="mo">01</span><span class="p">,</span> <span class="n">xx</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<div class="newline"></div>    <span class="n">pl</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">yy</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-.</span><span class="mo">01</span><span class="p">,</span> <span class="n">yy</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<div class="newline"></div>    <span class="n">pl</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">u&quot;Mots relatifs à l&#39;électronique&quot;</span><span class="p">,</span>
+<div class="newline"></div>            <span class="n">weight</span><span class="o">=</span><span class="s">&#39;bold&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<div class="newline"></div>    <span class="n">pl</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">u&quot;Mots relatifs à l&#39;informatique&quot;</span><span class="p">,</span>
+<div class="newline"></div>            <span class="n">weight</span><span class="o">=</span><span class="s">&#39;bold&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<div class="newline"></div>    <span class="n">pl</span><span class="o">.</span><span class="n">xticks</span><span class="p">((</span><span class="mf">0.</span><span class="p">,))</span>
+<div class="newline"></div>    <span class="n">pl</span><span class="o">.</span><span class="n">yticks</span><span class="p">((</span><span class="mf">0.</span><span class="p">,))</span>
+<div class="newline"></div>    <span class="n">pl</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">numpoints</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">handlelength</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div>    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s">&#39;train&#39;</span><span class="p">:</span>
+<div class="newline"></div>        <span class="n">pl</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&quot;Messages dans la base d&#39;apprentissage&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<div class="newline"></div>        <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;base d&#39;apprentissage&quot;</span>
+<div class="newline"></div>    <span class="k">else</span><span class="p">:</span>
+<div class="newline"></div>        <span class="n">pl</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">u&quot;Messages à prédire&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<div class="newline"></div>        <span class="n">title</span> <span class="o">=</span> <span class="s">u&quot;messages à prédire&quot;</span>
+<div class="newline"></div>    <span class="n">pl</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;document_word_distrib_</span><span class="si">%s</span><span class="s">.png&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<div class="newline"></div>    <span class="n">mesh</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z1</span><span class="p">)</span>
+<div class="newline"></div>    <span class="n">pl</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-.</span><span class="mo">01</span><span class="p">,</span> <span class="n">xx</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<div class="newline"></div>    <span class="n">pl</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">yy</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-.</span><span class="mo">01</span><span class="p">,</span> <span class="n">yy</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<div class="newline"></div>    <span class="n">pl</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">u&quot;Prédiction au plus proche voisin</span><span class="se">\n</span><span class="s"> et </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">title</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<div class="newline"></div>    <span class="n">pl</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;document_word_knn1_</span><span class="si">%s</span><span class="s">.png&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">3.62</span><span class="p">,</span> <span class="mf">4.048</span><span class="p">))</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">axes</span><span class="p">([</span><span class="o">.</span><span class="mo">01</span><span class="p">,</span> <span class="o">.</span><span class="mo">01</span><span class="p">,</span> <span class="o">.</span><span class="mi">98</span><span class="p">,</span> <span class="o">.</span><span class="mi">897</span><span class="p">])</span>
+<div class="newline"></div><span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_test</span><span class="p">),</span> <span class="n">symbols</span><span class="p">):</span>
+<div class="newline"></div>    <span class="n">this_pts</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[</span><span class="n">y_test</span><span class="o">==</span><span class="n">label</span><span class="p">]</span>
+<div class="newline"></div>    <span class="n">pl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">this_pts</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+<div class="newline"></div>            <span class="n">this_pts</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">symbol</span><span class="p">,</span>
+<div class="newline"></div>            <span class="n">color</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Spectral</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="o">*</span><span class="n">label</span><span class="p">),</span>
+<div class="newline"></div>            <span class="n">label</span><span class="o">=</span><span class="n">categories</span><span class="p">[</span><span class="n">label</span><span class="p">],</span>
+<div class="newline"></div>            <span class="n">markeredgewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">mesh</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z10</span><span class="p">)</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-.</span><span class="mo">01</span><span class="p">,</span> <span class="n">xx</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">yy</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-.</span><span class="mo">01</span><span class="p">,</span> <span class="n">yy</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">xticks</span><span class="p">(())</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">yticks</span><span class="p">(())</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">u&quot;10 plus proches voisins&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;document_word_knn10_test.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">mesh</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+<div class="newline"></div><span class="n">mesh</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z_svm</span><span class="p">)</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-.</span><span class="mo">01</span><span class="p">,</span> <span class="n">xx</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">yy</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-.</span><span class="mo">01</span><span class="p">,</span> <span class="n">yy</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">u&quot;Décisions linéaires&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;document_word_svm_test.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">mesh</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+<div class="newline"></div><span class="n">mesh</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z_rbf</span><span class="p">)</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-.</span><span class="mo">01</span><span class="p">,</span> <span class="n">xx</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">yy</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-.</span><span class="mo">01</span><span class="p">,</span> <span class="n">yy</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">u&quot;Décisions courbes&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;document_word_svm_rbf_</span><span class="si">%s</span><span class="s">.png&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="newline"></div><span class="n">pl</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<div class="newline"></div></pre></div>
+</div>
+<p><div style="clear: both"></div></p>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../../index.html">Python scientifique - ENS Paris</a> &raquo;</li> 
+      </ul>
+    </div>
+        <!-- your html code here -->
+<a href="http://www.ens.fr"><img src="../../_static/ENS_Logo.png"
+alt="ENS" height="100"></a>
+<a href="http://www.inria.fr"><img src="../../_static/logo-inria.jpg"
+alt="INRIA" height="60"></a>
+<a href="http://www.saint-gobain-recherche.fr/fr/"><img
+src="../../_static/logoSGR.png" alt="Saint-Gobain Recherche" height="60"></a>
+
+  </body>
+</html>

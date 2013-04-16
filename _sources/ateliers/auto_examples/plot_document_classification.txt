@@ -3,14 +3,90 @@
 .. _example_plot_document_classification.py:
 
 
-
-
-.. rst-class:: horizontal
-
+Example de classification de documents texte
+=============================================
 
 
 **Python source code:** :download:`plot_document_classification.py <plot_document_classification.py>`
 
 .. literalinclude:: plot_document_classification.py
-    :lines: 3-
+    :lines: 5-
+
+
+.. image:: images/plot_document_classification_1.png
+    :align: center
+
+
+**Script output**::
+
+  ________________________________________________________________________________
+  Ridge Classifier
+  
+  error:   0.098
+  top 10 keywords per class:
+  alt.atheism: rushdie wingate osrhe atheist okcforum caltech islamic keith atheism atheists
+  comp.graphics: video format card looking hi 3d file image thanks graphics
+  sci.space: digex flight shuttle launch pat moon sci orbit nasa space
+  talk.religion.misc: jesus mitre hudson morality 2000 biblical beast mr fbi christian
+  
+                      precision    recall  f1-score   support
+  
+         alt.atheism       0.86      0.84      0.85       319
+       comp.graphics       0.92      0.98      0.95       389
+           sci.space       0.95      0.95      0.95       394
+  talk.religion.misc       0.84      0.78      0.81       251
+  
+         avg / total       0.90      0.90      0.90      1353
+  
+  confusion matrix:
+  [[269   6   9  35]
+   [  1 382   3   3]
+   [  1  17 376   0]
+   [ 41   9   6 195]]
+  
+  ________________________________________________________________________________
+  kNN
+  
+  error:   0.144
+                      precision    recall  f1-score   support
+  
+         alt.atheism       0.78      0.90      0.84       319
+       comp.graphics       0.89      0.89      0.89       389
+           sci.space       0.90      0.91      0.90       394
+  talk.religion.misc       0.86      0.67      0.75       251
+  
+         avg / total       0.86      0.86      0.86      1353
+  
+  confusion matrix:
+  [[287   3  11  18]
+   [ 14 348  19   8]
+   [  7  26 359   2]
+   [ 59  13  12 167]]
+  
+  
+  error:   0.117
+  top 10 keywords per class:
+  alt.atheism: god say think people don com nntp host posting article
+  comp.graphics: like com article know thanks graphics university nntp host posting
+  sci.space: nasa like university just com nntp host posting space article
+  talk.religion.misc: think know christian posting god people just don article com
+  
+                      precision    recall  f1-score   support
+  
+         alt.atheism       0.83      0.88      0.86       319
+       comp.graphics       0.88      0.96      0.92       389
+           sci.space       0.94      0.91      0.92       394
+  talk.religion.misc       0.87      0.73      0.79       251
+  
+         avg / total       0.88      0.88      0.88      1353
+  
+  confusion matrix:
+  [[282   9   3  25]
+   [  1 373  13   2]
+   [  5  31 358   0]
+   [ 50  10   8 183]]
+
+
+
+**Total running time of the example:**  6.24 seconds
     

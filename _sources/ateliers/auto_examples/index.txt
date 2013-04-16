@@ -64,6 +64,11 @@ Examples
 
    :ref:`example_document_high_dim.py`
 
+.. figure:: ./images/thumb/no_plot_document_classification.png
+   :target: ./no_plot_document_classification.html
+
+   :ref:`example_no_plot_document_classification.py`
+
 .. figure:: ./images/thumb/plot_color_grey.png
    :target: ./plot_color_grey.html
 
