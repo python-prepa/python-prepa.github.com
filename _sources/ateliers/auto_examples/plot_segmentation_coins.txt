@@ -15,12 +15,12 @@
 
     *
 
-      .. image:: images/plot_segmentation_coins_1.png
+      .. image:: images/plot_segmentation_coins_2.png
             :scale: 50
 
     *
 
-      .. image:: images/plot_segmentation_coins_2.png
+      .. image:: images/plot_segmentation_coins_1.png
             :scale: 50
 
 

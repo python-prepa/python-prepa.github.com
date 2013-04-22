@@ -88,5 +88,5 @@ Example de classification de documents texte
 
 
 
-**Total running time of the example:**  6.24 seconds
+**Total running time of the example:**  10.12 seconds
     

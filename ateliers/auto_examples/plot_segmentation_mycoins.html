@@ -43,74 +43,74 @@
   <img alt="../../_images/plot_segmentation_mycoins_1.png" class="align-center" id="example-plot-segmentation-mycoins-py" src="../../_images/plot_segmentation_mycoins_1.png" />
 <p><strong>Python source code:</strong> <a class="reference download internal" href="../../_downloads/plot_segmentation_mycoins.py"><tt class="xref download docutils literal"><span class="pre">plot_segmentation_mycoins.py</span></tt></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
-<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="nb">filter</span>
-<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">morphology</span>
-<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">segmentation</span>
-<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">measure</span>
-<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">draw</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-
-<span class="n">img</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&#39;../coins_black_small.jpg&#39;</span><span class="p">,</span> <span class="n">as_grey</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">val</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">threshold_otsu</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-
-<span class="n">mask</span> <span class="o">=</span> <span class="n">img</span> <span class="o">&lt;</span> <span class="n">val</span>
-
-<span class="c"># Compute compacity of granular material</span>
-<span class="n">compacity</span> <span class="o">=</span> <span class="n">mask</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">:</span><span class="mi">700</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="k">print</span> <span class="s">&quot;compacity is &quot;</span><span class="p">,</span> <span class="n">compacity</span>
-
-<span class="c"># Separate the different coins</span>
-<span class="n">erosion</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span>
-<span class="n">erosion</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">erosion</span><span class="p">,</span> <span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
-
-
-<span class="n">labs</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">erosion</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">labs</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="n">edges</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">sobel</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-
-<span class="n">regions</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">watershed</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="n">labs</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span>
-
-<span class="c"># remove borders</span>
-<span class="n">l0</span><span class="p">,</span> <span class="n">l1</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span>
-<span class="n">indices_borders</span> <span class="o">=</span> <span class="p">[</span><span class="n">regions</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">regions</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">l1</span><span class="o">/</span><span class="mi">2</span><span class="p">],</span> \
-                            <span class="n">regions</span><span class="p">[</span><span class="n">l0</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">l1</span><span class="o">/</span><span class="mi">2</span><span class="p">]]</span>
-
-<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">indices_borders</span><span class="p">:</span>
-    <span class="n">regions</span><span class="p">[</span><span class="n">regions</span> <span class="o">==</span> <span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="n">seg</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">segmentation</span><span class="o">.</span><span class="n">relabel_from_one</span><span class="p">(</span><span class="n">regions</span><span class="p">)</span>
-
-<span class="c"># Compute neighbors</span>
-
-<span class="n">neighbors</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">lab</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">seg</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="n">dilation_of_region</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_dilation</span><span class="p">(</span><span class="n">seg</span> <span class="o">==</span> <span class="n">lab</span><span class="p">,</span>
-                                <span class="n">morphology</span><span class="o">.</span><span class="n">diamond</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-    <span class="n">neighbors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">seg</span><span class="p">[</span><span class="n">dilation_of_region</span><span class="p">]))</span>
-
-<span class="n">res</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">regionprops</span><span class="p">(</span><span class="n">seg</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;Area&#39;</span><span class="p">,</span> <span class="s">&#39;Centroid&#39;</span><span class="p">])</span>
-<span class="n">areas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">entry</span><span class="p">[</span><span class="s">&#39;Area&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">res</span><span class="p">])</span>
-<span class="n">centroids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">entry</span><span class="p">[</span><span class="s">&#39;Centroid&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">res</span><span class="p">])</span>
-
-<span class="n">number_of_neighbors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">el</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">])</span>
-
-<span class="n">new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-
-
-<span class="k">for</span> <span class="n">lab_index</span><span class="p">,</span> <span class="n">neighbors_index</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">neighbors</span><span class="p">):</span>
-    <span class="n">true_neighbors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">neighbors_index</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">lab_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
-    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">centroids</span><span class="p">[</span><span class="n">lab_index</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">true_neighbors</span><span class="p">:</span>
-        <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">centroids</span><span class="p">[</span><span class="n">element</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
-        <span class="n">inds</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y1</span><span class="p">))</span>
-        <span class="n">new</span><span class="p">[</span><span class="n">inds</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">&#39;gray&#39;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">&#39;nearest&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">],</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
+<div class="newline"></div><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="nb">filter</span>
+<div class="newline"></div><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">morphology</span>
+<div class="newline"></div><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">segmentation</span>
+<div class="newline"></div><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">measure</span>
+<div class="newline"></div><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">draw</span>
+<div class="newline"></div><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">img</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">&#39;../coins_black_small.jpg&#39;</span><span class="p">,</span> <span class="n">as_grey</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="newline"></div><span class="n">val</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">threshold_otsu</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">mask</span> <span class="o">=</span> <span class="n">img</span> <span class="o">&lt;</span> <span class="n">val</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># Compute compacity of granular material</span>
+<div class="newline"></div><span class="n">compacity</span> <span class="o">=</span> <span class="n">mask</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">:</span><span class="mi">700</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="newline"></div><span class="k">print</span> <span class="s">&quot;compacity is &quot;</span><span class="p">,</span> <span class="n">compacity</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># Separate the different coins</span>
+<div class="newline"></div><span class="n">erosion</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span>
+<div class="newline"></div><span class="n">erosion</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">erosion</span><span class="p">,</span> <span class="n">morphology</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">labs</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">erosion</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="newline"></div><span class="n">labs</span> <span class="o">+=</span> <span class="mi">1</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">edges</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">sobel</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">regions</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">watershed</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="n">labs</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># remove borders</span>
+<div class="newline"></div><span class="n">l0</span><span class="p">,</span> <span class="n">l1</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span>
+<div class="newline"></div><span class="n">indices_borders</span> <span class="o">=</span> <span class="p">[</span><span class="n">regions</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">regions</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">l1</span><span class="o">/</span><span class="mi">2</span><span class="p">],</span> \
+<div class="newline"></div>                            <span class="n">regions</span><span class="p">[</span><span class="n">l0</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">l1</span><span class="o">/</span><span class="mi">2</span><span class="p">]]</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">indices_borders</span><span class="p">:</span>
+<div class="newline"></div>    <span class="n">regions</span><span class="p">[</span><span class="n">regions</span> <span class="o">==</span> <span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">seg</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">segmentation</span><span class="o">.</span><span class="n">relabel_from_one</span><span class="p">(</span><span class="n">regions</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="c"># Compute neighbors</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">neighbors</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="k">for</span> <span class="n">lab</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">seg</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<div class="newline"></div>    <span class="n">dilation_of_region</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_dilation</span><span class="p">(</span><span class="n">seg</span> <span class="o">==</span> <span class="n">lab</span><span class="p">,</span>
+<div class="newline"></div>                                <span class="n">morphology</span><span class="o">.</span><span class="n">diamond</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<div class="newline"></div>    <span class="n">neighbors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">seg</span><span class="p">[</span><span class="n">dilation_of_region</span><span class="p">]))</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">res</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">regionprops</span><span class="p">(</span><span class="n">seg</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;Area&#39;</span><span class="p">,</span> <span class="s">&#39;Centroid&#39;</span><span class="p">])</span>
+<div class="newline"></div><span class="n">areas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">entry</span><span class="p">[</span><span class="s">&#39;Area&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">res</span><span class="p">])</span>
+<div class="newline"></div><span class="n">centroids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">entry</span><span class="p">[</span><span class="s">&#39;Centroid&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">res</span><span class="p">])</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">number_of_neighbors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">el</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">])</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<div class="newline"></div>
+<div class="newline"></div>
+<div class="newline"></div><span class="k">for</span> <span class="n">lab_index</span><span class="p">,</span> <span class="n">neighbors_index</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">neighbors</span><span class="p">):</span>
+<div class="newline"></div>    <span class="n">true_neighbors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">neighbors_index</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">lab_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+<div class="newline"></div>    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">centroids</span><span class="p">[</span><span class="n">lab_index</span><span class="p">]</span>
+<div class="newline"></div>    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">true_neighbors</span><span class="p">:</span>
+<div class="newline"></div>        <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">centroids</span><span class="p">[</span><span class="n">element</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+<div class="newline"></div>        <span class="n">inds</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y1</span><span class="p">))</span>
+<div class="newline"></div>        <span class="n">new</span><span class="p">[</span><span class="n">inds</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="newline"></div>
+<div class="newline"></div><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">&#39;gray&#39;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">&#39;nearest&#39;</span><span class="p">)</span>
+<div class="newline"></div><span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">],</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<div class="newline"></div><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="newline"></div></pre></div>
 </div>
 <p><div style="clear: both"></div></p>
 
@@ -132,6 +132,10 @@ alt="ENS" height="100"></a>
 alt="INRIA" height="60"></a>
 <a href="http://www.saint-gobain-recherche.fr/fr/"><img
 src="../../_static/logoSGR.png" alt="Saint-Gobain Recherche" height="60"></a>
+
+<script language="JavaScript"
+src="http://freehostedscripts.net/ocount.php?site=ID1953783&name=pages
+ visitées"></script>
 
   </body>
 </html>

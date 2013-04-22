@@ -59,15 +59,10 @@ Examples
 
    :ref:`example_VonKarman_corr.py`
 
-.. figure:: ./images/thumb/document_high_dim.png
-   :target: ./document_high_dim.html
+.. figure:: ./images/thumb/mixing.png
+   :target: ./mixing.html
 
-   :ref:`example_document_high_dim.py`
-
-.. figure:: ./images/thumb/no_plot_document_classification.png
-   :target: ./no_plot_document_classification.html
-
-   :ref:`example_no_plot_document_classification.py`
+   :ref:`example_mixing.py`
 
 .. figure:: ./images/thumb/plot_color_grey.png
    :target: ./plot_color_grey.html
